@@ -17,7 +17,10 @@
 
 ## Usage
 
-> Some usage instructions
+> To start the app running:
+```sh
+npm start
+```
 
 ## Requirements
 
