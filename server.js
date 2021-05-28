@@ -2,9 +2,13 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
+const port = 1234;
 
-const pathname = path.join(__dirname, 'client', 'dist');
+const pathname = path.join(__dirname, 'public');
 app.use(express.static(pathname));
-console.log(pathname);
 
-app.listen(1234, () => console.log('Listening at http://localhost:1234 ...'));
+app.get('/', (req, res) => {
+  res.send('hello world from server!');
+});
+
+app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
