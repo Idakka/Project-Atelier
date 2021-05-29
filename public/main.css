@@ -1,0 +1,19 @@
+.app {
+  /* For modals to be placed absolutely, their parent div cannot have the default
+  "static" option for their position style. 'relative' satisfies this requirement
+  while behaving much like the default 'static' position */
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  z-index: 2;
+}
