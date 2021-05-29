@@ -1,8 +1,14 @@
 import React from 'react';
+import Card from './Card.jsx';
 
 const Carousel = () => {
   return (
-    <p>Carousel Placeholder</p>
+    <div className="carousel">
+      <p>Carousel Placeholder</p>
+      {[1].map(product => (
+        <Card key={product} />
+      ))}
+    </div>
   );
 };
 
