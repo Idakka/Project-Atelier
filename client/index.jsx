@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ProductDetailPage from './src/components/product_detail_page.jsx';
 
 ReactDOM.render(
-  <h1>Hello via React!</h1>,
+  <ProductDetailPage />,
   document.getElementById('app')
 );
