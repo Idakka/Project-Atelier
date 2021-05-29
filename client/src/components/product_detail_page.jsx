@@ -14,14 +14,14 @@ class ProductDetailPage extends React.Component {
   };
 
   render() {
-    return() {(
+    return (
       <React.Fragment>
         <Overview />
         <RelatedItemsAndComparisons />
         <QnA />
         <RatingsAndReviews />
       </React.Fragment>
-    )};
+    );
   };
 }
 

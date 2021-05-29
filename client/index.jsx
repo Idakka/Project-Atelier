@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ProductDetailPage from './components/product_detail_page.jsx';
+import ProductDetailPage from './src/components/product_detail_page.jsx';
 
 ReactDOM.render(
   <ProductDetailPage />,
