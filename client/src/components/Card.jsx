@@ -9,6 +9,7 @@ const Card = ({ productId, cardType }) => {
   const [rating, setRating] = React.useState(4);
 
   const starGraphic = '#';
+  const removeGraphic = '#';
 
   React.useEffect(() => {
     // make API call to get product info. in cb:
