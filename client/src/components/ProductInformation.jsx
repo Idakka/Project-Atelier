@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var ProductInformation = function(props) {
   return (
-    ProductInformation!
+    <span>ProductInformation!</span>
   );
 };
 

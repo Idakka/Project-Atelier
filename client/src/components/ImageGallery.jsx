@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var ImageGallery = function(props) {
   return (
-    ImageGallery!
+    <span>ImageGallery!</span>
   );
 };
 

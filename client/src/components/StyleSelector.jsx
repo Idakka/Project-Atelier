@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var StyleSelector = function(props) {
   return (
-    StyleSelector!
+    <span>StyleSelector!</span>
   );
 };
 

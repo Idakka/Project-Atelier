@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var AddToCartRegion = function(props) {
   return (
-    AddToCartRegion!
+    <span>AddToCartRegion!</span>
   );
 };
 

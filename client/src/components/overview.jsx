@@ -4,7 +4,7 @@ import SiteWideAnnounce from './SiteWideAnnounce.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ProductInformation from './ProductInformation.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import AddToCartRegion from './AddToCartRegion/jsx';
+import AddToCartRegion from './AddToCartRegion.jsx';
 import SalesPitch from './SalesPitch.jsx';
 
 var Overview = function(props) {

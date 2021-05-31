@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var SiteWideAnnounce = function(props) {
   return (
-    SiteWideAnnounce!
+    <span>SiteWideAnnounce!</span>
   );
 };
 

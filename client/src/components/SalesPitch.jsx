@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 
 var SalesPitch = function(props) {
   return (
-    SalesPitch!
+    <span>SalesPitch!</span>
   );
 };
 
