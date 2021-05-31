@@ -13,6 +13,9 @@ jobs:
         with:
           node-version: '12'
 
+      # Name: what will show up on Github in a PR
+      # Run: what script it will run from package.json
+
       - name: Install Dependencies
         run: npm install
 
