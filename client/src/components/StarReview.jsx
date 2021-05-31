@@ -17,7 +17,7 @@ const StarReview = ({ rating }) => {
     stars.push(<div className="star-review__star star-review__star--empty" key={i}><img src="#" alt="Empty star" /></div>);
   }
 
-  return <div className="star-review">{stars}</div>;
+  return <div className="star-review" data-testid="star-review">{stars}</div>;
 };
 
 export default StarReview;
