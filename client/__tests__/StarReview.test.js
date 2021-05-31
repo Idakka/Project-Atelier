@@ -18,3 +18,43 @@ test('Should render 5 full stars on a 5', () => {
   const numberOfFullStars = screen.getAllByAltText('Full star');
   expect(numberOfFullStars.length).toBe(5);
 });
+
+test('Should render 2 full stars and 3 empty stars on a 2', () => {
+  render(<StarReview rating={2} />);
+  const StarReviewComponent = screen.getByTestId('star-review');
+  const numberOfFullStars = screen.getAllByAltText('Full star');
+  const numberOfEmptyStars = screen.getAllByAltText('Empty star');
+  expect(numberOfFullStars.length).toBe(2);
+  expect(numberOfEmptyStars.length).toBe(3);
+});
+
+test('Should render 1 full star, 1 half star and 3 empty stars on a 1.5', () => {
+  render(<StarReview rating={1.5} />);
+  const StarReviewComponent = screen.getByTestId('star-review');
+  const numberOfFullStars = screen.getAllByAltText('Full star');
+  const numberOfHalfStars = screen.getAllByAltText('Half star');
+  const numberOfEmptyStars = screen.getAllByAltText('Empty star');
+  expect(numberOfFullStars.length).toBe(1);
+  expect(numberOfHalfStars.length).toBe(1);
+  expect(numberOfEmptyStars.length).toBe(3);
+});
+
+test('Should render 1 full star, 1 half star and 3 empty stars on a 1.9', () => {
+  render(<StarReview rating={1.9} />);
+  const StarReviewComponent = screen.getByTestId('star-review');
+  const numberOfFullStars = screen.getAllByAltText('Full star');
+  const numberOfHalfStars = screen.getAllByAltText('Half star');
+  const numberOfEmptyStars = screen.getAllByAltText('Empty star');
+  expect(numberOfFullStars.length).toBe(1);
+  expect(numberOfHalfStars.length).toBe(1);
+  expect(numberOfEmptyStars.length).toBe(3);
+});
+
+test('Should render 1 full star, 0 half stars and 4 empty stars on a 1.2', () => {
+  render(<StarReview rating={1.2} />);
+  const StarReviewComponent = screen.getByTestId('star-review');
+  const numberOfFullStars = screen.getAllByAltText('Full star');
+  const numberOfEmptyStars = screen.getAllByAltText('Empty star');
+  expect(numberOfFullStars.length).toBe(1);
+  expect(numberOfEmptyStars.length).toBe(4);
+});
