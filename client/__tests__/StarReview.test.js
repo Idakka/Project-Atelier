@@ -11,3 +11,10 @@ test('Should render StarReview component', () => {
   const StarReviewComponent = screen.getByTestId('star-review');
   expect(StarReviewComponent).toBeInTheDocument();
 });
+
+test('Should render 5 full stars on a 5', () => {
+  render(<StarReview rating={5} />);
+  const StarReviewComponent = screen.getByTestId('star-review');
+  const numberOfFullStars = screen.getAllByAltText('Full star');
+  expect(numberOfFullStars.length).toBe(5);
+});
