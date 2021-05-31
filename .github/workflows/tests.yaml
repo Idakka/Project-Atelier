@@ -1,0 +1,26 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Test using Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      # Name: what will show up on Github in a PR
+      # Run: what script it will run from package.json
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build:ci
+
+      - name: Test
+        run: npm run test:ci
