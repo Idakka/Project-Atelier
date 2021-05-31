@@ -1,6 +1,6 @@
 import React from 'react';
 import Overview from './overview.jsx';
-import RelatedItemsAndComparisons from './related_items_and_comparisons.jsx';
+import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QnA from './q_n_a.jsx';
 import RatingsAndReviews from './ratings_and_reviews.jsx';
 
@@ -17,7 +17,7 @@ class ProductDetailPage extends React.Component {
     return (
       <React.Fragment>
         <Overview />
-        <RelatedItemsAndComparisons />
+        <RelatedItemsAndOutfit />
         <QnA />
         <RatingsAndReviews />
       </React.Fragment>
