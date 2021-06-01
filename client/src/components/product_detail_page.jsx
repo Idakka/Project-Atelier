@@ -4,6 +4,7 @@ import Overview from './overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
+const port = 1234;
 
 class ProductDetailPage extends React.Component {
   constructor(props) {
