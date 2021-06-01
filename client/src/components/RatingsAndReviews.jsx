@@ -35,7 +35,9 @@ const RatingsAndReviews = function(props) {
             <button>MORE REVIEWS</button>
           </div>
           <div className="review-add">
-            <button>ADD A REVIEW +</button>
+            <input type="file" name="file" onChange={props.onChangeFileHandler} />
+            <button type="button" onClick={props.onClickUploadHandler}>Upload</button>
+            {/* <button>ADD A REVIEW +</button> */}
           </div>
 
         </div>
