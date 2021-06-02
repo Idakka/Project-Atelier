@@ -8,7 +8,7 @@ const StarReview = ({ rating }) => {
   for (let i = 0; i < Math.floor(rating); i++) {
     stars.push(<div className="star-review__star star-review__star--full" key={i}><img src="#" alt="Full star" /></div>);
   }
-  // If decimal between .75 and 1, show half-star graphic
+  // If decimal between .75 and 1, show 3/4-star graphic
   if ((rating - stars.length) >= .75) {
     stars.push(<div className="star-review__star star-review__star--threequarter" key={1}><img src="#" alt="Three quarter star" /></div>);
   }
