@@ -16,7 +16,21 @@ app.get('/', (req, res) => {
 
 app.get('/products/:product_id/related', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`)
-    .then(response => res.end(JSON.stringify(response.data)))
+    .then(response => response.data)
+    .then(relatedItems => {
+      const promises = [];
+      relatedItems.forEach((item) => {
+        promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`));
+      });
+      return Promise.all(promises);
+    })
+    .then(items => {
+      const itemsData = [];
+      items.forEach(item => {
+        itemsData.push(item.data);
+      });
+      res.end(JSON.stringify(itemsData));
+    })
     .catch(err => res.end(JSON.stringify(err)));
 });
 
