@@ -1,3 +1,4 @@
+const axios = require('axios');
 const path = require('path');
 const express = require('express');
 
@@ -9,6 +10,11 @@ app.use(express.static(pathname));
 
 app.get('/', (req, res) => {
   res.send('hello world from server!');
+});
+
+app.get('/test/', (req, res) => {
+  axios.get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => res.end(JSON.stringify(response.data)));
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
