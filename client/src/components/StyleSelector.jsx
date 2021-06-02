@@ -2,7 +2,7 @@ import React from 'react';
 
 var StyleSelector = function(props) {
   return (
-    <span>StyleSelector!</span>
+    <div>StyleSelector!</div>
   );
 };
 

@@ -12,17 +12,15 @@ var Overview = function(props) {
     <div className='top-region max-width'>
       <TitleBar />
       <SiteWideAnnounce />
-      <div className="column-container">
-        <div className="horizontal-block">
-          <ImageGallery />
-          <div className="right-column">
+      <div className="overview-column-container">
+        <ImageGallery />
+        <div className="product-information">
             <ProductInformation />
             <StyleSelector />
             <AddToCartRegion />
-          </div>
         </div>
-        <SalesPitch />
       </div>
+      <SalesPitch />
     </div>
   );
 };
