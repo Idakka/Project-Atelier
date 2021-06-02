@@ -2,7 +2,14 @@ import React from 'react';
 
 var ProductInformation = function(props) {
   return (
-    <div>ProductInformation!</div>
+    <React.Fragment>
+      <div>Star Review</div>
+      <div>
+        Category
+        Expanded Product Name
+        $Price
+      </div>
+    </React.Fragment>
   );
 };
 
