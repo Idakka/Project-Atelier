@@ -34,11 +34,8 @@
     "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
     "react-test-renderer": "^17.0.2",
-=======
     "style-loader": "^2.0.0",
->>>>>>> 9bba5ba1a51d6726577ddeacc729238b642d1788
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
