@@ -149,3 +149,13 @@ h1{
   text-decoration: underline;
   padding: 5px;
 }
+
+.logo {
+  font-weight: 600;
+}
+
+.sitewide-announce {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 2px;
+}
