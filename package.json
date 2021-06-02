@@ -27,14 +27,22 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "express": "^4.17.1",
     "jest": "^27.0.1",
     "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-test-renderer": "^17.0.2",
+=======
+    "style-loader": "^2.0.0",
+>>>>>>> 9bba5ba1a51d6726577ddeacc729238b642d1788
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "material-design-icons": "^3.0.1"
   }
 }
