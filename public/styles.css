@@ -109,3 +109,15 @@ h1{
   border-style: solid;
   border-color: blue;
 }
+
+.title-bar {
+  background-color: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  font-size: 1.6rem;
+  font-style: italic;
+  text-decoration: underline;
+  padding: 5px;
+}
