@@ -1,4 +1,5 @@
 import React from 'react';
+import VerticalRule from './VerticalRule.jsx';
 
 var SalesPitch = function(props) {
   return (
@@ -11,7 +12,7 @@ var SalesPitch = function(props) {
           Brownie halvah lollipop cupcake dessert. Croissant bonbon sweet cookie cake. Toffee macaroon powder tart jelly beans caramels.
         </p>
       </div>
-      <div className="vertical-rule"></div>
+      <VerticalRule />
       <div className="sales-pitch-checklist">
         <div><span className="material-icons">done</span>Totally Sweet.</div>
         <div><span className="material-icons">done</span>Totally Sweet.</div>

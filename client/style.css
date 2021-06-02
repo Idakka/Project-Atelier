@@ -182,15 +182,22 @@ h1{
 .sales-pitch-paragraph {
   min-width: 62%;
   padding: 1%;
+  margin: 1% 0;
+}
+
+.vertrule-containter {
+  min-width: 6%;
+  display: flex;
+  padding: 1%;
 }
 
 .vertical-rule {
-  min-width: 6%;
   border-left: 3px solid #666;
-  padding: 1%;
+  margin: 0 auto
 }
 
 .sales-pitch-checklist {
   min-width: 32%;
   text-align: left;
+  margin: 1% 0;
 }
