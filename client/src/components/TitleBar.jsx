@@ -6,7 +6,7 @@ var TitleBar = function(props) {
       <div className="logo">Logo</div>
       <div className="titlebar-search">
         <input type="text" default="________" id="title_bar_search" />
-        <span className="material-icons-outlined">search</span>
+        <span className="material-icons">search</span>
       </div>
     </div>
   );
