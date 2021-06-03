@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Card.jsx';
+import axios from 'axios';
 
-const Carousel = () => {
+const Carousel = ({ productId }) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('/products/22122/related')
+      .then(response => {
+        console.log(response.data);
+        return setProducts(response.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <div className="carousel">
-      {/* This array is purely to set the stage for the iteration we'll do later */}
-      {[1].map(product => (
-        <Card key={product} />
+      {products.map(product => (
+        <Card key={product.id} />
       ))}
     </div>
   );
