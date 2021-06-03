@@ -170,11 +170,13 @@ h1{
 .image-gallery {
   background-color: lightgray;
   min-width: 60%;
+  max-width: 60%;
   height: 300px;
 }
 
 .product-information {
   min-width: 38%;
+  max-width: 38%;
   display: flex;
   flex-direction: column;
 }
@@ -205,15 +207,22 @@ h1{
 .product-detail-category {
   font-size: 1.2rem;
   font-weight: 100;
+  padding: 0.3rem 0;
 }
 
 .product-detail-expanded-product-name {
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
 .product-detail-price {
+  padding: 1rem 0;
+}
 
+.read-all-reviews {
+  font-weight: 100;
+  font-size: 0.7rem;
+  text-decoration: underline;
 }
 
 #qa-div {
