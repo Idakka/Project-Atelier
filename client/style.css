@@ -257,6 +257,9 @@ h1{
 .add-to-bag {
   min-width: 83%;
   max-width: 83%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .add-to-cart-star {
