@@ -3,7 +3,7 @@ import React from 'react';
 var ImageGalleryForwardArrow = function() {
   return (
     <div className="image-gallery-forward-arrow">
-      <span class="material-icons">arrow_forward</span>
+      <span className="material-icons">arrow_forward</span>
     </div>
   );
 };
