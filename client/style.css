@@ -239,6 +239,7 @@ h1{
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem 0;
+  font-weight: 600;
 }
 
 .add-to-bag-box {
@@ -252,11 +253,22 @@ h1{
 .size-select {
   min-width: 55%;
   max-width: 55%;
+	font-size: 1rem;
+	color: #333;
+  font-weight: 600;
+	padding: .6em 2em .5em 1em;
+	appearance: none;
 }
 
 .quantity-select {
   min-width: 40%;
   max-width: 40%;
+  font-size: 1rem;
+	color: #333;
+  font-weight: 600;
+	text-align-last: right;
+  padding: 0.6em 1em 0.5em 2em;
+	appearance: none;
 }
 
 .add-to-bag {

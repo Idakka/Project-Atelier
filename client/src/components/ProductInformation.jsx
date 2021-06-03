@@ -4,7 +4,9 @@ import StarReview from './StarReview.jsx';
 var ProductInformation = function(props) {
   return (
     <React.Fragment>
-      <StarReview rating='4.5'/><span className="read-all-reviews">Read all reviews</span>
+      <div className="stars-and-reviews">
+        <StarReview rating='4.5'/>&nbsp;<span className="read-all-reviews">Read all reviews</span>
+      </div>
       <div>
         <div className="product-detail-category">Category</div>
         <div className="product-detail-expanded-product-name">Expanded Product Name</div>

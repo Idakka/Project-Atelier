@@ -5,11 +5,11 @@ var AddToCartRegion = function(props) {
     <React.Fragment>
       <div className="add-to-bag-row">
         <select className="add-to-bag-box size-select">
-          <option>Foo</option>
-          <option>Bar</option>
-          <option>Baz</option>
-          <option>Qux</option>
-          <option>Quux</option>
+          <option>SELECT SIZE</option>
+          <option>WEE</option>
+          <option>MIDDLIN</option>
+          <option>BIGGUN</option>
+          <option>LAWD HE COMIN</option>
         </select>
         <select className="add-to-bag-box quantity-select">
           <option>1</option>
