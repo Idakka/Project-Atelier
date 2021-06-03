@@ -15,7 +15,7 @@ const StarReview = ({ rating }) => {
   // If decimal between .75 and 1, show 3/4-star graphic
   if ((rating - stars.length) >= .75) {
     stars.push(
-      <div className="star-review__star star-review__star--threequarter" title="Three quarter star" key={1}>
+      <div className="star-review__star star-review__star--threequarter" title="Three quarter star" key={'threequarter'}>
         <span className="material-icons">star_outline</span>
       </div>
     );
@@ -23,7 +23,7 @@ const StarReview = ({ rating }) => {
   // If decimal between .5 and .75, show half-star graphic
   if ((rating - stars.length) >= .5) {
     stars.push(
-      <div className="star-review__star star-review__star--half" title="Half star" key={1}>
+      <div className="star-review__star star-review__star--half" title="Half star" key={'half'}>
         <span className="material-icons">star_outline</span>
       </div>
     );
@@ -31,7 +31,7 @@ const StarReview = ({ rating }) => {
   // If decimal between .25 and .5, show 1/4-star graphic
   if ((rating - stars.length) >= .25) {
     stars.push(
-      <div className="star-review__star star-review__star--quarter" title="Quarter star" key={1}>
+      <div className="star-review__star star-review__star--quarter" title="Quarter star" key={'quarter'}>
         <span className="material-icons">star_outline</span>
       </div>
     );
