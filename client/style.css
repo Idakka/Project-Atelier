@@ -193,6 +193,18 @@ h1{
   right: 1.5%;
 }
 
+.image-gallery-back-arrow {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+
+.image-gallery-forward-arrow {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+}
+
 .image-gallery-thumbnail-column {
   position: absolute;
   left: 3%;
