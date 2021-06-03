@@ -2,7 +2,14 @@ import React from 'react';
 
 var StyleSelector = function(props) {
   return (
-    <div>StyleSelector!</div>
+    <React.Fragment>
+      <div className="style-selector-header">
+        <span className="style-label">STYLE ></span> SELECTED STYLE
+      </div>
+      <div>
+        <img src='img/style_placeholder.png' />
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -225,6 +225,19 @@ h1{
   text-decoration: underline;
 }
 
+.style-label {
+  font-weight: 600;
+}
+
+.add-to-bag-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-to-bag-box {
+  border: 1px solid black;
+}
+
 #qa-div {
   border: 3px solid black;
   padding: 1%;
