@@ -167,11 +167,21 @@ h1{
   margin-bottom: 2%;
 }
 
+.image-gallery-container {
+  position: relative;
+  max-width: 60%;
+  min-width: 60%;
+  padding-top: 45%;
+}
+
 .image-gallery {
   background-color: lightgray;
-  min-width: 60%;
-  max-width: 60%;
-  height: 300px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .stars-and-reviews {
