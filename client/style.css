@@ -211,6 +211,18 @@ h1{
   top: 10%;
 }
 
+.image-gallery-thumbnail-column-up-arrow {
+  position: relative;
+  left: 35%;
+  top: 2%;
+}
+
+.image-gallery-thumbnail-column-down-arrow {
+  position: relative;
+  left: 35%;
+  bottom: 2%;
+}
+
 .image-gallery-thumbnail {
   position: relative;
   background-color: #eaeaea;
