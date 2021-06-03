@@ -232,10 +232,36 @@ h1{
 .add-to-bag-row {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 0;
 }
 
 .add-to-bag-box {
-  border: 1px solid black;
+  border: 2px solid #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+}
+
+.size-select {
+  min-width: 55%;
+  max-width: 55%;
+}
+
+.quantity-select {
+  min-width: 40%;
+  max-width: 40%;
+}
+
+.add-to-bag {
+  min-width: 83%;
+  max-width: 83%;
+}
+
+.add-to-cart-star {
+  min-width: 12%;
+  max-width: 12%;
 }
 
 #qa-div {
