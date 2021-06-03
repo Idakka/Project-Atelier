@@ -213,3 +213,35 @@ h1{
 }
 
 /* QA Styling Ends */
+
+/* || StarReview */
+
+.star-review__star {
+  display: inline-block;
+}
+.star-review__star > span {
+  font-size: 1em;
+  position: relative;
+}
+.star-review__star > span::after {
+  content: '\e838';
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-review__star--full > span::after {
+  width: 100%;
+}
+.star-review__star--threequarter > span::after {
+  width: 58%;
+}
+.star-review__star--half > span::after {
+  width: 50%;
+}
+.star-review__star--quarter > span::after {
+  width: 42%;
+}
+.star-review__star--empty > span::after {
+  width: 0;
+}
