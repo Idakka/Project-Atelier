@@ -138,6 +138,8 @@ h1{
   border-color: blue;
 }
 
+/* QA Styling Starts */
+
 #qa-div {
   border: 3px solid black;
   padding: 1%;
@@ -183,7 +185,7 @@ h1{
   padding-left: 3%;
 }
 
-.qa-more, .qa-add {
+.qa-more, .qa-add, .add-form-submit {
   background-color: white;
   border: 1px solid black;
   padding: 2%;
@@ -194,3 +196,20 @@ h1{
   margin: 1px;
   cursor: pointer;
 }
+
+.add-form-submit {
+  float: right;
+}
+
+.add-question-form label {
+  width: 10%;
+  text-align: right;
+  display: inline-block;
+  padding-right: 1%;
+}
+
+.add-question-form input, .add-question-form textarea{
+  width: 50%
+}
+
+/* QA Styling Ends */
