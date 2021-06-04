@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: sans-serif;
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 @font-face {
@@ -261,7 +261,7 @@ h1{
   margin: 1% 0;
 }
 
-.vertrule-containter {
+.vertrule-container {
   min-width: 6%;
   display: flex;
   padding: 1%;
@@ -322,7 +322,7 @@ h1{
 .size-select {
   min-width: 55%;
   max-width: 55%;
-	font-size: 1rem;
+  font-size: 1rem;
 	color: #333;
   font-weight: 600;
 	padding: .6em 2em .5em 1em;
