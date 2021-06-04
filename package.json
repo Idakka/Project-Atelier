@@ -28,6 +28,7 @@
     "@testing-library/react": "^11.2.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
+    "eslint": "^7.27.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "express": "^4.17.1",
     "jest": "^27.0.1",
