@@ -4,7 +4,7 @@ var StyleSelector = function(props) {
   return (
     <React.Fragment>
       <div className="style-selector-header">
-        <span className="style-label">STYLE ></span> SELECTED STYLE
+        <span className="style-label">STYLE &gt;</span> SELECTED STYLE
       </div>
       <div>
         <img src='img/style_placeholder.png' />
