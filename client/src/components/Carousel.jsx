@@ -17,10 +17,18 @@ const Carousel = ({ productId, cardType }) => {
   }, []);
 
   return (
-    <div className="carousel">
-      {products.map(product => (
-        <Card key={product.id} product={product} cardType={cardType} />
-      ))}
+    <div className="carousel__overflow">
+      <div className="carousel__edge carousel__edge--left">
+        <span className="material-icons">arrow_backward</span>
+      </div>
+      <div className="carousel">
+        {products.map(product => (
+          <Card key={product.id} product={product} cardType={cardType} />
+        ))}
+      </div>
+      <div className="carousel__edge carousel__edge--right">
+        <span className="material-icons">arrow_forward</span>
+      </div>
     </div>
   );
 };

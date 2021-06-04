@@ -14,7 +14,6 @@ const Card = ({ product, cardType }) => {
       .then(response => response.data)
       .then(cardInfo => {
         setRating(cardInfo.rating);
-        console.log(product.id, cardInfo.rating);
         setPictureURL(cardInfo.pictureURL);
         setOriginalPrice(cardInfo.originalPrice);
         setSalePrice(cardInfo.salePrice);
@@ -37,7 +36,7 @@ const Card = ({ product, cardType }) => {
       <div className="product__details">
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
-        <p className="product__price">{salePrice ? salePrice : originalPrice}</p>
+        <p className="product__price">${salePrice ? salePrice.split('.')[0] : originalPrice.split('.')[0]}</p>
         <StarReview rating={rating} />
       </div>
     </div>
