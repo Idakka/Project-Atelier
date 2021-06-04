@@ -34,4 +34,31 @@ app.get('/products/:product_id/related', (req, res) => {
     .catch(err => res.end(JSON.stringify(err)));
 });
 
+app.get('/products/:product_id/card-info', (req, res) => {
+  // REVIEWS
+  // get average review
+
+  // let rating = 0;
+  // get all reviews
+    // reduce all reviews to the average
+    // set rating to average review
+
+  // STYLES
+  // get picture of default style
+  // get original price
+  // get sale price
+
+  // let pictureURL, originalprice, saleprice
+  // get all styles
+    // reduce down to the default style
+    // set picture URL to default style picture 0
+    // set original price to original price
+    // set sale price to sale price
+
+  // package into obj
+  // send back
+
+  // put together, send off
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
