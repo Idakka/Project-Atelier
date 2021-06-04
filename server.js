@@ -35,30 +35,38 @@ app.get('/products/:product_id/related', (req, res) => {
 });
 
 app.get('/products/:product_id/card-info', (req, res) => {
-  // REVIEWS
-  // get average review
+  let rating = 0;
+  let pictureURL = '';
+  let originalPrice = 0;
+  let salePrice = 0;
 
-  // let rating = 0;
-  // get all reviews
-    // reduce all reviews to the average
-    // set rating to average review
-
-  // STYLES
-  // get picture of default style
-  // get original price
-  // get sale price
-
-  // let pictureURL, originalprice, saleprice
-  // get all styles
-    // reduce down to the default style
-    // set picture URL to default style picture 0
-    // set original price to original price
-    // set sale price to sale price
-
-  // package into obj
-  // send back
-
-  // put together, send off
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.product_id}&count=100`)
+    .then(response => response.data)
+    .then(reviews => (reviews.results.reduce((acc, review) => acc + review.rating, 0) / reviews.results.length))
+    .then(averageRating => {
+      // If no ratings exist, at least let it be a number
+      rating = averageRating || 0;
+    })
+    .then(_ => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/styles`))
+    .then(response => response.data)
+    .then(styles => styles.results.filter(style => style['default?'])[0] || styles.results[0])
+    .then(defaultStyle => {
+      pictureURL = defaultStyle.photos[0].url;
+      originalPrice = defaultStyle.original_price;
+      salePrice = defaultStyle.sale_price;
+      return;
+    })
+    .then(_ => {
+      const output = {
+        'product_id': req.params.product_id,
+        rating,
+        pictureURL,
+        originalPrice,
+        salePrice
+      };
+      res.end(JSON.stringify(output));
+    })
+    .catch(err => res.end(JSON.stringify(err)));
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
