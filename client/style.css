@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: sans-serif;
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 @font-face {
@@ -27,7 +27,7 @@ body {
 }
 
 h1{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #ratings-main{
@@ -138,6 +138,221 @@ h1{
   border-color: blue;
 }
 
+.title-bar {
+  background-color: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  font-size: 1.6rem;
+  font-style: italic;
+  text-decoration: underline;
+  padding: 5px;
+}
+
+.logo {
+  font-weight: 600;
+}
+
+.sitewide-announce {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 2px;
+}
+
+.overview-column-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.image-gallery-container {
+  position: relative;
+  max-width: 60%;
+  min-width: 60%;
+  padding-top: 45%;
+}
+
+.image-gallery {
+  background-color: lightgray;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.image-gallery-fullscreen-toggle {
+  position: absolute;
+  float: left;
+  width: 2rem;
+  margin: 0;
+  top: 3%;
+  right: 1.5%;
+}
+
+.image-gallery-back-arrow {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+
+.image-gallery-forward-arrow {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+}
+
+.image-gallery-thumbnail-column {
+  position: absolute;
+  left: 3%;
+  top: 10%;
+}
+
+.image-gallery-thumbnail-column-up-arrow {
+  position: relative;
+  left: 35%;
+  top: 2%;
+}
+
+.image-gallery-thumbnail-column-down-arrow {
+  position: relative;
+  left: 35%;
+  bottom: 2%;
+}
+
+.image-gallery-thumbnail {
+  position: relative;
+  background-color: #eaeaea;
+  width: 75px;
+  height: 75px;
+  border: 1px solid black;
+  margin: 1em 0;
+  z-index: 3;
+}
+
+.three-px-hr {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  top: 80px;
+  margin: 0;
+  z-index: 2;
+}
+
+.stars-and-reviews {
+  display: flex;
+  flex-direction: row;
+}
+
+.product-information {
+  min-width: 38%;
+  max-width: 38%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sales-pitch-paragraph {
+  min-width: 62%;
+  padding: 1%;
+  margin: 1% 0;
+}
+
+.vertrule-container {
+  min-width: 6%;
+  display: flex;
+  padding: 1%;
+}
+
+.vertical-rule {
+  border-left: 3px solid #666;
+  margin: 0 auto
+}
+
+.sales-pitch-checklist {
+  min-width: 32%;
+  text-align: left;
+  margin: 1% 0;
+}
+
+.product-detail-category {
+  font-size: 1.2rem;
+  font-weight: 100;
+  padding: 0.3rem 0;
+}
+
+.product-detail-expanded-product-name {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.product-detail-price {
+  padding: 1rem 0;
+}
+
+.read-all-reviews {
+  font-weight: 100;
+  font-size: 0.7rem;
+  text-decoration: underline;
+}
+
+.style-label {
+  font-weight: 600;
+}
+
+.add-to-bag-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
+
+.add-to-bag-box {
+  border: 2px solid #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+}
+
+.size-select {
+  min-width: 55%;
+  max-width: 55%;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  padding: .6em 2em .5em 1em;
+  appearance: none;
+}
+
+.quantity-select {
+  min-width: 40%;
+  max-width: 40%;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  text-align-last: right;
+  padding: 0.6em 1em 0.5em 2em;
+  appearance: none;
+}
+
+.add-to-bag {
+  min-width: 73%;
+  max-width: 73%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.add-to-cart-star {
+  min-width: 12%;
+  max-width: 12%;
+}
 /* QA Styling Starts */
 
 #qa-div {
