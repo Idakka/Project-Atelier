@@ -3,30 +3,71 @@ import StarReview from './StarReview.jsx';
 
 const Card = ({ product, cardType }) => {
   const [styles, setStyles] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     setStyles([
       {
-        'style_id': 1,
+        'style_id': 123142,
         'name': 'Forest Green & Black',
-        'original_price': '140',
-        'sale_price': '0',
+        'original_price': '140.00',
+        'sale_price': null,
         'default?': true,
         'photos': [
           {
-            'thumbnail_url': 'urlplaceholder/style_1_photo_number_thumbnail.jpg',
-            'url': 'urlplaceholder/style_1_photo_number.jpg'
+            'thumbnail_url': 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
           },
           {
-            'thumbnail_url': 'urlplaceholder/style_1_photo_number_thumbnail.jpg',
-            'url': 'urlplaceholder/style_1_photo_number.jpg'
+            'thumbnail_url': 'https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80'
+          },
+          {
+            'thumbnail_url': 'https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2775&q=80'
+          },
+          {
+            'thumbnail_url': 'https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'
+          },
+          {
+            'thumbnail_url': 'https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+          },
+          {
+            'thumbnail_url': 'https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+            'url': 'https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80'
           }
         ],
-        'skus': {},
+        'skus': {
+          '714432': {
+            'quantity': 8,
+            'size': 'XS'
+          },
+          '714433': {
+            'quantity': 16,
+            'size': 'S'
+          },
+          '714434': {
+            'quantity': 17,
+            'size': 'M'
+          },
+          '714435': {
+            'quantity': 10,
+            'size': 'L'
+          },
+          '714436': {
+            'quantity': 15,
+            'size': 'XL'
+          },
+          '714437': {
+            'quantity': 4,
+            'size': 'XL'
+          }
+        }
       }
     ]);
-    setReviews([
+    const reviews = [
       {
         'review_id': 5,
         'rating': 3,
@@ -60,7 +101,8 @@ const Card = ({ product, cardType }) => {
         'helpfulness': 5,
         'photos': [],
       }
-    ]);
+    ];
+    setRating(reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length);
   }, []);
 
   console.log(styles);
@@ -82,7 +124,7 @@ const Card = ({ product, cardType }) => {
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
         <p className="product__price">{product.price}</p>
-        <StarReview rating={reviews.length !== 0 ? reviews[0].rating : 0} />
+        <StarReview rating={rating} />
       </div>
     </div>
   );
