@@ -47,11 +47,11 @@ const QuestionsAndAnswers = () => {
         <h3>About the [Product Name Placeholder]</h3>
         <form className="add-question-form">
           <label className="add-form-question">Question*</label>
-            <textarea rows="10" maxLength="1000" required></textarea><p></p>
+          <textarea rows="10" maxLength="1000" required></textarea><p></p>
           <label className="add-form-username">Username*</label>
-            <input maxLength="60" required></input><p></p>
+          <input maxLength="60" required></input><p></p>
           <label className="add-form-email">Email*</label>
-            <input maxLength="60" required></input><p></p>
+          <input maxLength="60" required></input><p></p>
           <button className="add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
         </form>
       </Modal>

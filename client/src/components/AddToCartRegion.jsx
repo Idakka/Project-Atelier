@@ -18,11 +18,11 @@ var AddToCartRegion = function(props) {
           <option>4</option>
           <option>5</option>
         </select>
-        </div>
-        <div className="add-to-bag-row">
-          <div className="add-to-bag-box add-to-bag"><div>Add to Bag</div><div>+</div></div>
-          <div className="add-to-bag-box add-to-cart-star"><span className='material-icons'>star_rate</span></div>
-        </div>
+      </div>
+      <div className="add-to-bag-row">
+        <div className="add-to-bag-box add-to-bag"><div>Add to Bag</div><div>+</div></div>
+        <div className="add-to-bag-box add-to-cart-star"><span className='material-icons'>star_rate</span></div>
+      </div>
     </React.Fragment>
   );
 };
