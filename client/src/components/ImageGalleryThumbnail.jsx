@@ -8,7 +8,7 @@ var ImageGalleryThumbnail = function(props) {
           <hr className='three-px-hr'/>
         </div>
       </React.Fragment>
-    )
+    );
   } else return (
     <div className='image-gallery-thumbnail'></div>
   );
