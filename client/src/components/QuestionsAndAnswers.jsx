@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 
 // Modal.setAppElement('#app');
-// Note - review below to move to test file
-if (process.env.NODE_ENV !== 'test') ReactModal.setAppElement('#app');
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#app');
 
 const QuestionsAndAnswers = () => {
 
@@ -11,7 +10,7 @@ const QuestionsAndAnswers = () => {
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
 
   return (
-    <div className="qa-div">
+    <div id="qa-div">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
 
       <form id="search">
