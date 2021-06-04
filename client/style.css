@@ -1,3 +1,8 @@
+:root {
+  --black: #515251;
+  --white: white;
+}
+
 html,
 body {
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -459,4 +464,73 @@ h1{
 }
 .star-review__star--empty > span::after {
   width: 0;
+}
+
+/* || Carousel and Cards */
+
+
+
+.carousel {
+  display: grid;
+  gap: 2rem;
+  grid-auto-flow: column;
+}
+.card {
+  color: var(--black);
+  display: grid;
+}
+.card.product {
+  border: 1px solid var(--black);
+}
+.product__picture {
+  height: 500px;
+  max-width: 500px;
+  overflow: hidden;
+  position: relative;
+}
+.product__picture img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+  width: 100%;
+  z-index: -1;
+}
+/* Make star visible on both light and dark backgrounds */
+/* I honestly hate this solution but will table it for later */
+.product__picture > .material-icons {
+  color: black;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
+.product__picture > .material-icons::before {
+  border-radius: 100%;
+  color: gold;
+  content: '\e838';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.product__details {
+  padding: 1rem .5rem .5rem;
+}
+.product__details > * {
+  margin: 0;
+}
+.product__details > * + * {
+  margin-top: .5rem;
+}
+.product__category {
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+.product__name {
+  font-weight: bold;
+  letter-spacing: 0.4px;
 }
