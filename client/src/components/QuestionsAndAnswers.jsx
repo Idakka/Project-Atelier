@@ -6,6 +6,7 @@ Modal.setAppElement('#app');
 const QuestionsAndAnswers = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
 
   return (
     <div id="qa-div">
@@ -21,7 +22,25 @@ const QuestionsAndAnswers = () => {
 
       {/* NOTE - Refactor to have a seperate component later on when there is more to display */}
       <div className="qa-card-sample">
-        <b><div className="qa-div">Q: Question [Placeholder]</div></b><p></p>
+        <b><div className="qa-div">Q: Question [Placeholder]
+          <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href="">Add Answer</button>
+          <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
+            <h2>Submit Your Answer</h2>
+            <h3>[Product Name]: [Question Body]</h3>
+            <form className="add-answer-form">
+              <label className="add-form-answer">Answer*</label>
+              <textarea rows="10" maxLength="1000" required></textarea><p></p>
+              <label className="add-form-username">Nickname*</label>
+              <input maxLength="60" placeholder="Example: jack543!" required></input><p className="form-small">For privacy reasons, do not use your full name or email address</p>
+              <label className="add-form-email">Email*</label>
+              <input maxLength="60" placeholder="Example: jack@email.com" required></input><p className="form-small">For authentication reasons, you will not be emailed</p>
+              <button className="add-form-submit" onClick={() => setModalIsOpenAdd(false)}>Submit</button>
+            </form>
+          </Modal>
+        </div>
+
+        </b><p></p>
+
         <div className="qa-div"><b>A: </b>Answer [Placeholder]</div><p></p>
         <div className="qa-footer">
           <label className="qa-username">by Username [Placeholder],
@@ -48,10 +67,10 @@ const QuestionsAndAnswers = () => {
         <form className="add-question-form">
           <label className="add-form-question">Question*</label>
             <textarea rows="10" maxLength="1000" required></textarea><p></p>
-          <label className="add-form-username">Username*</label>
-            <input maxLength="60" required></input><p></p>
+          <label className="add-form-username">Nickame*</label>
+            <input maxLength="60" placeholder="Example: jackson11!" required></input><p className="form-small">For privacy reasons, do not use your full name or email address</p>
           <label className="add-form-email">Email*</label>
-            <input maxLength="60" required></input><p></p>
+            <input maxLength="60" required></input><p className="form-small">For authentication reasons, you will not be emailed</p>
           <button className="add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
         </form>
       </Modal>
