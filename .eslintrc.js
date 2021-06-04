@@ -7,11 +7,13 @@
 
 module.exports = {
   env: {
-    jest: true
+    jest: true,
+    node: true
   },
   extends: [
-    './node_modules/eslint-config-hackreactor/index.js',
-    'eslint:recommended',
-    'plugin:react/recommended'
-  ]
+    './node_modules/eslint-config-hackreactor/index.js'
+  ],
+  rules: {
+    indent: ['error', 2]
+  }
 };
