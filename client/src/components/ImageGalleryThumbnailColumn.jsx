@@ -5,7 +5,7 @@ import ImageGalleryThumbnailColumnDownArrow from './ImageGalleryThumbnailColumnD
 
 var ImageGalleryThumbnailColumn = function(props) {
   return (
-    <div className="image-gallery-thumbnail-column">
+    <div className="image-gallery-thumbnail-column" data-testid="ig-tc">
       <ImageGalleryThumbnailColumnUpArrow />
       <ImageGalleryThumbnail selected={true}/>
       <ImageGalleryThumbnail />
