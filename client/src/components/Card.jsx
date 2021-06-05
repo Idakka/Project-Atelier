@@ -15,28 +15,26 @@ const Card = ({ product, cardType }) => {
       .then(cardInfo => {
         setRating(cardInfo.rating);
         setPictureURL(cardInfo.pictureURL);
-        setOriginalPrice(cardInfo.originalPrice);
-        setSalePrice(cardInfo.salePrice);
+        setOriginalPrice(cardInfo.originalPrice.split('.')[0]);
+        setSalePrice(cardInfo.salePrice ? cardInfo.salePrice.split('.')[0] : null);
       });
   }, []);
-
-  cardType = 'related';
 
   return (
     <div className="card product">
       <div className="product__picture">
         <img src={pictureURL} alt={product.name} />
         {cardType === 'related' && (
-          <span className="material-icons">star_outline</span>
+          <span className="material-icons star">star_outline</span>
         )}
         {cardType === 'outfit' && (
-          <span className="material-icons">do_not_disturb</span>
+          <span className="material-icons remove">highlight_off</span>
         )}
       </div>
       <div className="product__details">
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
-        <p className="product__price">${salePrice ? salePrice.split('.')[0] : originalPrice.split('.')[0]}</p>
+        <p className="product__price">${salePrice ? salePrice : originalPrice}</p>
         <StarReview rating={rating} />
       </div>
     </div>

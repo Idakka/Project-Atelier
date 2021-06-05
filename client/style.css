@@ -467,16 +467,15 @@ h1{
 }
 
 /* || Carousel and Cards */
-
-
-
+.related-items-and-outfit > * {
+  margin: 4rem 0;
+}
 .carousel {
   display: grid;
   gap: 2rem;
   grid-auto-flow: column;
 }
-.carousel__overflow {
-  display: flex;
+.carousel__wrapper {
   overflow: hidden;
   position: relative;
 }
@@ -489,17 +488,22 @@ h1{
   width: min(200px, 15%);
   z-index: 1;
 }
+.carousel__edge > .material-icons {
+  cursor: pointer;
+}
 .carousel__edge--left {
   background-image: linear-gradient(to right, white, transparent);
   justify-content: flex-start;
   left: 0;
-  padding-left: 1rem;
 }
 .carousel__edge--right {
   background-image: linear-gradient(to left, white, transparent);
   justify-content: flex-end;
-  padding-right: 1rem;
   right: 0;
+}
+.carousel__title {
+  font-weight: normal;
+  text-transform: uppercase;
 }
 .card {
   color: var(--black);
@@ -529,6 +533,7 @@ h1{
 /* I honestly hate this solution but will table it for later */
 .product__picture > .material-icons {
   color: black;
+  cursor: pointer;
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -536,14 +541,21 @@ h1{
 }
 .product__picture > .material-icons::before {
   border-radius: 100%;
-  color: gold;
-  content: '\e838';
   height: 100%;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
   z-index: -1;
+}
+.product__picture > .material-icons.star::before {
+  color: gold;
+  content: '\e838';
+  transform: scale(.9);
+}
+.product__picture > .material-icons.remove::before {
+  color: white;
+  content: '\ef4a';
 }
 .product__details {
   padding: 1rem .5rem .5rem;
