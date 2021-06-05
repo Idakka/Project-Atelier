@@ -10,8 +10,6 @@ const Carousel = ({ productId, carouselType }) => {
 
   const slideWrapperRef = createRef();
 
-  const cardWidth = 272;
-
   useEffect(() => {
     // if carouselType is related
     axios.get(`/products/${productId}/related`)
@@ -25,32 +23,21 @@ const Carousel = ({ productId, carouselType }) => {
   }, []);
 
   const scrollCarousel = useCallback((direction) => {
+    // Get boundary variables for scroll calibration
+    const cardWidth = 272;
     const capacity = Math.floor(slideWrapperRef.current.clientWidth / cardWidth);
-    // set farLeft to 0
     const farLeft = 0;
-    // set farRight to length of products - capacity
     const farRight = products.length - capacity;
     const change = direction === 'left' ? -1 : 1;
 
-    // get rid of scrolls if no longer needed
-    // if going to be at far left
-      // set to no
-    // if not
-      // set to yes
+    // If you can't scroll in a direction, remove the button
     setCanScrollLeft(scrollPosition + change !== farLeft);
-    // if going to be at far right
-      // set to no
-    // if not
-      // set to yes
     setCanScrollRight(scrollPosition + change !== farRight);
 
-    // if direction is left and not at farLeft
+    // If you are not at the edge, then scroll one more card over
     if (direction === 'left' && scrollPosition !== farLeft) {
-      // subtract one from scroll position
       setScrollPosition(scrollPosition - 1);
-    // if direction is right and not at farRight
     } else if (direction === 'right' && scrollPosition !== farRight) {
-      // add one from scroll position
       setScrollPosition(scrollPosition + 1);
     }
   });
