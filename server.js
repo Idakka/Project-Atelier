@@ -1,11 +1,21 @@
 const axios = require('axios');
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const express = require('express');
 const path = require('path');
 
 const app = express();
 const port = 1234;
-axios.defaults.headers.common['Authorization'] = process.env.GITHUB_TOKEN;
+
+const atelierHeaders = {
+  headers: {
+    'Authorization': process.env.GITHUB_TOKEN
+  }
+};
+const s3Headers = {
+  headers: {
+    'Authorization': process.env.S3_TOKEN
+  }
+};
 
 const pathname = path.join(__dirname, 'public');
 app.use(express.static(pathname));
@@ -15,12 +25,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products/:product_id/related', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`, atelierHeaders)
     .then(response => response.data)
     .then(relatedItems => {
       const promises = [];
       relatedItems.forEach((item) => {
-        promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`));
+        promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`, atelierHeaders));
       });
       return Promise.all(promises);
     })
@@ -40,14 +50,14 @@ app.get('/products/:product_id/card-info', (req, res) => {
   let originalPrice = 0;
   let salePrice = 0;
 
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.product_id}&count=100`)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.product_id}&count=100`, atelierHeaders)
     .then(response => response.data)
     .then(reviews => (reviews.results.reduce((acc, review) => acc + review.rating, 0) / reviews.results.length))
     .then(averageRating => {
       // If no ratings exist, at least let it be a number
       rating = averageRating || 0;
     })
-    .then(_ => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/styles`))
+    .then(_ => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/styles`, atelierHeaders))
     .then(response => response.data)
     .then(styles => styles.results.filter(style => style['default?'])[0] || styles.results[0])
     .then(defaultStyle => {
