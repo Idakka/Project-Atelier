@@ -3,7 +3,7 @@ import Carousel from './Carousel.jsx';
 
 const RelatedItemsAndOutfit = () => {
   return (
-    <section id="related-items-and-outfit">
+    <section id="related-items-and-outfit" data-testid="related-items-and-outfit">
       <div id="related-items">
         <h2>Related Items</h2>
         <Carousel />
