@@ -1,0 +1,470 @@
+html,
+body {
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v88/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+h1{
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#ratings-main{
+  border-style: solid;
+  border-color: red;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-column-gap: 2px;
+}
+
+#ratings-left-pane{
+  border-style: solid;
+  border-color: yellow;
+}
+
+ #ratings-right-pane{
+  border-style: solid;
+  border-color: yellow;
+}
+
+#left-pane-title{
+  border-style: solid;
+  border-color: green;
+}
+.rating-left{
+  border-style: solid;
+  border-color: green;
+  display: grid;
+  grid-template-columns: 34% 34% 32%;
+}
+
+.number-rating{
+  border-style: solid;
+  border-color: blue;
+}
+
+.stars{
+  border-style: solid;
+  border-color: red;
+}
+
+.recommend-percent{
+  border-style: solid;
+  border-color: green;
+}
+
+.star-chart{
+  border-style: solid;
+  border-color: green;
+}
+
+.review-size{
+  border-style: solid;
+  border-color: green;
+}
+
+.review-comfort{
+  border-style: solid;
+  border-color: green;
+}
+
+#ratings-title{
+  border-style: solid;
+  border-color: green;
+}
+
+.review-header{
+  border-style: solid;
+  border-color: blue;
+  display: grid;
+  grid-template-columns: 34% 34% 32%;
+}
+
+.review-title{
+  border-style: solid;
+  border-color: blue;
+}
+
+.review-block{
+  border-style: solid;
+  border-color: blue;
+}
+
+.response-block{
+  border-style: solid;
+  border-color: blue;
+}
+
+.review-footer{
+  border-style: solid;
+  border-color: green;
+}
+
+#ratings-right-pane-footer{
+  border-style: solid;
+  border-color: blue;
+  display: grid;
+  grid-template-columns: 34% 34% 32%;
+}
+
+.review-btn{
+  border-style: solid;
+  border-color: blue;
+}
+
+.review-add{
+  border-style: solid;
+  border-color: blue;
+}
+
+.title-bar {
+  background-color: grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  font-size: 1.6rem;
+  font-style: italic;
+  text-decoration: underline;
+  padding: 5px;
+}
+
+.logo {
+  font-weight: 600;
+}
+
+.sitewide-announce {
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 2px;
+}
+
+.overview-column-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.image-gallery-container {
+  position: relative;
+  max-width: 60%;
+  min-width: 60%;
+  padding-top: 45%;
+}
+
+.image-gallery {
+  background-color: lightgray;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.image-gallery-fullscreen-toggle {
+  position: absolute;
+  float: left;
+  width: 2rem;
+  margin: 0;
+  top: 3%;
+  right: 1.5%;
+}
+
+.image-gallery-back-arrow {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+
+.image-gallery-forward-arrow {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+}
+
+.image-gallery-thumbnail-column {
+  position: absolute;
+  left: 3%;
+  top: 10%;
+}
+
+.image-gallery-thumbnail-column-up-arrow {
+  position: relative;
+  left: 35%;
+  top: 2%;
+}
+
+.image-gallery-thumbnail-column-down-arrow {
+  position: relative;
+  left: 35%;
+  bottom: 2%;
+}
+
+.image-gallery-thumbnail {
+  position: relative;
+  background-color: #eaeaea;
+  width: 75px;
+  height: 75px;
+  border: 1px solid black;
+  margin: 1em 0;
+  z-index: 3;
+}
+
+.three-px-hr {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  top: 80px;
+  margin: 0;
+  z-index: 2;
+}
+
+.stars-and-reviews {
+  display: flex;
+  flex-direction: row;
+}
+
+.product-information {
+  min-width: 38%;
+  max-width: 38%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sales-pitch-paragraph {
+  min-width: 62%;
+  padding: 1%;
+  margin: 1% 0;
+}
+
+.vertrule-container {
+  min-width: 6%;
+  display: flex;
+  padding: 1%;
+}
+
+.vertical-rule {
+  border-left: 3px solid #666;
+  margin: 0 auto
+}
+
+.sales-pitch-checklist {
+  min-width: 32%;
+  text-align: left;
+  margin: 1% 0;
+}
+
+.product-detail-category {
+  font-size: 1.2rem;
+  font-weight: 100;
+  padding: 0.3rem 0;
+}
+
+.product-detail-expanded-product-name {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.product-detail-price {
+  padding: 1rem 0;
+}
+
+.read-all-reviews {
+  font-weight: 100;
+  font-size: 0.7rem;
+  text-decoration: underline;
+}
+
+.style-label {
+  font-weight: 600;
+}
+
+.add-to-bag-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
+
+.add-to-bag-box {
+  border: 2px solid #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+}
+
+.size-select {
+  min-width: 55%;
+  max-width: 55%;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  padding: .6em 2em .5em 1em;
+  appearance: none;
+}
+
+.quantity-select {
+  min-width: 40%;
+  max-width: 40%;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  text-align-last: right;
+  padding: 0.6em 1em 0.5em 2em;
+  appearance: none;
+}
+
+.add-to-bag {
+  min-width: 73%;
+  max-width: 73%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.add-to-cart-star {
+  min-width: 12%;
+  max-width: 12%;
+}
+/* QA Styling Starts */
+
+#qa-div {
+  border: 3px solid black;
+  padding: 1%;
+}
+
+.qa-searchbar {
+  width: 90%;
+  padding: 12px 16px;
+  margin: 1px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.qa-search-btn {
+  width: 9%;
+  background-color: white;
+  border: 1px solid black;
+  padding: 1%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.qa-card-sample {
+  border: 1px solid black;
+}
+
+.qa-div {
+  margin-bottom: 1px;
+  margin: 1%;
+}
+
+.qa-footer {
+  font-size: 10px;
+  margin: 1%;
+}
+
+.qa-helpful, .qa-report {
+  padding-left: 3%;
+}
+
+.qa-more, .qa-add, .add-form-submit {
+  background-color: white;
+  border: 1px solid black;
+  padding: 2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.add-form-submit {
+  float: right;
+}
+
+.add-question-form label, .add-answer-form label {
+  width: 10%;
+  text-align: right;
+  display: inline-block;
+  padding-right: 1%;
+}
+
+.add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
+  width: 50%
+}
+
+.qa-add-answer {
+  float: right;
+}
+
+.form-small {
+  font-size: 8px;
+}
+
+/* QA Styling Ends */
+
+/* || StarReview */
+
+.star-review__star {
+  display: inline-block;
+}
+.star-review__star > span {
+  font-size: 1em;
+  position: relative;
+}
+.star-review__star > span::after {
+  content: '\e838';
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-review__star--full > span::after {
+  width: 100%;
+}
+.star-review__star--threequarter > span::after {
+  width: 58%;
+}
+.star-review__star--half > span::after {
+  width: 50%;
+}
+.star-review__star--quarter > span::after {
+  width: 42%;
+}
+.star-review__star--empty > span::after {
+  width: 0;
+}

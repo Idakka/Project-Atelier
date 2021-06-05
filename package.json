@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "project-atelier",
   "version": "",
   "description": "",
   "author": "",
@@ -7,10 +7,15 @@
   "engines": {
     "node": ">=6.13.0"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.js"
+    ]
+  },
   "scripts": {
     "start": "npx nodemon server.js",
-    "test": "jest --watchAll",
-    "test:ci": "jest",
+    "test": "jest --env=jsdom --watchAll",
+    "test:ci": "jest --env=jsdom",
     "build": "webpack --mode development --watch",
     "build:ci": "webpack --mode development"
   },
@@ -19,18 +24,27 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "eslint": "^7.27.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "express": "^4.17.1",
     "jest": "^27.0.1",
     "nodemon": "^2.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-modal": "^3.14.2",
+    "react-test-renderer": "^17.0.2",
+    "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "material-design-icons": "^3.0.1"
   }
 }

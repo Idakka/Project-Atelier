@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import StarReview from './StarReview.jsx';
 
 const Card = ({ productId, cardType }) => {
   // All of these are default values that we will remove when API implementation is ready
@@ -37,8 +38,7 @@ const Card = ({ productId, cardType }) => {
         <p className="product__category">{category}</p>
         <p className="product__name">{name}</p>
         <p className="product__price">{price}</p>
-        {/* Will be a star component */}
-        <p className="product__rating">{rating}</p>
+        <StarReview rating={rating} />
       </div>
     </div>
   );
