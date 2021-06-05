@@ -468,3 +468,16 @@ h1{
 .star-review__star--empty > span::after {
   width: 0;
 }
+
+.modal {
+  position: absolute;
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  z-index: 2;
+}
