@@ -6,5 +6,14 @@
  */
 
 module.exports = {
-  extends: './node_modules/eslint-config-hackreactor/index.js'
+  env: {
+    jest: true,
+    node: true
+  },
+  extends: [
+    './node_modules/eslint-config-hackreactor/index.js'
+  ],
+  rules: {
+    indent: ['error', 2]
+  }
 };
