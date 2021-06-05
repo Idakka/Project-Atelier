@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload', (req, res) => {
+  // temp placeholder for image upload route
   res.send('temp placeholder for image upload');
 });
 
