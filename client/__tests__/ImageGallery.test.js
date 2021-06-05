@@ -4,11 +4,11 @@ import ImageGallery from '../src/components/ImageGallery.jsx';
 
 beforeEach(() => {
   render(<ImageGallery />);
-})
+});
 
 afterEach(() => {
   cleanup();
-})
+});
 
 // Just check and make sure that the image gallery and its static subcomponents render.
 test('it renders the ImageGallery', () => {

@@ -8,7 +8,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
-})
+});
 
 test('Product Information renders', () => {
   expect(screen.getByTestId('product-information')).toBeInTheDocument();
