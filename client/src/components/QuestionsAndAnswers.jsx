@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
+import QACard from './QACard.jsx';
+import QACardAnswers from './QACardAnswers.jsx';
 
 // Modal.setAppElement('#app');
 if (process.env.NODE_ENV !== 'test') {
@@ -10,6 +13,33 @@ const QuestionsAndAnswers = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
+  // questions array for current product
+  const [questions, setQuestions] = useState([]);
+  // answers array for current product
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    axios.get('/qa/questions')
+      .then(response => {
+        // console.log('axios data', response.data.results);
+        setQuestions(response.data.results);
+      })
+      .catch(err => console.log('axios err', err));
+  }, []);
+
+  // console.log('? after being set', questions);
+
+  useEffect(() => {
+    axios.get('/qa/questions/:question_id/answers')
+      .then(response => {
+        // console.log('answers data', response.data);
+        setAnswers(response.data);
+      })
+      .catch(err => console.log('axios err answers', err));
+  }, []);
+
+  console.log('answers after being set', answers);
+
 
   return (
     <div id="qa-div">
@@ -23,7 +53,12 @@ const QuestionsAndAnswers = () => {
 
       <p></p>
 
-      {/* NOTE - Refactor to have a seperate component later on when there is more to display */}
+      <div id="test">
+        <div><QACard questions={questions} answers={answers}/></div>
+        <div><QACardAnswers answers={answers} /></div>
+      </div>
+
+      {/* NOTE - Refactor to have a seperate component later on when there is more to display
       <div className="qa-card-sample">
         <b><div className="qa-div">Q: Question [Placeholder]
           <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href="">Add Answer</button>
@@ -57,7 +92,7 @@ const QuestionsAndAnswers = () => {
             </label>
           </label>
         </div>
-      </div>
+      </div> */}
 
       <p></p>
 
@@ -69,11 +104,11 @@ const QuestionsAndAnswers = () => {
         <h3>About the [Product Name Placeholder]</h3>
         <form className="add-question-form">
           <label className="add-form-question">Question*</label>
-            <textarea rows="10" maxLength="1000" required /><p></p>
+          <textarea rows="10" maxLength="1000" required /><p></p>
           <label className="add-form-username">Nickame*</label>
-            <input maxLength="60" placeholder="Example: jackson11!" required /><p className="form-small">For privacy reasons, do not use your full name or email address</p>
+          <input maxLength="60" placeholder="Example: jackson11!" required /><p className="form-small">For privacy reasons, do not use your full name or email address</p>
           <label className="add-form-email">Email*</label>
-            <input maxLength="60" required /><p className="form-small">For authentication reasons, you will not be emailed</p>
+          <input maxLength="60" required /><p className="form-small">For authentication reasons, you will not be emailed</p>
           <button className="add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
         </form>
       </Modal>
