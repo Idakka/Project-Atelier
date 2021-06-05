@@ -5,7 +5,7 @@ import ImageGalleryBackArrow from './ImageGalleryBackArrow.jsx';
 
 var ImageGallery = function(props) {
   return (
-    <div className="image-gallery-container">
+    <div className="image-gallery-container" data-testid="image-gallery">
       <div className="image-gallery">
         <ImageGalleryBackArrow />
         <ImageGalleryForwardArrow />
