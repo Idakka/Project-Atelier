@@ -59,11 +59,12 @@ const Carousel = ({ productId, carouselType }) => {
     <React.Fragment>
       <h3 className="carousel__title">{carouselType === 'related' ? 'Related Items' : 'Your Outfit'}</h3>
       <div className="carousel__wrapper">
-        {canScrollLeft ? (
-          <div className="carousel__edge carousel__edge--left">
-            <span className="material-icons" onClick={() => scrollCarousel('left')}>arrow_backward</span>
-          </div>
-        ) : <></>}
+        <div
+          className="carousel__edge carousel__edge--left"
+          style={{visibility: canScrollLeft ? 'visible' : 'hidden', opacity: canScrollLeft ? 1 : 0}}
+        >
+          <span className="material-icons" onClick={() => scrollCarousel('left')}>arrow_backward</span>
+        </div>
         <div ref={slideWrapperRef} className="carousel__slide-wrapper">
           <div className="carousel" style={{ left: String(scrollPosition * -272) + 'px' }}>
             {products.map(product => (
@@ -71,11 +72,12 @@ const Carousel = ({ productId, carouselType }) => {
             ))}
           </div>
         </div>
-        {canScrollRight ? (
-          <div className="carousel__edge carousel__edge--right">
-            <span className="material-icons" onClick={() => scrollCarousel('right')}>arrow_forward</span>
-          </div>
-        ) : <></>}
+        <div
+          className="carousel__edge carousel__edge--right"
+          style={{visibility: canScrollRight ? 'visible' : 'hidden', opacity: canScrollRight ? 1 : 0}}
+        >
+          <span className="material-icons" onClick={() => scrollCarousel('right')}>arrow_forward</span>
+        </div>
       </div>
     </React.Fragment>
   );
