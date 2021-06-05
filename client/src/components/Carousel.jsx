@@ -58,7 +58,11 @@ const Carousel = ({ productId, carouselType }) => {
           </span>
         </div>
         <div ref={slideWrapperRef} className="carousel__slide-wrapper">
-          <div className="carousel" style={{ left: String(scrollPosition * -272) + 'px' }}>
+          <div
+            className="carousel"
+            style={{ left: String(scrollPosition * -272) + 'px' }}
+            data-testid="carousel"
+          >
             {products.map(product => (
               <Card key={product.id} product={product} cardType={carouselType} />
             ))}
