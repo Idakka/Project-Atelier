@@ -472,8 +472,9 @@ h1{
 }
 .carousel {
   display: grid;
-  gap: 2rem;
+  gap: 32px;
   grid-auto-flow: column;
+  position: relative;
 }
 .carousel__wrapper {
   overflow: hidden;
@@ -490,6 +491,8 @@ h1{
 }
 .carousel__edge > .material-icons {
   cursor: pointer;
+  overflow: hidden;
+  width: 1ch;
 }
 .carousel__edge--left {
   background-image: linear-gradient(to right, white, transparent);
