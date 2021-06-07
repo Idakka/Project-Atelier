@@ -16,39 +16,46 @@ app.get('/', (req, res) => {
   res.send('hello world from server!');
 });
 
-app.get('/qa/questions', (req, res) => {
+// // NOTE - GS setting this up to render products, will change once Sam gets a product
+// app.get('/productTEMP', (req, res) => {
+//   var currentProduct = 22126; // will need to be updated once product is rendering on page
+//   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
+//     .then(response => {
+//       console.log('questions: ', response.data);
+//       res.send(response.data);
+//     })
+//     .catch(err => console.log('err', err));
+// });
+
+app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22126; // will need to be updated once product is rendering on page
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
     .then(response => {
-      // console.log('questions: ', response.data);
-      res.send(response.data);
+      // current product id
+      // console.log('answers from server (product_id): ', response.data.product_id);
+      // console.log('response for questions', response.data.results);
+      // console.log('response for questions', response.data.results[0].answers);
+      res.send(response.data.results);
     })
     .catch(err => console.log('err', err));
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   var currentProduct = 22126; // will need to be updated once product is rendering on page
-  var currentQuestion = 153694; // will need to be updated once product is rendering on page
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}&question_id=${currentQuestion}`)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
     .then(response => {
-      // current product id
-      // console.log('answers from server (product_id): ', response.data.product_id);
-      // qestion results for current product id
-      // console.log('answers from server (questions results): ', response.data.results);
-      // console.log('answers from server (answers?): ', response.data.results[0]); // requires an index variable to pulls answers for specific question
-      var indexWithAnswers = 0;
-      for (var i = 0; i < response.data.results.length; i++) {
-        var indexId = response.data.results[i].question_id;
-        if (currentQuestion !== indexId) {
-          // indexWithAnswers = i;
-          response.data.results.splice(1);
-        }
-        console.log('final', response.data.results);
-      }
-      console.log('answers?', response.data.results[indexWithAnswers].answers);
-      res.send(response.data.results[indexWithAnswers].answers);
+      var currentQuestion = response.data.results;
+      // console.log('check', currentQuestion);
+      var currentAnswers = [];
+      currentQuestion.forEach((item, index) => {
+        // currentAnswers.push(item.answers[0]);
+        currentAnswers.push(Object.keys(item.answers));
+      })
+      // console.log('answers...' , currentAnswers)
+      res.send(JSON.stringify(currentAnswers));
     })
     .catch(err => console.log('err', err));
 });
+
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));

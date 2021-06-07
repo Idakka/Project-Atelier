@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import QACard from './QACard.jsx';
+import QACardQuestions from './QACardQuestions.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
 
 // Modal.setAppElement('#app');
@@ -15,31 +15,17 @@ const QuestionsAndAnswers = () => {
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
   // questions array for current product
   const [questions, setQuestions] = useState([]);
-  // answers array for current product
-  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    axios.get('/qa/questions')
+    axios.get('/qa/questions/')
       .then(response => {
-        // console.log('axios data', response.data.results);
-        setQuestions(response.data.results);
+        // console.log('axios data', response.data);
+        setQuestions(response.data);
       })
       .catch(err => console.log('axios err', err));
   }, []);
 
-  // console.log('? after being set', questions);
-
-  useEffect(() => {
-    axios.get('/qa/questions/:question_id/answers')
-      .then(response => {
-        // console.log('answers data', response.data);
-        setAnswers(response.data);
-      })
-      .catch(err => console.log('axios err answers', err));
-  }, []);
-
-  console.log('answers after being set', answers);
-
+  // console.log('QUESTIONS set --> ', questions);
 
   return (
     <div id="qa-div">
@@ -54,8 +40,7 @@ const QuestionsAndAnswers = () => {
       <p></p>
 
       <div id="test">
-        <div><QACard questions={questions} answers={answers}/></div>
-        <div><QACardAnswers answers={answers} /></div>
+        <div><QACardQuestions questions={questions} /></div>
       </div>
 
       {/* NOTE - Refactor to have a seperate component later on when there is more to display

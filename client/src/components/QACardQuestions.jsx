@@ -2,20 +2,38 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
+import QACardAnswers from './QACardAnswers.jsx';
 
 // Modal.setAppElement('#app');
 if (process.env.NODE_ENV !== 'test') {
   Modal.setAppElement('#app');
 }
 
-const QACard = ({ questions, answers }) => {
+const QACardQuestions = ({ questions }) => {
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
+  // answers array for current product
+  const [answersNow, setAnswersNow] = useState([]);
+
+  useEffect(() => {
+    axios.get('/qa/questions/:question_id/answers')
+      .then(response => {
+        console.log('saving', response.data);
+        setAnswersNow(response.data);
+      })
+      .catch(err => console.log('axios err answers', err));
+  }, []);
+
+  console.log('--->>>>', answersNow);
+  console.log('QUESTIONS', questions);
 
   return (
     <div id="qa-div-card">
-      <h1>...new...</h1>
-      <div>{questions.map((question) =>
-        <div className="qa-card-sample"> Q_ID: {question.question_id}
+      <div>{questions.map((question, index) =>
+        <div className="qa-card-sample" key={question.question_id}>
+          {/* NOTE - remove once done rendering, added for tracking */}
+          <div className="form-small">Q_ID: {index} - {question.question_id} </div>
+          {console.log('look', questions[0].answers[1444586].body)}
+          {/* {console.log('?', question.answers)} */}
           <b><div className="qa-div">Q: {question.question_body}
             <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href="">Add Answer</button>
             <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
@@ -32,33 +50,14 @@ const QACard = ({ questions, answers }) => {
               </form>
             </Modal>
           </div>
-
           </b>
+          <div><QACardAnswers current={question} answersNow={answersNow}/></div>
+
         </div>
 
       )}</div>
-
-      {/* <div className="external">
-        <div className="qa-div"><b>A: </b>Answer [Placeholder]</div><p></p>
-        <div className="qa-footer">
-          <label className="qa-username">by Username [Placeholder],
-              <label className="qa-date"> Date [Placeholder]
-                <label className="qa-helpful"> Helpful? [Placeholder]
-                  <label className="qa-report"> Report [Placeholder] <p></p>
-                  <label className="qa-load-more"><b>[LOAD MORE ANSWERS]</b>
-                  </label>
-                </label>
-              </label>
-            </label>
-          </label>
-        </div>
-        <h1>...new...</h1>
-      </div> */}
-
     </div>
-
-
   );
 };
 
-export default QACard;
+export default QACardQuestions;
