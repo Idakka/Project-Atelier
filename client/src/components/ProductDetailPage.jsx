@@ -1,10 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:client/src/components/product_detail_page.jsx
 import axios from 'axios';
-import Overview from './overview.jsx';
-=======
 import Overview from './Overview.jsx';
->>>>>>> main:client/src/components/ProductDetailPage.jsx
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
