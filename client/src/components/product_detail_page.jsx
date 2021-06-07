@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Overview from './overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
@@ -17,7 +17,7 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    // Start sending off Axios calls and populate state with the returns.
+    // Start sending off axios calls and populate state with the returns.
   }
 
   onChangeFileHandler(event) {
@@ -30,7 +30,7 @@ class ProductDetailPage extends React.Component {
   onClickUploadHandler() {
     const data = new FormData();
     data.append('file', this.state.selectedImageFile);
-    Axios.post(`http://localhost:${port}/upload`, data, {
+    axios.post(`http://localhost:${port}/upload`, data, {
     })
       .then(response => {
         console.log('successful upload: ', response);
