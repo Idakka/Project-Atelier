@@ -352,6 +352,7 @@ h1{
 .add-to-cart-star {
   min-width: 12%;
   max-width: 12%;
+  cursor: default;
 }
 /* QA Styling Starts */
 
@@ -470,7 +471,8 @@ h1{
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
+  visibility: hidden;
   background-color: white;
   top: 10%;
   left: 10%;
