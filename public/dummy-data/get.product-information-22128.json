@@ -1,0 +1,25 @@
+{
+  "id": 22128,
+  "campus": "hr-rpp",
+  "name": "Blues Suede Shoes",
+  "slogan": "2019 Stanley Cup Limited Edition",
+  "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
+  "category": "Dress Shoes",
+  "default_price": "120.00",
+  "created_at": "2021-03-18T16:09:30.589Z",
+  "updated_at": "2021-03-18T16:09:30.589Z",
+  "features": [
+      {
+          "feature": "Sole",
+          "value": "Rubber"
+      },
+      {
+          "feature": "Material",
+          "value": "FullControlSkin"
+      },
+      {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+      }
+  ]
+}
