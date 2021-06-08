@@ -8,19 +8,21 @@ import Modal from './Modal.jsx';
 class ProductDetailPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>
+    }
   }
 
   componentDidMount() {
     // Start sending off Axios calls and populate state with the returns.
   }
 
-  showModal() {
-    console.log('Show the modal!');
+  showModal(component) {
+    this.setState({modalContents: component});
     document.getElementById('the_modal').style.visibility = 'visible';
   }
 
   hideModal() {
-    console.log('hide the modal!');
     document.getElementById('the_modal').style.visibility = 'hidden';
   }
 
@@ -31,7 +33,7 @@ class ProductDetailPage extends React.Component {
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
         <RatingsAndReviews />
-        <Modal top={this} />
+        <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
     );
   }

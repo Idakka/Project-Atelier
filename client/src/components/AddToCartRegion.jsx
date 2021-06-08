@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalDefaultContents from './ModalDefaultContents.jsx';
 
 class AddToCartRegion extends React.Component {
   constructor(props) {
@@ -6,9 +7,8 @@ class AddToCartRegion extends React.Component {
   };
 
   componentDidMount() {
-    console.log('Mounted');
     document.getElementById('add-to-bag-star-button').addEventListener('click', (event) => {
-      this.props.top.showModal();
+      this.props.top.showModal(<ModalDefaultContents top="this.props.top" />);
     });
   }
 
