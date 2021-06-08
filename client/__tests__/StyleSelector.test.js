@@ -8,7 +8,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
-})
+});
 
 test('StyleSelector renders', () => {
   expect(screen.getByTestId('style-selector')).toBeInTheDocument();

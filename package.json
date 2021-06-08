@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "project-atelier",
   "version": "",
   "description": "",
   "author": "",
@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "material-design-icons": "^3.0.1"
   }
