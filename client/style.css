@@ -30,7 +30,9 @@ h1{
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-#ratings-main{
+/* Ratings and Reviews */
+
+#ratings-main {
   border-style: solid;
   border-color: red;
   display: grid;
@@ -38,102 +40,103 @@ h1{
   grid-column-gap: 2px;
 }
 
-#ratings-left-pane{
+#ratings-left-pane {
   border-style: solid;
   border-color: yellow;
 }
 
- #ratings-right-pane{
+ #ratings-right-pane {
   border-style: solid;
   border-color: yellow;
 }
 
-#left-pane-title{
+#left-pane-title {
   border-style: solid;
   border-color: green;
 }
-.rating-left{
+
+.rating-left {
   border-style: solid;
   border-color: green;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
-.number-rating{
+.number-rating {
   border-style: solid;
   border-color: blue;
 }
 
-.stars{
+.stars {
   border-style: solid;
   border-color: red;
 }
 
-.recommend-percent{
+.recommend-percent {
   border-style: solid;
   border-color: green;
 }
 
-.star-chart{
+.star-chart {
   border-style: solid;
   border-color: green;
 }
 
-.review-size{
+.review-size {
   border-style: solid;
   border-color: green;
 }
 
-.review-comfort{
+.review-comfort {
   border-style: solid;
   border-color: green;
 }
 
-#ratings-title{
+#ratings-title {
   border-style: solid;
   border-color: green;
 }
 
-.review-header{
+.review-header {
   border-style: solid;
   border-color: blue;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
-.review-title{
+.review-title {
   border-style: solid;
   border-color: blue;
 }
 
-.review-block{
+.review-block {
   border-style: solid;
   border-color: blue;
 }
 
-.response-block{
+.response-block {
   border-style: solid;
   border-color: blue;
 }
 
-.review-footer{
+.review-footer {
   border-style: solid;
   border-color: green;
 }
 
-#ratings-right-pane-footer{
+#ratings-right-pane-footer {
   border-style: solid;
   border-color: blue;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
-.review-btn{
+.review-btn {
   border-style: solid;
   border-color: blue;
 }
 
-.review-add{
+.review-add {
   border-style: solid;
   border-color: blue;
 }
