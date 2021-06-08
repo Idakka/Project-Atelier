@@ -421,15 +421,23 @@ h1{
   float: right;
 }
 
-.add-question-form label {
+.add-question-form label, .add-answer-form label {
   width: 10%;
   text-align: right;
   display: inline-block;
   padding-right: 1%;
 }
 
-.add-question-form input, .add-question-form textarea{
+.add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
   width: 50%
+}
+
+.qa-add-answer {
+  float: right;
+}
+
+.form-small {
+  font-size: 8px;
 }
 
 /* QA Styling Ends */

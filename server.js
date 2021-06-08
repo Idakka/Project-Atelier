@@ -1,6 +1,7 @@
 const axios = require('axios');
 const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
@@ -19,6 +20,7 @@ const s3Headers = {
 
 const pathname = path.join(__dirname, 'public');
 app.use(express.static(pathname));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('hello world from server!');
