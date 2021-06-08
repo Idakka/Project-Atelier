@@ -10,7 +10,10 @@
   "jest": {
     "setupFilesAfterEnv": [
       "<rootDir>/jest-setup.js"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "scripts": {
     "start": "npx nodemon server.js",

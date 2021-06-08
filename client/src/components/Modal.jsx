@@ -2,7 +2,7 @@ import React from 'react';
 
 var Modal = function(props) {
   return (
-    <div className="modal" id="the_modal">
+    <div className="modal" id="the_modal" data-testid="the_modal">
       {props.contents}
     </div>
   );

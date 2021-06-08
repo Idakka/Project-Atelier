@@ -33,7 +33,7 @@ class AddToCartRegion extends React.Component {
         </div>
         <div className="add-to-bag-row">
           <div className="add-to-bag-box add-to-bag"><div>Add to Bag</div><div>+</div></div>
-          <div id='add-to-bag-star-button' className="add-to-bag-box add-to-cart-star">
+          <div id='add-to-bag-star-button' className="add-to-bag-box add-to-cart-star" data-testid="add-to-bag-star-button">
             <span className='material-icons'>star_rate</span>
           </div>
         </div>

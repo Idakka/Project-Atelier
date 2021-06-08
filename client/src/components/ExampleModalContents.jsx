@@ -15,7 +15,7 @@ class ExampleModalContents extends React.Component {
     return (
       <React.Fragment>
         <h1>Example Modal Window</h1>
-        <button id='default-modal-close-button'>Click to hide modal.</button>
+        <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to hide modal.</button>
       </React.Fragment>
     );
   }
