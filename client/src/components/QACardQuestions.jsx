@@ -28,7 +28,7 @@ const QACardQuestions = ({ questions }) => {
       <div>{questions.map((question, index) =>
         <div className="qa-card-sample" key={index}>
           <b><div className="qa-div">Q: {question.question_body}
-            <div className="qa-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
+            <div className="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
               <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href="">Add Answer</button>
               <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
                 <h2>Submit Your Answer</h2>
@@ -45,9 +45,9 @@ const QACardQuestions = ({ questions }) => {
               </Modal>
             </div>
           </div></b>
-        <div data-testid="answers"><QACardAnswers currentAnswers={question.answers}/></div>
-        <label className="qa-load-more form-small"><a href=""><b>[LOAD MORE ANSWERS]</b></a></label>
-      </div>)}</div>
+          <div data-testid="answers"><QACardAnswers currentAnswers={question.answers} /></div>
+          <label className="qa-load-more form-small"><a href=""><b>[LOAD MORE ANSWERS]</b></a></label>
+        </div>)}</div>
     </div>
   );
 };

@@ -387,9 +387,13 @@ h1{
   margin-bottom: 3px;
 }
 
-.qa-div {
-  margin-bottom: 1px;
+.qa-div, .qa-load-more {
   margin: 1%;
+}
+
+.qa-helpfulness-right {
+  float: right;
+  font-size: 12px;
 }
 
 .qa-footer {
@@ -397,8 +401,12 @@ h1{
   margin: 1%;
 }
 
-.qa-helpful, .qa-report {
-  padding-left: 3%;
+.divider {
+  margin: 1%;
+}
+
+.answers-external {
+  font-size: 14px;
 }
 
 .qa-more, .qa-add, .add-form-submit {
@@ -426,11 +434,6 @@ h1{
 
 .add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
   width: 50%
-}
-
-.qa-right {
-  float: right;
-  font-size: 12px;
 }
 
 .right-spacing {

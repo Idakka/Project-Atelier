@@ -26,18 +26,14 @@ const QACardAnswers = ({ currentAnswers }) => {
   return (
     < div id="qa-div-card">
       {answers.map((answer, index) =>
-        <div className="external" key={index}>
+        <div className="answers-external" key={index}>
           <div className="qa-div" ><b>A:</b> {answer.body}</div>
-            <div className="qa-footer">
-              <label className="qa-username">by {answer.answerer_name},
-                <label className="qa-date"> {answer.date}
-                  <label className="qa-helpful"> <a href="">Helpful? ({answer.helpfulness})</a>
-                    <label className="qa-report"> <a href="">Report </a>
-                    </label>
-                  </label>
-                </label>
-              </label>
-            </div>
+          <p className="qa-footer"> by {answer.answerer_name}, {answer.date}
+            <span className="divider">|</span>
+            <a href="">Helpful? ({answer.helpfulness})</a>
+            <span className="divider">|</span>
+            <a href="">Report </a>
+          </p>
         </div>
       )}
     </div >
