@@ -384,6 +384,7 @@ h1{
 
 .qa-card-sample {
   border: 1px solid black;
+  margin-bottom: 3px;
 }
 
 .qa-div {
@@ -425,6 +426,15 @@ h1{
 
 .add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
   width: 50%
+}
+
+.qa-right {
+  float: right;
+  font-size: 12px;
+}
+
+.right-spacing {
+  margin-right: 10px;
 }
 
 .qa-add-answer {

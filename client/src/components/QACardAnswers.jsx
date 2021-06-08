@@ -3,43 +3,44 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 
+// Modal.setAppElement('#app');
+if (process.env.NODE_ENV !== 'test') {
+  Modal.setAppElement('#app');
+}
 
-const QACardAnswers = ({ current, answersNow }) => {
+const QACardAnswers = ({ currentAnswers }) => {
 
-  console.log('current passed', current);
-  // console.log('array', answersNow);
+  const [answers, setAnswers] = useState([]);
+  // toggle is to make sure we avoid infinite rerender loop
+  const [toggle, setToggle] = useState(false);
 
-  // answerer_name: "Seller"
-  // body: "We are selling it here without any markup from the middleman!"
-  // date: "2018-08-18T00:00:00.000Z"
-  // helpfulness: 4
-  // id: 1444586
+  useEffect(() => {
+    if (answers) {
+      for (var key in currentAnswers) {
+        answers.push(currentAnswers[key]);
+      }
+    }
+    setToggle(true);
+  }, []);
 
   return (
-    <div id="qa-div-card">
-
-    {answersNow.map((item, index) =>
-
-      <div className="external">
-      {/* NOTE - remove once done rendering, added for tracking */}
-      <div className="form-small">A_ID: {index} - # of answers {item.length} </div>
-        <div className="qa-div"><b>A: </b></div><p></p>
-        <div className="qa-footer">
-          <label className="qa-username">by Username [Placeholder],
-              <label className="qa-date"> Date [Placeholder]
-                <label className="qa-helpful"> Helpful? [Placeholder]
-                  <label className="qa-report"> Report [Placeholder] <p></p>
-                  <label className="qa-load-more"><b>[LOAD MORE ANSWERS]</b>
+    < div id="qa-div-card">
+      {answers.map((answer, index) =>
+        <div className="external" key={index}>
+          <div className="qa-div" ><b>A:</b> {answer.body}</div>
+            <div className="qa-footer">
+              <label className="qa-username">by {answer.answerer_name},
+                <label className="qa-date"> {answer.date}
+                  <label className="qa-helpful"> <a href="">Helpful? ({answer.helpfulness})</a>
+                    <label className="qa-report"> <a href="">Report </a>
+                    </label>
                   </label>
                 </label>
               </label>
-            </label>
-          </label>
+            </div>
         </div>
-      </div>
-        )}
-
-    </div>
+      )}
+    </div >
   );
 };
 
