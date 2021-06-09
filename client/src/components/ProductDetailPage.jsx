@@ -7,6 +7,7 @@ import RatingsAndReviews from './RatingsAndReviews.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
 import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
 import { questionsMock, answersMock } from '../mockData/questionsMock.js';
+import { cartMock } from '../mockData/cartMock.js';
 
 const port = window.location.port;
 
@@ -49,7 +50,7 @@ class ProductDetailPage extends React.Component {
         <QuestionsAndAnswers />
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
         <div>{console.log(`Test of mock data passed to render function:\n Mock Products: ${productsMock} \n
-        Mock Product Info:${productInfoMock} \n Mock Product Styles: ${productStylesMock} \n Mock Related Products: ${relatedProductsMock} \n Mock Reveiws: ${reviewsMock} Mock Reviews: ${reviewsMetaMock} Mock Questions: ${questionsMock} Mock Answers: ${answersMock}`)}
+        Mock Product Info:${productInfoMock} \n Mock Product Styles: ${productStylesMock} \n Mock Related Products: ${relatedProductsMock} \n Mock Reveiws: ${reviewsMock} Mock Reviews: ${reviewsMetaMock} Mock Questions: ${questionsMock} Mock Answers: ${answersMock} \n Mock cart: ${cartMock}`)}
         </div>
       </React.Fragment>
     );

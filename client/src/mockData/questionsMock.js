@@ -41,4 +41,4 @@ const answersMock = {
 export {
   questionsMock,
   answersMock
-}
+};
