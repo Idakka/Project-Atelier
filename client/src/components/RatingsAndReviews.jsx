@@ -10,9 +10,7 @@ const RatingsAndReviews = function(props) {
         </div>
         <div className="rating-left">
           <div className="number-rating">3.5</div>
-          <div className="star-review" data-testid="star-review">
-            <StarReview rating='3.75'/>
-          </div>
+          <StarReview rating='3.75'/>
         </div>
         <div className="recommend-percent">100% of reviews recommend this product</div>
         <div className="star-chart">list of stars here!</div>
@@ -24,9 +22,7 @@ const RatingsAndReviews = function(props) {
 
         </div>
         <div className="review-header">
-          <div className="star-review" data-testid="star-review">
-            <StarReview rating='4.5'/>
-          </div>
+          <StarReview rating='4.5'/>
           <div className="author">User1234, January 1, 2019</div>
         </div>
         <div className="review-title">Review Title with word-break...</div>
