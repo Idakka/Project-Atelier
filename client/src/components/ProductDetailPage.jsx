@@ -4,6 +4,9 @@ import Overview from './Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
+// import productsMock from '../mockData/productsMock.js';
+import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
+
 const port = window.location.port;
 
 class ProductDetailPage extends React.Component {
@@ -44,6 +47,9 @@ class ProductDetailPage extends React.Component {
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
+        <div>{console.log(`Test of mock data passed to render function:\n Mock Products: ${productsMock} \n
+        Mock Product Info:${productInfoMock} \n Mock Product Styles: ${productStylesMock} \n Mock Related Products: ${relatedProductsMock} \n Mock `)}
+        </div>
       </React.Fragment>
     );
   }
