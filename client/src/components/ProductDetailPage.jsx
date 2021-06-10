@@ -4,6 +4,10 @@ import Overview from './Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
+import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
+import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
+import { questionsMock, answersMock } from '../mockData/questionsMock.js';
+import { cartMock } from '../mockData/cartMock.js';
 import Modal from './Modal.jsx';
 const port = window.location.port;
 
