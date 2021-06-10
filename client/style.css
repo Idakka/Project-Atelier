@@ -357,6 +357,7 @@ h1{
 .add-to-cart-star {
   min-width: 12%;
   max-width: 12%;
+  cursor: default;
 }
 /* QA Styling Starts */
 
@@ -590,4 +591,20 @@ h1{
 }
 .product__price {
   font-size: .8rem;
+}
+
+/* Modal */
+
+.modal {
+  position: fixed;
+  visibility: hidden;
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  z-index: 2;
 }

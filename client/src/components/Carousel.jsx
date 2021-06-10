@@ -31,7 +31,6 @@ const Carousel = ({ productId, carouselType }) => {
     // if carouselType is related
     axios.get(`/products/${productId}/related`)
       .then(response => {
-        console.log(response.data);
         setProducts(response.data);
         // Have to pass in window width as first render has not occurred and number of products since setProducts is async
         // qqq Add an OR clause for when container has maxwidth
