@@ -27,22 +27,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products/:product_id/related', (req, res) => {
-  // axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`, atelierHeaders)
-  new Promise((resolve, reject) => resolve(getRelated[req.params.product_id]))
-    // .then(response => response.data)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`, atelierHeaders)
+    .then(response => response.data)
     .then(relatedItems => {
       const promises = [];
       relatedItems.forEach((item) => {
-        // promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`, atelierHeaders));
-        promises.push(new Promise((resolve, reject) => resolve(getInfo[item])));
+        promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`, atelierHeaders));
       });
       return Promise.all(promises);
     })
     .then(items => {
       const itemsData = [];
       items.forEach(item => {
-        // itemsData.push(item.data);
-        itemsData.push(item);
+        itemsData.push(item.data);
       });
       res.end(JSON.stringify(itemsData));
     })
