@@ -49,9 +49,6 @@ class ProductDetailPage extends React.Component {
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
-        <div>{console.log(`Test of mock data passed to render function:\n Mock Products: ${productsMock} \n
-        Mock Product Info:${productInfoMock} \n Mock Product Styles: ${productStylesMock} \n Mock Related Products: ${relatedProductsMock} \n Mock Reveiws: ${reviewsMock} Mock Reviews: ${reviewsMetaMock} Mock Questions: ${questionsMock} Mock Answers: ${answersMock} \n Mock cart: ${cartMock}`)}
-        </div>
       </React.Fragment>
     );
   }
