@@ -1,3 +1,8 @@
+:root {
+  --black: #515251;
+  --white: white;
+}
+
 html,
 body {
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -469,6 +474,106 @@ h1{
 .star-review__star--empty > span::after {
   width: 0;
 }
+
+/* || Carousel and Cards */
+
+.carousel {
+  display: grid;
+  gap: 2rem;
+  grid-auto-flow: column;
+}
+.carousel__overflow {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+.carousel__edge {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: min(200px, 15%);
+  z-index: 1;
+}
+.carousel__edge--left {
+  background-image: linear-gradient(to right, white, transparent);
+  justify-content: flex-start;
+  left: 0;
+  padding-left: 1rem;
+}
+.carousel__edge--right {
+  background-image: linear-gradient(to left, white, transparent);
+  justify-content: flex-end;
+  padding-right: 1rem;
+  right: 0;
+}
+.card {
+  color: var(--black);
+  display: grid;
+  max-width: 100%;
+  width: 240px;
+}
+.card.product {
+  border: 1px solid var(--black);
+}
+.product__picture {
+  height: 280px;
+  max-width: 240px;
+  overflow: hidden;
+  position: relative;
+}
+.product__picture img {
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+  width: 100%;
+  z-index: -1;
+}
+/* Make star visible on both light and dark backgrounds */
+/* I honestly hate this solution but will table it for later */
+.product__picture > .material-icons {
+  color: black;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
+.product__picture > .material-icons::before {
+  border-radius: 100%;
+  color: gold;
+  content: '\e838';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.product__details {
+  padding: 1rem .5rem .5rem;
+}
+.product__details > * {
+  margin: 0;
+}
+.product__details > * + * {
+  margin-top: .5rem;
+}
+.product__category {
+  font-size: .8rem;
+  text-transform: uppercase;
+}
+.product__name {
+  font-weight: bold;
+  letter-spacing: 0.4px;
+}
+.product__price {
+  font-size: .8rem;
+}
+
+/* Modal */
 
 .modal {
   position: fixed;
