@@ -9,10 +9,9 @@ const Carousel = ({ productId, cardType }) => {
     // if cardType is related
     axios.get('/products/22122/related')
       .then(response => {
-        console.log(response.data);
         setProducts(response.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => err);
     // if cardType is outfit
   }, []);
 
