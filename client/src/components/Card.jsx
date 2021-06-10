@@ -4,26 +4,10 @@ import StarReview from './StarReview.jsx';
 import axios from 'axios';
 
 const Card = ({ product, cardType }) => {
-  const [rating, setRating] = useState(0);
-  const [pictureURL, setPictureURL] = useState('');
-  const [originalPrice, setOriginalPrice] = useState('');
-  const [salePrice, setSalePrice] = useState('');
-
-  useEffect(() => {
-    axios.get(`/products/${product.id}/card-info`)
-      .then(response => response.data)
-      .then(cardInfo => {
-        setRating(cardInfo.rating);
-        setPictureURL(cardInfo.pictureURL);
-        setOriginalPrice(cardInfo.originalPrice.split('.')[0]);
-        setSalePrice(cardInfo.salePrice ? cardInfo.salePrice.split('.')[0] : null);
-      });
-  }, []);
-
   return (
     <div className="card product">
       <div className="product__picture">
-        <img src={pictureURL} alt={product.name} />
+        <img src={product.style.photos[0].url} alt={product.name} />
         {cardType === 'related' && (
           <span className="material-icons star">star_outline</span>
         )}
@@ -34,8 +18,8 @@ const Card = ({ product, cardType }) => {
       <div className="product__details">
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
-        <p className="product__price">${salePrice ? salePrice : originalPrice}</p>
-        <StarReview rating={rating} />
+        <p className="product__price">${product.style.sale_price ? product.style.sale_price.split('.')[0] : product.style.original_price.split('.')[0]}</p>
+        <StarReview rating={product.rating} />
       </div>
     </div>
   );
