@@ -4,12 +4,14 @@ import Overview from './Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
+import Modal from './Modal.jsx';
 const port = window.location.port;
 
 class ProductDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
     };
     this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
@@ -37,13 +39,23 @@ class ProductDetailPage extends React.Component {
       });
   }
 
+  showModal(component) {
+    this.setState({modalContents: component});
+    document.getElementById('the_modal').style.visibility = 'visible';
+  }
+
+  hideModal() {
+    document.getElementById('the_modal').style.visibility = 'hidden';
+  }
+
   render() {
     return (
       <React.Fragment>
-        <Overview />
+        <Overview top={this}/>
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
+        <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
     );
   }

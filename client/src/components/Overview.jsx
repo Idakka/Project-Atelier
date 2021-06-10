@@ -17,7 +17,7 @@ var Overview = function(props) {
         <div className="product-information">
           <ProductInformation />
           <StyleSelector />
-          <AddToCartRegion />
+          <AddToCartRegion top={props.top} />
         </div>
       </div>
       <SalesPitch />
