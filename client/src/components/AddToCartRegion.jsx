@@ -3,7 +3,7 @@ import React from 'react';
 var AddToCartRegion = function(props) {
   return (
     <React.Fragment>
-      <div className="add-to-bag-row">
+      <div className="add-to-bag-row" data-testid="add-to-cart-region">
         <select className="add-to-bag-box size-select">
           <option>SELECT SIZE</option>
           <option>WEE</option>

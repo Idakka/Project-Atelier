@@ -1,6 +1,7 @@
 const axios = require('axios');
 const dotenv = require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
@@ -11,6 +12,7 @@ axios.defaults.headers.common['Authorization'] = process.env.GITHUB_TOKEN;
 
 const pathname = path.join(__dirname, 'public');
 app.use(express.static(pathname));
+app.use(cors());
 
 app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22126; // will need to be updated once product is rendering on page
@@ -44,5 +46,10 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   //   .catch(err => console.log('err', err));
 });
 
+
+app.post('/upload', (req, res) => {
+  // temp placeholder for image upload route
+  res.send('temp placeholder for image upload');
+});
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
