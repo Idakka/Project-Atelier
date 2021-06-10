@@ -36,7 +36,7 @@ const Carousel = ({ productId, carouselType }) => {
         // qqq Add an OR clause for when container has maxwidth
         scrollCarousel(0, window.innerWidth, response.data.length);
       })
-      .catch(err => console.log(err));
+      .catch(err => err);
     // if carouselType is outfit
       // get all products saved in outfit and setProducts
   }, []);
