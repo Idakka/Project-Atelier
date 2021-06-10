@@ -21,7 +21,7 @@ const Carousel = ({ productId, cardType }) => {
       <div className="carousel__edge carousel__edge--left">
         <span className="material-icons">arrow_backward</span>
       </div>
-      <div className="carousel">
+      <div className="carousel" data-testid="carousel">
         {products.map(product => (
           <Card key={product.id} product={product} cardType={cardType} />
         ))}
