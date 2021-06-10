@@ -1,43 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import StarReview from './StarReview.jsx';
 
-const Card = ({ productId, cardType }) => {
-  // All of these are default values that we will remove when API implementation is ready
-  const [photoURL, setPhotoURL] = React.useState('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/600px-Placeholder_no_text.svg.png');
-  const [category, setCategory] = React.useState('Placeholder Category');
-  const [name, setName] = React.useState('Placeholder Name');
-  const [price, setPrice] = React.useState('$100.00');
-  const [rating, setRating] = React.useState(4);
+import axios from 'axios';
 
-  const starGraphic = '#';
-  const removeGraphic = '#';
+const Card = ({ product, cardType }) => {
+  const [rating, setRating] = useState(0);
+  const [pictureURL, setPictureURL] = useState('');
+  const [originalPrice, setOriginalPrice] = useState('');
+  const [salePrice, setSalePrice] = useState('');
 
-  React.useEffect(() => {
-    // make API call to get product info. in cb:
-      // set category
-      // set name
-      // set price
-    // make API call to get rating info. in cb:
-      // set rating
-    // make API call to get style info. in cb:
-      // set image url
+  useEffect(() => {
+    axios.get(`/products/${product.id}/card-info`)
+      .then(response => response.data)
+      .then(cardInfo => {
+        setRating(cardInfo.rating);
+        setPictureURL(cardInfo.pictureURL);
+        setOriginalPrice(cardInfo.originalPrice);
+        setSalePrice(cardInfo.salePrice);
+      });
   }, []);
+
+  cardType = 'related';
 
   return (
     <div className="card product">
-      <div className="product__img">
-        <img src={photoURL} alt={name} />
+      <div className="product__picture">
+        <img src={pictureURL} alt={product.name} />
         {cardType === 'related' && (
-          <img src={starGraphic} alt="Star" className="card__action" />
+          <span className="material-icons">star_outline</span>
         )}
         {cardType === 'outfit' && (
-          <img src={removeGraphic} alt="Remove" className="card__action" />
+          <span className="material-icons">do_not_disturb</span>
         )}
       </div>
       <div className="product__details">
-        <p className="product__category">{category}</p>
-        <p className="product__name">{name}</p>
-        <p className="product__price">{price}</p>
+        <p className="product__category">{product.category}</p>
+        <p className="product__name">{product.name}</p>
+        <p className="product__price">${salePrice ? salePrice.split('.')[0] : originalPrice.split('.')[0]}</p>
         <StarReview rating={rating} />
       </div>
     </div>
