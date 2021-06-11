@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import ProductInformation from '../src/components/ProductInformation.jsx';
+import { productInfoMock } from '../src/mockData/productInfoMock.js';
 
 beforeEach(() => {
-  render(<ProductInformation />);
+  render(<ProductInformation productInfo={productInfoMock} />);
 });
 
 afterEach(() => {
