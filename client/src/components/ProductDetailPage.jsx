@@ -55,7 +55,7 @@ class ProductDetailPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Overview top={this}/>
+        <Overview top={this} productInfo={productInfoMock}/>
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
