@@ -9,7 +9,7 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
 
   const slideWrapperRef = createRef();
 
-  const scrollCarousel = useCallback((change, containerWidth, numberOfProducts = products.length) => {
+  const scrollCarousel = useCallback((change, containerWidth, numberOfProducts = productCards.length) => {
     // Get boundary variables for scroll calibration
     const cardWidth = 272;
     const capacity = Math.floor(containerWidth / cardWidth);
