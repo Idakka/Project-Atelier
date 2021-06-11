@@ -26,4 +26,3 @@ var SalesPitch = function(props) {
 
 export default SalesPitch;
 
-//         <div><span className="material-icons">done</span>Totally Sweet.</div>
