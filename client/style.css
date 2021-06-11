@@ -393,11 +393,16 @@ h1{
 
 .qa-card-sample {
   border: 1px solid black;
+  margin-bottom: 3px;
 }
 
-.qa-div {
-  margin-bottom: 1px;
+.qa-div, .qa-load-more {
   margin: 1%;
+}
+
+.qa-helpfulness-right {
+  float: right;
+  font-size: 12px;
 }
 
 .qa-footer {
@@ -405,8 +410,12 @@ h1{
   margin: 1%;
 }
 
-.qa-helpful, .qa-report {
-  padding-left: 3%;
+.divider {
+  margin: 1%;
+}
+
+.answers-external {
+  font-size: 14px;
 }
 
 .qa-more, .qa-add, .add-form-submit {
@@ -436,12 +445,16 @@ h1{
   width: 50%
 }
 
+.right-spacing {
+  margin-right: 10px;
+}
+
 .qa-add-answer {
   float: right;
 }
 
 .form-small {
-  font-size: 8px;
+  font-size: 9px;
 }
 
 /* QA Styling Ends */
