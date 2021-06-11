@@ -14,17 +14,29 @@ const QuestionsAndAnswers = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // questions array for current product
   const [questions, setQuestions] = useState([]);
+  const [questionLength, setQuestionLength] = useState(0);
+  // array for questions to display
+  const [questionsToShow, setQuestionsToShow] = useState([]);
+  const [questionsToShowLength, setQuestionsToShowLength] = useState(4);
 
   useEffect(() => {
     axios.get('/qa/questions/')
       .then(response => {
         setQuestions(response.data);
+        setQuestionLength(response.data.length);
+        setQuestionsToShow(response.data.slice(0, questionsToShowLength));
+        setQuestionsToShowLength(questionsToShowLength + 2);
       })
       .catch(err => err);
   }, []);
 
+  // sorts questions by helpfulness
+  questions.sort((a, b) => {
+    return b.question_helpfulness - a.question_helpfulness;
+  });
+
   return (
-    <div id="qa-div">
+    <div data-testid="qa-div">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
 
       <form id="search">
@@ -33,9 +45,12 @@ const QuestionsAndAnswers = () => {
         <button className="qa-search-btn">Search</button>
       </form>
 
-      <div data-testid="qa"><QACardQuestions questions={questions} /></div>
+      <div data-testid="qa"><QACardQuestions questions={questionsToShow} /></div>
 
-      <button className="qa-more">MORE ANSWERED QUESTIONS</button>
+      <button className="qa-more" onClick={() => {
+        setQuestionsToShowLength(questionsToShowLength + 2);
+        setQuestionsToShow(questions.slice(0, questionsToShowLength));
+      }}>MORE ANSWERED QUESTIONS</button>
 
       <button onClick={() => setModalIsOpen(true)} className="qa-add">ADD A QUESTION +</button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
@@ -45,10 +60,10 @@ const QuestionsAndAnswers = () => {
           <label className="add-form-question">Question*</label>
           <textarea rows="10" maxLength="1000" required /><p></p>
           <label className="add-form-username">Nickame*</label>
-          <input maxLength="60" placeholder="Example: jackson11!" required /><p className="form-small">For privacy reasons, do not use your full name or email address</p>
+          <input maxLength="60" placeholder="Example: jackson11!" required /><p className="qa-form-small">For privacy reasons, do not use your full name or email address</p>
           <label className="add-form-email">Email*</label>
-          <input maxLength="60" required /><p className="form-small">For authentication reasons, you will not be emailed</p>
-          <button className="add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
+          <input maxLength="60" required /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
+          <button className="qa-add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
         </form>
       </Modal>
 

@@ -398,6 +398,8 @@ h1{
 
 .qa-div, .qa-load-more {
   margin: 1%;
+  background-color: white;
+  border: none;
 }
 
 .qa-helpfulness-right {
