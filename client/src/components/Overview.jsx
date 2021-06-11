@@ -15,12 +15,12 @@ var Overview = function(props) {
       <div className="overview-column-container">
         <ImageGallery />
         <div className="product-information">
-          <ProductInformation />
+          <ProductInformation productInfo={props.productInfo}/>
           <StyleSelector />
           <AddToCartRegion top={props.top} />
         </div>
       </div>
-      <SalesPitch />
+      <SalesPitch productInfo={props.productInfo} />
     </div>
   );
 };
