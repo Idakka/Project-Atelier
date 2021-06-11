@@ -36,8 +36,8 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
       let totalRating = 0;
       let numberOfReviews = 0;
       for (const ratingNumber in reviews.ratings) {
-        numberOfReviews += reviews.ratings[ratingNumber];
-        totalRating += ratingNumber * reviews.ratings[ratingNumber];
+        numberOfReviews += Number(reviews.ratings[ratingNumber]);
+        totalRating += ratingNumber * Number(reviews.ratings[ratingNumber]);
       }
       const defaultStyle = styles.results.filter(style => style['default?'])[0];
       const productCardInformation = {
