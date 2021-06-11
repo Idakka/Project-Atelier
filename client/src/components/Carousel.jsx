@@ -77,9 +77,9 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
             style={{ left: String(scrollPosition * -272) + 'px' }}
             data-testid="carousel"
           >
-            {productCards.map(productCard => (
+            {productCards.map((productCard, index) => (
               <Card
-                key={productCard.id}
+                key={index}
                 product={productCard}
                 cardType={carouselType}
               />

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Card = ({ product, cardType }) => {
   return (
-    <div className="card product">
+    <div className="card product" data-testid={`card--${cardType}`}>
       <div className="product__picture">
         <img src={product.style.photos[0].url} alt={product.name} />
         {cardType === 'related' && (
