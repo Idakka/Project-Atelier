@@ -75,7 +75,7 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
           <div
             className="carousel"
             style={{ left: String(scrollPosition * -272) + 'px' }}
-            data-testid="carousel"
+            data-testid={`carousel--${carouselType}`}
           >
             {productCards.map(productCard => (
               <Card
