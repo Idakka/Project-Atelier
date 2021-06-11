@@ -412,15 +412,15 @@ h1{
   margin: 1%;
 }
 
-.divider {
+.qa-divider {
   margin: 1%;
 }
 
-.answers-external {
+.qa-answers-external {
   font-size: 14px;
 }
 
-.qa-more, .qa-add, .add-form-submit {
+.qa-more, .qa-add, .qa-add-form-submit {
   background-color: white;
   border: 1px solid black;
   padding: 2%;
@@ -432,7 +432,7 @@ h1{
   cursor: pointer;
 }
 
-.add-form-submit {
+.qa-add-form-submit {
   float: right;
 }
 
@@ -453,9 +453,11 @@ h1{
 
 .qa-add-answer {
   float: right;
+  background-color: white;
+  border: none;
 }
 
-.form-small {
+.qa-form-small {
   font-size: 9px;
 }
 

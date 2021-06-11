@@ -29,7 +29,7 @@ const QACardQuestions = ({ questions }) => {
         <div className="qa-card-sample" key={index}>
           <b><div className="qa-div">Q: {question.question_body}
             <div className="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
-              <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href="">Add Answer</button>
+              <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href=""><b>[Add Answer]</b></button>
               <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
                 <h2>Submit Your Answer</h2>
                 <h3>[Product Name]: [Question Body] </h3>
