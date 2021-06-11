@@ -3,14 +3,16 @@ import Carousel from './Carousel.jsx';
 
 const RelatedItemsAndOutfit = () => {
   return (
-    <section id="related-items-and-outfit" data-testid="related-items-and-outfit">
+    <section
+      id="related-items-and-outfit"
+      className="related-items-and-outfit"
+      data-testid="related-items-and-outfit"
+    >
       <div id="related-items">
-        <h2>Related Items</h2>
-        <Carousel />
+        <Carousel productId={22122} carouselType={'related'}/>
       </div>
       <div id="your-outfit">
-        <h2>Your Outfit</h2>
-        <Carousel />
+        <Carousel productId={22123} carouselType={'outfit'}/>
       </div>
     </section>
   );
