@@ -20,7 +20,7 @@ var Overview = function(props) {
           <AddToCartRegion top={props.top} />
         </div>
       </div>
-      <SalesPitch />
+      <SalesPitch productInfo={props.productInfo} />
     </div>
   );
 };

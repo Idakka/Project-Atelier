@@ -4,7 +4,6 @@ import StarReview from './StarReview.jsx';
 var ProductInformation = function(props) {
   let { productInfo } = props;
   let { default_price, category, name } = productInfo;
-  console.log('props reaching ProductInformation: ', productInfo);
   return (
     <React.Fragment>
       <div className="stars-and-reviews">
