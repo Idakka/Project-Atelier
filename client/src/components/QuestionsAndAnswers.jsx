@@ -20,7 +20,7 @@ const QuestionsAndAnswers = () => {
       .then(response => {
         setQuestions(response.data);
       })
-      .catch(err => console.log('axios err qa overview', err));
+      .catch(err => err);
   }, []);
 
   return (
