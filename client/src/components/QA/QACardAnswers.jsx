@@ -4,11 +4,6 @@ import axios from 'axios';
 import { format } from "date-fns";
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 
-// Modal.setAppElement('#app');
-if (process.env.NODE_ENV !== 'test') {
-  Modal.setAppElement('#app');
-}
-
 const QACardAnswers = ({ currentAnswers }) => {
 
   // array for all answers for current question

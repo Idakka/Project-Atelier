@@ -5,11 +5,6 @@ import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
 import QAAddAnswerModal from './QAAddAnswerModal.jsx';
 
-// Modal.setAppElement('#app');
-if (process.env.NODE_ENV !== 'test') {
-  Modal.setAppElement('#app');
-}
-
 const QACardQuestions = ({ questions, productName }) => {
 
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
