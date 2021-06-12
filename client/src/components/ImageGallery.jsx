@@ -5,7 +5,6 @@ import ImageGalleryBackArrow from './ImageGalleryBackArrow.jsx';
 
 var ImageGallery = function({ productStyles }) {
   let photo = productStyles.results[0].photos[0].url;
-  console.log(photo);
   return (
     <div className="image-gallery-container" data-testid="image-gallery">
       <div className="image-gallery">
