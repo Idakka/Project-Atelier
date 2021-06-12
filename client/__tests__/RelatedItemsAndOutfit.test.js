@@ -14,7 +14,7 @@ test('Should render RelatedItemsAndOutfit', () => {
 
 test('Should render two Carousels', () => {
   render(<RelatedItemsAndOutfit />);
-  const CarouselComponents = screen.getAllByTestId('carousel');
+  const CarouselComponents = screen.getAllByTestId(/carousel/);
   for (let i = 0; i < CarouselComponents.length; i++) {
     expect(CarouselComponents[i]).toBeInTheDocument();
   }
