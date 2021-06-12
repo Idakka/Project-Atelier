@@ -5,7 +5,7 @@ import { format } from "date-fns";
 const Review = ({review}) => {
   return (
     <React.Fragment>
-      <div className="review-card">
+      <div className="review-card" data-testid="review-card">
         <div className="review-header">
           <StarReview rating={review.rating}/>
           <div className="author">{review.reviewer_name}, {format((new Date(review.date)), "MMMM do, yyyy")}
