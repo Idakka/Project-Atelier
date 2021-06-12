@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import { format } from "date-fns";
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 
 // Modal.setAppElement('#app');
@@ -41,8 +42,8 @@ const QACardAnswers = ({ currentAnswers }) => {
     <div data-testid="qa-div-card-answers">
       {answersToShow.map((answer, index) =>
         <div className="qa-answers-external" key={index}>
-          <div className="qa-div" ><b>A:</b> {answer.body}</div>
-          <p className="qa-footer"> by {answer.answerer_name}, {answer.date}
+          <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
+          <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
             <a href="">Helpful? ({answer.helpfulness})</a>
             <span className="qa-divider">|</span>
@@ -53,8 +54,8 @@ const QACardAnswers = ({ currentAnswers }) => {
       <button className="qa-load-more" onClick={() => {
         setAnswersToShowLength(answersToShowLength + 2);
         setAnswersToShow(answers.slice(0, answersToShowLength));
-      }}><b>[LOAD MORE ANSWERS]</b></button>
-    </div >
+      }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
+    </div>
   );
 };
 
