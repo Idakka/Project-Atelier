@@ -1,12 +1,12 @@
 import React from 'react';
 import StarReview from './StarReview.jsx';
+import PriceLine from './PriceLine.jsx';
 
 const calculateRating = function(ratings) {
   let ratingCount = 0;
   let ratingTally = 0;
   for (let i = 1; i <= 5; i++) {
     if (ratings[i]) {
-      console.log(i + ": " + ratings[i]);
       ratingCount += Number.parseInt(ratings[i]);
       ratingTally += Number.parseInt(ratings[i]) * i;
     }
@@ -15,10 +15,10 @@ const calculateRating = function(ratings) {
 };
 
 var ProductInformation = function(props) {
-  let { productInfo, reviewsMeta } = props;
+  let { productInfo, productStyles, reviewsMeta } = props;
   let { default_price, category, name } = productInfo;
+  let { original_price, sale_price } = productStyles.results[0];
   let { ratings } = reviewsMeta;
-  console.log('ratings: ', ratings);
   return (
     <React.Fragment>
       <div className="stars-and-reviews">
@@ -27,7 +27,7 @@ var ProductInformation = function(props) {
       <div data-testid="product-information">
         <div className="product-detail-category">{category}</div>
         <div className="product-detail-expanded-product-name">{name}</div>
-        <div className="product-detail-price">${default_price}</div>
+        <PriceLine originalPrice={original_price} salePrice={sale_price} />
       </div>
     </React.Fragment>
   );
