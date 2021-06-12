@@ -38,25 +38,24 @@ const QuestionsAndAnswers = () => {
   });
 
   return (
-    <div data-testid="qa-div">
+    <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
 
       <form id="search">
-        <input className="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
+        <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
         {/* NOTE - Search button will be replaced with icon later on  */}
         <button className="qa-search-btn">Search</button>
       </form>
 
       <div data-testid="qa"><QACardQuestions questions={questionsToShow} /></div>
 
-      <div className="qa-footer-buttons">
+      <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => {
           setQuestionsToShowLength(questionsToShowLength + 2);
           setQuestionsToShow(questions.slice(0, questionsToShowLength));
         }}>MORE ANSWERED QUESTIONS</button>
-     <div className="qa-more"><QAAddQuestionModal /></div>
-     </div>
-
+        <div className="qa-more"><QAAddQuestionModal /></div>
+      </div>
 
       <p></p>
     </div>

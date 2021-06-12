@@ -22,15 +22,15 @@ const QACardQuestions = ({ questions }) => {
   //     .then(response => {
   //       setAnswers(response.data);
   //     })
-  //     .catch(err => console.log('axios err answers', err));
+  //     .catch(err => err);
   // }, []);
 
   return (
-    <div data-testid="qa-div-card-questions">
+    <div data-testid="qa-div-card-questions" id="qa-div-card-questions">
       <div>{questions.map((question, index) =>
         <div className="qa-card-sample" key={index}>
           <b><div className="qa-div">Q: {question.question_body}
-            <div className="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
+            <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
               <QAAddAnswerModal question={question} />
             </div>
           </div></b>
