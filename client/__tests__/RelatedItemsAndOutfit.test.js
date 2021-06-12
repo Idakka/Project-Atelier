@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import RelatedItemsAndOutfit from '../src/components/RelatedItemsAndOutfit';
+import RelatedItemsAndOutfit from '../src/components/RelatedItemsAndOutfit/RelatedItemsAndOutfit';
 
 afterEach(() => {
   cleanup();
