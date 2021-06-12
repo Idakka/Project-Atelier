@@ -37,7 +37,7 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
         <div id="left-pane-title">
           <h1>RatingsAndReviews!</h1>
         </div>
-        <div className="rating-left">
+        <div className="rating-left" data-testid="rating-left">
           <div className="number-rating">{rating}</div>
           <StarReview rating={rating}/>
         </div>

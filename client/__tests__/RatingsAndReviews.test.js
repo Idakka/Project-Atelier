@@ -27,6 +27,10 @@ test('Ratings and Reviews has 2 review cards on load', () => {
   expect(screen.getAllByTestId('review-card').length).toBe(2);
 });
 
+test('Ratings and Reviews has a rating-left element', () => {
+  expect(screen.getByTestId('rating-left')).toBeInTheDocument();
+});
+
 // test('Ratings and Reviews has 4 review cards after pressing button for "More Reviews"', () => {
 //   var page = <RatingsAndReviews productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>;
 
