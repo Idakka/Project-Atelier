@@ -132,6 +132,9 @@ const cardInformation = {
   }
 };
 
+const cardInformationWithSale = JSON.parse(JSON.stringify(cardInformation));
+cardInformationWithSale.style['sale_price'] = '50.00';
+
 describe('Related items Cards', () => {
   beforeEach(() => {
     render(<Card product={cardInformation} cardType="related" />);
@@ -161,9 +164,15 @@ describe('Related items Cards', () => {
     expect(productNameElement).toBeInTheDocument();
   });
 
-  test('Should contain a price', () => {
+  test('Should contain original price when no sale price is present', () => {
     const priceElement = screen.getByText('$99');
     expect(priceElement).toBeInTheDocument();
+  });
+
+  test('Should contain a sale price when present', () => {
+    render(<Card product={cardInformationWithSale} cardType="related" />);
+    const salePrice = screen.getByText('$50');
+    expect(salePrice).toBeInTheDocument();
   });
 
   test('Should contain a StarReview component', () => {
