@@ -1,6 +1,6 @@
 import React from 'react';
 import StarReview from './StarReview.jsx';
-import Review from './Review.jsx';
+import ReviewsList from './ReviewsList.jsx';
 
 const RatingsAndReviews = function(props) {
   return (
@@ -20,11 +20,8 @@ const RatingsAndReviews = function(props) {
       </div>
       <div id="ratings-right-pane">
         <div id="ratings-title">248 reviews, sorted by relevance
-
         </div>
-        <div className="reviews-list">
-          <Review />
-        </div>
+        <ReviewsList reviews={props.reviews} />
         <div id="ratings-right-pane-footer">
           <div className="review-btn">
             <button>MORE REVIEWS</button>
