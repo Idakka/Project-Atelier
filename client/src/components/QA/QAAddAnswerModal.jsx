@@ -24,7 +24,7 @@ const QAAddAnswerModal = ({ question, productName }) => {
       <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href=""><b>[Add Answer]</b></button>
       <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
         <h2>Submit Your Answer</h2>
-        <h3>{productName}: {question.question_body} </h3>
+        <h3>{productName.name}: {question.question_body} </h3>
         <form className="add-answer-form">
           <label className="add-form-answer">Answer* </label>
             <textarea rows="10" maxLength="1000" required onChange={() => setAnswer(event.target.value)}/><p></p>

@@ -21,10 +21,11 @@ const QuestionsAndAnswers = (props) => {
   const [questionsToShow, setQuestionsToShow] = useState([]);
   const [questionsToShowLength, setQuestionsToShowLength] = useState(4);
   // variables to take in product info
-  const [productName, setProductName] = useState(props.productInfo.name);
-
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
+    setProductName(props.productInfo);
+
     axios.get('/qa/questions/')
       .then(response => {
         setQuestions(response.data);
