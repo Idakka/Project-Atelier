@@ -15,6 +15,7 @@
   "scripts": {
     "start": "npx nodemon server.js",
     "test": "jest --env=jsdom --watchAll",
+    "testCoverage": "jest --env=jsdom --coverage",
     "test:ci": "jest --env=jsdom",
     "build": "webpack --mode development --watch",
     "build:ci": "webpack --mode development"
