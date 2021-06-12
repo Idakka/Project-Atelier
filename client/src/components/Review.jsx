@@ -21,7 +21,7 @@ const Review = ({review}) => {
             <p>{review.response}</p>
           </div>
         }
-        <div className="review-footer">Helpful? Yes (9) | Report
+        <div className="review-footer">Helpful? Yes ({review.helpfulness || ''}) | Report
         </div>
       </div>
     </React.Fragment>
