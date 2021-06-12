@@ -2,7 +2,7 @@ import React from 'react';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
-const RatingsAndReviews = function(props) {
+const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
   return (
     <div id="ratings-main" data-testid="ratings-main">
       <div id="ratings-left-pane">
@@ -19,16 +19,16 @@ const RatingsAndReviews = function(props) {
         <div className="review-comfort">Comfort Review Components</div>
       </div>
       <div id="ratings-right-pane">
-        <div id="ratings-title">{props.reviews.length} reviews, sorted by relevance
+        <div id="ratings-title">{reviews.length} reviews, sorted by relevance
         </div>
-        <ReviewsList reviews={props.reviews} />
+        <ReviewsList reviews={reviews} />
         <div id="ratings-right-pane-footer">
           <div className="review-btn">
             <button>MORE REVIEWS</button>
           </div>
           <div className="review-add">
-            <input type="file" name="file" onChange={props.onChangeFileHandler} />
-            <button type="button" onClick={props.onClickUploadHandler}>Upload</button>
+            <input type="file" name="file" onChange={onChangeFileHandler} />
+            <button type="button" onClick={onClickUploadHandler}>Upload</button>
             {/* <button>ADD A REVIEW +</button> */}
           </div>
 
