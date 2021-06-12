@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import ReviewsList from '../src/components/ReviewsList.jsx';
+import ReviewsList from '../src/components/RatingsAndReviews/ReviewsList.jsx';
 import { reviewsMock } from '../src/mockData/reviewsMock.js';
 
 beforeEach(() => {

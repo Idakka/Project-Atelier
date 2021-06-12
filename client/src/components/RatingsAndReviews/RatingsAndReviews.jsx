@@ -1,5 +1,5 @@
 import React from 'react';
-import StarReview from './StarReview.jsx';
+import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 const RatingsAndReviews = function(props) {

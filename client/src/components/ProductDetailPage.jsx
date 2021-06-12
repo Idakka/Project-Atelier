@@ -3,7 +3,7 @@ import axios from 'axios';
 import Overview from './Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
-import RatingsAndReviews from './RatingsAndReviews.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
 import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
 import { questionsMock, answersMock } from '../mockData/questionsMock.js';
