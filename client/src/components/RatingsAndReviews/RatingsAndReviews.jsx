@@ -47,9 +47,9 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
         <div id="ratings-right-pane-footer">
           <div type="button" className="review-btn">
             <button className="rnr-button" onClick={() => {
-        setReviewsToShowLength(reviewsToShowLength + 2);
-        setReviewsToShow(_reviews.slice(0, reviewsToShowLength));
-      }}>MORE REVIEWS</button>
+              setReviewsToShowLength(reviewsToShowLength + 2);
+              setReviewsToShow(_reviews.slice(0, reviewsToShowLength));
+            }}>MORE REVIEWS</button>
           </div>
           <div className="review-add">
             <input type="file" name="file" onChange={onChangeFileHandler} />
