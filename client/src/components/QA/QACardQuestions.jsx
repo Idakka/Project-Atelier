@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 const QACardQuestions = ({ questions }) => {
+
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
   // NOTE - keeping for refactor later on based on server changes for this path
   // // answers array for current product

@@ -37,9 +37,7 @@ const QACardAnswers = ({ currentAnswers }) => {
     setToggle(true);
   }, []);
 
-
   return (
-
     <div data-testid="qa-div-card-answers">
       {answersToShow.map((answer, index) =>
         <div className="qa-answers-external" key={index}>
@@ -52,10 +50,10 @@ const QACardAnswers = ({ currentAnswers }) => {
           </p>
         </div>
       )}
-    <button className="qa-load-more" onClick={() => {
-      setAnswersToShowLength(answersToShowLength + 2);
-      setAnswersToShow(answers.slice(0, answersToShowLength));
-    }}><b>[LOAD MORE ANSWERS]</b></button>
+      <button className="qa-load-more" onClick={() => {
+        setAnswersToShowLength(answersToShowLength + 2);
+        setAnswersToShow(answers.slice(0, answersToShowLength));
+      }}><b>[LOAD MORE ANSWERS]</b></button>
     </div >
   );
 };
