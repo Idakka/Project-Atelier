@@ -12,9 +12,11 @@ if (process.env.NODE_ENV !== 'test') {
 const QAAddAnswerModal = ({ question }) => {
 
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
+  // handles onChange for inputs
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  // sets up an object with responses, will send this to POST requests
   const [modalInfo, setModalInfo] = useState({});
 
   return (
@@ -33,7 +35,8 @@ const QAAddAnswerModal = ({ question }) => {
           <button className="qa-add-form-submit" onClick={() => {
             event.preventDefault();
             setModalIsOpenAdd(false);
-            setModalInfo({answer: answer,
+            setModalInfo({
+              answer: answer,
               nickname: nickname,
               email: email
             });
@@ -41,8 +44,6 @@ const QAAddAnswerModal = ({ question }) => {
         </form>
       </Modal>
     </div>
-
-
   );
 };
 

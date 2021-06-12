@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
+import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
 // Modal.setAppElement('#app');
 if (process.env.NODE_ENV !== 'test') {
@@ -11,7 +12,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 const QuestionsAndAnswers = () => {
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [product, setProduct] = useState('');
   // questions array for current product
   const [questions, setQuestions] = useState([]);
@@ -48,25 +49,14 @@ const QuestionsAndAnswers = () => {
 
       <div data-testid="qa"><QACardQuestions questions={questionsToShow} /></div>
 
-      <button className="qa-more" onClick={() => {
-        setQuestionsToShowLength(questionsToShowLength + 2);
-        setQuestionsToShow(questions.slice(0, questionsToShowLength));
-      }}>MORE ANSWERED QUESTIONS</button>
+      <div className="qa-footer-buttons">
+        <button className="qa-more" onClick={() => {
+          setQuestionsToShowLength(questionsToShowLength + 2);
+          setQuestionsToShow(questions.slice(0, questionsToShowLength));
+        }}>MORE ANSWERED QUESTIONS</button>
+     <div className="qa-more"><QAAddQuestionModal /></div>
+     </div>
 
-      <button onClick={() => setModalIsOpen(true)} className="qa-add">ADD A QUESTION +</button>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
-        <h2>Ask Your Question</h2>
-        <h3>About the [Product Name Placeholder]</h3>
-        <form className="add-question-form">
-          <label className="add-form-question">Question*</label>
-          <textarea rows="10" maxLength="1000" required /><p></p>
-          <label className="add-form-username">Nickame*</label>
-          <input maxLength="60" placeholder="Example: jackson11!" required /><p className="qa-form-small">For privacy reasons, do not use your full name or email address</p>
-          <label className="add-form-email">Email*</label>
-          <input maxLength="60" required /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
-          <button className="qa-add-form-submit" onClick={() => setModalIsOpen(false)}>Submit</button>
-        </form>
-      </Modal>
 
       <p></p>
     </div>

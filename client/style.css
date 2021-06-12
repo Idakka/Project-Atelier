@@ -428,7 +428,7 @@ h1{
   font-size: 14px;
 }
 
-.qa-more, .qa-add, .qa-add-form-submit {
+.qa-more, .qa-add-form-submit {
   background-color: white;
   border: 1px solid black;
   padding: 2%;
@@ -438,6 +438,12 @@ h1{
   font-size: 16px;
   margin: 1px;
   cursor: pointer;
+}
+
+.qa-add {
+  border: none;
+  background-color: white;
+  font-size: 16px;
 }
 
 .qa-add-form-submit {
@@ -467,6 +473,10 @@ h1{
 
 .qa-form-small {
   font-size: 9px;
+}
+
+.qa-footer-buttons {
+  display: flex;
 }
 
 /* QA Styling Ends */
