@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
-import { productsMock, productInfoMock, productStylesMock, relatedProductsMock } from '../mockData/productInfoMock.js';
-import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
+import { productsMock, productInfoMock, productStylesMock, relatedProductsMock } from '../../mockData/productInfoMock.js';
+import { reviewsMock, reviewsMetaMock } from '../../mockData/reviewsMock.js';
 
 class RelatedItemsAndOutfit extends React.Component {
   // when using top level state, this will be a functional component that takes in
