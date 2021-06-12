@@ -13,7 +13,7 @@ var Overview = function(props) {
       <TitleBar />
       <SiteWideAnnounce />
       <div className="overview-column-container">
-        <ImageGallery />
+        <ImageGallery productStyles={props.productStyles}/>
         <div className="product-information">
           <ProductInformation productInfo={props.productInfo} productStyles={props.productStyles} reviewsMeta={props.reviewsMeta} />
           <StyleSelector />

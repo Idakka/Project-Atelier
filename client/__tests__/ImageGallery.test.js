@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import ImageGallery from '../src/components/ImageGallery.jsx';
+import { productStylesMock } from '../src/mockData/productInfoMock.js';
 
 beforeEach(() => {
-  render(<ImageGallery />);
+  render(<ImageGallery productStyles={productStylesMock} />);
 });
 
 afterEach(() => {
