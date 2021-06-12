@@ -1,5 +1,6 @@
 import React from 'react';
 import StarReview from './StarReview.jsx';
+import ReviewsList from './ReviewsList.jsx';
 
 const RatingsAndReviews = function(props) {
   return (
@@ -19,18 +20,8 @@ const RatingsAndReviews = function(props) {
       </div>
       <div id="ratings-right-pane">
         <div id="ratings-title">248 reviews, sorted by relevance
-
         </div>
-        <div className="review-header">
-          <StarReview rating='4.5'/>
-          <div className="author">User1234, January 1, 2019</div>
-        </div>
-        <div className="review-title">Review Title with word-break...</div>
-        <div className="review-block">
-          Donuts and gummi bears
-        </div>
-        <div className="response-block">Response:</div>
-        <div className="review-footer">Helpful? Yes (9) | Report</div>
+        <ReviewsList reviews={props.reviews} />
         <div id="ratings-right-pane-footer">
           <div className="review-btn">
             <button>MORE REVIEWS</button>
