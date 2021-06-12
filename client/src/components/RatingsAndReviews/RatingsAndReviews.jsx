@@ -16,6 +16,21 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
     setReviewsToShowLength(reviewsToShowLength + 2);
   }, []);
 
+  const calculateRating = function(ratings) {
+    // *There is poorly formatted data coming in from the mock API json object. repeated key names make counting by key inaccurate
+    let ratingCount = 0;
+    let ratingTally = 0;
+    for (let i = 0; i < 5; i++) {
+      if (ratings[i]) {
+        ratingTally += Number.parseInt(ratings[i]);
+        ratingCount++;
+      }
+      console.log('checking calculateRating: ', ratingCount, ratingTally);
+    }
+    return ratingTally / parseFloat(ratingCount);
+  };
+  let rating = calculateRating(reviewsMeta.ratings);
+
   return (
     <div id="ratings-main" data-testid="ratings-main">
       <div id="ratings-left-pane">
@@ -23,8 +38,8 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
           <h1>RatingsAndReviews!</h1>
         </div>
         <div className="rating-left">
-          <div className="number-rating">3.5</div>
-          <StarReview rating='3.75'/>
+          <div className="number-rating">{rating}</div>
+          <StarReview rating={rating}/>
         </div>
         <div className="recommend-percent">100% of reviews recommend this product</div>
         <div className="star-chart">list of stars here!</div>
