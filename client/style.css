@@ -74,6 +74,8 @@ h1{
 }
 
 .star-chart {
+  overflow:hidden;
+  clip: rect(0px,179px,300px,0px);
 }
 
 .review-size {
@@ -92,6 +94,13 @@ h1{
 .review-header {
   display: grid;
   grid-template-columns: 34% 34% 32%;
+}
+
+#sort-parameter {
+  border: 1px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 16px;
 }
 
 .review-title {
@@ -133,12 +142,24 @@ h1{
 #ratings-right-pane-footer {
 
   display: grid;
-  grid-template-columns: 34% 34% 32%;
+  grid-template-columns: 40% 40% 20%;
 }
 
 .review-btn {
   background-color: white;
   padding: 2%;
+  align-items: left;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.rnr-button {
+  background-color: white;
+  border: 1PX solid black;
+  padding: 1.2rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -148,7 +169,17 @@ h1{
 }
 
 .review-add {
+  background-color: white;
+  border: 1PX solid black;
+  padding: 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
 }
 
 .title-bar {
