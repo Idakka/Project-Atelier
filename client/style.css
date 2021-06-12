@@ -35,9 +35,17 @@ h1{
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+h2 {
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: medium;
+  color:rgb(60, 60, 60);
+  padding: 0%
+}
+
 /* Ratings and Reviews */
 
 #ratings-main {
+  margin-top: 2em;
   display: grid;
   grid-template-columns: 30% 70%;
   grid-column-gap: 2px;
@@ -64,15 +72,21 @@ h1{
 }
 
 .recommend-percent {
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .star-chart {
 }
 
 .review-size {
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .review-comfort {
+  padding: 1%;
+  margin: 1px 0;
 }
 
 #ratings-title {
@@ -84,23 +98,39 @@ h1{
 }
 
 .review-title {
+  padding: 1%;
+  margin: 1px 0;
+}
 
+.author {
+  font-size: 10px;
+  color:#666;
+  margin: 1%;
+  text-align: right;
 }
 
 .review-block {
-
+  font-size: 16px;
+  margin: 1%;
+  color:#666;
 }
 
 .review-card {
-
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .response-block {
-
+  font-size: 16px;
+  margin: 1%;
+  color:#666;
+  padding: 1%;
 }
 
 .review-footer {
-
+  font-size: 10px;
+  margin: 1%;
+  color:#666;
 }
 
 #ratings-right-pane-footer {
@@ -110,7 +140,14 @@ h1{
 }
 
 .review-btn {
-
+  background-color: white;
+  padding: 2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
+  cursor: pointer;
 }
 
 .review-add {

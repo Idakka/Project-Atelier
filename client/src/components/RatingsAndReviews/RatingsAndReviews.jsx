@@ -25,7 +25,6 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
         ratingTally += Number.parseInt(ratings[i]);
         ratingCount++;
       }
-      console.log('checking calculateRating: ', ratingCount, ratingTally);
     }
     return ratingTally / parseFloat(ratingCount);
   };
@@ -35,7 +34,7 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
     <div id="ratings-main" data-testid="ratings-main">
       <div id="ratings-left-pane">
         <div id="left-pane-title">
-          <h1>RatingsAndReviews!</h1>
+          <h2>RatingsAndReviews!</h2>
         </div>
         <div className="rating-left" data-testid="rating-left">
           <div className="number-rating">{rating}</div>
