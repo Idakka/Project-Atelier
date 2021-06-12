@@ -42,9 +42,12 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
           <StarReview rating={rating}/>
         </div>
         <div className="recommend-percent">100% of reviews recommend this product</div>
-        <div className="star-chart">list of stars here!</div>
-        <div className="review-size">Size Review Components</div>
-        <div className="review-comfort">Comfort Review Components</div>
+        <div className="star-chart">
+          <img src='img/star_breakdown_placeholder.png' /></div>
+        <div className="review-size">
+          <img src='img/size_placeholder.png' /></div>
+        <div className="review-comfort">
+          <img src='img/comfort_placeholder.png' /></div>
       </div>
       <div id="ratings-right-pane">
         <div id="ratings-title">{reviews.length} reviews, sorted by
