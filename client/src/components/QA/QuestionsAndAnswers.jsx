@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'test') {
   Modal.setAppElement('#app');
 }
 
-const QuestionsAndAnswers = () => {
+const QuestionsAndAnswers = (props) => {
 
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [product, setProduct] = useState('');
@@ -20,6 +20,9 @@ const QuestionsAndAnswers = () => {
   // array for questions to display
   const [questionsToShow, setQuestionsToShow] = useState([]);
   const [questionsToShowLength, setQuestionsToShowLength] = useState(4);
+  // variables to take in product info
+  const [productName, setProductName] = useState(props.productInfo.name);
+
 
   useEffect(() => {
     axios.get('/qa/questions/')
@@ -47,14 +50,14 @@ const QuestionsAndAnswers = () => {
         <button className="qa-search-btn">Search</button>
       </form>
 
-      <div data-testid="qa"><QACardQuestions questions={questionsToShow} /></div>
+      <div data-testid="qa"><QACardQuestions questions={questionsToShow} productName={productName}/></div>
 
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => {
           setQuestionsToShowLength(questionsToShowLength + 2);
           setQuestionsToShow(questions.slice(0, questionsToShowLength));
         }}>MORE ANSWERED QUESTIONS</button>
-        <div className="qa-more"><QAAddQuestionModal /></div>
+        <div className="qa-more"><QAAddQuestionModal productName={productName}/></div>
       </div>
 
       <p></p>

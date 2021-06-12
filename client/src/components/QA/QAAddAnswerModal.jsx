@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'test') {
   Modal.setAppElement('#app');
 }
 
-const QAAddAnswerModal = ({ question }) => {
+const QAAddAnswerModal = ({ question, productName }) => {
 
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
   // handles onChange for inputs
@@ -24,7 +24,7 @@ const QAAddAnswerModal = ({ question }) => {
       <button onClick={() => setModalIsOpenAdd(true)} className="qa-add-answer" href=""><b>[Add Answer]</b></button>
       <Modal isOpen={modalIsOpenAdd} onRequestClose={() => setModalIsOpenAdd(false)}>
         <h2>Submit Your Answer</h2>
-        <h3>[Product Name]: {question.question_body} </h3>
+        <h3>{productName}: {question.question_body} </h3>
         <form className="add-answer-form">
           <label className="add-form-answer">Answer* </label>
             <textarea rows="10" maxLength="1000" required onChange={() => setAnswer(event.target.value)}/><p></p>

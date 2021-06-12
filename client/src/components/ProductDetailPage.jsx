@@ -57,7 +57,7 @@ class ProductDetailPage extends React.Component {
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit />
-        <QuestionsAndAnswers />
+        <QuestionsAndAnswers productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>

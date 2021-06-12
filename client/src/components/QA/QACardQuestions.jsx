@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'test') {
   Modal.setAppElement('#app');
 }
 
-const QACardQuestions = ({ questions }) => {
+const QACardQuestions = ({ questions, productName }) => {
 
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
   // NOTE - keeping for refactor later on based on server changes for this path
@@ -31,7 +31,7 @@ const QACardQuestions = ({ questions }) => {
         <div className="qa-card-sample" key={index}>
           <b><div className="qa-div">Q: {question.question_body}
             <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
-              <QAAddAnswerModal question={question} />
+              <QAAddAnswerModal question={question} productName={productName} />
             </div>
           </div></b>
           <div data-testid="answers"><QACardAnswers currentAnswers={question.answers} /></div>
