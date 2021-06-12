@@ -38,7 +38,8 @@ const productStylesMock =
       'style_id': 123167,
       'name': 'White & White',
       'original_price': '99.00',
-      'sale_price': null,
+      'sale_price': null, // this is the original line.
+//      'sale_price': '49.00', // this line has been mocked for testing sales price formatting..
       'default?': true,
       'photos': [
         {

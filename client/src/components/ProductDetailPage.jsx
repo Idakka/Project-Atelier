@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Overview from './Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
-import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
-import RatingsAndReviews from './RatingsAndReviews.jsx';
+import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
 import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
 import { questionsMock, answersMock } from '../mockData/questionsMock.js';
@@ -55,10 +55,10 @@ class ProductDetailPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Overview top={this}/>
+        <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit />
         <QuestionsAndAnswers />
-        <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} />
+        <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
     );
