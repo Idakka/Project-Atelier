@@ -19,7 +19,7 @@ const RatingsAndReviews = function(props) {
         <div className="review-comfort">Comfort Review Components</div>
       </div>
       <div id="ratings-right-pane">
-        <div id="ratings-title">248 reviews, sorted by relevance
+        <div id="ratings-title">{props.reviews.length} reviews, sorted by relevance
         </div>
         <ReviewsList reviews={props.reviews} />
         <div id="ratings-right-pane-footer">
