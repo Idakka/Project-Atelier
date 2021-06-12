@@ -38,112 +38,83 @@ h1{
 /* Ratings and Reviews */
 
 #ratings-main {
-  border-style: solid;
-  border-color: red;
   display: grid;
   grid-template-columns: 30% 70%;
   grid-column-gap: 2px;
 }
 
 #ratings-left-pane {
-  border-style: solid;
-  border-color: yellow;
 }
 
  #ratings-right-pane {
-  border-style: solid;
-  border-color: yellow;
 }
 
 #left-pane-title {
-  border-style: solid;
-  border-color: green;
 }
 
 .rating-left {
-  border-style: solid;
-  border-color: green;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .number-rating {
-  border-style: solid;
-  border-color: blue;
 }
 
 .stars {
-  border-style: solid;
-  border-color: red;
 }
 
 .recommend-percent {
-  border-style: solid;
-  border-color: green;
 }
 
 .star-chart {
-  border-style: solid;
-  border-color: green;
 }
 
 .review-size {
-  border-style: solid;
-  border-color: green;
 }
 
 .review-comfort {
-  border-style: solid;
-  border-color: green;
 }
 
 #ratings-title {
-  border-style: solid;
-  border-color: green;
 }
 
 .review-header {
-  border-style: solid;
-  border-color: blue;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .review-title {
-  border-style: solid;
-  border-color: blue;
+
 }
 
 .review-block {
-  border-style: solid;
-  border-color: blue;
+
+}
+
+.review-card {
+
 }
 
 .response-block {
-  border-style: solid;
-  border-color: blue;
+
 }
 
 .review-footer {
-  border-style: solid;
-  border-color: green;
+
 }
 
 #ratings-right-pane-footer {
-  border-style: solid;
-  border-color: blue;
+
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .review-btn {
-  border-style: solid;
-  border-color: blue;
+
 }
 
 .review-add {
-  border-style: solid;
-  border-color: blue;
+
 }
 
 .title-bar {
