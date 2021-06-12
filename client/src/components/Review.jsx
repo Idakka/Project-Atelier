@@ -11,11 +11,16 @@ const Review = ({review}) => {
           <div className="author">{review.reviewer_name}, {format((new Date(review.date)), "MMMM do, yyyy")}
           </div>
         </div>
-        <div className="review-title">Review Title with word-break...</div>
+        <div className="review-title">{review.summary}</div>
         <div className="review-block">
-              here is some dynamic text: {review.summary}
+          {review.body}
         </div>
-        <div className="response-block">Response:</div>
+        {review.response &&
+          <div className="response-block">
+            <h3>Response:</h3>
+            <p>{review.response}</p>
+          </div>
+        }
         <div className="review-footer">Helpful? Yes (9) | Report
         </div>
       </div>
