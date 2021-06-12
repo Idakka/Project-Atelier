@@ -373,7 +373,6 @@ h1{
 /* QA Styling Starts */
 
 #qa-div {
-  border: 3px solid black;
   padding: 1%;
 }
 
@@ -382,41 +381,55 @@ h1{
   padding: 12px 16px;
   margin: 1px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
 .qa-search-btn {
-  width: 9%;
   background-color: white;
   border: 1px solid black;
   padding: 1%;
+  width: 9%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 1em;
   margin: 1px;
   cursor: pointer;
 }
 
 .qa-card-sample {
-  border: 1px solid black;
   margin-bottom: 3px;
 }
 
-.qa-div, .qa-load-more {
-  margin: 1%;
-  background-color: white;
-  border: none;
+.qa-div {
+  margin-top: 3%;
 }
 
-.qa-helpfulness-right {
+.qa-div, .qa-load-more {
+  background-color: white;
+  border: none;
+  font-size: 1.3em
+}
+
+.qa-helpfulness-right, .qa-load {
+  font-size: .7em;
+  display: flex;
   float: right;
-  font-size: 12px;
+}
+
+.qa-div-answers {
+  font-size: 1em;
+  margin: 1%;
+}
+
+.right-spacing {
+  margin-right: 10px;
 }
 
 .qa-footer {
-  font-size: 10px;
+  font-size: .7em;
   margin: 1%;
 }
 
@@ -425,7 +438,7 @@ h1{
 }
 
 .qa-answers-external {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .qa-more, .qa-add-form-submit {
@@ -435,7 +448,7 @@ h1{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   margin: 1px;
   cursor: pointer;
 }
@@ -443,7 +456,7 @@ h1{
 .qa-add {
   border: none;
   background-color: white;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .qa-add-form-submit {
@@ -461,10 +474,6 @@ h1{
   width: 50%
 }
 
-.right-spacing {
-  margin-right: 10px;
-}
-
 .qa-add-answer {
   float: right;
   background-color: white;
@@ -472,7 +481,7 @@ h1{
 }
 
 .qa-form-small {
-  font-size: 9px;
+  font-size: .7em;
 }
 
 .qa-footer-buttons {
