@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
-import axios from 'axios';
 
-const Carousel = ({ productId, carouselType }) => {
-  const [products, setProducts] = useState([]);
+const Carousel = ({ product, styles, related, reviews, carouselType }) => {
+  const [productCards, setProductCards] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const slideWrapperRef = createRef();
 
-  const scrollCarousel = useCallback((change, containerWidth, numberOfProducts = products.length) => {
+  const scrollCarousel = useCallback((change, containerWidth, numberOfProducts = productCards.length) => {
     // Get boundary variables for scroll calibration
     const cardWidth = 272;
     const capacity = Math.floor(containerWidth / cardWidth);
@@ -28,17 +27,33 @@ const Carousel = ({ productId, carouselType }) => {
   });
 
   useEffect(() => {
-    // if carouselType is related
-    axios.get(`/products/${productId}/related`)
-      .then(response => {
-        setProducts(response.data);
-        // Have to pass in window width as first render has not occurred and number of products since setProducts is async
-        // qqq Add an OR clause for when container has maxwidth
-        scrollCarousel(0, window.innerWidth, response.data.length);
-      })
-      .catch(err => err);
-    // if carouselType is outfit
-      // get all products saved in outfit and setProducts
+    // this is where each card's information object will be created. Per product:
+    // 1. Product information
+    // 2. Review data
+    // 3. Default style picture URL
+    const createdProductCards = [];
+    related.forEach(rel => {
+      let totalRating = 0;
+      let numberOfReviews = 0;
+      for (const ratingNumber in reviews.ratings) {
+        numberOfReviews += Number(reviews.ratings[ratingNumber]);
+        totalRating += ratingNumber * Number(reviews.ratings[ratingNumber]);
+      }
+      const defaultStyle = styles.results.filter(style => style['default?'])[0];
+      const productCardInformation = {
+        ...product,
+        rating: totalRating / numberOfReviews,
+        style: defaultStyle
+      };
+      createdProductCards.push(productCardInformation);
+    });
+    setProductCards(createdProductCards);
+
+    // Have to pass in window width as first render has not occurred and number
+    // of products since setProducts is async
+    // qqq Add an OR clause for when container has maxwidth and add a way for
+    // the browser to adjust based on browser size
+    scrollCarousel(0, window.innerWidth, related.length);
   }, []);
 
   return (
@@ -62,8 +77,12 @@ const Carousel = ({ productId, carouselType }) => {
             style={{ left: String(scrollPosition * -272) + 'px' }}
             data-testid="carousel"
           >
-            {products.map(product => (
-              <Card key={product.id} product={product} cardType={carouselType} />
+            {productCards.map((productCard, index) => (
+              <Card
+                key={index}
+                product={productCard}
+                cardType={carouselType}
+              />
             ))}
           </div>
         </div>
