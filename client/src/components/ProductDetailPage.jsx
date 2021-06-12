@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Overview from './Overview.jsx';
-import RelatedItemsAndOutfit from './RelatedItemsAndOutfit.jsx';
+import RelatedItemsAndOutfit from './RelatedItemsAndOutfit/RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';

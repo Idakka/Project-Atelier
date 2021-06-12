@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import StarReview from './StarReview.jsx';
+import StarReview from '../StarReview.jsx';
 
 import axios from 'axios';
 
