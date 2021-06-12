@@ -16,20 +16,37 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
     setReviewsToShowLength(reviewsToShowLength + 2);
   }, []);
 
+  const calculateRating = function(ratings) {
+    // *There is poorly formatted data coming in from the mock API json object. repeated key names make counting by key inaccurate
+    let ratingCount = 0;
+    let ratingTally = 0;
+    for (let i = 0; i < 5; i++) {
+      if (ratings[i]) {
+        ratingTally += Number.parseInt(ratings[i]);
+        ratingCount++;
+      }
+    }
+    return ratingTally / parseFloat(ratingCount);
+  };
+  let rating = calculateRating(reviewsMeta.ratings);
+
   return (
     <div id="ratings-main" data-testid="ratings-main">
       <div id="ratings-left-pane">
         <div id="left-pane-title">
-          <h1>RatingsAndReviews!</h1>
+          RatingsAndReviews!
         </div>
-        <div className="rating-left">
-          <div className="number-rating">3.5</div>
-          <StarReview rating='3.75'/>
+        <div className="rating-left" data-testid="rating-left">
+          <div className="number-rating">{rating}</div>
+          <StarReview rating={rating}/>
         </div>
         <div className="recommend-percent">100% of reviews recommend this product</div>
-        <div className="star-chart">list of stars here!</div>
-        <div className="review-size">Size Review Components</div>
-        <div className="review-comfort">Comfort Review Components</div>
+        <div className="star-chart">
+          <img src='img/star_breakdown_placeholder.png' /></div>
+        <div className="review-size">
+          <img src='img/size_placeholder.png' /></div>
+        <div className="review-comfort">
+          <img src='img/comfort_placeholder.png' /></div>
       </div>
       <div id="ratings-right-pane">
         <div id="ratings-title">{reviews.length} reviews, sorted by

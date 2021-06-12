@@ -38,112 +38,117 @@ h1{
 /* Ratings and Reviews */
 
 #ratings-main {
-  border-style: solid;
-  border-color: red;
+  margin-top: 2em;
   display: grid;
   grid-template-columns: 30% 70%;
   grid-column-gap: 2px;
 }
 
 #ratings-left-pane {
-  border-style: solid;
-  border-color: yellow;
 }
 
  #ratings-right-pane {
-  border-style: solid;
-  border-color: yellow;
 }
 
 #left-pane-title {
-  border-style: solid;
-  border-color: green;
+  font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: medium;
+  color:rgb(60, 60, 60);
+  padding: 0%
 }
 
 .rating-left {
-  border-style: solid;
-  border-color: green;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .number-rating {
-  border-style: solid;
-  border-color: blue;
 }
 
 .stars {
-  border-style: solid;
-  border-color: red;
 }
 
 .recommend-percent {
-  border-style: solid;
-  border-color: green;
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .star-chart {
-  border-style: solid;
-  border-color: green;
 }
 
 .review-size {
-  border-style: solid;
-  border-color: green;
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .review-comfort {
-  border-style: solid;
-  border-color: green;
+  padding: 1%;
+  margin: 1px 0;
 }
 
 #ratings-title {
-  border-style: solid;
-  border-color: green;
 }
 
 .review-header {
-  border-style: solid;
-  border-color: blue;
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .review-title {
-  border-style: solid;
-  border-color: blue;
+  padding: 1%;
+  margin: 1px 0;
+}
+
+.author {
+  font-size: 10px;
+  color:#666;
+  margin: 1%;
+  text-align: right;
 }
 
 .review-block {
-  border-style: solid;
-  border-color: blue;
+  font-size: 16px;
+  margin: 1%;
+  color:#666;
+}
+
+.review-card {
+  padding: 1%;
+  margin: 1px 0;
 }
 
 .response-block {
-  border-style: solid;
-  border-color: blue;
+  font-size: 16px;
+  margin: 1%;
+  color:#666;
+  padding: 1%;
 }
 
 .review-footer {
-  border-style: solid;
-  border-color: green;
+  font-size: 10px;
+  margin: 1%;
+  color:#666;
 }
 
 #ratings-right-pane-footer {
-  border-style: solid;
-  border-color: blue;
+
   display: grid;
   grid-template-columns: 34% 34% 32%;
 }
 
 .review-btn {
-  border-style: solid;
-  border-color: blue;
+  background-color: white;
+  padding: 2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 1px;
+  cursor: pointer;
 }
 
 .review-add {
-  border-style: solid;
-  border-color: blue;
+
 }
 
 .title-bar {

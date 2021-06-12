@@ -23,6 +23,7 @@ const Review = ({review}) => {
         }
         <div className="review-footer">Helpful? <span onClick={(i) => {alert("This feature only available to premium subscribers!")}}>Yes</span> ({review.helpfulness || ''}) | <span onClick={(e) => {alert("this feature coming soon!")}}>Report</span>
         </div>
+        <hr></hr>
       </div>
     </React.Fragment>
   );
