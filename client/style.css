@@ -192,6 +192,10 @@ h1{
   right: 0;
 }
 
+.ig-main-image {
+  width: 100%;
+}
+
 .image-gallery-fullscreen-toggle {
   position: absolute;
   float: left;
