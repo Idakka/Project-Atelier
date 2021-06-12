@@ -19,7 +19,16 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
         <div className="review-comfort">Comfort Review Components</div>
       </div>
       <div id="ratings-right-pane">
-        <div id="ratings-title">{reviews.length} reviews, sorted by relevance
+        <div id="ratings-title">{reviews.length} reviews, sorted by
+
+          <select name="sort-parameter" id="sort-parameter" onChange={(i) => {alert("This feature only available to premium subscribers!")}}>
+            <option value="relevance">relevance
+
+            </option>
+            <option value="helpful">helpful</option>
+            <option value="newest">newest</option>
+
+          </select>
         </div>
         <ReviewsList reviews={reviews} />
         <div id="ratings-right-pane-footer">
