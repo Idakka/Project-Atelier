@@ -33,7 +33,7 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
         <ReviewsList reviews={reviews} />
         <div id="ratings-right-pane-footer">
           <div className="review-btn">
-            <button>MORE REVIEWS</button>
+            <button onClick={(i) => {alert("This feature only available to premium subscribers!")}}>MORE REVIEWS</button>
           </div>
           <div className="review-add">
             <input type="file" name="file" onChange={onChangeFileHandler} />
