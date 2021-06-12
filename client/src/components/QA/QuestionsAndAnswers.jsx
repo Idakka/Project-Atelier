@@ -24,7 +24,6 @@ const QuestionsAndAnswers = () => {
     axios.get('/qa/questions/')
       .then(response => {
         setQuestions(response.data);
-        console.log('check', response);
         setQuestionLength(response.data.length);
         setQuestionsToShow(response.data.slice(0, questionsToShowLength));
         setQuestionsToShowLength(questionsToShowLength + 2);
