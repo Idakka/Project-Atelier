@@ -12,6 +12,7 @@ if (process.env.NODE_ENV !== 'test') {
 const QuestionsAndAnswers = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [product, setProduct] = useState('');
   // questions array for current product
   const [questions, setQuestions] = useState([]);
   const [questionLength, setQuestionLength] = useState(0);
@@ -23,6 +24,7 @@ const QuestionsAndAnswers = () => {
     axios.get('/qa/questions/')
       .then(response => {
         setQuestions(response.data);
+        console.log('check', response);
         setQuestionLength(response.data.length);
         setQuestionsToShow(response.data.slice(0, questionsToShowLength));
         setQuestionsToShowLength(questionsToShowLength + 2);
