@@ -8,7 +8,7 @@ const QAAddQuestionModal = ({ productName }) => {
 
   return (
     <div>
-      <button onClick={() => setModalIsOpen(true)} className="qa-add">ADD A QUESTION +</button>
+      <button onClick={() => setModalIsOpen(true)} className="qa-add" datatest-id="qa-add">ADD A QUESTION +</button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <h2>Ask Your Question</h2>
         <h3>About the Heir Force Ones</h3>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
+// import { questionsMock } from '../../mockData/questionsMock.js';
 
 const QuestionsAndAnswers = (props) => {
 

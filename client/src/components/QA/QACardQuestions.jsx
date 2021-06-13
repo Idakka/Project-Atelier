@@ -21,7 +21,7 @@ const QACardQuestions = ({ questions, productName }) => {
   // }, []);
 
   return (
-    <div data-testid="qa-div-card-questions" id="qa-div-card-questions">
+    <div data-testid="qa-questions">
       <div>{questions.map((question, index) =>
         <div className="qa-card-sample" key={index}>
           <b><div className="qa-div">Q: {question.question_body}
