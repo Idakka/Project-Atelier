@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
+import calculateRating from '../../scripts/calculateRating.js';
 
 const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
 
@@ -16,18 +17,6 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
     setReviewsToShowLength(reviewsToShowLength + 2);
   }, []);
 
-  const calculateRating = function(ratings) {
-    // *There is poorly formatted data coming in from the mock API json object. repeated key names make counting by key inaccurate
-    let ratingCount = 0;
-    let ratingTally = 0;
-    for (let i = 0; i < 5; i++) {
-      if (ratings[i]) {
-        ratingTally += Number.parseInt(ratings[i]);
-        ratingCount++;
-      }
-    }
-    return ratingTally / parseFloat(ratingCount);
-  };
   let rating = calculateRating(reviewsMeta.ratings);
 
   return (
@@ -51,7 +40,9 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
       <div id="ratings-right-pane">
         <div id="ratings-title">{reviews.length} reviews, sorted by
 
-          <select name="sort-parameter" id="sort-parameter" onChange={(i) => {alert("This feature only available to premium subscribers!");} }>
+          <select name="sort-parameter" id="sort-parameter" onChange={(i) => {
+            alert('This feature only available to premium subscribers!');
+          }}>
             <option value="relevance">relevance
 
             </option>
