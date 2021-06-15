@@ -13,7 +13,7 @@
     ]
   },
   "scripts": {
-    "start": "npx nodemon server.js",
+    "start": "npx nodemon server/server.js",
     "test": "jest --env=jsdom --watchAll",
     "testCoverage": "jest --env=jsdom --coverage",
     "test:ci": "jest --env=jsdom",

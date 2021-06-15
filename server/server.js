@@ -7,6 +7,8 @@ const path = require('path');
 const app = express();
 const port = 1234;
 
+const { test } = require('./api-queries.js');
+
 const atelierHeaders = {
   headers: {
     'Authorization': process.env.GITHUB_TOKEN
@@ -107,6 +109,10 @@ app.get('/products/:product_id/card-info', (req, res) => {
       res.end(JSON.stringify(output));
     })
     .catch(err => res.end(JSON.stringify(err)));
+});
+
+app.get('/products/:product_id/current', (req, res) => {
+  res.end(test());
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
