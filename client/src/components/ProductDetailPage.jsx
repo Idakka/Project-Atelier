@@ -15,6 +15,12 @@ class ProductDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // Product Information
+      currentProductId: null, // this should be set at runtime by the productId in the url? or if none given, has a default
+      products: {
+        // productId: { ... },
+      },
+      // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
     };
@@ -23,7 +29,8 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    // Start sending off axios calls and populate state with the returns.
+    // make axios call to server to get product information and update this.state.products
+    // make axios calls for all related products and update this.state.products
   }
 
   onChangeFileHandler(event) {
@@ -56,7 +63,12 @@ class ProductDetailPage extends React.Component {
     return (
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
-        <RelatedItemsAndOutfit />
+        <RelatedItemsAndOutfit
+          productInfo={productInfoMock}
+          productStyles={productStylesMock}
+          relatedProducts={relatedProductsMock}
+          reviewsMeta={reviewsMetaMock}
+        />
         <QuestionsAndAnswers productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
         <Modal top={this} contents={this.state.modalContents}/>

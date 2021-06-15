@@ -1,7 +1,5 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
-import { productsMock, productInfoMock, productStylesMock, relatedProductsMock } from '../../mockData/productInfoMock.js';
-import { reviewsMock, reviewsMetaMock } from '../../mockData/reviewsMock.js';
 
 class RelatedItemsAndOutfit extends React.Component {
   // when using top level state, this will be a functional component that takes in
@@ -10,10 +8,10 @@ class RelatedItemsAndOutfit extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      productInfo: productInfoMock,
-      productStyles: productStylesMock,
-      relatedProducts: relatedProductsMock,
-      reviewsMeta: reviewsMetaMock
+      productInfo: this.props.productInfo,
+      productStyles: this.props.productStyles,
+      relatedProducts: this.props.relatedProducts,
+      reviewsMeta: this.props.reviewsMeta
     };
   }
 
