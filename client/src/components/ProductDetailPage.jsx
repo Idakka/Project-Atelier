@@ -16,7 +16,7 @@ class ProductDetailPage extends React.Component {
     super(props);
     this.state = {
       // Product Information
-      currentProductId: null, // this should be set at runtime by the productId in the url? or if none given, has a default
+      currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
       products: {
         // productId: { ... },
       },
@@ -29,6 +29,7 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
+    // set currentProductId based on URL or default
     // make axios call to server to get product information and update this.state.products
     // make axios calls for all related products and update this.state.products
   }
