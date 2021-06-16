@@ -1,5 +1,5 @@
 const axios = require('axios');
-const dotenv = require('dotenv').config({path: __dirname + '/.env'});
+const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const port = 1234;
 
-const { test } = require('./api-queries.js');
+const apiQueries = require('./api-queries.js');
 
 const atelierHeaders = {
   headers: {
@@ -112,7 +112,12 @@ app.get('/products/:product_id/card-info', (req, res) => {
 });
 
 app.get('/products/:product_id/current', (req, res) => {
-  res.end(test());
+  apiQueries.getCurrentProduct(req.params.product_id, atelierHeaders)
+    .then(result => res.end(result))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
