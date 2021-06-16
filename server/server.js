@@ -113,7 +113,7 @@ app.get('/products/:product_id/card-info', (req, res) => {
 
 app.get('/products/:product_id/current', (req, res) => {
   apiQueries.getCurrentProduct(req.params.product_id, atelierHeaders)
-    .then(result => res.end(result))
+    .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
       res.end(JSON.stringify(error));
