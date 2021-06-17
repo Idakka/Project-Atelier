@@ -71,7 +71,7 @@ const getCurrentProductBundle = (productId, headers) => {
       return {
         ...responses[0],
         styles: [ ...responses[1] ],
-        related: [ ...responses[2] ],
+        related: [ ...new Set(responses[2]) ],
         reviews: { ...responses[3] },
         reviewsMeta: { ...responses[4] },
         questions: [ ...responses[5] ],
