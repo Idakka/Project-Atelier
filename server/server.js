@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const port = 1234;
 
-const apiQueries = require('./api-queries.js');
+const atelierQueries = require('./atelier-queries.js');
 
 const atelierHeaders = {
   headers: {
@@ -20,7 +20,7 @@ const s3Headers = {
   }
 };
 
-const pathname = path.join(__dirname, 'public');
+const pathname = path.join(__dirname, '..', 'public');
 app.use(express.static(pathname));
 app.use(cors());
 
@@ -76,6 +76,7 @@ app.get('/products/:product_id/related', (req, res) => {
     .catch(err => res.end(JSON.stringify(err)));
 });
 
+// qqq delete when better API route for current product is completed
 app.get('/products/:product_id/card-info', (req, res) => {
   let rating = 0;
   let pictureURL = '';
@@ -112,7 +113,7 @@ app.get('/products/:product_id/card-info', (req, res) => {
 });
 
 app.get('/products/:product_id/current', (req, res) => {
-  apiQueries.getCurrentProduct(req.params.product_id, atelierHeaders)
+  atelierQueries.getCurrentProduct(req.params.product_id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
