@@ -92,10 +92,6 @@ class ProductDetailPage extends React.Component {
         <RelatedItemsAndOutfit
           product={this.state.products[this.state.currentProductId]}
           relatedProducts={this.state.relatedProducts.map(relId => this.state.products[relId])}
-          productInfo={productInfoMock}
-          productStyles={productStylesMock}
-          relatedProductsOld={relatedProductsMock}
-          reviewsMeta={reviewsMetaMock}
         />
         <QuestionsAndAnswers productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 
-const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, productStyles, relatedProductsOld, reviewsMeta }) => {
+const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
   return (
     <section
       id="related-items-and-outfit"
@@ -15,10 +15,6 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, produ
         <Carousel
           product={product}
           relatedProducts={relatedProducts}
-          productInfoOld={productInfoOld}
-          styles={productStyles}
-          relatedProductsOld={relatedProductsOld}
-          reviews={reviewsMeta}
           carouselType={'related'}
         />
       </div>
@@ -26,10 +22,6 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, produ
         <Carousel
           product={product}
           relatedProducts={relatedProducts}
-          productInfoOld={productInfoOld}
-          styles={productStyles}
-          relatedProductsOld={relatedProductsOld}
-          reviews={reviewsMeta}
           carouselType={'outfit'}
         />
       </div>
