@@ -25,7 +25,6 @@ const QACardQuestions = ({ questions, productName }) => {
   const increaseCount = () => {
     event.preventDefault();
     setLength(length + 2);
-    console.log('count', length);
   };
 
   const filterQuestions = () => {
@@ -34,16 +33,15 @@ const QACardQuestions = ({ questions, productName }) => {
     } else {
       setWord(event.target.value);
     }
-    console.log('word', word, word.length);
   };
 
   return (
-    <div>
+    <div datatest-id="qa-questions">
       <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           onChange={() => {
             filterQuestions();
-            setLength(questions.length);
+            setLength(4);
           }}
         ></input>
         {/* NOTE - Search button will be replaced with icon later on */}
@@ -51,18 +49,21 @@ const QACardQuestions = ({ questions, productName }) => {
         }}>Search</button>
       </form>
 
-      {questions.slice(0, length).filter((item) => item.question_body.includes(word)).map((question, index) => (
-        <div key={index}>
-          <div className="qa-card-sample" key={index}>
-            <b><div className="qa-div">Q: {question.question_body}
-              <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
-                <QAAddAnswerModal question={question} productName={productName} />
-              </div>
-            </div></b>
+      <div data-test-id="qa-scroll" id="qa-scroll">
+        {questions.slice(0, length).filter((item) => item.question_body.includes(word)).map((question, index) => (
+          <div key={index}>
+            <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
+              <b><div className="qa-div">Q: {question.question_body}
+                <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
+                  <QAAddAnswerModal question={question} productName={productName} />
+                </div>
+              </div></b>
+            </div>
+            <div data-testid="answers"><QACardAnswers currentAnswers={question.answers} /></div>
           </div>
-          <div data-testid="answers"><QACardAnswers currentAnswers={question.answers} /></div>
-        </div>
-      ))}
+        ))}
+      </div>
+
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => increaseCount()}>MORE ANSWERED QUESTIONS</button>
         <div className="qa-more" data-testid="qa-more"><QAAddQuestionModal productName={productName} /></div>

@@ -412,6 +412,11 @@ h1{
 }
 /* QA Styling Starts */
 
+#qa-scroll {
+  height: 600px;
+  overflow: auto;
+}
+
 #qa-div {
   padding: 1%;
 }
@@ -526,6 +531,7 @@ h1{
 
 .qa-footer-buttons {
   display: flex;
+  margin-top: 2%;
 }
 
 /* QA Styling Ends */
