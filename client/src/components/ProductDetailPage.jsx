@@ -31,37 +31,33 @@ class ProductDetailPage extends React.Component {
   componentDidMount() {
     console.time('mounted => fetched')
     // set currentProductId based on URL or default
-    this.setState({
-      currentProductId: 22126,
-    }, () => {
-      const updatedProducts = { ...this.state.products };
-      fetch(`/products/${this.state.currentProductId}/current`)
-        .then(response => response.json())
-        .then(productInformation => {
-          updatedProducts[this.state.currentProductId] = productInformation;
-          this.setState({
-            products: updatedProducts
-          }, () => {
-            console.log('updated main product')
-          })
-          fetch(`/products/related?ids=${productInformation.related.join(',')}`)
-            .then(response => response.json())
-            .then(relatedProductsInformation => {
-              for (const product in relatedProductsInformation) {
-                updatedProducts[product] = relatedProductsInformation[product]
-              }
-              this.setState({
-                products: updatedProducts
-              }, () => {
-                console.log('updated related products');
-                console.timeEnd('mounted => fetched')
-              });
-            });
+    const updatedProducts = { ...this.state.products };
+    fetch(`/products/${this.state.currentProductId}/current`)
+      .then(response => response.json())
+      .then(productInformation => {
+        updatedProducts[this.state.currentProductId] = productInformation;
+        this.setState({
+          products: updatedProducts
+        }, () => {
+          console.log('updated main product')
         })
-        .catch(err => {
-          console.error(err);
+        return fetch(`/products/related?ids=${productInformation.related.join(',')}`)
+      })
+      .then(response => response.json())
+      .then(relatedProductsInformation => {
+        for (const product in relatedProductsInformation) {
+          updatedProducts[product] = relatedProductsInformation[product]
+        }
+        this.setState({
+          products: updatedProducts
+        }, () => {
+          console.log('updated related products');
+          console.timeEnd('mounted => fetched')
         });
-    });
+      })
+      .catch(err => {
+        console.error(err);
+      });
     // make axios calls for all related products and update this.state.products
   }
 
