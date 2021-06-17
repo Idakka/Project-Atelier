@@ -32,18 +32,19 @@ const Carousel = ({ product, relatedProducts, productInfoOld, styles, relatedPro
     // 2. Review data
     // 3. Default style picture URL
     const createdProductCards = [];
-    relatedProductsOld.forEach(rel => {
+    relatedProducts.forEach(rel => {
       let totalRating = 0;
       let numberOfReviews = 0;
-      for (const ratingNumber in reviews.ratings) {
-        numberOfReviews += Number(reviews.ratings[ratingNumber]);
-        totalRating += ratingNumber * Number(reviews.ratings[ratingNumber]);
+      for (const ratingNumber in rel.reviewsMeta.ratings) {
+        numberOfReviews += Number(rel.reviewsMeta.ratings[ratingNumber]);
+        totalRating += ratingNumber * Number(rel.reviewsMeta.ratings[ratingNumber]);
       }
-      const defaultStyle = styles.results.filter(style => style['default?'])[0];
+      const defaultStyle = rel.styles.filter(style => style['default?'])[0] || rel.styles[0];
+      console.log(defaultStyle);
       const productCardInformation = {
-        ...productInfoOld,
+        ...rel,
         rating: totalRating / numberOfReviews,
-        style: defaultStyle
+        defaultStyle: defaultStyle,
       };
       createdProductCards.push(productCardInformation);
     });
@@ -54,7 +55,7 @@ const Carousel = ({ product, relatedProducts, productInfoOld, styles, relatedPro
     // qqq Add an OR clause for when container has maxwidth and add a way for
     // the browser to adjust based on browser size
     scrollCarousel(0, window.innerWidth, relatedProductsOld.length);
-  }, []);
+  }, [relatedProducts]);
 
   return (
     <React.Fragment>

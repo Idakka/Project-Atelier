@@ -13,6 +13,8 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, produ
         {/* It will take in a list of objects from top level state, e.g. iterate through related */}
         {/* and populate an array of those objects that the Carousel/Card can then use. */}
         <Carousel
+          product={product}
+          relatedProducts={relatedProducts}
           productInfoOld={productInfoOld}
           styles={productStyles}
           relatedProductsOld={relatedProductsOld}
@@ -22,6 +24,8 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, produ
       </div>
       <div id="your-outfit">
         <Carousel
+          product={product}
+          relatedProducts={relatedProducts}
           productInfoOld={productInfoOld}
           styles={productStyles}
           relatedProductsOld={relatedProductsOld}

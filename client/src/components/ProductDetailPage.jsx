@@ -91,6 +91,7 @@ class ProductDetailPage extends React.Component {
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit
           product={this.state.products[this.state.currentProductId]}
+          relatedProducts={this.state.relatedProducts.map(relId => this.state.products[relId])}
           productInfo={productInfoMock}
           productStyles={productStylesMock}
           relatedProductsOld={relatedProductsMock}
