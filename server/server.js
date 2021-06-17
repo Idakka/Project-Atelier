@@ -113,7 +113,17 @@ app.get('/products/:product_id/card-info', (req, res) => {
 });
 
 app.get('/products/:product_id/current', (req, res) => {
-  atelierQueries.getCurrentProduct(req.params.product_id, atelierHeaders)
+  atelierQueries.getCurrentProductBundle(req.params.product_id, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+app.get('/products/related', (req, res) => {
+  const relatedProducts = req.query.ids.split(',');
+  atelierQueries.getRelatedProductsBundle(relatedProducts, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);

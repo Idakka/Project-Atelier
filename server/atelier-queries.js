@@ -54,9 +54,9 @@ const getProductQuestions = (productId, headers) => {
     });
 };
 
-const getCurrentProduct = (productId, headers) => {
+const getCurrentProductBundle = (productId, headers) => {
   let currentProduct = {};
-  console.time('getCurrentProduct API Time');
+  console.time('getCurrentProductBundle API Time');
   const allCalls = [
     getProductInfo(productId, headers),
     getProductStyles(productId, headers),
@@ -67,7 +67,7 @@ const getCurrentProduct = (productId, headers) => {
   ];
   return Promise.all(allCalls)
     .then(responses => {
-      console.timeEnd('getCurrentProduct API Time');
+      console.timeEnd('getCurrentProductBundle API Time');
       return {
         ...responses[0],
         styles: [ ...responses[1] ],
@@ -79,6 +79,37 @@ const getCurrentProduct = (productId, headers) => {
     });
 };
 
+const getRelatedProductsBundle = (relatedProducts, headers) => {
+  console.time('getRelatedProductsBundle API Time');
+  const allRelatedProductCalls = [];
+  for (let i = 0; i < relatedProducts.length; i++) {
+    const relatedProduct = {};
+    const relatedProductCalls = [
+      getProductStyles(relatedProducts[i], headers),
+      getProductReviewsMeta(relatedProducts[i], headers)
+    ];
+    allRelatedProductCalls.push(Promise.all(relatedProductCalls)
+      .then(responses => {
+        console.log(responses);
+        return {
+          styles: [ ...responses[0] ],
+          reviewsMeta: { ...responses[1] },
+        };
+      })
+    );
+  }
+  return Promise.all(allRelatedProductCalls)
+    .then(responses => {
+      console.timeEnd('getRelatedProductsBundle API Time');
+      const allRelatedProductsBundle = {};
+      for (let i = 0; i < relatedProducts.length; i++) {
+        allRelatedProductsBundle[relatedProducts[i]] = responses[i];
+      }
+      return allRelatedProductsBundle;
+    });
+};
+
 module.exports = {
-  getCurrentProduct
+  getCurrentProductBundle,
+  getRelatedProductsBundle
 };
