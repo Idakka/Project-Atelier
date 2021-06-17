@@ -1,5 +1,5 @@
 import React from 'react';
-import ExampleModalContents from './ExampleModalContents.jsx';
+import ExampleModalContents from '../ExampleModalContents.jsx';
 
 class AddToCartRegion extends React.Component {
   constructor(props) {
