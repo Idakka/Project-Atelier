@@ -92,9 +92,10 @@ class ProductDetailPage extends React.Component {
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit
+          product={this.state.products[this.state.currentProductId]}
           productInfo={productInfoMock}
           productStyles={productStylesMock}
-          relatedProducts={relatedProductsMock}
+          relatedProductsOld={relatedProductsMock}
           reviewsMeta={reviewsMetaMock}
         />
         <QuestionsAndAnswers productInfo={productInfoMock}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 
-const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, reviewsMeta }) => {
+const RelatedItemsAndOutfit = ({ product, relatedProducts, productInfoOld, productStyles, relatedProductsOld, reviewsMeta }) => {
   return (
     <section
       id="related-items-and-outfit"
@@ -13,18 +13,18 @@ const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, re
         {/* It will take in a list of objects from top level state, e.g. iterate through related */}
         {/* and populate an array of those objects that the Carousel/Card can then use. */}
         <Carousel
-          product={productInfo}
+          productInfoOld={productInfoOld}
           styles={productStyles}
-          related={relatedProducts}
+          relatedProductsOld={relatedProductsOld}
           reviews={reviewsMeta}
           carouselType={'related'}
         />
       </div>
       <div id="your-outfit">
         <Carousel
-          product={productInfo}
+          productInfoOld={productInfoOld}
           styles={productStyles}
-          related={relatedProducts}
+          relatedProductsOld={relatedProductsOld}
           reviews={reviewsMeta}
           carouselType={'outfit'}
         />

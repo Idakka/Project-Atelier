@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
 
-const Carousel = ({ product, styles, related, reviews, carouselType }) => {
+const Carousel = ({ product, relatedProducts, productInfoOld, styles, relatedProductsOld, reviews, carouselType }) => {
   const [productCards, setProductCards] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -32,7 +32,7 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
     // 2. Review data
     // 3. Default style picture URL
     const createdProductCards = [];
-    related.forEach(rel => {
+    relatedProductsOld.forEach(rel => {
       let totalRating = 0;
       let numberOfReviews = 0;
       for (const ratingNumber in reviews.ratings) {
@@ -41,7 +41,7 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
       }
       const defaultStyle = styles.results.filter(style => style['default?'])[0];
       const productCardInformation = {
-        ...product,
+        ...productInfoOld,
         rating: totalRating / numberOfReviews,
         style: defaultStyle
       };
@@ -53,7 +53,7 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
     // of products since setProducts is async
     // qqq Add an OR clause for when container has maxwidth and add a way for
     // the browser to adjust based on browser size
-    scrollCarousel(0, window.innerWidth, related.length);
+    scrollCarousel(0, window.innerWidth, relatedProductsOld.length);
   }, []);
 
   return (
