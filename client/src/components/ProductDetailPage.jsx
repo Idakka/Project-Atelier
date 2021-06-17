@@ -17,6 +17,7 @@ class ProductDetailPage extends React.Component {
     this.state = {
       // Product Information
       currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
+      relatedProducts: [],
       products: {
         // productId: { ... },
       },
@@ -36,11 +37,6 @@ class ProductDetailPage extends React.Component {
       .then(response => response.data)
       .then(productInformation => {
         updatedProducts[this.state.currentProductId] = productInformation;
-        this.setState({
-          products: updatedProducts
-        }, () => {
-          console.log('updated main product');
-        });
         return axios.get(`/products/related?ids=${productInformation.related.join(',')}`);
       })
       .then(response => response.data)
@@ -49,8 +45,10 @@ class ProductDetailPage extends React.Component {
           updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
-          products: updatedProducts
+          products: updatedProducts,
+          relatedProducts: updatedProducts[this.state.currentProductId].related
         }, () => {
+          console.log('updated main product');
           console.log('updated related products');
           console.timeEnd('mounted => fetched');
         });
