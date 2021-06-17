@@ -8,7 +8,7 @@ const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, re
       className="related-items-and-outfit"
       data-testid="related-items-and-outfit"
     >
-      <section id="related-items">
+      <section id="related-items" aria-labelledby="related-header">
         {/* The Carousel will need to refactor its inputs to accommodate the correct set of data */}
         {/* It will take in a list of objects from top level state, e.g. iterate through related */}
         {/* and populate an array of those objects that the Carousel/Card can then use. */}
@@ -20,7 +20,7 @@ const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, re
           carouselType={'related'}
         />
       </section>
-      <section id="your-outfit">
+      <section id="your-outfit" aria-labelledby="outfit-header">
         <Carousel
           product={productInfo}
           styles={productStyles}
