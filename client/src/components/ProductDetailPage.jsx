@@ -30,7 +30,36 @@ class ProductDetailPage extends React.Component {
 
   componentDidMount() {
     // set currentProductId based on URL or default
-    // make axios call to server to get product information and update this.state.products
+    this.setState({
+      currentProductId: 22126,
+    }, () => {
+      const updatedProducts = { ...this.state.products };
+      fetch(`/products/${this.state.currentProductId}/current`)
+        .then(response => response.json())
+        .then(productInformation => {
+          updatedProducts[this.state.currentProductId] = productInformation;
+          this.setState({
+            products: updatedProducts
+          }, () => {
+            console.log('updated main product')
+          })
+          fetch(`/products/related?ids=${productInformation.related.join(',')}`)
+            .then(response => response.json())
+            .then(relatedProductsInformation => {
+              for (const product in relatedProductsInformation) {
+                updatedProducts[product] = relatedProductsInformation[product]
+              }
+              this.setState({
+                products: updatedProducts
+              }, () => {
+                console.log('updated related products');
+              });
+            });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    });
     // make axios calls for all related products and update this.state.products
   }
 
