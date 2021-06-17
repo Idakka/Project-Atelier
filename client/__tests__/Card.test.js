@@ -31,7 +31,7 @@ const cardInformation = {
     }
   ],
   'rating': 3.142857142857143,
-  'style': {
+  'defaultStyle': {
     'style_id': 123167,
     'name': 'White & White',
     'original_price': '99.00',
@@ -133,11 +133,14 @@ const cardInformation = {
 };
 
 const cardInformationWithSale = JSON.parse(JSON.stringify(cardInformation));
-cardInformationWithSale.style['sale_price'] = '50.00';
+cardInformationWithSale.defaultStyle['sale_price'] = '50.00';
 
 describe('Related items Cards', () => {
   beforeEach(() => {
-    render(<Card product={cardInformation} cardType="related" />);
+    render(<Card
+      product={cardInformation}
+      cardType="related"
+    />);
   });
 
   afterEach(() => {
