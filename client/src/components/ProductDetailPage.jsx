@@ -29,6 +29,7 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
+    console.time('mounted => fetched')
     // set currentProductId based on URL or default
     this.setState({
       currentProductId: 22126,
@@ -53,6 +54,7 @@ class ProductDetailPage extends React.Component {
                 products: updatedProducts
               }, () => {
                 console.log('updated related products');
+                console.timeEnd('mounted => fetched')
               });
             });
         })
