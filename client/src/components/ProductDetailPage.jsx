@@ -29,7 +29,7 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    console.time('mounted => fetched')
+    console.time('mounted => fetched');
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
     axios.get(`/products/${this.state.currentProductId}/current`)
@@ -39,20 +39,20 @@ class ProductDetailPage extends React.Component {
         this.setState({
           products: updatedProducts
         }, () => {
-          console.log('updated main product')
-        })
-        return axios.get(`/products/related?ids=${productInformation.related.join(',')}`)
+          console.log('updated main product');
+        });
+        return axios.get(`/products/related?ids=${productInformation.related.join(',')}`);
       })
       .then(response => response.data)
       .then(relatedProductsInformation => {
         for (const product in relatedProductsInformation) {
-          updatedProducts[product] = relatedProductsInformation[product]
+          updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
           products: updatedProducts
         }, () => {
           console.log('updated related products');
-          console.timeEnd('mounted => fetched')
+          console.timeEnd('mounted => fetched');
         });
       })
       .catch(err => {
