@@ -32,7 +32,7 @@ class ProductDetailPage extends React.Component {
     console.time('mounted => fetched')
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
-    fetch(`/products/${this.state.currentProductId}/current`)
+    axios.get(`/products/${this.state.currentProductId}/current`)
       .then(response => response.json())
       .then(productInformation => {
         updatedProducts[this.state.currentProductId] = productInformation;
@@ -41,7 +41,7 @@ class ProductDetailPage extends React.Component {
         }, () => {
           console.log('updated main product')
         })
-        return fetch(`/products/related?ids=${productInformation.related.join(',')}`)
+        return axios.get(`/products/related?ids=${productInformation.related.join(',')}`)
       })
       .then(response => response.json())
       .then(relatedProductsInformation => {
