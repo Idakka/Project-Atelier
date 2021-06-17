@@ -85,15 +85,16 @@ const getRelatedProductsBundle = (relatedProducts, headers) => {
   for (let i = 0; i < relatedProducts.length; i++) {
     const relatedProduct = {};
     const relatedProductCalls = [
+      getProductInfo(relatedProducts[i], headers),
       getProductStyles(relatedProducts[i], headers),
       getProductReviewsMeta(relatedProducts[i], headers)
     ];
     allRelatedProductCalls.push(Promise.all(relatedProductCalls)
       .then(responses => {
-        console.log(responses);
         return {
-          styles: [ ...responses[0] ],
-          reviewsMeta: { ...responses[1] },
+          ...responses[0],
+          styles: [ ...responses[1] ],
+          reviewsMeta: { ...responses[2] },
         };
       })
     );
