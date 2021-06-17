@@ -33,7 +33,7 @@ class ProductDetailPage extends React.Component {
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
     axios.get(`/products/${this.state.currentProductId}/current`)
-      .then(response => response.json())
+      .then(response => response.data)
       .then(productInformation => {
         updatedProducts[this.state.currentProductId] = productInformation;
         this.setState({
@@ -43,7 +43,7 @@ class ProductDetailPage extends React.Component {
         })
         return axios.get(`/products/related?ids=${productInformation.related.join(',')}`)
       })
-      .then(response => response.json())
+      .then(response => response.data)
       .then(relatedProductsInformation => {
         for (const product in relatedProductsInformation) {
           updatedProducts[product] = relatedProductsInformation[product]
