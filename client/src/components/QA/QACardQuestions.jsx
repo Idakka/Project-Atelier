@@ -36,7 +36,7 @@ const QACardQuestions = ({ questions, productName }) => {
   };
 
   return (
-    <div datatest-id="qa-questions">
+    <div data-testid="qa-questions">
       <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           onChange={() => {

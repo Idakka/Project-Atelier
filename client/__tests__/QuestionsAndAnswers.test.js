@@ -13,7 +13,10 @@ import axios from 'axios';
 
 beforeEach(() => {
   render(<QuestionsAndAnswers productName={productInfoMock.name} questions={questionsMock.results}/>,
-    <QACardQuestions productName={productInfoMock.name} questions={questionsMock.results}/>
+    <QACardQuestions productName={productInfoMock.name} questions={questionsMock.results}/>,
+    console.log('sample', questionsMock.results[0].answers)
+
+    // <QACardAnswers />
 
     );
   // console.log('questions', questionsMock.results[0]);
@@ -57,20 +60,19 @@ test('Questions array should be longer than 1 ', () => {
 });
 
 // QA Card Question
-xtest('Should render QACardQuestions component', () => {
-  var questions = questionsMock.results;
-  var productName = productInfoMock.name;
-
-  expect(screen.getByTestId('qa-card-sample')).toBeInTheDocument();
+test('Should render QACardQuestions component', () => {
+  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
 });
 
 // QA Card Answers
-xtest('Should render QACardAnswers component', () => {
-  expect(screen.getByTestId('qa-div-card-answers')).toBeInTheDocument();
+test('Should render QACardAnswers component', () => {
+
+  expect(screen.getByText('qa-card-sample')).toBeInTheDocument();
+
 });
 
 // QA Add Answer Modal
 xtest('Should render QAAddAnswer component', () => {
-  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
+  expect(screen.getByTestId('qa-show-answers')).toBeInTheDocument();
 });
 
