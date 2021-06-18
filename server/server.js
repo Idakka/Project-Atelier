@@ -112,8 +112,8 @@ app.get('/products/:product_id/card-info', (req, res) => {
     .catch(err => res.end(JSON.stringify(err)));
 });
 
-app.get('/products/:product_id/current', (req, res) => {
-  atelierQueries.getCurrentProductBundle(req.params.product_id, atelierHeaders)
+app.get('/products/current', (req, res) => {
+  atelierQueries.getCurrentProductBundle(req.query.id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
