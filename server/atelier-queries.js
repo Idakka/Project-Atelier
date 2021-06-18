@@ -111,8 +111,11 @@ const getRelatedProductsBundle = (relatedProducts, headers) => {
 };
 
 module.exports = {
+  // Multi-purpose functions
   getCurrentProductBundle,
   getRelatedProductsBundle,
+  // Single-purpose functions
+  getProductQuestions,
   getProductReviews,
   getProductReviewsMeta,
 };

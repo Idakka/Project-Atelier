@@ -153,4 +153,14 @@ app.get('/reviews/meta', (req, res) => {
     });
 });
 
+app.get('/questions', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductQuestions(productId, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
