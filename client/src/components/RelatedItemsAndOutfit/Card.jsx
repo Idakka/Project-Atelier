@@ -3,16 +3,16 @@ import StarReview from '../StarReview.jsx';
 
 import axios from 'axios';
 
-const Card = ({ product, cardType }) => {
+const Card = ({ product, cardType, onAction }) => {
   return (
     <div className="card product" data-testid={`card--${cardType}`}>
       <div className="product__picture">
         <img src={product.defaultStyle.photos[0].url} alt={product.name} />
         {cardType === 'related' && (
-          <span className="material-icons star">star_outline</span>
+          <span className="material-icons star" onClick={() => onAction()}>star_outline</span>
         )}
         {cardType === 'outfit' && (
-          <span className="material-icons remove">highlight_off</span>
+          <span className="material-icons remove" onClick={() => onAction('remove', product.id)}>highlight_off</span>
         )}
       </div>
       <div className="product__details">

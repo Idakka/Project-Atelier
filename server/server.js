@@ -70,6 +70,11 @@ app.get('/products/current', (req, res) => {
 // .../products/related?ids=12345,23456,34567
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');
+  // If there is nothing in the query param 'ids', send back empty array
+  if (relatedProducts[0] === '') {
+    res.end(JSON.stringify([]));
+    return;
+  }
   atelierQueries.getRelatedProductsBundle(relatedProducts, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
