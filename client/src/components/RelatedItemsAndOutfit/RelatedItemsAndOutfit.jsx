@@ -9,9 +9,6 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
       data-testid="related-items-and-outfit"
     >
       <section id="related-items" aria-labelledby="related-header">
-        {/* The Carousel will need to refactor its inputs to accommodate the correct set of data */}
-        {/* It will take in a list of objects from top level state, e.g. iterate through related */}
-        {/* and populate an array of those objects that the Carousel/Card can then use. */}
         <Carousel
           product={product}
           relatedProducts={relatedProducts}
