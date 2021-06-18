@@ -8,8 +8,8 @@ describe('Related Items Carousel', () => {
   beforeEach(() => {
     render(
       <Carousel
-        product={currentProductMock}
-        relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
+        currentProduct={currentProductMock}
+        products={currentProductMock.related.map(relId => relatedProductsMock[relId])}
         carouselType={'related'}
       />
     );
@@ -34,8 +34,8 @@ describe('Outfit Carousel', () => {
   beforeEach(() => {
     render(
       <Carousel
-        product={currentProductMock}
-        relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
+        currentProduct={currentProductMock}
+        products={currentProductMock.related.map(relId => relatedProductsMock[relId])}
         carouselType={'outfit'}
       />
     );
