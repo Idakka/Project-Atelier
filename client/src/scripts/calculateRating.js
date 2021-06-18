@@ -1,13 +1,15 @@
 const calculateRating = function(ratings) {
-  let ratingCount = 0;
-  let ratingTally = 0;
-  for (let i = 1; i <= 5; i++) {
-    if (ratings[i]) {
-      ratingCount += Number.parseInt(ratings[i]);
-      ratingTally += Number.parseInt(ratings[i]) * i;
+  let totalRatingCount = 0;
+  let totalRatingTally = 0;
+  for (let currentRatingValue = 1; currentRatingValue <= 5; currentRatingValue++) {
+    const currentRatingCount = Number(ratings[currentRatingValue]);
+    // If no ratings at currentRatingValue, continue to next ratingValue
+    if (currentRatingCount) {
+      totalRatingCount += currentRatingCount;
+      totalRatingTally += currentRatingCount * currentRatingValue;
     }
   }
-  return (ratingTally / parseFloat(ratingCount)).toFixed(1);
+  return (totalRatingTally / totalRatingCount);
 };
 
 export default calculateRating;
