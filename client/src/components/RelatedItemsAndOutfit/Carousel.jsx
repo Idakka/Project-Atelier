@@ -58,7 +58,7 @@ const Carousel = ({ product, relatedProducts, carouselType }) => {
 
   return (
     <React.Fragment>
-      <h3 className="carousel__title">{carouselType === 'related' ? 'Related Items' : 'Your Outfit'}</h3>
+      <h3 className="carousel__title" id={`${carouselType}-header`}>{carouselType === 'related' ? 'Related Items' : 'Your Outfit'}</h3>
       <div className="carousel__wrapper">
         <div
           className="carousel__edge carousel__edge--left"

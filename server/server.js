@@ -56,64 +56,10 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   //   .catch(err => console.log('err', err));
 });
 
-app.get('/products/:product_id/related', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/related`, atelierHeaders)
-    .then(response => response.data)
-    .then(relatedItems => {
-      const promises = [];
-      relatedItems.forEach((item) => {
-        promises.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${item}`, atelierHeaders));
-      });
-      return Promise.all(promises);
-    })
-    .then(items => {
-      const itemsData = [];
-      items.forEach(item => {
-        itemsData.push(item.data);
-      });
-      res.end(JSON.stringify(itemsData));
-    })
-    .catch(err => res.end(JSON.stringify(err)));
-});
-
-// qqq delete when better API route for current product is completed
-app.get('/products/:product_id/card-info', (req, res) => {
-  let rating = 0;
-  let pictureURL = '';
-  let originalPrice = 0;
-  let salePrice = 0;
-
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.product_id}&count=100`, atelierHeaders)
-    .then(response => response.data)
-    .then(reviews => (reviews.results.reduce((acc, review) => acc + review.rating, 0) / reviews.results.length))
-    .then(averageRating => {
-      // If no ratings exist, at least let it be a number
-      rating = averageRating || 0;
-    })
-    .then(_ => axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.product_id}/styles`, atelierHeaders))
-    .then(response => response.data)
-    .then(styles => styles.results.filter(style => style['default?'])[0] || styles.results[0])
-    .then(defaultStyle => {
-      pictureURL = defaultStyle.photos[0].url;
-      originalPrice = defaultStyle.original_price;
-      salePrice = defaultStyle.sale_price;
-      return;
-    })
-    .then(_ => {
-      const output = {
-        'product_id': req.params.product_id,
-        rating,
-        pictureURL,
-        originalPrice,
-        salePrice
-      };
-      res.end(JSON.stringify(output));
-    })
-    .catch(err => res.end(JSON.stringify(err)));
-});
-
-app.get('/products/:product_id/current', (req, res) => {
-  atelierQueries.getCurrentProductBundle(req.params.product_id, atelierHeaders)
+// Top level state queries
+// .../products/current?id=12345
+app.get('/products/current', (req, res) => {
+  atelierQueries.getCurrentProductBundle(req.query.id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
@@ -121,9 +67,44 @@ app.get('/products/:product_id/current', (req, res) => {
     });
 });
 
+// .../products/related?ids=12345,23456,34567
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');
   atelierQueries.getRelatedProductsBundle(relatedProducts, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+// Specific and smaller queries
+// .../reviews?id=12345
+app.get('/reviews', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductReviews(productId, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+// .../reviews/meta?id=12345
+app.get('/reviews/meta', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+// .../questions?id=12345
+app.get('/questions', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
