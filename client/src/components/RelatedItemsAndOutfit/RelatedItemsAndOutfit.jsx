@@ -10,15 +10,14 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
     >
       <section id="related-items" aria-labelledby="related-header">
         <Carousel
-          product={product}
-          relatedProducts={relatedProducts}
+          currentProduct={product}
+          products={relatedProducts}
           carouselType={'related'}
         />
       </section>
       <section id="your-outfit" aria-labelledby="outfit-header">
         <Carousel
-          product={product}
-          relatedProducts={relatedProducts}
+          products={relatedProducts}
           carouselType={'outfit'}
         />
       </section>
