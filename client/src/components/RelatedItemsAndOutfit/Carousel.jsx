@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
+import AddToOutfitCard from './AddToOutfitCard.jsx';
 import calculateRating from '../../scripts/calculateRating';
 
-const Carousel = ({ currentProduct = {}, products, carouselType, onAction }) => {
+const Carousel = ({ currentProduct, products, carouselType, onAction }) => {
   const [productCards, setProductCards] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -71,6 +72,12 @@ const Carousel = ({ currentProduct = {}, products, carouselType, onAction }) => 
           style={{ left: String(scrollPosition * -272) + 'px' }}
           data-testid={`carousel--${carouselType}`}
         >
+          {carouselType === 'outfit' && (
+            <AddToOutfitCard
+              currentProduct={currentProduct}
+              onAction={onAction}
+            />
+          )}
           {productCards.map((productCard, index) => (
             <Card
               key={index}

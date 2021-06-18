@@ -571,6 +571,7 @@ h1{
   display: grid;
   gap: 32px;
   grid-auto-flow: column;
+  justify-content: flex-start;
   position: relative;
   transition: left .5s;
 }
@@ -611,7 +612,21 @@ h1{
   color: var(--black);
   display: grid;
   max-width: 100%;
+  min-height: 380px;
   width: 240px;
+}
+.card--add-to-outfit {
+  align-items: center;
+  background-color: var(--white);
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.card--add-to-outfit > span {
+  font-size: 10rem;
+}
+.card--add-to-outfit > .product__name {
 }
 .card.product {
   border: 1px solid var(--black);

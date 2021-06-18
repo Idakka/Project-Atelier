@@ -20,6 +20,7 @@ const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }
       <section id="your-outfit" aria-labelledby="outfit-header">
         <h3 className="carousel__title" id="outfit-header">Your Outfit</h3>
         <Carousel
+          currentProduct={product}
           products={outfitProducts}
           carouselType={'outfit'}
           onAction={(changeType, productId) => top.onOutfitChange(changeType, productId)}
