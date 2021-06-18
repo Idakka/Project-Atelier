@@ -112,5 +112,7 @@ const getRelatedProductsBundle = (relatedProducts, headers) => {
 
 module.exports = {
   getCurrentProductBundle,
-  getRelatedProductsBundle
+  getRelatedProductsBundle,
+  getProductReviews,
+  getProductReviewsMeta,
 };

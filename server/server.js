@@ -112,6 +112,7 @@ app.get('/products/:product_id/card-info', (req, res) => {
     .catch(err => res.end(JSON.stringify(err)));
 });
 
+// Top level state queries
 app.get('/products/current', (req, res) => {
   atelierQueries.getCurrentProductBundle(req.query.id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
@@ -124,6 +125,27 @@ app.get('/products/current', (req, res) => {
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');
   atelierQueries.getRelatedProductsBundle(relatedProducts, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+// Specific and smaller queries
+app.get('/reviews', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductReviews(productId, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+app.get('/reviews/meta', (req, res) => {
+  const productId = req.query.id;
+  atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
