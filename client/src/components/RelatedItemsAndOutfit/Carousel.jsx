@@ -62,7 +62,11 @@ const Carousel = ({ product, relatedProducts, carouselType }) => {
       <div className="carousel__wrapper">
         <div
           className="carousel__edge carousel__edge--left"
-          style={{visibility: canScrollLeft ? 'visible' : 'hidden', opacity: canScrollLeft ? 1 : 0}}
+          style={{
+            visibility: canScrollLeft ? 'visible' : 'hidden',
+            opacity: canScrollLeft ? 1 : 0,
+            pointerEvents: canScrollLeft ? 'auto' : 'none'
+          }}
         >
           <span
             className="material-icons"
@@ -88,7 +92,11 @@ const Carousel = ({ product, relatedProducts, carouselType }) => {
         </div>
         <div
           className="carousel__edge carousel__edge--right"
-          style={{visibility: canScrollRight ? 'visible' : 'hidden', opacity: canScrollRight ? 1 : 0}}
+          style={{
+            visibility: canScrollRight ? 'visible' : 'hidden',
+            opacity: canScrollRight ? 1 : 0,
+            pointerEvents: canScrollRight ? 'auto' : 'none'
+          }}
         >
           <span
             className="material-icons"
