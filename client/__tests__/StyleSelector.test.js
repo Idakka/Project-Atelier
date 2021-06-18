@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import StyleSelector from '../src/components/StyleSelector.jsx';
+import StyleSelector from '../src/components/Overview/StyleSelector.jsx';
 
 beforeEach(() => {
   render(<StyleSelector />);
