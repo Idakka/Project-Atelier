@@ -21,7 +21,7 @@ class ProductDetailPage extends React.Component {
       products: {
         // productId: { ... },
       },
-      yourOutfit: JSON.parse(localStorage.getItem('atelier-your-outfit')) || [],
+      yourOutfit: [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
@@ -34,6 +34,8 @@ class ProductDetailPage extends React.Component {
     console.time('mounted => fetched');
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
+    localStorage.removeItem('atelier-your-outfit');
+    const yourOutfit = localStorage.getItem('atelier-your-outfit') || [22127];
     console.time('fetched current product');
     axios.get(`/products/current?id=${this.state.currentProductId}`)
       .then(response => response.data)
@@ -59,16 +61,16 @@ class ProductDetailPage extends React.Component {
           console.timeEnd('fetched related products');
         });
         console.time('fetched your outfit products');
-        return axios.get(`/products/related?ids=${this.state.yourOutfit.join(',')}`);
+        return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
       })
       .then(response => response.data)
       .then(outfitProducts => {
-        console.log(outfitProducts);
         for (const product in outfitProducts) {
           updatedProducts[product] = outfitProducts[product];
         }
         this.setState({
           products: updatedProducts,
+          yourOutfit: yourOutfit,
         }, () => {
           console.timeEnd('fetched your outfit products');
         });
@@ -86,11 +88,10 @@ class ProductDetailPage extends React.Component {
     } else { // if it is remove
       updatedOutfit = updatedOutfit.filter(existingProductId => existingProductId !== productId);
     }
-    updatedOutfit = [ ...new Set(this.state.yourOutfit) ];
     this.setState({
-      yourOutfit: updatedOutfit
+      yourOutfit: [ ...new Set(updatedOutfit) ]
     }, () => {
-      localStorage.setItem('atelier-your-outfit', JSON.stringify(updatedOutfit));
+      localStorage.setItem('atelier-your-outfit', JSON.stringify(this.state.yourOutfit));
     });
   }
 
