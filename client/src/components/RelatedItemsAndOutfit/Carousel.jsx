@@ -49,56 +49,53 @@ const Carousel = ({ currentProduct = {}, products, carouselType }) => {
   }, [products]);
 
   return (
-    <React.Fragment>
-      <h3 className="carousel__title" id={`${carouselType}-header`}>{carouselType === 'related' ? 'Related Items' : 'Your Outfit'}</h3>
-      <div className="carousel__wrapper">
-        <div
-          className="carousel__edge carousel__edge--left"
-          style={{
-            visibility: canScrollLeft ? 'visible' : 'hidden',
-            opacity: canScrollLeft ? 1 : 0,
-            pointerEvents: canScrollLeft ? 'auto' : 'none'
-          }}
+    <div className="carousel__wrapper">
+      <div
+        className="carousel__edge carousel__edge--left"
+        style={{
+          visibility: canScrollLeft ? 'visible' : 'hidden',
+          opacity: canScrollLeft ? 1 : 0,
+          pointerEvents: canScrollLeft ? 'auto' : 'none'
+        }}
+      >
+        <span
+          className="material-icons"
+          onClick={() => scrollCarousel(-1, slideWrapperRef.current.clientWidth)}
         >
-          <span
-            className="material-icons"
-            onClick={() => scrollCarousel(-1, slideWrapperRef.current.clientWidth)}
-          >
-            arrow_backward
-          </span>
-        </div>
-        <div ref={slideWrapperRef} className="carousel__slide-wrapper">
-          <div
-            className="carousel"
-            style={{ left: String(scrollPosition * -272) + 'px' }}
-            data-testid={`carousel--${carouselType}`}
-          >
-            {productCards.map((productCard, index) => (
-              <Card
-                key={index}
-                product={productCard}
-                cardType={carouselType}
-              />
-            ))}
-          </div>
-        </div>
+          arrow_backward
+        </span>
+      </div>
+      <div ref={slideWrapperRef} className="carousel__slide-wrapper">
         <div
-          className="carousel__edge carousel__edge--right"
-          style={{
-            visibility: canScrollRight ? 'visible' : 'hidden',
-            opacity: canScrollRight ? 1 : 0,
-            pointerEvents: canScrollRight ? 'auto' : 'none'
-          }}
+          className="carousel"
+          style={{ left: String(scrollPosition * -272) + 'px' }}
+          data-testid={`carousel--${carouselType}`}
         >
-          <span
-            className="material-icons"
-            onClick={() => scrollCarousel(1, slideWrapperRef.current.clientWidth)}
-          >
-            arrow_forward
-          </span>
+          {productCards.map((productCard, index) => (
+            <Card
+              key={index}
+              product={productCard}
+              cardType={carouselType}
+            />
+          ))}
         </div>
       </div>
-    </React.Fragment>
+      <div
+        className="carousel__edge carousel__edge--right"
+        style={{
+          visibility: canScrollRight ? 'visible' : 'hidden',
+          opacity: canScrollRight ? 1 : 0,
+          pointerEvents: canScrollRight ? 'auto' : 'none'
+        }}
+      >
+        <span
+          className="material-icons"
+          onClick={() => scrollCarousel(1, slideWrapperRef.current.clientWidth)}
+        >
+          arrow_forward
+        </span>
+      </div>
+    </div>
   );
 };
 
