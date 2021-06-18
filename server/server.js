@@ -113,6 +113,7 @@ app.get('/products/:product_id/card-info', (req, res) => {
 });
 
 // Top level state queries
+// .../products/current?id=12345
 app.get('/products/current', (req, res) => {
   atelierQueries.getCurrentProductBundle(req.query.id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
@@ -122,6 +123,7 @@ app.get('/products/current', (req, res) => {
     });
 });
 
+// .../products/related?ids=12345,23456,34567
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');
   atelierQueries.getRelatedProductsBundle(relatedProducts, atelierHeaders)
@@ -133,6 +135,7 @@ app.get('/products/related', (req, res) => {
 });
 
 // Specific and smaller queries
+// .../reviews?id=12345
 app.get('/reviews', (req, res) => {
   const productId = req.query.id;
   atelierQueries.getProductReviews(productId, atelierHeaders)
@@ -143,6 +146,7 @@ app.get('/reviews', (req, res) => {
     });
 });
 
+// .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
   const productId = req.query.id;
   atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
@@ -153,6 +157,7 @@ app.get('/reviews/meta', (req, res) => {
     });
 });
 
+// .../questions?id=12345
 app.get('/questions', (req, res) => {
   const productId = req.query.id;
   atelierQueries.getProductQuestions(productId, atelierHeaders)
