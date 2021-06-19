@@ -67,9 +67,5 @@ test('Should render Add Answer Modal ', () => {
   expect(screen.getByTestId('qa-more')).toBeInTheDocument();
 });
 
-// QA Add Answer Modal
-xtest('Should render QAAddAnswer component', () => {
-  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
-});
 
 
