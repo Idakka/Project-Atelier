@@ -622,6 +622,7 @@ h1{
   z-index: 0;
 }
 .product__picture {
+  border-bottom: 1px solid black;
   height: 280px;
   max-width: 240px;
   overflow: hidden;
