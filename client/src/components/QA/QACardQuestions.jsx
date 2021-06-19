@@ -3,7 +3,7 @@ import QACardAnswers from './QACardAnswers.jsx';
 import QAAddAnswerModal from './QAAddAnswerModal.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
-const QACardQuestions = ({ questions, productName }) => {
+const QACardQuestions = ({ questionsInfo, productName }) => {
 
   const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
 
@@ -15,11 +15,11 @@ const QACardQuestions = ({ questions, productName }) => {
   const [length, setLength] = useState(4);
 
   // useEffect(() => {
-  //   axios.get('/qa/questions/:question_id/answers')
-  //     .then(response => {
-  //       setAnswers(response.data);
-  //     })
-  //     .catch(err => err);
+  // axios.get('/qa/questions/:question_id/answers')
+  //   .then(response => {
+  //     setAnswers(response.data);
+  //   })
+  //   .catch(err => err);
   // }, []);
 
   const increaseCount = () => {
@@ -49,8 +49,8 @@ const QACardQuestions = ({ questions, productName }) => {
         }}>Search</button>
       </form>
 
-      <div data-test-id="qa-scroll" id="qa-scroll">
-        {questions.slice(0, length).filter((item) => item.question_body.includes(word)).map((question, index) => (
+      <div data-testid="qa-scroll" id="qa-scroll">
+        {questionsInfo.slice(0, length).filter((item) => item.question_body.includes(word)).map((question, index) => (
           <div key={index}>
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}

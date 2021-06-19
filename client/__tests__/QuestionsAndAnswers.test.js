@@ -7,23 +7,15 @@ import QACardAnswers from '../src/components/QA/QACardAnswers.jsx';
 import QAAddAnswerModal from '../src/components/QA/QAAddAnswerModal.jsx';
 import QAAddQuestionModal from '../src/components/QA/QAAddQuestionModal.jsx';
 import { productInfoMock } from '../src/mockData/productInfoMock.js';
-import { questionsMock } from '../src/mockData/questionsMock.js';
+import { questionsMock, answersMock } from '../src/mockData/questionsMock.js';
 import axios from 'axios';
 
 
 beforeEach(() => {
-  render(<QuestionsAndAnswers productName={productInfoMock.name} questions={questionsMock.results}/>,
-    <QACardQuestions productName={productInfoMock.name} questions={questionsMock.results}/>,
-    console.log('sample', questionsMock.results[0].answers)
+  render(<QuestionsAndAnswers productInfo={productInfoMock} questionsInfo={questionsMock}/>,
+    <QACardQuestions productInfo={productInfoMock} questionsInfo={questionsMock}/>, <QACardAnswers />
 
-    // <QACardAnswers />
-
-    );
-  // console.log('questions', questionsMock.results[0]);
-  // console.log('answers', questionsMock.results[0].answers);
-  // console.log('product', productInfoMock.name);
-
-  // render(<QACardAnswers />);
+  );
   // axios.get('/qa/questions/')
   //   .then(response => response)
   //   .catch(err => err);
@@ -45,34 +37,39 @@ test('Should render Search Bar', () => {
   expect(screen.getByTestId('search')).toBeInTheDocument();
 });
 
+// QA Card Questions
+test('Should render questions component ', () => {
+  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
+});
+
 test('Should render search questions', () => {
   expect(screen.getByTestId('qa-searchbar')).toBeInTheDocument();
+});
+
+test('Should contain scrollable questions ', () => {
+  expect(screen.getByTestId('qa-scroll')).toBeInTheDocument();
 });
 
 test('Should render buttons to "More Answered Questions" and "Add Question" ', () => {
   expect(screen.getByTestId('qa-footer-buttons')).toBeInTheDocument();
 });
 
-test('Questions array should be longer than 1 ', () => {
-  var questions = questionsMock.results;
-  expect(Array.isArray(questions)).toBe(true);
-  expect(questions.length).toBeGreaterThan(1);
-});
-
-// QA Card Question
-test('Should render QACardQuestions component', () => {
-  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
-});
-
 // QA Card Answers
 test('Should render QACardAnswers component', () => {
+  expect(screen.getAllByTestId('qa-answers-div').length).not.toBe(0);
+});
 
-  expect(screen.getByText('qa-card-sample')).toBeInTheDocument();
+test('Should render load more answers section ', () => {
+  expect(screen.getAllByTestId('qa-load-more').length).not.toBe(0);
+});
 
+test('Should render Add Answer Modal ', () => {
+  expect(screen.getByTestId('qa-more')).toBeInTheDocument();
 });
 
 // QA Add Answer Modal
 xtest('Should render QAAddAnswer component', () => {
-  expect(screen.getByTestId('qa-show-answers')).toBeInTheDocument();
+  expect(screen.getByTestId('qa-questions')).toBeInTheDocument();
 });
+
 
