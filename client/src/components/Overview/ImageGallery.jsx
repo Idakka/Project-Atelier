@@ -8,7 +8,7 @@ var ImageGallery = function({ productStyles }) {
   return (
     <div className="image-gallery-container" data-testid="image-gallery">
       <div className="image-gallery">
-        <img className="ig-main-image" src={photo} />
+        <img className="ig-main-image" alt="Main product gallery image" src={photo} />
         <ImageGalleryBackArrow />
         <ImageGalleryForwardArrow />
         <ImageGalleryThumbnailColumn />
