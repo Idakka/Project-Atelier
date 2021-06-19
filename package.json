@@ -13,7 +13,7 @@
     ]
   },
   "scripts": {
-    "start": "npx nodemon server.js",
+    "start": "npx nodemon server/server.js",
     "test": "jest --env=jsdom --watchAll",
     "testCoverage": "jest --env=jsdom --coverage",
     "test:ci": "jest --env=jsdom",
@@ -27,6 +27,7 @@
     "@babel/preset-react": "^7.13.13",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
     "eslint": "^7.27.0",

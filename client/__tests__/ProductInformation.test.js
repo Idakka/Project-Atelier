@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import ProductInformation from '../src/components/ProductInformation.jsx';
+import ProductInformation from '../src/components/Overview/ProductInformation.jsx';
 import { productInfoMock, productStylesMock } from '../src/mockData/productInfoMock.js';
 import { reviewsMetaMock } from '../src/mockData/reviewsMock.js';
 

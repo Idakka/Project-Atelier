@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Overview from './Overview.jsx';
+import Overview from './Overview/Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit/RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
@@ -17,6 +17,7 @@ class ProductDetailPage extends React.Component {
     this.state = {
       // Product Information
       currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
+      relatedProducts: [],
       products: {
         // productId: { ... },
       },
@@ -29,8 +30,39 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
+    console.time('mounted => fetched');
     // set currentProductId based on URL or default
-    // make axios call to server to get product information and update this.state.products
+    const updatedProducts = { ...this.state.products };
+    console.time('fetched current product');
+    axios.get(`/products/current?id=${this.state.currentProductId}`)
+      .then(response => response.data)
+      .then(productInformation => {
+        updatedProducts[this.state.currentProductId] = productInformation;
+        this.setState({
+          products: updatedProducts
+        }, () => {
+          console.log('updated main product');
+          console.timeEnd('fetched current product');
+        });
+        console.time('fetched related products');
+        return axios.get(`/products/related?ids=${productInformation.related.join(',')}`);
+      })
+      .then(response => response.data)
+      .then(relatedProductsInformation => {
+        for (const product in relatedProductsInformation) {
+          updatedProducts[product] = relatedProductsInformation[product];
+        }
+        this.setState({
+          relatedProducts: updatedProducts[this.state.currentProductId].related
+        }, () => {
+          console.timeEnd('fetched related products');
+          console.log('updated related products');
+          console.timeEnd('mounted => fetched');
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
     // make axios calls for all related products and update this.state.products
   }
 
@@ -65,10 +97,8 @@ class ProductDetailPage extends React.Component {
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit
-          productInfo={productInfoMock}
-          productStyles={productStylesMock}
-          relatedProducts={relatedProductsMock}
-          reviewsMeta={reviewsMetaMock}
+          product={this.state.products[this.state.currentProductId]}
+          relatedProducts={this.state.relatedProducts.map(relId => this.state.products[relId])}
         />
         <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>

@@ -15,5 +15,6 @@ module.exports = {
   ],
   rules: {
     indent: ['error', 2]
-  }
+  },
+  parser: 'babel-eslint'
 };

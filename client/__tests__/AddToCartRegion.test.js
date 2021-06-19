@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
-import AddToCartRegion from '../src/components/AddToCartRegion.jsx';
+import AddToCartRegion from '../src/components/Overview/AddToCartRegion.jsx';
 
 beforeEach(() => {
   render(<AddToCartRegion />);
