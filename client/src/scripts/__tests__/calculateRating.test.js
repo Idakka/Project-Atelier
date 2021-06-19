@@ -15,6 +15,6 @@ it('should calculate an average rating from a list of reviewMeta', () => {
 it('should not be affected by a missing rating value', () => {
   // This is missing a rating value of 1
   const reviewsMetaMockWithMissingRatingValue = reviewsMetaMock.ratings;
-  // average is 2.1428571
+  // average is 3.1428571
   expect(calculateRating(reviewsMetaMockWithMissingRatingValue)).toBeCloseTo(3.1428);
 });
