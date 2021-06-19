@@ -262,20 +262,23 @@ h1{
 }
 
 .ig-thumbnail-inner-container {
+  position: relative;
   height: 100%;
   overflow: hidden;
 }
 
-.image-gallery-thumbnail-column-up-arrow {
+.ig-thumbnail-column-up-arrow {
   position: relative;
   left: 35%;
   top: 2%;
+  z-index: 1;
 }
 
-.image-gallery-thumbnail-column-down-arrow {
+.ig-thumbnail-column-down-arrow {
   position: relative;
   left: 35%;
   bottom: 2%;
+  z-index: 1;
 }
 
 .image-gallery-thumbnail {
