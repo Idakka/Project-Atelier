@@ -17,6 +17,7 @@ class ProductDetailPage extends React.Component {
     this.state = {
       // Product Information
       currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
+      relatedProducts: [],
       products: {
         // productId: { ... },
       },
@@ -32,6 +33,7 @@ class ProductDetailPage extends React.Component {
     console.time('mounted => fetched');
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
+    console.time('fetched current product');
     axios.get(`/products/current?id=${this.state.currentProductId}`)
       .then(response => response.data)
       .then(productInformation => {
@@ -40,7 +42,9 @@ class ProductDetailPage extends React.Component {
           products: updatedProducts
         }, () => {
           console.log('updated main product');
+          console.timeEnd('fetched current product');
         });
+        console.time('fetched related products');
         return axios.get(`/products/related?ids=${productInformation.related.join(',')}`);
       })
       .then(response => response.data)
@@ -49,8 +53,9 @@ class ProductDetailPage extends React.Component {
           updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
-          products: updatedProducts
+          relatedProducts: updatedProducts[this.state.currentProductId].related
         }, () => {
+          console.timeEnd('fetched related products');
           console.log('updated related products');
           console.timeEnd('mounted => fetched');
         });
@@ -92,10 +97,8 @@ class ProductDetailPage extends React.Component {
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit
-          productInfo={productInfoMock}
-          productStyles={productStylesMock}
-          relatedProducts={relatedProductsMock}
-          reviewsMeta={reviewsMetaMock}
+          product={this.state.products[this.state.currentProductId]}
+          relatedProducts={this.state.relatedProducts.map(relId => this.state.products[relId])}
         />
         <QuestionsAndAnswers productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>

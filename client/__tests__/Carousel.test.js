@@ -1,17 +1,15 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import Carousel from '../src/components/RelatedItemsAndOutfit/Carousel';
-import { productsMock, productInfoMock, productStylesMock, relatedProductsMock } from '../src/mockData/productInfoMock.js';
-import { reviewsMock, reviewsMetaMock } from '../src/mockData/reviewsMock.js';
+import currentProductMock from '../src/mockData/serverMock/currentProductMock';
+import relatedProductsMock from '../src/mockData/serverMock/relatedProductsMock';
 
 describe('Related Items Carousel', () => {
   beforeEach(() => {
     render(
       <Carousel
-        product={productInfoMock}
-        styles={productStylesMock}
-        related={relatedProductsMock}
-        reviews={reviewsMetaMock}
+        product={currentProductMock}
+        relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
         carouselType={'related'}
       />
     );
@@ -28,7 +26,7 @@ describe('Related Items Carousel', () => {
 
   test('Should render as many Cards as there are related products', () => {
     const cardComponents = screen.getAllByTestId('card--related');
-    expect(cardComponents.length).toBe(relatedProductsMock.length);
+    expect(cardComponents.length).toBe(currentProductMock.related.length);
   });
 });
 
@@ -36,10 +34,8 @@ describe('Outfit Carousel', () => {
   beforeEach(() => {
     render(
       <Carousel
-        product={productInfoMock}
-        styles={productStylesMock}
-        related={relatedProductsMock}
-        reviews={reviewsMetaMock}
+        product={currentProductMock}
+        relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
         carouselType={'outfit'}
       />
     );

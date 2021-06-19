@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
 
-const Carousel = ({ product, styles, related, reviews, carouselType }) => {
+const Carousel = ({ product, relatedProducts, carouselType }) => {
   const [productCards, setProductCards] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -32,18 +32,18 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
     // 2. Review data
     // 3. Default style picture URL
     const createdProductCards = [];
-    related.forEach(rel => {
+    relatedProducts.forEach(rel => {
       let totalRating = 0;
       let numberOfReviews = 0;
-      for (const ratingNumber in reviews.ratings) {
-        numberOfReviews += Number(reviews.ratings[ratingNumber]);
-        totalRating += ratingNumber * Number(reviews.ratings[ratingNumber]);
+      for (const ratingNumber in rel.reviewsMeta.ratings) {
+        numberOfReviews += Number(rel.reviewsMeta.ratings[ratingNumber]);
+        totalRating += ratingNumber * Number(rel.reviewsMeta.ratings[ratingNumber]);
       }
-      const defaultStyle = styles.results.filter(style => style['default?'])[0];
+      const defaultStyle = rel.styles.filter(style => style['default?'])[0] || rel.styles[0];
       const productCardInformation = {
-        ...product,
+        ...rel,
         rating: totalRating / numberOfReviews,
-        style: defaultStyle
+        defaultStyle: defaultStyle,
       };
       createdProductCards.push(productCardInformation);
     });
@@ -53,8 +53,8 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
     // of products since setProducts is async
     // qqq Add an OR clause for when container has maxwidth and add a way for
     // the browser to adjust based on browser size
-    scrollCarousel(0, window.innerWidth, related.length);
-  }, []);
+    scrollCarousel(0, window.innerWidth, relatedProducts.length);
+  }, [relatedProducts]);
 
   return (
     <React.Fragment>
@@ -62,7 +62,11 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
       <div className="carousel__wrapper">
         <div
           className="carousel__edge carousel__edge--left"
-          style={{visibility: canScrollLeft ? 'visible' : 'hidden', opacity: canScrollLeft ? 1 : 0}}
+          style={{
+            visibility: canScrollLeft ? 'visible' : 'hidden',
+            opacity: canScrollLeft ? 1 : 0,
+            pointerEvents: canScrollLeft ? 'auto' : 'none'
+          }}
         >
           <span
             className="material-icons"
@@ -88,7 +92,11 @@ const Carousel = ({ product, styles, related, reviews, carouselType }) => {
         </div>
         <div
           className="carousel__edge carousel__edge--right"
-          style={{visibility: canScrollRight ? 'visible' : 'hidden', opacity: canScrollRight ? 1 : 0}}
+          style={{
+            visibility: canScrollRight ? 'visible' : 'hidden',
+            opacity: canScrollRight ? 1 : 0,
+            pointerEvents: canScrollRight ? 'auto' : 'none'
+          }}
         >
           <span
             className="material-icons"
