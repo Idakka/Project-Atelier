@@ -621,24 +621,6 @@ h1{
   border: 1px solid var(--black);
   z-index: 0;
 }
-.card--add-to-outfit {
-  cursor: pointer;
-}
-.card--meta > .card__contents {
-  align-items: center;
-  color: var(--black);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform: scale(1);
-  transition: all .3s ease-out;
-}
-.card--add-to-outfit > .card__contents:hover {
-  transform: scale(1.05);
-}
-.card--meta span {
-  font-size: 10rem;
-}
 .product__picture {
   height: 280px;
   max-width: 240px;
@@ -700,6 +682,29 @@ h1{
 }
 .product__price {
   font-size: .8rem;
+}
+
+/* For all cards that are essentially an icon to inform the user */
+.card--meta > .card__contents,
+.product__no-picture-provided {
+  align-items: center;
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  transform: scale(1);
+  transition: all .3s ease-out;
+}
+.card--add-to-outfit {
+  cursor: pointer;
+}
+.card--add-to-outfit > .card__contents:hover {
+  transform: scale(1.05);
+}
+.card--meta span,
+.product__no-picture-provided span {
+  font-size: 10rem;
 }
 
 /* Modal */
