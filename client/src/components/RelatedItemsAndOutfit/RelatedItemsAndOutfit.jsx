@@ -9,16 +9,17 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
       data-testid="related-items-and-outfit"
     >
       <section id="related-items" aria-labelledby="related-header">
+        <h3 className="carousel__title" id="related-header">Related Items</h3>
         <Carousel
-          product={product}
-          relatedProducts={relatedProducts}
+          currentProduct={product}
+          products={relatedProducts}
           carouselType={'related'}
         />
       </section>
       <section id="your-outfit" aria-labelledby="outfit-header">
+        <h3 className="carousel__title" id="outfit-header">Your Outfit</h3>
         <Carousel
-          product={product}
-          relatedProducts={relatedProducts}
+          products={relatedProducts}
           carouselType={'outfit'}
         />
       </section>
