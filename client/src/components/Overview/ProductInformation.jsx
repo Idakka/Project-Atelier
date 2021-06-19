@@ -1,6 +1,6 @@
 import React from 'react';
-import StarReview from './StarReview.jsx';
-import PriceLine from './PriceLine.jsx';
+import StarReview from '../StarReview.jsx';
+import PriceLine from '../PriceLine.jsx';
 
 const calculateRating = function(ratings) {
   let ratingCount = 0;

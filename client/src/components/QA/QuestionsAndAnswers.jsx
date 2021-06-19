@@ -4,11 +4,7 @@ import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
-
-// Modal.setAppElement('#app');
-if (process.env.NODE_ENV !== 'test') {
-  Modal.setAppElement('#app');
-}
+// import { questionsMock } from '../../mockData/questionsMock.js';
 
 const QuestionsAndAnswers = (props) => {
 
@@ -25,7 +21,6 @@ const QuestionsAndAnswers = (props) => {
 
   useEffect(() => {
     setProductName(props.productInfo);
-
     axios.get('/qa/questions/')
       .then(response => {
         setQuestions(response.data);
@@ -45,20 +40,20 @@ const QuestionsAndAnswers = (props) => {
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
 
-      <form id="search">
+      <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></input>
         {/* NOTE - Search button will be replaced with icon later on  */}
         <button className="qa-search-btn">Search</button>
       </form>
 
-      <div data-testid="qa"><QACardQuestions questions={questionsToShow} productName={productName}/></div>
+      <div data-testid="qa" id="qa"><QACardQuestions questions={questionsToShow} productName={productName}/></div>
 
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => {
           setQuestionsToShowLength(questionsToShowLength + 2);
           setQuestionsToShow(questions.slice(0, questionsToShowLength));
         }}>MORE ANSWERED QUESTIONS</button>
-        <div className="qa-more"><QAAddQuestionModal productName={productName}/></div>
+        <div className="qa-more" data-testid="qa-more"><QAAddQuestionModal productName={productName}/></div>
       </div>
 
       <p></p>
