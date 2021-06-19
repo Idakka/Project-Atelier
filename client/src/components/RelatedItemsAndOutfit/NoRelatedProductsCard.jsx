@@ -7,7 +7,7 @@ const NoRelatedProductsCard = ({ currentProduct, onAction }) => {
   return (
     <div
       className="card card--meta card--no-related-products"
-      data-testid={`card--no-related-products`}
+      data-testid="card--no-related-products"
     >
       <div className="card__contents">
         <span className="material-icons account_tree">account_tree</span>

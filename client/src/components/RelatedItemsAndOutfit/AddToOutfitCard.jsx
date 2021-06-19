@@ -7,7 +7,7 @@ const AddToOutfitCard = ({ currentProduct, onAction }) => {
   return (
     <div
       className="card card--meta card--add-to-outfit"
-      data-testid={`card--add-to-outfit`}
+      data-testid="card--add-to-outfit"
       onClick={() => onAction('add', currentProduct.id)}
     >
       <div className="card__contents">
