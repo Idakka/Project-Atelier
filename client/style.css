@@ -253,10 +253,17 @@ h1{
   right: 5%;
 }
 
-.image-gallery-thumbnail-column {
-  position: absolute;
+.ig-thumbnail-column {
+  position: relative;
   left: 3%;
-  top: 10%;
+  top: -100%;
+  height: 90%;
+  width: 75px;
+}
+
+.ig-thumbnail-inner-container {
+  height: 100%;
+  overflow: hidden;
 }
 
 .image-gallery-thumbnail-column-up-arrow {
