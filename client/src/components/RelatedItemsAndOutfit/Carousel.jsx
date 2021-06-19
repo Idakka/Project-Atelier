@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
+import NoRelatedProductsCard from './NoRelatedProductsCard.jsx';
 import calculateRating from '../../scripts/calculateRating';
 
 const Carousel = ({ currentProduct, products, carouselType, onAction }) => {
@@ -72,6 +73,9 @@ const Carousel = ({ currentProduct, products, carouselType, onAction }) => {
           style={{ left: String(scrollPosition * -272) + 'px' }}
           data-testid={`carousel--${carouselType}`}
         >
+          {carouselType === 'related' && products.length === 0 && (
+            <NoRelatedProductsCard />
+          )}
           {carouselType === 'outfit' && (
             <AddToOutfitCard
               currentProduct={currentProduct}

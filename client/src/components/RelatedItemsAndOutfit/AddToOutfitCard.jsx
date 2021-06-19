@@ -6,12 +6,14 @@ import axios from 'axios';
 const AddToOutfitCard = ({ currentProduct, onAction }) => {
   return (
     <div
-      className="card card--add-to-outfit product"
+      className="card card--meta card--add-to-outfit"
       data-testid={`card--add-to-outfit`}
       onClick={() => onAction('add', currentProduct.id)}
     >
-      <span className="material-icons add">add</span>
-      <p className="product__name">Add To Outfit</p>
+      <div className="card__contents">
+        <span className="material-icons post_add">post_add</span>
+        <p className="product__name">Add To Outfit</p>
+      </div>
     </div>
   );
 };

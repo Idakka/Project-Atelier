@@ -613,29 +613,36 @@ h1{
   display: grid;
   max-width: 100%;
   min-height: 380px;
+  position: relative;
   width: 240px;
 }
-.card--add-to-outfit {
-  align-items: center;
+.carousel > .card {
   background-color: var(--white);
+  border: 1px solid var(--black);
+  z-index: 0;
+}
+.card--add-to-outfit {
+  cursor: pointer;
+}
+.card--meta > .card__contents {
+  align-items: center;
   color: var(--black);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transform: scale(1);
+  transition: all .3s ease-out;
 }
-.card--add-to-outfit > span {
+.card--add-to-outfit > .card__contents:hover {
+  transform: scale(1.05);
+}
+.card--meta span {
   font-size: 10rem;
-}
-.card--add-to-outfit > .product__name {
-}
-.card.product {
-  border: 1px solid var(--black);
 }
 .product__picture {
   height: 280px;
   max-width: 240px;
   overflow: hidden;
-  position: relative;
 }
 .product__picture img {
   height: 100%;
