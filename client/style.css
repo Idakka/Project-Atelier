@@ -270,6 +270,7 @@ h1{
 .igtc-sliding-inner-div {
   position: relative;
   height: 100%;
+  transition: all 0.5s;
 }
 
 .ig-thumbnail-column-up-arrow {
