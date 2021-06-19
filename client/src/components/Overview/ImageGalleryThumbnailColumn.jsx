@@ -36,8 +36,10 @@ class ImageGalleryThumbnailColumn extends React.Component {
     return (
       <div className="ig-thumbnail-column" data-testid="ig-tc">
         <ImageGalleryThumbnailColumnUpArrow />
-          <div className="ig-thumbnail-inner-container" style={{ top: IGTC_THUMBNAIL_HEIGHT * -this.state.thumbnailPosition + "px" }}>
-            {thumbnails}
+          <div className="ig-thumbnail-inner-container">
+            <div className="igtc-sliding-inner-div"  style={{ top: IGTC_THUMBNAIL_HEIGHT * -this.state.thumbnailPosition + "px" }}>
+              {thumbnails}
+            </div>
           </div>
         <ImageGalleryThumbnailColumnDownArrow />
       </div>

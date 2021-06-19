@@ -263,8 +263,13 @@ h1{
 
 .ig-thumbnail-inner-container {
   position: relative;
-  height: 100%;
   overflow: hidden;
+  height: 100%;
+}
+
+.igtc-sliding-inner-div {
+  position: relative;
+  height: 100%;
 }
 
 .ig-thumbnail-column-up-arrow {
