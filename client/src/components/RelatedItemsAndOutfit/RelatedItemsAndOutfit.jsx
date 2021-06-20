@@ -14,7 +14,7 @@ const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }
           currentProduct={product}
           products={relatedProducts}
           carouselType={'related'}
-          onAction={() => console.log('show modal')}
+          onAction={(component) => top.showModal(component)}
         />
       </section>
       <section id="your-outfit" aria-labelledby="outfit-header">

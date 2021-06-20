@@ -17,7 +17,7 @@ const Card = ({ product, cardType, onAction }) => {
           </div>
         )}
         {cardType === 'related' && (
-          <span className="material-icons star" onClick={() => onAction()}>star_outline</span>
+          <span className="material-icons star" onClick={() => onAction(<p>Related Product Modal Comparison Placeholder</p>)}>star_outline</span>
         )}
         {cardType === 'outfit' && (
           <span className="material-icons remove" onClick={() => onAction('remove', product.id)}>highlight_off</span>
