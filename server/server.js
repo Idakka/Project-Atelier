@@ -1,6 +1,10 @@
 const axios = require('axios');
 const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
 const express = require('express');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
+
 const cors = require('cors');
 const path = require('path');
 
@@ -16,13 +20,49 @@ const atelierHeaders = {
 };
 const s3Headers = {
   headers: {
+    'AccessKeyID': process.env.S3_ACCESS_KEY_ID,
     'Authorization': process.env.S3_TOKEN
   }
 };
 
+const s3 = new AWS.S3({
+  accessKeyId: s3Headers.headers.AccessKeyID,
+  secretAccessKey: s3Headers.headers.Authorization
+});
+
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, 'uploads/');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//   }
+// });
+
+var uploadS3 = multer({
+  storage: multerS3({
+    s3: s3,
+    acl: 'public-read',
+    bucket: 'hr-nylon-eric-fec-bucket',
+    metadata: (req, file, cb) => {
+      console.log('in multer metadata function');
+      cb(null, {fieldName: file.fieldname})
+    },
+    key: (req, file, cb) => {
+      console.log('in multer key function');
+      cb(null, Date.now().toString() + '-' + file.originalname)
+    }
+  })
+});
+
 const pathname = path.join(__dirname, '..', 'public');
 app.use(express.static(pathname));
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:1234',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
 
 app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22126; // will need to be updated once product is rendering on page
@@ -117,9 +157,9 @@ app.get('/questions', (req, res) => {
     });
 });
 
-app.post('/photo-upload', (req, res) => {
-  console.log('posting photo uploads');
-  res.end('files recieved')
+app.post('/photo-upload', uploadS3.array('review-photo', 5), (req, res) => {
+  console.log('posting photo uploads', req);
+  res.redirect('/')
     .catch(error => {
       console.error(error);
       res.end(JSON.stringify(error));
