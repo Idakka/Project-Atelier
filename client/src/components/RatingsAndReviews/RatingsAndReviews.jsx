@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import calculateRating from '../../scripts/calculateRating.js';
+import ExampleModalContents from '../ExampleModalContents.jsx';
 
-const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
+const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
 
   const [_reviews, setReviews] = useState([]);
   const [reviewsLength, setReviewsLength] = useState(0);
@@ -60,11 +61,10 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
             }}>MORE REVIEWS</button>
           </div>
           <div className="review-add">
-            <input type="file" name="file" onChange={onChangeFileHandler} />
-            <button type="button" onClick={onClickUploadHandler}>Upload</button>
-            {/* <button>ADD A REVIEW +</button> */}
+            <button className="add-review-button" onClick={(event) => {
+              top.showModal(<ExampleModalContents top={top} />);
+            }}>ADD A REVIEW +</button>
           </div>
-
         </div>
       </div>
     </div>
