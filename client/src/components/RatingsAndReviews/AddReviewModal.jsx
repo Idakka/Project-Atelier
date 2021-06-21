@@ -17,7 +17,7 @@ class AddReviewModal extends React.Component {
         <h1>Example Modal Window</h1>
         <form id="review-upload-form"
           encType="multipart/form-data"
-          action="/api/photo"
+          action="/photo-upload"
           method="post">
           <input type="file" name="review-photo" multiple />
           <input type="submit" value="Upload Image" name="submit" />

@@ -117,4 +117,13 @@ app.get('/questions', (req, res) => {
     });
 });
 
+app.post('/photo-upload', (req, res) => {
+  console.log('posting photo uploads');
+  res.end('files recieved')
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
