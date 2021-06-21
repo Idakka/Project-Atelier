@@ -46,7 +46,7 @@ var uploadS3 = multer({
     acl: 'public-read',
     bucket: 'hr-nylon-eric-fec-bucket',
     metadata: (req, file, cb) => {
-      console.log('in multer metadata function', s3Headers.headers.AccessKeyID, s3Headers.headers.Authorization);
+      console.log('in multer metadata function');
       cb(null, {fieldName: file.fieldname})
     },
     key: (req, file, cb) => {
@@ -55,6 +55,8 @@ var uploadS3 = multer({
     }
   })
 });
+
+var photoUpload = uploadS3.array('review-photo', 5);
 
 const pathname = path.join(__dirname, '..', 'public');
 app.use(express.static(pathname));
@@ -158,14 +160,15 @@ app.get('/questions', (req, res) => {
     });
 });
 
-app.post('/photo-upload', uploadS3.single('review-photo'), (req, res) => {
+app.post('/photo-upload', (req, res) => {
   // send urls to review POST route
-  res.status(200).redirect('/')
-    .catch(error => {
-      console.log('error in post route');
-      console.error(error);
-      res.end(JSON.stringify(error));
-    });
+  photoUpload(req, res, (err, data) => {
+    if (err) {
+      res.status(400).end('server error uploading photos');
+    } else {
+      res.status(200).redirect('/');
+    };
+  });
 });
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
