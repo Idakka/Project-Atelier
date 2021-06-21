@@ -20,6 +20,7 @@ const atelierHeaders = {
 };
 const s3Headers = {
   headers: {
+    'S3Bucket': process.env.S3_BUCKET,
     'AccessKeyID': process.env.S3_ACCESS_KEY_ID,
     'Authorization': process.env.S3_TOKEN
   }
@@ -31,20 +32,12 @@ const s3 = new AWS.S3({
 });
 
 AWS.config.update({region: 'us-east-1'});
-// const storage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, 'uploads/');
-//   },
-//   filename: function(req, file, cb) {
-//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-//   }
-// });
 
 var uploadS3 = multer({
   storage: multerS3({
     s3: s3,
     acl: 'public-read',
-    bucket: 'hr-nylon-eric-fec-bucket',
+    bucket: s3Headers.headers.S3Bucket,
     metadata: (req, file, cb) => {
       console.log('in multer metadata function');
       cb(null, {fieldName: file.fieldname})
