@@ -30,6 +30,7 @@ const s3 = new AWS.S3({
   secretAccessKey: s3Headers.headers.Authorization
 });
 
+AWS.config.update({region: 'us-east-1'});
 // const storage = multer.diskStorage({
 //   destination: function(req, file, cb) {
 //     cb(null, 'uploads/');
@@ -45,11 +46,11 @@ var uploadS3 = multer({
     acl: 'public-read',
     bucket: 'hr-nylon-eric-fec-bucket',
     metadata: (req, file, cb) => {
-      console.log('in multer metadata function');
+      console.log('in multer metadata function', s3Headers.headers.AccessKeyID, s3Headers.headers.Authorization);
       cb(null, {fieldName: file.fieldname})
     },
     key: (req, file, cb) => {
-      console.log('in multer key function');
+      console.log('in multer key function, file.originalname:', file.originalname);
       cb(null, Date.now().toString() + '-' + file.originalname)
     }
   })
@@ -157,10 +158,11 @@ app.get('/questions', (req, res) => {
     });
 });
 
-app.post('/photo-upload', uploadS3.array('review-photo', 5), (req, res) => {
-  console.log('posting photo uploads', req);
-  res.redirect('/')
+app.post('/photo-upload', uploadS3.single('review-photo'), (req, res) => {
+  // send urls to review POST route
+  res.status(200).redirect('/')
     .catch(error => {
+      console.log('error in post route');
       console.error(error);
       res.end(JSON.stringify(error));
     });
