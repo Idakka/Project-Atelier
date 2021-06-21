@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import calculateRating from '../../scripts/calculateRating.js';
-import ExampleModalContents from '../ExampleModalContents.jsx';
+import AddReviewModal from './AddReviewModal.jsx';
 
 const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
 
@@ -62,7 +62,7 @@ const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandl
           </div>
           <div className="review-add">
             <button className="add-review-button" onClick={(event) => {
-              top.showModal(<ExampleModalContents top={top} />);
+              top.showModal(<AddReviewModal top={top} />);
             }}>ADD A REVIEW +</button>
           </div>
         </div>
