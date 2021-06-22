@@ -3,7 +3,6 @@ import ImageGalleryThumbnailColumn from './ImageGalleryThumbnailColumn.jsx';
 import ImageGalleryForwardArrow from './ImageGalleryForwardArrow.jsx';
 import ImageGalleryBackArrow from './ImageGalleryBackArrow.jsx';
 
-<<<<<<< HEAD
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
@@ -27,19 +26,6 @@ class ImageGallery extends React.Component {
           <div className="image-gallery-fullscreen-toggle">
             <span className="material-icons">fullscreen</span>
           </div>
-=======
-var ImageGallery = function({ productStyles }) {
-  let photo = productStyles.results[0].photos[0].url;
-  return (
-    <div className="image-gallery-container" data-testid="image-gallery">
-      <div className="image-gallery">
-        <img className="ig-main-image" alt="Main product gallery image" src={photo} />
-        <ImageGalleryBackArrow />
-        <ImageGalleryForwardArrow />
-        <ImageGalleryThumbnailColumn productStyles={productStyles} />
-        <div className="image-gallery-fullscreen-toggle">
-          <span className="material-icons">fullscreen</span>
->>>>>>> main
         </div>
       </div>
     );
