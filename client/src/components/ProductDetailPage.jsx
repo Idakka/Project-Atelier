@@ -75,9 +75,7 @@ class ProductDetailPage extends React.Component {
           console.timeEnd('fetched your outfit products');
         });
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => err);
     // make axios calls for all related products and update this.state.products
   }
 
