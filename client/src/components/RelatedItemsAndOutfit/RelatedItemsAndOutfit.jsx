@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 
-const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
+const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }) => {
   return (
     <div
       id="related-items-and-outfit"
@@ -14,13 +14,16 @@ const RelatedItemsAndOutfit = ({ product, relatedProducts }) => {
           currentProduct={product}
           products={relatedProducts}
           carouselType={'related'}
+          onAction={(component) => top.showModal(component)}
         />
       </section>
       <section id="your-outfit" aria-labelledby="outfit-header">
         <h3 className="carousel__title" id="outfit-header">Your Outfit</h3>
         <Carousel
-          products={relatedProducts}
+          currentProduct={product}
+          products={outfitProducts}
           carouselType={'outfit'}
+          onAction={(changeType, productId) => top.onOutfitChange(changeType, productId)}
         />
       </section>
     </div>

@@ -6,8 +6,10 @@ import relatedProductsMock from '../src/mockData/serverMock/relatedProductsMock'
 
 beforeEach(() => {
   render(<RelatedItemsAndOutfit
+    top={this}
     product={currentProductMock}
     relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
+    outfitProducts={[]}
   />);
 });
 

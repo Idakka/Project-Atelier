@@ -21,6 +21,7 @@ class ProductDetailPage extends React.Component {
       products: {
         // productId: { ... },
       },
+      yourOutfit: [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
@@ -33,6 +34,8 @@ class ProductDetailPage extends React.Component {
     console.time('mounted => fetched');
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
+    localStorage.removeItem('atelier-your-outfit');
+    const yourOutfit = localStorage.getItem('atelier-your-outfit') || [22127];
     console.time('fetched current product');
     axios.get(`/products/current?id=${this.state.currentProductId}`)
       .then(response => response.data)
@@ -41,11 +44,10 @@ class ProductDetailPage extends React.Component {
         this.setState({
           products: updatedProducts
         }, () => {
-          console.log('updated main product');
           console.timeEnd('fetched current product');
         });
         console.time('fetched related products');
-        return axios.get(`/products/related?ids=${productInformation.related.join(',')}`);
+        return axios.get(`/products/related?ids=${updatedProducts[this.state.currentProductId].related.join(',')}`);
       })
       .then(response => response.data)
       .then(relatedProductsInformation => {
@@ -53,17 +55,44 @@ class ProductDetailPage extends React.Component {
           updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
+          products: updatedProducts,
           relatedProducts: updatedProducts[this.state.currentProductId].related
         }, () => {
           console.timeEnd('fetched related products');
-          console.log('updated related products');
-          console.timeEnd('mounted => fetched');
+        });
+        console.time('fetched your outfit products');
+        return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
+      })
+      .then(response => response.data)
+      .then(outfitProducts => {
+        for (const product in outfitProducts) {
+          updatedProducts[product] = outfitProducts[product];
+        }
+        this.setState({
+          products: updatedProducts,
+          yourOutfit: yourOutfit,
+        }, () => {
+          console.timeEnd('fetched your outfit products');
         });
       })
       .catch(err => {
         console.error(err);
       });
     // make axios calls for all related products and update this.state.products
+  }
+
+  onOutfitChange(changeType, productId) {
+    let updatedOutfit = this.state.yourOutfit;
+    if (changeType === 'add') {
+      updatedOutfit = updatedOutfit.concat(productId);
+    } else { // if it is remove
+      updatedOutfit = updatedOutfit.filter(existingProductId => existingProductId !== productId);
+    }
+    this.setState({
+      yourOutfit: [ ...new Set(updatedOutfit) ]
+    }, () => {
+      localStorage.setItem('atelier-your-outfit', JSON.stringify(this.state.yourOutfit));
+    });
   }
 
   onChangeFileHandler(event) {
@@ -97,8 +126,10 @@ class ProductDetailPage extends React.Component {
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfit
+          top={this}
           product={this.state.products[this.state.currentProductId]}
-          relatedProducts={this.state.relatedProducts.map(relId => this.state.products[relId])}
+          relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
+          outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
         <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
