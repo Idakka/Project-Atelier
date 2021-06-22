@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import RelatedItemsAndOutfit from '../src/components/RelatedItemsAndOutfit/RelatedItemsAndOutfit';
-import { productsMock, productInfoMock, productStylesMock, relatedProductsMock } from '../src/mockData/productInfoMock.js';
-import { reviewsMock, reviewsMetaMock } from '../src/mockData/reviewsMock.js';
+import currentProductMock from '../src/mockData/serverMock/currentProductMock';
+import relatedProductsMock from '../src/mockData/serverMock/relatedProductsMock';
 
 beforeEach(() => {
   render(<RelatedItemsAndOutfit
-    productInfo={productInfoMock}
-    productStyles={productStylesMock}
-    relatedProducts={relatedProductsMock}
-    reviewsMeta={reviewsMetaMock}
+    top={this}
+    product={currentProductMock}
+    relatedProducts={currentProductMock.related.map(relId => relatedProductsMock[relId])}
+    outfitProducts={[]}
   />);
 });
 

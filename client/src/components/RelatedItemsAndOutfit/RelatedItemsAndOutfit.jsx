@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 
-const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, reviewsMeta }) => {
+const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }) => {
   return (
     <div
       id="related-items-and-outfit"
@@ -9,24 +9,21 @@ const RelatedItemsAndOutfit = ({ productInfo, productStyles, relatedProducts, re
       data-testid="related-items-and-outfit"
     >
       <section id="related-items" aria-labelledby="related-header">
-        {/* The Carousel will need to refactor its inputs to accommodate the correct set of data */}
-        {/* It will take in a list of objects from top level state, e.g. iterate through related */}
-        {/* and populate an array of those objects that the Carousel/Card can then use. */}
+        <h3 className="carousel__title" id="related-header">Related Items</h3>
         <Carousel
-          product={productInfo}
-          styles={productStyles}
-          related={relatedProducts}
-          reviews={reviewsMeta}
+          currentProduct={product}
+          products={relatedProducts}
           carouselType={'related'}
+          onAction={(component) => top.showModal(component)}
         />
       </section>
       <section id="your-outfit" aria-labelledby="outfit-header">
+        <h3 className="carousel__title" id="outfit-header">Your Outfit</h3>
         <Carousel
-          product={productInfo}
-          styles={productStyles}
-          related={relatedProducts}
-          reviews={reviewsMeta}
+          currentProduct={product}
+          products={outfitProducts}
           carouselType={'outfit'}
+          onAction={(changeType, productId) => top.onOutfitChange(changeType, productId)}
         />
       </section>
     </div>
