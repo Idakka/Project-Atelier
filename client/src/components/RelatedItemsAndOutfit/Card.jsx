@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import StarReview from '../StarReview.jsx';
+import Comparison from './Comparison.jsx';
 
 import axios from 'axios';
 
-const Card = ({ product, cardType, onAction }) => {
+const Card = ({ top, product, cardType, onAction }) => {
   return (
     <div className="card product" data-testid={`card--${cardType}`}>
       <div className="product__picture">
@@ -17,10 +18,20 @@ const Card = ({ product, cardType, onAction }) => {
           </div>
         )}
         {cardType === 'related' && (
-          <span className="material-icons star" onClick={() => onAction(<p>Related Product Modal Comparison Placeholder</p>)}>star_outline</span>
+          <span
+            className="material-icons star"
+            onClick={() => onAction(<Comparison top={top} />)}
+          >
+            star_outline
+          </span>
         )}
         {cardType === 'outfit' && (
-          <span className="material-icons remove" onClick={() => onAction('remove', product.id)}>highlight_off</span>
+          <span
+            className="material-icons remove"
+            onClick={() => onAction('remove', product.id)}
+          >
+            highlight_off
+          </span>
         )}
       </div>
       <div className="product__details">

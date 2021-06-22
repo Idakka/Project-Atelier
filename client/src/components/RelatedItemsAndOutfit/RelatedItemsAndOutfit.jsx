@@ -11,6 +11,7 @@ const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }
       <section id="related-items" aria-labelledby="related-header">
         <h3 className="carousel__title" id="related-header">Related Items</h3>
         <Carousel
+          top={top}
           currentProduct={product}
           products={relatedProducts}
           carouselType={'related'}
@@ -20,6 +21,7 @@ const RelatedItemsAndOutfit = ({ top, product, relatedProducts, outfitProducts }
       <section id="your-outfit" aria-labelledby="outfit-header">
         <h3 className="carousel__title" id="outfit-header">Your Outfit</h3>
         <Carousel
+          top={top}
           currentProduct={product}
           products={outfitProducts}
           carouselType={'outfit'}
