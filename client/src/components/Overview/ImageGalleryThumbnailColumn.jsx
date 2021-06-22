@@ -8,7 +8,7 @@ const IGTC_THUMBNAIL_HEIGHT = 75;
 class ImageGalleryThumbnailColumn extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { thumbnailPosition: 0 }
+    this.state = { thumbnailPosition: 0 };
   }
 
   componentDidMount() {
@@ -27,18 +27,20 @@ class ImageGalleryThumbnailColumn extends React.Component {
   }
 
   render() {
+    let index = 0;
     let thumbnails = this.props.productStyles.results[0].photos.map((style) => {
-      return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} />
+      index += 1;
+      return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index - 1} gallery={this.props.gallery} />
     });
 
     return (
       <div className="ig-thumbnail-column" data-testid="ig-tc">
         <ImageGalleryThumbnailColumnUpArrow />
-          <div className="ig-thumbnail-inner-container">
-            <div className="igtc-sliding-inner-div"  style={{ top: IGTC_THUMBNAIL_HEIGHT * -this.state.thumbnailPosition + "px" }}>
-              {thumbnails}
-            </div>
+        <div className="ig-thumbnail-inner-container">
+          <div className="igtc-sliding-inner-div"  style={{ top: IGTC_THUMBNAIL_HEIGHT * -this.state.thumbnailPosition + "px" }}>
+            {thumbnails}
           </div>
+        </div>
         <ImageGalleryThumbnailColumnDownArrow />
       </div>
     );
