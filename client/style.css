@@ -529,15 +529,20 @@ h1{
   float: right;
 }
 
-.add-question-form label, .add-answer-form label {
+.add-form label, .add-answer-form label {
   width: 10%;
   text-align: right;
   display: inline-block;
   padding-right: 1%;
 }
 
-.add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
+.add-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
   width: 70%
+}
+
+#index h2 {
+  width: 100%;
+  float: left;
 }
 
 .qa-add-answer {

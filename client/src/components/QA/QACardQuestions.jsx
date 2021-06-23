@@ -66,7 +66,9 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
 
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => increaseCount()}>MORE ANSWERED QUESTIONS</button>
-        <div className="qa-more" data-testid="qa-more"><QAAddQuestionModal productName={productName} /></div>
+        <div className="qa-more" data-testid="qa-more">
+          <QAAddQuestionModal productName={productName} />
+        </div>
       </div>
     </div>
   );
