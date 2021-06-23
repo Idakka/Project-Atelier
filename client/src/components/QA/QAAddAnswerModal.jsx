@@ -3,8 +3,7 @@ import axios from 'axios';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
 
-const QAAddAnswerModal = ({ question, productName }) => {
-
+const QAAddAnswerModal = ({ question, index, productName }) => {
   // handles onChange for inputs
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
@@ -15,12 +14,12 @@ const QAAddAnswerModal = ({ question, productName }) => {
   return (
     <div data-testid="qa-div-card-questions">
       <button id="qa-modal-button" className="qa-add" onClick={() => {
-        document.getElementById("qa-modal-answers").style.display = "block";
+        document.getElementById(index).style.display = "block";
       }}><b>[Add Answer]</b></button>
-      <div id="qa-modal-answers" className="qa-modal">
+      <div id={index} className="qa-modal">
         <div className="qa-modal-content">
           <div className="qa-modal-close" onClick={() => {
-            document.getElementById("qa-modal-answers").style.display = "none";
+            document.getElementById(index).style.display = "none";
           }}>&times;</div>
           <h2>Submit Your Answer</h2>
           <h3>{productName.name}: {question.question_body} </h3>
