@@ -60,8 +60,8 @@ const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandl
               setReviewsToShow(_reviews.slice(0, reviewsToShowLength));
             }}>MORE REVIEWS</button>
           </div>
-          <div className="review-add">
-            <button className="add-review-button" onClick={(event) => {
+          <div className="review-add" data-testid="review-add">
+            <button className="add-review-button" data-testid="add-review-button" onClick={(event) => {
               top.showModal(<AddReviewModal top={top} onChangeFileHandler={onChangeFileHandler} onClickUploadHandler={onClickUploadHandler} />);
             }}>ADD A REVIEW +</button>
           </div>

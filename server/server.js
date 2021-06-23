@@ -18,6 +18,7 @@ const atelierHeaders = {
     'Authorization': process.env.GITHUB_TOKEN
   }
 };
+
 const s3Headers = {
   headers: {
     'S3Bucket': process.env.S3_BUCKET,
@@ -55,7 +56,7 @@ const pathname = path.join(__dirname, '..', 'public');
 app.use(express.static(pathname));
 const corsOptions = {
   origin: 'http://localhost:1234',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200
 }
 
 app.use(cors(corsOptions));
