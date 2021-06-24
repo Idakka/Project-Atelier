@@ -26,7 +26,7 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
           RatingsAndReviews!
         </div>
         <div className="rating-left" data-testid="rating-left">
-          <div className="number-rating">{rating}</div>
+          <div className="number-rating">{rating.toFixed(1)}</div>
           <StarReview rating={rating}/>
         </div>
         <div className="recommend-percent">100% of reviews recommend this product</div>
