@@ -13,6 +13,18 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
       }, null),
     };
   });
+  relatedProduct.features.forEach(relatedFeature => {
+    if (traits[relatedFeature.feature]) return;
+    traits[relatedFeature.feature] = {
+      related: relatedFeature.value,
+      current: currentProduct.features.reduce((acc, currentFeature) => {
+        if (acc) return acc;
+        if (currentFeature.feature === relatedFeature.feature) {
+          return currentFeature.value;
+        }
+      }, null),
+    };
+  });
 
   return (
     <div className="comparison__wrapper">
