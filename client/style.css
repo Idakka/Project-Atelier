@@ -230,6 +230,7 @@ h1{
 
 .ig-main-image {
   width: 100%;
+  height: 100%;
 }
 
 .image-gallery-fullscreen-toggle {
@@ -257,11 +258,12 @@ h1{
   position: relative;
   left: 3%;
   top: -100%;
-  height: 90%;
+  height: 85%;
   width: 75px;
 }
 
 .ig-thumbnail-inner-container {
+  margin: 10% 0;
   position: relative;
   overflow: hidden;
   height: 100%;
@@ -271,6 +273,7 @@ h1{
   position: relative;
   height: 100%;
   transition: all 0.5s;
+  cursor: default;
 }
 
 .ig-thumbnail-column-up-arrow {
@@ -278,6 +281,7 @@ h1{
   left: 35%;
   top: 2%;
   z-index: 1;
+  cursor: default;
 }
 
 .ig-thumbnail-column-down-arrow {
@@ -285,6 +289,7 @@ h1{
   left: 35%;
   bottom: 2%;
   z-index: 1;
+  cursor: default;
 }
 
 .image-gallery-thumbnail {
@@ -293,8 +298,12 @@ h1{
   width: 75px;
   height: 50px;
   border: 1px solid black;
-  margin: 1em 0;
+  margin: 0 0 1em 0;
   z-index: 3;
+}
+
+.ig-thumbnail-extra-margin {
+  margin: 0 0 1.5em 0;
 }
 
 .ig-thumbnail {
@@ -303,11 +312,12 @@ h1{
 }
 
 .three-px-hr {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 3px;
-  background-color: #333;
-  top: 80px;
+  border: none;
+  background-color: #000;
+  top: 3px;
   margin: 0;
   z-index: 2;
 }
