@@ -6,7 +6,9 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
     traits[currentFeature.feature] = {
       current: currentFeature.value,
       related: relatedProduct.features.reduce((acc, relatedFeature) => {
-        if (acc) return acc;
+        if (acc) {
+          return acc;
+        }
         if (relatedFeature.feature === currentFeature.feature) {
           return relatedFeature.value;
         }
@@ -14,11 +16,15 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
     };
   });
   relatedProduct.features.forEach(relatedFeature => {
-    if (traits[relatedFeature.feature]) return;
+    if (traits[relatedFeature.feature]) {
+      return;
+    }
     traits[relatedFeature.feature] = {
       related: relatedFeature.value,
       current: currentProduct.features.reduce((acc, currentFeature) => {
-        if (acc) return acc;
+        if (acc) {
+          return acc;
+        }
         if (currentFeature.feature === relatedFeature.feature) {
           return currentFeature.value;
         }
@@ -27,35 +33,35 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
   });
 
   return (
-    <div className="comparison__wrapper">
+    <div className="comparison__wrapper" data-testid="comparison">
       <h3 className="comparison__title">Comparing</h3>
       <div className="comparison__product-titles">
-        <h3 className="comparison__product-title">Current Product Name</h3>
-        <h3 className="comparison__product-title">Related Product Name</h3>
+        <h3 className="comparison__product-title" data-testid="comparison--current-title">Current Product Name</h3>
+        <h3 className="comparison__product-title" data-testid="comparison--related-title">Related Product Name</h3>
       </div>
       <div className="comparison-characteristics">
         {Object.keys(traits).map((trait, index) => {
           return (
             <div key={index} className="comparison-characteristics__row">
-              <div className="comparison-characteristics__current">
+              <div className="comparison-characteristics__current" data-testid="comparison-characteristics__current">
                 {/* If current has the trait and it is boolean, add the check. or if current is a string, add it */}
                 {traits[trait].current && typeof traits[trait].current === 'boolean' ? (
-                  <span className="material-icons check">check</span>
+                  <span className="material-icons check" data-testid='comparison--boolean-trait'>check</span>
                 ) : (
                   traits[trait].current
                 )}
               </div>
-              <div className="comparison-characteristics__characteristic">{trait}</div>
-              <div className="comparison-characteristics__related">
+              <div className="comparison-characteristics__characteristic" data-testid="comparison-characteristics__characteristic">{trait}</div>
+              <div className="comparison-characteristics__related" data-testid="comparison-characteristics__related">
                 {/* If related has the trait and it is boolean, add the check. or if related is a string, add it */}
                 {traits[trait].related && typeof traits[trait].related === 'boolean' ? (
-                  <span className="material-icons check">check</span>
+                  <span className="material-icons check" data-testid='comparison--boolean-trait'>check</span>
                 ) : (
                   traits[trait].related
                 )}
               </div>
             </div>
-          )
+          );
         })}
       </div>
       <button
