@@ -9,8 +9,13 @@ class ImageGallery extends React.Component {
     this.state = {
       selectedStyle: 0, // this will later move up to the overview component, but for quick testing, it's here.
       selectedPhoto: 0
-    }
+    };
+    this.thumbnailClicked = this.thumbnailClicked.bind(this);
   };
+
+  thumbnailClicked(event) {
+    this.setState({ selectedPhoto: event.target.dataset.index});
+  }
 
   render() {
     let { selectedStyle, selectedPhoto } = this.state;
@@ -22,7 +27,7 @@ class ImageGallery extends React.Component {
           <img className="ig-main-image" src={photo} />
           <ImageGalleryBackArrow />
           <ImageGalleryForwardArrow />
-          <ImageGalleryThumbnailColumn productStyles={productStyles} gallery={this}/>
+          <ImageGalleryThumbnailColumn productStyles={productStyles} thumbnailClicked={this.thumbnailClicked} selected={this.state.selectedPhoto}/>
           <div className="image-gallery-fullscreen-toggle">
             <span className="material-icons">fullscreen</span>
           </div>

@@ -1,32 +1,23 @@
 import React from 'react';
 
-class ImageGalleryThumbnail extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    document.getElementById('igthumb-' + this.props.index).addEventListener('click', (event) => {
-      this.props.gallery.setState({ selectedPhoto: this.props.index })
-    });
-  }
-
-  render() {
-    if (this.props.selected) {
-      return (
-        <React.Fragment>
-          <div className='image-gallery-thumbnail'>
-            <img src={this.props.thumbnail_url} className="ig-thumbnail" id={'igthumb-' + this.props.index}/>
-            <hr className='three-px-hr'/>
-          </div>
-        </React.Fragment>
-      );
-    } else return (
+var ImageGalleryThumbnail = function(props) {
+  if (props.selected) {
+    console.log('I am the selected element: ', props.index);
+    return (
+      <div className='image-gallery-thumbnail ig-thumbnail-extra-margin'>
+        <img src={props.thumbnail_url} className="ig-thumbnail" data-index={props.index} onClick={props.thumbnailClicked}/>
+        <hr className='three-px-hr'/>
+      </div>
+    );
+  } else {
+    console.log('ns')
+    return (
       <div className='image-gallery-thumbnail'>
-        <img src={this.props.thumbnail_url} className="ig-thumbnail" id={'igthumb-' + this.props.index}/>
+        <img src={props.thumbnail_url} className="ig-thumbnail" data-index={props.index} onClick={props.thumbnailClicked}/>
       </div>
     );
   }
 };
+//};
 
 export default ImageGalleryThumbnail;
