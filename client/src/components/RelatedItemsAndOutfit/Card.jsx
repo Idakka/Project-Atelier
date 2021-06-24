@@ -20,7 +20,13 @@ const Card = ({ top, product, cardType, onAction }) => {
         {cardType === 'related' && (
           <span
             className="material-icons star"
-            onClick={() => onAction(<Comparison top={top} />)}
+            onClick={() => onAction(
+              <Comparison
+                top={top}
+                currentProduct={top.state.products[top.state.currentProductId]}
+                relatedProduct={product}
+              />
+            )}
           >
             star_outline
           </span>

@@ -1,6 +1,19 @@
 import React from 'react';
 
 const Comparison = ({ top, currentProduct, relatedProduct }) => {
+  const traits = {};
+  currentProduct.features.forEach(currentFeature => {
+    traits[currentFeature.feature] = {
+      current: currentFeature.value,
+      related: relatedProduct.features.reduce((acc, relatedFeature) => {
+        if (acc) return acc;
+        if (relatedFeature.feature === currentFeature.feature) {
+          return relatedFeature.value;
+        }
+      }, null),
+    };
+  });
+
   return (
     <div className="comparison__wrapper">
       <h3 className="comparison__title">Comparing</h3>
@@ -9,23 +22,29 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
         <h3 className="comparison__product-title">Related Product Name</h3>
       </div>
       <div className="comparison-characteristics">
-        {[1,2,3].map(trait => (
-          <div className="comparison-characteristics__row">
-            <div className="comparison-characteristics__current">
-              {/* If current has the trait, add the check */}
-              {true && (
-                <span className="material-icons check">check</span>
-              )}
+        {Object.keys(traits).map((trait, index) => {
+          return (
+            <div key={index} className="comparison-characteristics__row">
+              <div className="comparison-characteristics__current">
+                {/* If current has the trait and it is boolean, add the check. or if current is a string, add it */}
+                {traits[trait].current && typeof traits[trait].current === 'boolean' ? (
+                  <span className="material-icons check">check</span>
+                ) : (
+                  traits[trait].current
+                )}
+              </div>
+              <div className="comparison-characteristics__characteristic">{trait}</div>
+              <div className="comparison-characteristics__related">
+                {/* If related has the trait and it is boolean, add the check. or if related is a string, add it */}
+                {traits[trait].related && typeof traits[trait].related === 'boolean' ? (
+                  <span className="material-icons check">check</span>
+                ) : (
+                  traits[trait].related
+                )}
+              </div>
             </div>
-            <div className="comparison-characteristics__characteristic">Product Characteristic</div>
-            <div className="comparison-characteristics__related">
-              {/* If related has the trait, add the check */}
-              {true && (
-                <span className="material-icons check">check</span>
-              )}
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
       <button
         id='default-modal-close-button'
