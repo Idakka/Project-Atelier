@@ -2,7 +2,6 @@ import React from 'react';
 
 var ImageGalleryThumbnail = function(props) {
   if (props.selected) {
-    console.log('I am the selected element: ', props.index);
     return (
       <div className='image-gallery-thumbnail ig-thumbnail-extra-margin'>
         <img src={props.thumbnail_url} className="ig-thumbnail" data-index={props.index} onClick={props.thumbnailClicked}/>
@@ -10,7 +9,6 @@ var ImageGalleryThumbnail = function(props) {
       </div>
     );
   } else {
-    console.log('ns')
     return (
       <div className='image-gallery-thumbnail'>
         <img src={props.thumbnail_url} className="ig-thumbnail" data-index={props.index} onClick={props.thumbnailClicked}/>
