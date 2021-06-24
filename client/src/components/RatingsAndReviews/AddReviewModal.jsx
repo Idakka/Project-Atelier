@@ -15,7 +15,6 @@ class AddReviewModal extends React.Component {
     return (
       <React.Fragment>
         <h1>Example Modal Window</h1>
-        <div className="review-form" id="review-form" data-testid="review-form">
           <form id="review-upload-form"
             data-testid="review-upload-form"
             encType="multipart/form-data"
@@ -26,10 +25,7 @@ class AddReviewModal extends React.Component {
             <input type='text' id='random' name='random' /><br></br>
             <span id = "status"></span>
           </form>
-        </div>
-        {/* <input type="file" name="file" onChange={onChangeFileHandler} />
-<button type="button" onClick={onClickUploadHandler}>Upload</button> */}
-        <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to hide modal.</button>
+          <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to hide modal.</button>
       </React.Fragment>
     );
   }
