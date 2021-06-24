@@ -11,7 +11,7 @@ var ImageGallery = function({ productStyles }) {
         <img className="ig-main-image" alt="Main product gallery image" src={photo} />
         <ImageGalleryBackArrow />
         <ImageGalleryForwardArrow />
-        <ImageGalleryThumbnailColumn />
+        <ImageGalleryThumbnailColumn productStyles={productStyles} />
         <div className="image-gallery-fullscreen-toggle">
           <span className="material-icons">fullscreen</span>
         </div>
