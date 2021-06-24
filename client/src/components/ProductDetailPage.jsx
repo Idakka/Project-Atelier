@@ -75,9 +75,7 @@ class ProductDetailPage extends React.Component {
           console.timeEnd('fetched your outfit products');
         });
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => err);
     // make axios calls for all related products and update this.state.products
   }
 
@@ -131,7 +129,7 @@ class ProductDetailPage extends React.Component {
           relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
-        <QuestionsAndAnswers productInfo={productInfoMock}/>
+        <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
         <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
