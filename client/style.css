@@ -632,7 +632,7 @@ h1{
   right: 0;
 }
 .carousel__title {
-  font-weight: normal;
+  font-weight: lighter;
   text-transform: uppercase;
 }
 .card {
@@ -733,6 +733,37 @@ h1{
 .card--meta span,
 .product__no-picture-provided span {
   font-size: 10rem;
+}
+
+/* Comparison Modal */
+
+.comparison__wrapper {
+  padding: 1.5rem;
+}
+
+.comparison__title {
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+
+.comparison__product-titles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comparison-characteristics {
+  align-items: center;
+  display: grid;
+  gap: .25rem;
+}
+
+.comparison-characteristics__row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comparison-characteristics__characteristic {
+  font-weight: lighter;
 }
 
 /* Modal */
