@@ -48,7 +48,7 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
                 {traits[trait].current && typeof traits[trait].current === 'boolean' ? (
                   <span className="material-icons check" data-testid='comparison--boolean-trait'>check</span>
                 ) : (
-                  traits[trait].current
+                  <span data-testid='comparison--trait-value'>{traits[trait].current}</span>
                 )}
               </div>
               <div className="comparison-characteristics__characteristic" data-testid="comparison-characteristics__characteristic">{trait}</div>
@@ -57,7 +57,7 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
                 {traits[trait].related && typeof traits[trait].related === 'boolean' ? (
                   <span className="material-icons check" data-testid='comparison--boolean-trait'>check</span>
                 ) : (
-                  traits[trait].related
+                  <span data-testid='comparison--trait-value'>{traits[trait].related}</span>
                 )}
               </div>
             </div>

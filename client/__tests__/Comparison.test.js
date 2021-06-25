@@ -133,10 +133,12 @@ const currentProductInformation = {
 };
 
 const relatedProductInformation = JSON.parse(JSON.stringify(currentProductInformation));
+// Add/remove a feature so the features are imbalanced and wil be empty, like in production
 relatedProductInformation.features.push({
   feature: 'this feature is only on the related product',
   value: true
 });
+relatedProductInformation.features.splice(3, 1);
 
 beforeEach(() => {
   render(<Comparison
@@ -167,7 +169,14 @@ test('Should contain traits', () => {
   expect(comparisonTraits.length).toBe(5);
 });
 
-test('Should render a check mark if feature attribute is boolean', () => {
+test('Should render the feature\'s value if value is a string', () => {
+  const currentTraitValue = screen.getAllByTestId('comparison--trait-value')[0];
+  expect(currentTraitValue).toBeInTheDocument();
+  // This is based on the order of the traits/characteristics in the current product's features
+  expect(currentTraitValue).toHaveTextContent('Rubber');
+});
+
+test('Should render a check mark if feature\'s value is boolean', () => {
   const relatedBooleanTrait = screen.getByTestId('comparison--boolean-trait');
   expect(relatedBooleanTrait).toBeInTheDocument();
 });
