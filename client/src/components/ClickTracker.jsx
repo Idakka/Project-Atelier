@@ -16,8 +16,8 @@ const ClickTracker = (WrappedComponent) => {
         time: new Date().toString(),
       };
       axios.post('/interactions', interaction)
-        .then(response => console.log(response))
-        .catch(error => console.error(error));
+        .then(response => response)
+        .catch(error => error);
     }
 
     render() {
