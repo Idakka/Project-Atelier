@@ -58,7 +58,12 @@ const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandl
           </div>
           <div className="review-add" data-testid="review-add">
             <button className="add-review-button" data-testid="add-review-button" onClick={(event) => {
-              top.showModal(<AddReviewModal top={top} onChangeFileHandler={onChangeFileHandler} onClickUploadHandler={onClickUploadHandler} />);
+              top.showModal(
+              <AddReviewModal
+                top={top}
+                onChangeFileHandler={onChangeFileHandler}
+                onClickUploadHandler={onClickUploadHandler}
+              />);
             }}>ADD A REVIEW +</button>
           </div>
         </div>

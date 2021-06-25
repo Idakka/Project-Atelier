@@ -14,8 +14,7 @@ var onChangeFileHandler = (event) => {
 var onClickUploadHandler = () => {
   const data = new FormData();
   data.append('file', this.state.selectedImageFile);
-  axios.post(`http://localhost:${port}/upload`, data, {
-  })
+  axios.post(`http://localhost:${port}/upload`, data)
     .then(response => {
       console.log('successful upload: ', response);
     });
@@ -23,7 +22,14 @@ var onClickUploadHandler = () => {
 
 beforeEach(() => {
   var ProductDetailPageMock = new ProductDetailPage;
-  render(<RatingsAndReviews top={ProductDetailPageMock} onChangeFileHandler={ProductDetailPageMock.onChangeFileHandler} onClickUploadHandler={ProductDetailPageMock.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>);
+  render(<RatingsAndReviews
+    top={ProductDetailPageMock}
+    onChangeFileHandler={ProductDetailPageMock.onChangeFileHandler}
+    onClickUploadHandler={ProductDetailPageMock.onClickUploadHandler}
+    productId={reviewsMock.product}
+    reviews={reviewsMock.results}
+    reviewsMeta={reviewsMetaMock}
+  />);
 });
 
 afterEach(() => {
