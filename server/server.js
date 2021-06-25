@@ -1,4 +1,5 @@
 const axios = require('axios');
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
 const express = require('express');
 const cors = require('cors');
@@ -23,6 +24,7 @@ const s3Headers = {
 const pathname = path.join(__dirname, '..', 'public');
 app.use(express.static(pathname));
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22126; // will need to be updated once product is rendering on page
@@ -110,6 +112,15 @@ app.get('/reviews/meta', (req, res) => {
 app.get('/questions', (req, res) => {
   const productId = req.query.id;
   atelierQueries.getProductQuestions(productId, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+app.post('/interactions', (req, res) => {
+  atelierQueries.postInteraction(req.body, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);

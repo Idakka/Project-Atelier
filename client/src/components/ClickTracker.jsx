@@ -8,18 +8,21 @@ const ClickTracker = (WrappedComponent) => {
       super(props);
     }
 
-    logGenerator(event) {
+    sendInteraction(event) {
       const selectorPath = generateSelectorPath(event.target);
-      const generatedLog = {
+      const interaction = {
         element: selectorPath,
         widget: WrappedComponent.displayName || WrappedComponent.name,
         time: new Date().toString(),
       };
+      axios.post('/interactions', interaction)
+        .then(response => console.log(response))
+        .catch(error => console.error(error));
     }
 
     render() {
       return (
-        <div className="click-tracker" onClick={this.logGenerator}>
+        <div className="click-tracker" onClick={this.sendInteraction}>
           <WrappedComponent {...this.props} />
         </div>
       );

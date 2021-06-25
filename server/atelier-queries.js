@@ -54,6 +54,14 @@ const getProductQuestions = (productId, headers) => {
     });
 };
 
+const postInteraction = (interaction, headers) => {
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', interaction, headers)
+    .then(result => result.data)
+    .catch(err => {
+      throw err;
+    });
+};
+
 const getCurrentProductBundle = (productId, headers) => {
   let currentProduct = {};
   console.time('getCurrentProductBundle API Time');
@@ -119,4 +127,5 @@ module.exports = {
   getProductQuestions,
   getProductReviews,
   getProductReviewsMeta,
+  postInteraction
 };
