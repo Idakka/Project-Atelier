@@ -4,7 +4,7 @@ import AddToOutfitCard from './AddToOutfitCard.jsx';
 import NoRelatedProductsCard from './NoRelatedProductsCard.jsx';
 import calculateRating from '../../scripts/calculateRating';
 
-const Carousel = ({ currentProduct, products, carouselType, onAction }) => {
+const Carousel = ({ top, currentProduct, products, carouselType, onAction }) => {
   const [productCards, setProductCards] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -84,6 +84,7 @@ const Carousel = ({ currentProduct, products, carouselType, onAction }) => {
           )}
           {productCards.map((productCard, index) => (
             <Card
+              top={top}
               key={index}
               product={productCard}
               cardType={carouselType}
