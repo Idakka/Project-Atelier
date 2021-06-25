@@ -1,26 +1,25 @@
 import React from 'react';
+import generateSelectorPath from '../scripts/generateSelectorPath.js';
+import axios from 'axios';
 
-const ClickTracker = (WrappedComponent, moduleName) => {
-  return class extends React.Component {
+const ClickTracker = (WrappedComponent) => {
+  return class BOB extends React.Component {
     constructor(props) {
       super(props);
     }
 
-    // add onClick handler function
     logGenerator(event) {
+      const selectorPath = generateSelectorPath(event.target);
       const generatedLog = {
-        element: event.target,
-        time: Date.now(),
-        module: moduleName,
+        element: selectorPath,
+        widget: WrappedComponent.displayName || WrappedComponent.name,
+        time: new Date().toString(),
       };
-      console.log(generatedLog);
     }
 
-    // add event listener to wrapper of component
-    // on click => create log object
     render() {
       return (
-        <div className="click-tracker" onClick={(event) => this.logGenerator(event)}>
+        <div className="click-tracker" onClick={this.logGenerator}>
           <WrappedComponent {...this.props} />
         </div>
       );

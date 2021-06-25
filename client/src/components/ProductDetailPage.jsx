@@ -13,7 +13,10 @@ import Modal from './Modal.jsx';
 const port = window.location.port;
 
 // Wrapped components for tracking
-const RelatedItemsAndOutfitWithTracking = ClickTracker(RelatedItemsAndOutfit, 'RelatedItemsAndOutfit');
+const OverviewWithTracking = ClickTracker(Overview);
+const RelatedItemsAndOutfitWithTracking = ClickTracker(RelatedItemsAndOutfit);
+const QuestionsAndAnswersWithTracking = ClickTracker(QuestionsAndAnswers);
+const RatingsAndReviewsWithTracking = ClickTracker(RatingsAndReviews);
 
 class ProductDetailPage extends React.Component {
   constructor(props) {
@@ -126,15 +129,15 @@ class ProductDetailPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
+        <OverviewWithTracking top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
         <RelatedItemsAndOutfitWithTracking
           top={this}
           product={this.state.products[this.state.currentProductId]}
           relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
-        <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
-        <RatingsAndReviews onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
+        <QuestionsAndAnswersWithTracking questionsInfo={questionsMock} productInfo={productInfoMock}/>
+        <RatingsAndReviewsWithTracking onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
     );
