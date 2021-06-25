@@ -16,7 +16,7 @@ var Overview = function(props) {
         <ImageGallery productStyles={props.productStyles}/>
         <div className="product-information">
           <ProductInformation productInfo={props.productInfo} productStyles={props.productStyles} reviewsMeta={props.reviewsMeta} />
-          <StyleSelector />
+          <StyleSelector productStyles={props.productStyles} />
           <AddToCartRegion top={props.top} />
         </div>
       </div>
