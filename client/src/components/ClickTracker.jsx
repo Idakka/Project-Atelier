@@ -22,7 +22,7 @@ const ClickTracker = (WrappedComponent) => {
 
     render() {
       return (
-        <div className="click-tracker" onClick={this.sendInteraction}>
+        <div className="click-tracker" onClick={this.sendInteraction} data-testid="click-tracker">
           <WrappedComponent {...this.props} />
         </div>
       );
