@@ -39,13 +39,11 @@ var uploadS3 = multer({
     s3: s3,
     acl: 'public-read',
     bucket: s3Headers.headers.S3Bucket,
-    metadata: (req, file, cb) => {
-      console.log('in multer metadata function');
-      cb(null, {fieldName: file.fieldname})
+    metadata: (req, file, getFieldname) => {
+      getFieldname(null, {fieldName: file.fieldname})
     },
-    key: (req, file, cb) => {
-      console.log('in multer key function, file.originalname:', file.originalname);
-      cb(null, Date.now().toString() + '-' + file.originalname)
+    key: (req, file, createAWSName) => {
+      createAWSName(null, Date.now().toString() + '-' + file.originalname)
     }
   })
 });
