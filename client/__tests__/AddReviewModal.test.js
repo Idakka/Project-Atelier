@@ -13,10 +13,6 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders react-modal', () => {
-  expect(screen.getByTestId('the_modal')).toBeInTheDocument();
-});
-
 test('When no buttons are clicked, the modal does not yet contain the example content.', () => {
   expect(screen.queryByTestId('review-upload-form')).not.toBeInTheDocument();
 })
