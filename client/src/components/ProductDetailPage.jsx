@@ -4,12 +4,16 @@ import Overview from './Overview/Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit/RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+import ClickTracker from './ClickTracker.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
 import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
 import { questionsMock, answersMock } from '../mockData/questionsMock.js';
 import { cartMock } from '../mockData/cartMock.js';
 import Modal from './Modal.jsx';
 const port = window.location.port;
+
+// Wrapped components for tracking
+const RelatedItemsAndOutfitWithTracking = ClickTracker(RelatedItemsAndOutfit, 'RelatedItemsAndOutfit');
 
 class ProductDetailPage extends React.Component {
   constructor(props) {
@@ -123,7 +127,7 @@ class ProductDetailPage extends React.Component {
     return (
       <React.Fragment>
         <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
-        <RelatedItemsAndOutfit
+        <RelatedItemsAndOutfitWithTracking
           top={this}
           product={this.state.products[this.state.currentProductId]}
           relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
