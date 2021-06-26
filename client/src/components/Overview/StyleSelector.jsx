@@ -10,15 +10,12 @@ var StyleSelector = function(props) {
   });
   let rows = [];
   for (var i = 0; i < styleThumbnails.length; i += rowSize) {
-    console.log("looped, i: ", );
     // Extracting the relevent entries here with slice (shallow copy) doesn't work; a full copy and splice to trim does.
     let rowEntries = [...styleThumbnails];
     rowEntries.splice(0, i); // trim entries off the front
-    console.log("The end should be trimmed? ", i + rowSize > styleThumbnails.length)
     if (styleThumbnails.length > i + rowSize) { rowEntries.splice(i + rowSize); } // trim entries off the end
-    rows.push(<div className="row-of-style-thumbnails" children={rowEntries} key={Math.random()}></div>);
+    rows.push(<div className="row-of-style-thumbnails-container"><div className="row-of-style-thumbnails" children={rowEntries} key={Math.random()}></div></div>);
   }
-  console.log(rows);
   return (
     <React.Fragment>
       <div className="style-selector-header" data-testid='style-selector'>
