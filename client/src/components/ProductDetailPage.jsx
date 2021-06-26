@@ -4,12 +4,19 @@ import Overview from './Overview/Overview.jsx';
 import RelatedItemsAndOutfit from './RelatedItemsAndOutfit/RelatedItemsAndOutfit.jsx';
 import QuestionsAndAnswers from './QA/QuestionsAndAnswers.jsx';
 import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
+import ClickTracker from './ClickTracker.jsx';
 import { productInfoMock, relatedProductsMock, productStylesMock, productsMock } from '../mockData/productInfoMock.js';
 import { reviewsMock, reviewsMetaMock } from '../mockData/reviewsMock.js';
 import { questionsMock, answersMock } from '../mockData/questionsMock.js';
 import { cartMock } from '../mockData/cartMock.js';
 import Modal from './Modal.jsx';
 const port = window.location.port;
+
+// Wrapped components for tracking
+const OverviewWithTracking = ClickTracker(Overview);
+const RelatedItemsAndOutfitWithTracking = ClickTracker(RelatedItemsAndOutfit);
+const QuestionsAndAnswersWithTracking = ClickTracker(QuestionsAndAnswers);
+const RatingsAndReviewsWithTracking = ClickTracker(RatingsAndReviews);
 
 class ProductDetailPage extends React.Component {
   constructor(props) {
@@ -121,15 +128,15 @@ class ProductDetailPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Overview top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
-        <RelatedItemsAndOutfit
+        <OverviewWithTracking top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
+        <RelatedItemsAndOutfitWithTracking
           top={this}
           product={this.state.products[this.state.currentProductId]}
           relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
-        <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
-        <RatingsAndReviews
+        <QuestionsAndAnswersWithTracking questionsInfo={questionsMock} productInfo={productInfoMock}/>
+        <RatingsAndReviewsWithTracking
           top={this}
           onChangeFileHandler={this.onChangeFileHandler}
           onClickUploadHandler={this.onClickUploadHandler}
