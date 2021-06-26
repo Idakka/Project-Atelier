@@ -110,8 +110,7 @@ class ProductDetailPage extends React.Component {
   onClickUploadHandler() {
     const data = new FormData();
     data.append('file', this.state.selectedImageFile);
-    axios.post(`http://localhost:${port}/upload`, data, {
-    })
+    axios.post(`http://localhost:${port}/upload`, data)
       .then(response => {
         console.log('successful upload: ', response);
       });
@@ -137,7 +136,14 @@ class ProductDetailPage extends React.Component {
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
         <QuestionsAndAnswersWithTracking questionsInfo={questionsMock} productInfo={productInfoMock}/>
-        <RatingsAndReviewsWithTracking onChangeFileHandler={this.onChangeFileHandler} onClickUploadHandler={this.onClickUploadHandler} productId={reviewsMock.product} reviews={reviewsMock.results} reviewsMeta={reviewsMetaMock}/>
+        <RatingsAndReviewsWithTracking
+          top={this}
+          onChangeFileHandler={this.onChangeFileHandler}
+          onClickUploadHandler={this.onClickUploadHandler}
+          productId={reviewsMock.product}
+          reviews={reviewsMock.results}
+          reviewsMeta={reviewsMetaMock}
+        />
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
     );

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import calculateRating from '../../scripts/calculateRating.js';
+import AddReviewModal from './AddReviewModal.jsx';
 
-const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
+const RatingsAndReviews = function({top, onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta }) {
 
   const [_reviews, setReviews] = useState([]);
   const [reviewsLength, setReviewsLength] = useState(0);
@@ -39,16 +40,12 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
       </div>
       <div id="ratings-right-pane">
         <div id="ratings-title">{reviews.length} reviews, sorted by
-
           <select name="sort-parameter" id="sort-parameter" onChange={(i) => {
             alert('This feature only available to premium subscribers!');
           }}>
-            <option value="relevance">relevance
-
-            </option>
+            <option value="relevance">relevance</option>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
-
           </select>
         </div>
         <ReviewsList reviews={reviewsToShow} />
@@ -59,12 +56,16 @@ const RatingsAndReviews = function({ onChangeFileHandler, onClickUploadHandler, 
               setReviewsToShow(_reviews.slice(0, reviewsToShowLength));
             }}>MORE REVIEWS</button>
           </div>
-          <div className="review-add">
-            <input type="file" name="file" onChange={onChangeFileHandler} />
-            <button type="button" onClick={onClickUploadHandler}>Upload</button>
-            {/* <button>ADD A REVIEW +</button> */}
+          <div className="review-add" data-testid="review-add">
+            <button className="add-review-button" data-testid="add-review-button" onClick={(event) => {
+              top.showModal(
+              <AddReviewModal
+                top={top}
+                onChangeFileHandler={onChangeFileHandler}
+                onClickUploadHandler={onClickUploadHandler}
+              />);
+            }}>ADD A REVIEW +</button>
           </div>
-
         </div>
       </div>
     </div>
