@@ -56,11 +56,21 @@ const getProductQuestions = (productId, headers) => {
 
 // Posts question to current product
 const postQuestion = (body, headers) => {
-  console.log('calling postQuestion')
-  // console.log('body', body)
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions`, body, headers)
     .then(result => {
-      console.log(result.data);
+      return result.config.data;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+// Posts answer to current question
+const postAnswer = (body, headers) => {
+  var question_id = body.question_id;
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question_id}/answers`, body, headers)
+    .then(result => {
+      // console.log('answer details', result.data); // logs create
       return result.config.data;
     })
     .catch(err => {
@@ -142,5 +152,6 @@ module.exports = {
   getProductReviews,
   getProductReviewsMeta,
   postInteraction,
-  postQuestion
+  postQuestion,
+  postAnswer
 };
