@@ -15,8 +15,8 @@ const QAAddQuestionModal = ({ productName }) => {
     //   nickname: nickname,
     //   email: email
     // });
-    axios.post('/qa/questions/', ({question: question, nickname: nickname, email: email, product_id: 22124}))
-      .then(info => console.log(info))
+    axios.post('/qa/questions', ({product_id: 22124, body: question, name: nickname, email: email}))
+      .then(info => info)
       .catch(err => err)
   }
 

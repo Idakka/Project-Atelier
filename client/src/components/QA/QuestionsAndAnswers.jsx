@@ -15,6 +15,7 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo}) => {
     setQuestions(questionsInfo);
     axios.get('/qa/questions/')
       .then(response => {
+        console.log('response', response)
         setQuestions(response.data);
       })
       .catch(err => err);
@@ -23,6 +24,8 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo}) => {
       return b.question_helpfulness - a.question_helpfulness;
     });
   }, []);
+
+// fn to post question
 
   return (
     <div data-testid="qa-div" id="qa">

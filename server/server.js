@@ -63,8 +63,9 @@ app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22124; // will need to be updated once product is rendering on page
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`, atelierHeaders)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}&count=100000`, atelierHeaders)
     .then(response => {
+      console.log('?', response.data.results);
       res.send(response.data.results);
       res.end();
     })
@@ -93,19 +94,23 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   //   .catch(err => console.log('err', err));
 });
 
-app.post('/qa/questions/', (req, res) => {
-  var currentProduct = 22124; // will need to be updated once product is rendering on page
-  console.log('received by server', req.body);
-  // var data = req.body;
-  // atelierQueries.postQuestion(req.body, atelierHeaders)
-  //   .then(result => {
-  //     console.log('result', result);
-  //     // res.end(JSON.stringify(result));
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //     res.end(JSON.stringify(error));
-  //   });
+app.post('/qa/questions', (req, res) => {
+  // console.log('received by server', req.body);
+  atelierQueries.postQuestion(req.body, atelierHeaders)
+    .then(result => {
+      const parseResult = JSON.parse(result);
+      atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
+        .then(questions => questions)
+        return result;
+    })
+    .then(result => {
+      console.log('info', result);
+      res.end(JSON.stringify(result))
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 })
 
 // Top level state queries
