@@ -6,7 +6,7 @@ var StyleSelector = function(props) {
   let index = -1;
   let styleThumbnails = props.productStyles.results.map((style) => {
     index += 1;
-    return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} key={props.productStyles.results[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
+    return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} styleID={index} key={props.productStyles.results[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
   });
   let rows = [];
   for (var i = 0; i < styleThumbnails.length; i += rowSize) {

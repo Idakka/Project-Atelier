@@ -17,7 +17,7 @@ class Overview extends React.Component {
   }
 
   styleClickHandler(event) {
-    console.log('syleClickHandler fired! ', event);
+    this.setState({ selectedStyle: event.target.dataset.style_id });
   }
 
   render() {

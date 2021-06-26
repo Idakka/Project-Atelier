@@ -27,7 +27,7 @@ class ImageGallery extends React.Component {
           <img className="ig-main-image" src={photo} />
           <ImageGalleryBackArrow />
           <ImageGalleryForwardArrow />
-          <ImageGalleryThumbnailColumn productStyles={productStyles} thumbnailClicked={this.thumbnailClicked} selected={this.state.selectedPhoto}/>
+          <ImageGalleryThumbnailColumn productStyles={productStyles} thumbnailClicked={this.thumbnailClicked} selected={this.state.selectedPhoto} selectedStyle={selectedStyle} />
           <div className="image-gallery-fullscreen-toggle">
             <span className="material-icons">fullscreen</span>
           </div>
