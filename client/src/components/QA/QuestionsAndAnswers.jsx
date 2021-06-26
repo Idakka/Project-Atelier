@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 
