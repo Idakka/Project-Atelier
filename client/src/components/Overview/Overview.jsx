@@ -7,22 +7,36 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCartRegion from './AddToCartRegion.jsx';
 import SalesPitch from './SalesPitch.jsx';
 
-var Overview = function(props) {
-  return (
-    <div className='top-region max-width'>
-      <TitleBar />
-      <SiteWideAnnounce />
-      <div className="overview-column-container">
-        <ImageGallery productStyles={props.productStyles}/>
-        <div className="product-information">
-          <ProductInformation productInfo={props.productInfo} productStyles={props.productStyles} reviewsMeta={props.reviewsMeta} />
-          <StyleSelector productStyles={props.productStyles} />
-          <AddToCartRegion top={props.top} />
+class Overview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedStyle: 0
+    };
+    this.styleClickHandler = this.styleClickHandler.bind(this);
+  }
+
+  styleClickHandler(event) {
+    console.log('syleClickHandler fired! ', event);
+  }
+
+  render() {
+    return (
+      <div className='top-region max-width'>
+        <TitleBar />
+        <SiteWideAnnounce />
+        <div className="overview-column-container">
+          <ImageGallery productStyles={this.props.productStyles} overview={this}/>
+          <div className="product-information">
+            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
+            <StyleSelector productStyles={this.props.productStyles} overview={this} />
+            <AddToCartRegion top={this.props.top} />
+          </div>
         </div>
+        <SalesPitch productInfo={this.props.productInfo} />
       </div>
-      <SalesPitch productInfo={props.productInfo} />
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Overview;

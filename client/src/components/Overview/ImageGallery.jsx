@@ -7,19 +7,19 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: 0, // this will later move up to the overview component, but for quick testing, it's here.
       selectedPhoto: 0
     };
     this.thumbnailClicked = this.thumbnailClicked.bind(this);
-  };
+  }
 
   thumbnailClicked(event) {
     this.setState({ selectedPhoto: event.target.dataset.index});
   }
 
   render() {
-    let { selectedStyle, selectedPhoto } = this.state;
+    let { selectedPhoto } = this.state;
     let { productStyles } = this.props;
+    let { selectedStyle } = this.props.overview.state;
     let photo = productStyles.results[selectedStyle].photos[selectedPhoto].url;
     return (
       <div className="image-gallery-container" data-testid="image-gallery">
@@ -34,7 +34,7 @@ class ImageGallery extends React.Component {
         </div>
       </div>
     );
-  };
-};
+  }
+}
 
 export default ImageGallery;

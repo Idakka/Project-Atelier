@@ -6,7 +6,7 @@ var StyleSelector = function(props) {
   let index = -1;
   let styleThumbnails = props.productStyles.results.map((style) => {
     index += 1;
-    return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} key={props.productStyles.results[index].photos[0].thumbnail_url}/>
+    return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} key={props.productStyles.results[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
   });
   let rows = [];
   for (var i = 0; i < styleThumbnails.length; i += rowSize) {
@@ -14,7 +14,7 @@ var StyleSelector = function(props) {
     let rowEntries = [...styleThumbnails];
     rowEntries.splice(0, i); // trim entries off the front
     if (styleThumbnails.length > i + rowSize) { rowEntries.splice(i + rowSize); } // trim entries off the end
-    rows.push(<div className="row-of-style-thumbnails-container"><div className="row-of-style-thumbnails" children={rowEntries} key={Math.random()}></div></div>);
+    rows.push(<div className="row-of-style-thumbnails-container" key={Math.random()}><div className="row-of-style-thumbnails" children={rowEntries}></div></div>);
   }
   return (
     <React.Fragment>
