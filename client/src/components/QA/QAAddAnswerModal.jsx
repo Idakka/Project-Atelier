@@ -32,6 +32,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             <input maxLength="60" placeholder="Example: jack@email.com" required onChange={() => setEmail(event.target.value)} /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
             <button className="qa-add-form-submit" onClick={() => {
               event.preventDefault();
+              console.log('answer: ', answer, ' - nickname', nickname, ' - email: ', email);
               setModalInfo({
                 answer: answer,
                 nickname: nickname,

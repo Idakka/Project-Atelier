@@ -580,6 +580,8 @@ h1{
   border: 1px solid rgb(104, 99, 99);
   width: 80%;
   height: 80%;
+  text-align: center;
+  font-weight: bold;
 }
 
 .qa-modal-close {
@@ -593,6 +595,7 @@ h1{
   color: black;
   cursor: pointer;
 }
+
 
 /* QA Styling Ends */
 
