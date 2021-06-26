@@ -4,7 +4,7 @@ import ReviewsList from './ReviewsList.jsx';
 import calculateRating from '../../scripts/calculateRating.js';
 import AddReviewModal from './AddReviewModal.jsx';
 
-const RatingsAndReviews = function({ top, onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta, selectedImageFiles }) {
+const RatingsAndReviews = function({ top, onChangeFileHandler, onClickUploadHandler, productId, reviews, reviewsMeta, selectedImageFiles, fileLoaded }) {
 
   const [_reviews, setReviews] = useState([]);
   const [reviewsLength, setReviewsLength] = useState(0);
@@ -64,6 +64,7 @@ const RatingsAndReviews = function({ top, onChangeFileHandler, onClickUploadHand
                 onChangeFileHandler={onChangeFileHandler}
                 onClickUploadHandler={onClickUploadHandler}
                 selectedImageFiles={selectedImageFiles}
+                fileLoaded={fileLoaded}
               />);
             }}>ADD A REVIEW +</button>
           </div>

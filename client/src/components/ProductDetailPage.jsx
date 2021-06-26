@@ -27,8 +27,8 @@ class ProductDetailPage extends React.Component {
       selectedImageFiles: [],
       fileLoaded: 0
     };
-    this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
-    this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
+    // this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
+    // this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
   }
 
   componentDidMount() {
@@ -94,24 +94,25 @@ class ProductDetailPage extends React.Component {
     });
   }
 
-  onChangeFileHandler(event) {
-    let tempImageURLArray = this.state.selectedImageFiles;
-    tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
-    this.setState({
-      selectedImageFiles: tempImageURLArray,
-      fileLoaded: 1
-    });
-    console.log('selectedImageFiles now: ', this.state.selectedImageFiles, this.state.fileLoaded);
-  }
+  // onChangeFileHandler(event) {
+  //   let tempImageURLArray = this.state.selectedImageFiles;
+  //   let fileCount = this.state.fileLoaded;
+  //   tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
+  //   fileCount++;
+  //   this.setState({
+  //     selectedImageFiles: tempImageURLArray,
+  //     fileLoaded: fileCount
+  //   });
+  // }
 
-  onClickUploadHandler() {
-    const data = new FormData();
-    data.append('file', this.state.selectedImageFiles);
-    axios.post(`http://localhost:${port}/upload`, data)
-      .then(response => {
-        console.log('successful upload: ', response);
-      });
-  }
+  // onClickUploadHandler() {
+  //   const data = new FormData();
+  //   data.append('file', this.state.selectedImageFiles);
+  //   axios.post(`http://localhost:${port}/upload`, data)
+  //     .then(response => {
+  //       console.log('successful upload: ', response);
+  //     });
+  // }
 
   showModal(component) {
     this.setState({modalContents: component});
@@ -135,12 +136,13 @@ class ProductDetailPage extends React.Component {
         <QuestionsAndAnswers questionsInfo={questionsMock} productInfo={productInfoMock}/>
         <RatingsAndReviews
           top={this}
-          onChangeFileHandler={this.onChangeFileHandler}
-          onClickUploadHandler={this.onClickUploadHandler}
+          // onChangeFileHandler={this.onChangeFileHandler}
+          // onClickUploadHandler={this.onClickUploadHandler}
           productId={reviewsMock.product}
           reviews={reviewsMock.results}
           reviewsMeta={reviewsMetaMock}
           selectedImageFiles={this.state.selectedImageFiles}
+          fileLoaded={this.state.fileLoaded}
         />
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>
