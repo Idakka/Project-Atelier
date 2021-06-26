@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, createRef } from 'react';
+import React, { createRef } from 'react';
 import Card from './Card.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import NoRelatedProductsCard from './NoRelatedProductsCard.jsx';
