@@ -63,6 +63,7 @@ h1{
 }
 
 .number-rating {
+  font-size: 3rem;
 }
 
 .stars {
@@ -668,7 +669,7 @@ h1{
   right: 0;
 }
 .carousel__title {
-  font-weight: normal;
+  font-weight: lighter;
   text-transform: uppercase;
 }
 .card {
@@ -769,6 +770,46 @@ h1{
 .card--meta span,
 .product__no-picture-provided span {
   font-size: 10rem;
+}
+
+/* Comparison Modal */
+
+.comparison__wrapper {
+  padding: 1.5rem;
+}
+
+.comparison__title {
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+
+.comparison__product-titles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comparison-characteristics {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+}
+
+.comparison-characteristics__row {
+  display: grid;
+  gap: 1.5rem;
+  grid-auto-flow: column;
+  grid-template-columns: calc(25% - 1rem) calc(50% - 1rem) calc(25% - 1rem);
+}
+
+.comparison-characteristics__current {
+  text-align: left;
+}
+.comparison-characteristics__characteristic {
+  font-weight: lighter;
+  text-align: center;
+}
+.comparison-characteristics__related {
+  text-align: right;
 }
 
 /* Modal */
