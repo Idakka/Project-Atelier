@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, createRef } from 'react';
 import Card from './Card.jsx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import NoRelatedProductsCard from './NoRelatedProductsCard.jsx';
+import debounce from '../../scripts/debounce';
 import calculateRating from '../../scripts/calculateRating';
 
 class Carousel extends React.Component {
@@ -10,8 +11,10 @@ class Carousel extends React.Component {
     const screenWidth = window.innerWidth;
     const cardWidth = 272; // px
     const capacity = Math.floor(screenWidth / cardWidth); // number of cards that can fit across
+    const numberOfCards = this.getNumberOfCards();
     this.state = {
       products: this.props.products,
+      numberOfCards,
       productCards: [],
       // Scroll Info
       screenWidth,
@@ -21,9 +24,14 @@ class Carousel extends React.Component {
       cardWidth,
       capacity,
       farLeft: 0,
-      farRight: Math.max(this.props.products.length - capacity, 0), // number of scrolls you can make
+      farRight: Math.max(numberOfCards - capacity, 0), // number of scrolls you can make
     };
-    this.slideWrapperRef = createRef();
+    this.outerWrapperRef = createRef();
+    this.innerWrapperRef = createRef();
+  }
+
+  getNumberOfCards() {
+    return this.props.carouselType === 'outfit' ? this.props.products.length + 1 : this.props.products.length;
   }
 
   createProductCards() {
@@ -36,40 +44,56 @@ class Carousel extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.scrollAndSetCarousel();
+    const debouncedScrollAndSetCarousel = debounce(() => this.scrollAndSetCarousel());
+    window.addEventListener('resize', () => {
+      this.setState({
+        screenWidth: this.innerWrapperRef.current.scrollWidth,
+      });
+      debouncedScrollAndSetCarousel();
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props !== prevProps) {
       this.setState({
         products: this.props.products,
+        numberOfCards: this.getNumberOfCards(),
         productCards: this.createProductCards(),
-        farRight: Math.max(this.props.products.length - this.state.capacity, 0),
-        screenWidth: window.innerWidth,
       });
       this.scrollAndSetCarousel();
     }
   }
 
-  scrollAndSetCarousel(change = 0, numberOfProducts = this.state.products.length) {
+  scrollAndSetCarousel(change = 0, numberOfProducts = this.state.numberOfCards) {
     // If you can't scroll in a direction, remove the button
+    const capacity = Math.floor(this.state.screenWidth / this.state.cardWidth);
+    const farRight = Math.max(this.state.numberOfCards - capacity, 0);
     this.setState({
-      canScrollLeft: this.state.scrollPosition + change > this.state.farLeft,
-      canScrollRight: this.state.scrollPosition + change < this.state.farRight,
-    });
+      canScrollLeft: this.state.scrollPosition > this.state.farLeft,
+      canScrollRight: this.state.scrollPosition < farRight,
+      screenWidth: this.state.screenWidth,
+      capacity,
+      farRight,
+    }, () => {
+      // If you are not at the edge, then scroll one more card over
+      if ((change === -1 && this.state.scrollPosition > this.state.farLeft) || (change === 1 && this.state.scrollPosition < this.state.farRight)) {
+        // console.log(this.state.scrollPosition, change, this.state.farRight);
+        // console.log(this.state.scrollPosition + change < this.state.farRight);
 
-    // If you are not at the edge, then scroll one more card over
-    if ((change === -1 && this.state.scrollPosition !== this.state.farLeft) || (change === 1 && this.state.scrollPosition !== this.state.farRight)) {
-      this.setState({
-        scrollPosition: this.state.scrollPosition + change
-      });
-    }
+        this.setState({
+          canScrollLeft: this.state.scrollPosition + change > this.state.farLeft,
+          canScrollRight: this.state.scrollPosition + change < this.state.farRight,
+          scrollPosition: this.state.scrollPosition + change
+        });
+      }
+    });
   }
 
   render() {
     return (
-      <div className="carousel__wrapper">
+      <div className="carousel__wrapper" ref={this.outerWrapperRef}>
         <div
           className="carousel__edge carousel__edge--left"
           style={{
@@ -85,7 +109,7 @@ class Carousel extends React.Component {
             arrow_backward
           </span>
         </div>
-        <div ref={this.slideWrapperRef} className="carousel__slide-wrapper">
+        <div ref={this.innerWrapperRef} className="carousel__slide-wrapper">
           <div
             className="carousel"
             style={{ left: String(this.state.scrollPosition * -272) + 'px' }}
@@ -96,13 +120,13 @@ class Carousel extends React.Component {
             )}
             {this.props.carouselType === 'outfit' && (
               <AddToOutfitCard
-                currentProduct={this.state.currentProduct}
+                currentProduct={this.props.currentProduct}
                 onAction={this.props.onAction}
               />
             )}
             {this.state.productCards.map((productCard, index) => (
               <Card
-                top={top}
+                top={this.props.top}
                 key={index}
                 product={productCard}
                 cardType={this.props.carouselType}
