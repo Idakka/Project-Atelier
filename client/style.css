@@ -413,7 +413,7 @@ h1{
 .style-thumbnail {
   width: 100%;
   height: 100%;
-  clip-path: circle(50% at center)
+  clip-path: circle(40% at center)
 }
 
 .add-to-bag-row {
