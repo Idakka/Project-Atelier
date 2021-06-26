@@ -24,7 +24,8 @@ class ProductDetailPage extends React.Component {
       yourOutfit: [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
-      selectedImageFile: null
+      selectedImageFiles: [],
+      fileLoaded: 0
     };
     this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
@@ -94,15 +95,18 @@ class ProductDetailPage extends React.Component {
   }
 
   onChangeFileHandler(event) {
+    let tempImageURLArray = this.state.selectedImageFiles;
+    tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
     this.setState({
-      selectedImageFile: event.target.files[0],
-      fileLoaded: 0
+      selectedImageFiles: tempImageURLArray,
+      fileLoaded: 1
     });
+    console.log('selectedImageFiles now: ', this.state.selectedImageFiles, this.state.fileLoaded);
   }
 
   onClickUploadHandler() {
     const data = new FormData();
-    data.append('file', this.state.selectedImageFile);
+    data.append('file', this.state.selectedImageFiles);
     axios.post(`http://localhost:${port}/upload`, data)
       .then(response => {
         console.log('successful upload: ', response);
@@ -136,6 +140,7 @@ class ProductDetailPage extends React.Component {
           productId={reviewsMock.product}
           reviews={reviewsMock.results}
           reviewsMeta={reviewsMetaMock}
+          selectedImageFiles={this.state.selectedImageFiles}
         />
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>

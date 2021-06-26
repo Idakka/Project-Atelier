@@ -1,4 +1,5 @@
 import React from 'react';
+import ReviewThumbnailContainer from './ReviewThumbnailContainer.jsx';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -25,6 +26,13 @@ class AddReviewModal extends React.Component {
           <input type='text' id='random' name='random' /><br></br>
           <span id="status"></span>
         </form>
+        <input type="file" onChange={this.props.onChangeFileHandler}/>
+        {/* {
+          props.selectedImageFiles.map((image, index) => {
+            <img src={image} key={index} />
+          })
+        } */}
+        <ReviewThumbnailContainer thumbnails={this.props.selectedImageFiles} />
         <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to hide modal.</button>
       </React.Fragment>
     );
