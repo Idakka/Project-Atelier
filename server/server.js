@@ -63,35 +63,16 @@ app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
   var currentProduct = 22124; // will need to be updated once product is rendering on page
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}&count=100000`, atelierHeaders)
-    .then(response => {
-      console.log('?', response.data.results);
-      res.send(response.data.results);
-      res.end();
-    })
-    .catch(err => console.log('err', err));
+  atelierQueries.getProductQuestions(currentProduct, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  // NOTE - this path will need to be refactored, answers aren't comming from it currently, keeping for reference
-  // var currentProduct = 22126; // will need to be updated once product is rendering on page
-  // axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
-  //   .then(response => {
-  //     var questions = [];
-  //     response.data.results.forEach((item) => {
-  //       questions.push(item);
-  //     });
-  //     return questions;
-  //   })
-  //   .then(getAnswers => {
-  //     var answers = [];
-  //     getAnswers.forEach(item => {
-  //       answers.push(item.answers);
-  //     })
-  //     res.send(answers);
-  //     res.end();
-  //   })
-  //   .catch(err => console.log('err', err));
+
 });
 
 app.post('/qa/questions', (req, res) => {
