@@ -2,7 +2,7 @@ import React from 'react';
 import StyleThumbnail from './StyleThumbnail.jsx';
 
 var StyleSelector = function(props) {
-  const rowSize = 3;
+  const rowSize = 4;
   let index = -1;
   let styleThumbnails = props.productStyles.results.map((style) => {
     index += 1;
