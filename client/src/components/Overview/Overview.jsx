@@ -11,13 +11,19 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStyle: 0
+      selectedStyle: 0,
+      selectedPhoto: 0
     };
     this.styleClickHandler = this.styleClickHandler.bind(this);
+    this.thumbnailClicked = this.thumbnailClicked.bind(this);
   }
 
   styleClickHandler(event) {
-    this.setState({ selectedStyle: event.target.dataset.style_id });
+    this.setState({ selectedStyle: event.target.dataset.style_id, selectedPhoto: 0 });
+  }
+
+  thumbnailClicked(event) {
+    this.setState({ selectedPhoto: event.target.dataset.index});
   }
 
   render() {
@@ -26,7 +32,7 @@ class Overview extends React.Component {
         <TitleBar />
         <SiteWideAnnounce />
         <div className="overview-column-container">
-          <ImageGallery productStyles={this.props.productStyles} overview={this}/>
+          <ImageGallery productStyles={this.props.productStyles} overview={this} thumbnailClicked={this.thumbnailClicked}/>
           <div className="product-information">
             <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
             <StyleSelector productStyles={this.props.productStyles} overview={this} />
