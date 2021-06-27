@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from 'react-modal';
 import { render, screen, cleanup } from '@testing-library/react';
 import QuestionsAndAnswers from '../src/components/QA/QuestionsAndAnswers.jsx';
 import QACardQuestions from '../src/components/QA/QACardQuestions.jsx';
@@ -10,11 +9,9 @@ import { productInfoMock } from '../src/mockData/productInfoMock.js';
 import { questionsMock, answersMock } from '../src/mockData/questionsMock.js';
 import axios from 'axios';
 
-
 beforeEach(() => {
   render(<QuestionsAndAnswers productInfo={productInfoMock} questionsInfo={questionsMock}/>,
     <QACardQuestions productInfo={productInfoMock} questionsInfo={questionsMock}/>, <QACardAnswers />
-
   );
   // axios.get('/qa/questions/')
   //   .then(response => response)
@@ -66,6 +63,5 @@ test('Should render load more answers section ', () => {
 test('Should render Add Answer Modal ', () => {
   expect(screen.getByTestId('qa-more')).toBeInTheDocument();
 });
-
 
 

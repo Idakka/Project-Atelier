@@ -50,12 +50,12 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
       </form>
 
       <div data-testid="qa-scroll" id="qa-scroll">
-        {questionsInfo.slice(0, length).filter((item) => item.question_body.includes(word)).map((question, index) => (
+        {questionsInfo.slice(0, length).filter((item, index) => item.question_body.includes(word)).map((question, index) => (
           <div key={index}>
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
                 <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
-                  <QAAddAnswerModal question={question} productName={productName} />
+                  <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
               </div></b>
             </div>
@@ -66,7 +66,9 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
 
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => increaseCount()}>MORE ANSWERED QUESTIONS</button>
-        <div className="qa-more" data-testid="qa-more"><QAAddQuestionModal productName={productName} /></div>
+        <div className="qa-more" data-testid="qa-more">
+          <QAAddQuestionModal productName={productName} />
+        </div>
       </div>
     </div>
   );

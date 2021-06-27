@@ -540,15 +540,20 @@ h1{
   float: right;
 }
 
-.add-question-form label, .add-answer-form label {
+.add-form label, .add-answer-form label {
   width: 10%;
   text-align: right;
   display: inline-block;
   padding-right: 1%;
 }
 
-.add-question-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
-  width: 50%
+.add-form input, .add-question-form textarea, .add-answer-form input, .add-answer-form textarea{
+  width: 70%
+}
+
+#index h2 {
+  width: 100%;
+  float: left;
 }
 
 .qa-add-answer {
@@ -565,6 +570,43 @@ h1{
   display: flex;
   margin-top: 2%;
 }
+
+.qa-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.qa-modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid rgb(104, 99, 99);
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.qa-modal-close {
+  color: gray;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.qa-modal-close:hover {
+  color: black;
+  cursor: pointer;
+}
+
 
 /* QA Styling Ends */
 
