@@ -55,6 +55,15 @@ class AddReviewModal extends React.Component {
           encType="multipart/form-data"
           action="/photo-upload"
           method="post">
+          <fieldset>
+            <legend>Do you recommend this product?<abbr title="This field is mandatory"
+            aria-label="required">*</abbr>
+            </legend>
+            <input type="radio" required name="recommend" id="recommend-yes" value="yes" />Yes
+            {/* <label htmlFor="recommend-yes" value="Yes"/></input> */}
+            <input type="radio" required name="recommend" id="recommend-no" value="no" /> No
+            {/* <label htmlFor="recommend-no" value="No"/></input> */}
+          </fieldset>
           <input type="file" name="review-photo" multiple />
           <input type="submit" value="Upload Image" name="submit" data-testid="review-upload-form-submit" />
           <input type='text' id='random' name='random' /><br></br>
