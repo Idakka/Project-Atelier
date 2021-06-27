@@ -48,7 +48,8 @@ class AddReviewModal extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Example Modal Window</h1>
+        <h1>Write Your Review</h1>
+        <h2>About the {this.props.currentProduct.name}</h2>
         <form id="review-upload-form"
           data-testid="review-upload-form"
           encType="multipart/form-data"

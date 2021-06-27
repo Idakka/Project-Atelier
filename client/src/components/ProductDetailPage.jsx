@@ -138,7 +138,8 @@ class ProductDetailPage extends React.Component {
           top={this}
           // onChangeFileHandler={this.onChangeFileHandler}
           // onClickUploadHandler={this.onClickUploadHandler}
-          productId={reviewsMock.product}
+          productId={this.state.currentProductId}
+          currentProduct={this.state.products[this.state.currentProductId]}
           reviews={reviewsMock.results}
           reviewsMeta={reviewsMetaMock}
           selectedImageFiles={this.state.selectedImageFiles}
