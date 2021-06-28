@@ -10,19 +10,31 @@ class AddReviewModal extends React.Component {
       selectedImageFiles: [],
       filesLoaded: 0,
       reviewSummary: '',
-      reviewBody: '',
+      reviewBody: 'Why did you like the product or not?',
       characteristics: [],
       recommendation: '',
       overalRating: 0
     };
     this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   };
 
   componentDidMount() {
     document.getElementById('default-modal-close-button').addEventListener('click', (event) => {
       this.props.top.hideModal();
     })
+  }
+
+  onChangeHandler(event) {
+    event.preventDefault();
+    console.log("target for onChangeHandler", event.target.value);
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState( {
+      [name]: value
+    });
+    console.log('new state => name: value', name, value);
   }
 
   onChangeFileHandler(event) {
@@ -64,9 +76,11 @@ class AddReviewModal extends React.Component {
             <input type="radio" required name="recommend" id="recommend-no" value="no" /> No
             {/* <label htmlFor="recommend-no" value="No"/></input> */}
           </fieldset>
-          <input type="file" name="review-photo" multiple />
-          <input type="submit" value="Upload Image" name="submit" data-testid="review-upload-form-submit" />
-          <input type='text' id='random' name='random' /><br></br>
+          <input type="text" id="review-name" name="reviewSummary" defaultValue="Example: jackson11!" data-testid="review-name" />
+          <textarea id="review-body-text" name="reviewBody" value={this.state.reviewBody} required onChange={this.onChangeHandler} />
+          {/* <input type="file" name="review-photo" multiple /> */}
+          <input type="submit" value="Submit Review" name="submit" data-testid="review-upload-form-submit" />
+          <input type='text' id='review-body' name='random' /><br></br>
           <span id="status"></span>
         </form>
         <input type="file" onChange={this.onChangeFileHandler}/>
@@ -76,7 +90,7 @@ class AddReviewModal extends React.Component {
           })
         } */}
         <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} imageLoaded={this.state.imageLoaded} />
-        <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to hide modal.</button>
+        <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to cancel review.</button>
       </React.Fragment>
     );
   }
