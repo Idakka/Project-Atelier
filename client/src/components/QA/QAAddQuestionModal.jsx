@@ -10,12 +10,7 @@ const QAAddQuestionModal = ({ productName }) => {
   const [modalInfo, setModalInfo] = useState({question: '', nickname: '', email: ''});
 
   const APICall = (question, nickname, email) => {
-    // setModalInfo({
-    //   question: question,
-    //   nickname: nickname,
-    //   email: email
-    // });
-    axios.post('/qa/questions', ({product_id: 22124, body: question, name: nickname, email: email}))
+    axios.post('/qa/questions', ({product_id: 22126, body: question, name: nickname, email: email}))
       .then(info => info)
       .catch(err => err)
   }

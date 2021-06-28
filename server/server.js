@@ -62,7 +62,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var productId = 22124; // will need to be updated once product is rendering on page
+  var productId = 22126; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
       // console.log('?', result)
@@ -103,10 +103,10 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 });
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
-  console.log('info at server.js', req.body)
+  // console.log('info at server.js', req.body)
   atelierQueries.postAnswer(req.body, atelierHeaders)
     .then(result => {
-      console.log('result in server.js', result) // logs created
+      // console.log('result in server.js', result) // logs created
       res.end(JSON.stringify(result))
     })
     .catch(error => {
