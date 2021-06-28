@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewThumbnailContainer from './ReviewThumbnailContainer.jsx';
+import WordCount from './WordCount.jsx';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -92,6 +93,7 @@ class AddReviewModal extends React.Component {
             required
             onChange={this.onChangeHandler}
           />
+          <WordCount text={this.state.reviewBody} />
           {/* <input type="file" name="review-photo" multiple /> */}
           <input
             type="text"
