@@ -5,11 +5,11 @@ class AddReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nickname: '',
+      nickname: 'Example: jackson11!',
       email: '',
       selectedImageFiles: [],
       filesLoaded: 0,
-      reviewSummary: '',
+      reviewSummary: 'Example: Best purchase ever!',
       reviewBody: 'Why did you like the product or not?',
       characteristics: [],
       recommendation: '',
@@ -71,16 +71,49 @@ class AddReviewModal extends React.Component {
             <legend>Do you recommend this product?<abbr title="This field is mandatory"
             aria-label="required">*</abbr>
             </legend>
-            <input type="radio" required name="recommend" id="recommend-yes" value="yes" />Yes
-            {/* <label htmlFor="recommend-yes" value="Yes"/></input> */}
+            <input
+            type="radio" required name="recommend" id="recommend-yes" value="yes" />Yes
+            <label htmlFor="recommend-yes" value="Yes"/>
             <input type="radio" required name="recommend" id="recommend-no" value="no" /> No
-            {/* <label htmlFor="recommend-no" value="No"/></input> */}
+            <label htmlFor="recommend-no" value="No"/>
           </fieldset>
-          <input type="text" id="review-name" name="reviewSummary" defaultValue="Example: jackson11!" data-testid="review-name" />
-          <textarea id="review-body-text" name="reviewBody" value={this.state.reviewBody} required onChange={this.onChangeHandler} />
+          <legend>Review Summary:</legend>
+          <input
+            type="text"
+            id="review-summary"
+            name="reviewSummary"
+            defaultValue={this.state.reviewSummary}
+            data-testid="review-summary"
+          /><br></br>
+          <textarea
+            id="review-body-text"
+            name="reviewBody"
+            value={this.state.reviewBody}
+            required
+            onChange={this.onChangeHandler}
+          />
           {/* <input type="file" name="review-photo" multiple /> */}
-          <input type="submit" value="Submit Review" name="submit" data-testid="review-upload-form-submit" />
-          <input type='text' id='review-body' name='random' /><br></br>
+          <input
+            type="text"
+            id="review-nickname"
+            name="nickname"
+            defaultValue={this.state.nickname}
+            data-testid="review-nickname"
+          /><br></br>
+          <input
+            type="text"
+            id="review-email"
+            name="email"
+            defaultValue={this.state.email}
+            data-testid="review-name"
+          />
+          <input
+            type="submit"
+            value="Submit Review"
+            name="submit"
+            data-testid="review-upload-form-submit"
+          />
+          {/* <input type='text' id='review-body' name='random' /><br></br> */}
           <span id="status"></span>
         </form>
         <input type="file" onChange={this.onChangeFileHandler}/>
