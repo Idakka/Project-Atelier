@@ -716,12 +716,12 @@ h1{
   width: 1ch;
 }
 .carousel__edge--left {
-  background-image: linear-gradient(to right, white, transparent);
+  background-image: linear-gradient(to right, var(--white), transparent);
   justify-content: flex-start;
   left: 0;
 }
 .carousel__edge--right {
-  background-image: linear-gradient(to left, white, transparent);
+  background-image: linear-gradient(to left, var(--white), transparent);
   justify-content: flex-end;
   right: 0;
 }
