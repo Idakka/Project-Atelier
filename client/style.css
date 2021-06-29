@@ -452,6 +452,7 @@ h1{
   min-width: 55%;
   max-width: 55%;
   font-size: 1rem;
+  background-color: var(--white);
   color: var(--nearblack);
   font-weight: 600;
   padding: .6em 2em .5em 1em;
@@ -462,6 +463,7 @@ h1{
   min-width: 40%;
   max-width: 40%;
   font-size: 1rem;
+  background-color: var(--white);
   color: var(--nearblack);
   font-weight: 600;
   text-align-last: right;
