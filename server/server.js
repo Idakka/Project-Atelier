@@ -66,11 +66,11 @@ app.get('/qa/questions/', (req, res) => {
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
       // console.log('?', result)
-      result.forEach(item => {
-        if (item.question_id === 153675) {
-          console.log(item)
-        }
-      })
+      // result.forEach(item => {
+      //   if (item.question_id === 153675) {
+      //     console.log(item)
+      //   }
+      // })
       res.end(JSON.stringify(result))
     })
     .catch(error => {
@@ -129,6 +129,17 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
 app.put('/qa/questions/:question_id/report', (req, res) => {
   var questionId = req.body;
   atelierQueries.reportQuestion(questionId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  var answerId = req.body;
+  atelierQueries.helpfulAnswer(answerId, atelierHeaders)
     .then(result => {
       res.end(result);
     })

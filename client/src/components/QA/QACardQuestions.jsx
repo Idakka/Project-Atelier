@@ -35,7 +35,7 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
   };
 
   const APICall = (questionId) => {
-    axios.put(`/qa/questions/:question_id/helpful`, {question_id: questionId})
+    axios.put(`/qa/questions/:answer_id/helpful`, {question_id: questionId})
       .then(info => console.log('info:', info))
       .catch(err => err);
   }
