@@ -51,11 +51,6 @@ test('Should render buttons to "More Answered Questions" and "Add Question" ', (
   expect(screen.getByTestId('qa-footer-buttons')).toBeInTheDocument();
 });
 
-// QA Card Answers
-test('Should render QACardAnswers component', () => {
-  expect(screen.getAllByTestId('qa-answers-div').length).not.toBe(0);
-});
-
 test('Should render load more answers section ', () => {
   expect(screen.getAllByTestId('qa-load-more').length).not.toBe(0);
 });

@@ -42,29 +42,51 @@ const QACardAnswers = ({ currentAnswers }) => {
       .catch(err => err);
   }
 
-  return (
-    <div data-testid="qa-answers-div">
-      <div data-testid="qa-div-card-answers">
-        {answersToShow.map((answer, index) =>
-          <div className="qa-answers-external" key={index}>
-            <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
-            <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
-              <span className="qa-divider">|</span>
-              <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
-              <span className="qa-divider">|</span>
-              <span onClick={() => APICallReport(answer.id)}>Report</span>
-            </p>
-          </div>
-        )}
+  if (answersLength === 0) {
+    return <div>Be the first to answer this question!</div>
+  }
+
+  if (answersLength > (answersToShowLength - 2)) {
+    return <div data-testid="qa-div-card-answers">
+      {answersToShow.map((answer, index) =>
+        <div className="qa-answers-external" key={index}>
+          <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
+          <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICallReport(answer.id)}>Report</span>
+          </p>
+        </div>
+      )}
+      <div id='show-button'>
         <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
           setAnswersToShowLength(answersToShowLength + 2);
           setAnswersToShow(answers.slice(0, answersToShowLength));
         }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
       </div>
     </div>
+  }
+
+  if (answersLength <= (answersToShowLength - 2)) {
+    return <div data-testid="qa-div-card-answers">
+      {answersToShow.map((answer, index) =>
+        <div className="qa-answers-external" key={index}>
+          <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
+          <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICallReport(answer.id)}>Report</span>
+          </p>
+        </div>
+      )}
+    </div>
+  }
+
+  return (
+    <div data-testid="qa-answers-div"></div>
   );
 };
 
 export default QACardAnswers;
-
-
