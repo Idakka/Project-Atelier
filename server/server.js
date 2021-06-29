@@ -148,6 +148,17 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
     });
 })
 
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  var answerId = req.body;
+  atelierQueries.reportAnswer(answerId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
 // Top level state queries
 // .../products/current?id=12345
 app.get('/products/current', (req, res) => {
