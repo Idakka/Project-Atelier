@@ -31,13 +31,13 @@ const QACardAnswers = ({ currentAnswers }) => {
   }, []);
 
   const APICall = (answerId) => {
-    axios.put(`/qa/answers/:answer_id/helpful`, {answer_id: answerId})
+    axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
       .then(info => console.log('info:', info))
       .catch(err => err);
   }
 
   const APICallReport = (answerId) => {
-    axios.put(`/qa/answers/:answer_id/report`, {answer_id: answerId})
+    axios.put(`/qa/answers/:answer_id/report`, { answer_id: answerId })
       .then(info => console.log('info:', info))
       .catch(err => err);
   }
@@ -61,12 +61,10 @@ const QACardAnswers = ({ currentAnswers }) => {
           </p>
         </div>
       )}
-      <div id='show-button'>
-        <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
-          setAnswersToShowLength(answersToShowLength + 2);
-          setAnswersToShow(answers.slice(0, answersToShowLength));
-        }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
-      </div>
+      <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
+        setAnswersToShowLength(answersToShowLength + 2);
+        setAnswersToShow(answers.slice(0, answersToShowLength));
+      }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
     </div>
   }
 
@@ -84,12 +82,10 @@ const QACardAnswers = ({ currentAnswers }) => {
           </p>
         </div>
       )}
-      <div id='show-button'>
-        <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
-          setAnswersToShow(answers.slice(0, 2));
-          setAnswersToShowLength(2);
-        }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
-      </div>
+      <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
+        setAnswersToShow(answers.slice(0, 2));
+        setAnswersToShowLength(2);
+      }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
     </div>
   }
 
