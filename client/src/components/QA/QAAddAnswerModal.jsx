@@ -8,8 +8,15 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState([]);
   // sets up an object with responses, will send this to POST requests
   const [modalInfo, setModalInfo] = useState({});
+
+  const APICall = (question, answer, nickname, email) => {
+    axios.post('/qa/questions/:question_id/answers', ({question_id: question.question_id, body: answer, name: nickname, email: email, photos: photos}))
+      .then(info => info)
+      .catch(err => err)
+  }
 
   return (
     <div data-testid="qa-div-card-questions">
@@ -21,7 +28,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
           <div className="qa-modal-close" onClick={() => {
             document.getElementById(index).style.display = "none";
           }}>&times;</div>
-          <h2>Submit Your Answer</h2>
+          <h2>Submit Your Answer {question.question_id}</h2>
           <h3>{productName.name}: {question.question_body} </h3>
           <form className="add-answer-form">
             <label className="add-form-answer">Answer* </label>
@@ -32,12 +39,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             <input maxLength="60" placeholder="Example: jack@email.com" required onChange={() => setEmail(event.target.value)} /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
             <button className="qa-add-form-submit" onClick={() => {
               event.preventDefault();
-              console.log('answer: ', answer, ' - nickname', nickname, ' - email: ', email);
-              setModalInfo({
-                answer: answer,
-                nickname: nickname,
-                email: email
-              });
+              APICall(question, answer, nickname, email);
             }}>Submit</button>
           </form>
         </div>

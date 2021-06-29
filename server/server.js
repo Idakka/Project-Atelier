@@ -62,35 +62,57 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var currentProduct = 22126; // will need to be updated once product is rendering on page
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`, atelierHeaders)
-    .then(response => {
-      res.send(response.data.results);
-      res.end();
+  var productId = 22126; // will need to be updated once product is rendering on page
+  atelierQueries.getProductQuestions(productId, atelierHeaders)
+    .then(result => {
+      // console.log('?', result)
+      result.forEach(item => {
+        if (item.question_id === 153675) {
+          console.log(item)
+        }
+      })
+      res.end(JSON.stringify(result))
     })
-    .catch(err => console.log('err', err));
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
+app.post('/qa/questions', (req, res) => {
+  // console.log('received by server', req.body);
+  atelierQueries.postQuestion(req.body, atelierHeaders)
+    .then(result => {
+      const parseResult = JSON.parse(result);
+      atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
+        .then(questions => questions)
+        return result;
+    })
+    .then(result => {
+      // console.log('info', result); // logs created
+      res.end(JSON.stringify(result))
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+})
+
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  // NOTE - this path will need to be refactored, answers aren't comming from it currently, keeping for reference
-  // var currentProduct = 22126; // will need to be updated once product is rendering on page
-  // axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
-  //   .then(response => {
-  //     var questions = [];
-  //     response.data.results.forEach((item) => {
-  //       questions.push(item);
-  //     });
-  //     return questions;
-  //   })
-  //   .then(getAnswers => {
-  //     var answers = [];
-  //     getAnswers.forEach(item => {
-  //       answers.push(item.answers);
-  //     })
-  //     res.send(answers);
-  //     res.end();
-  //   })
-  //   .catch(err => console.log('err', err));
+
+});
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  // console.log('info at server.js', req.body)
+  atelierQueries.postAnswer(req.body, atelierHeaders)
+    .then(result => {
+      // console.log('result in server.js', result) // logs created
+      res.end(JSON.stringify(result))
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
 // Top level state queries

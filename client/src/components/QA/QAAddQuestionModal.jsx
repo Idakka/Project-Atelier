@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const QAAddQuestionModal = ({ productName }) => {
   // handles onChange for inputs
@@ -6,7 +7,13 @@ const QAAddQuestionModal = ({ productName }) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   // sets up an object with responses, will send this to POST requests
-  const [modalInfo, setModalInfo] = useState({});
+  const [modalInfo, setModalInfo] = useState({question: '', nickname: '', email: ''});
+
+  const APICall = (question, nickname, email) => {
+    axios.post('/qa/questions', ({product_id: 22126, body: question, name: nickname, email: email}))
+      .then(info => info)
+      .catch(err => err)
+  }
 
   return (
     <div data-testid="qa-div-card-question">
@@ -29,12 +36,7 @@ const QAAddQuestionModal = ({ productName }) => {
             <input maxLength="60" required onChange={() => setEmail(event.target.value)}/><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
             <button className="qa-add-form-submit" onClick={() => {
               event.preventDefault();
-              console.log('question: ', question, ' - nickname: ', nickname, ' - email: ', email);
-              setModalInfo({
-                question: question,
-                nickname: nickname,
-                email: email
-              });
+              APICall(question, nickname, email);
             }}>Submit</button>
           </form>
         </div>

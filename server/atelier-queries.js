@@ -47,8 +47,32 @@ const getProductReviewsMeta = (productId, headers) => {
 
 // Returns the questions as an array
 const getProductQuestions = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}`, headers)
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=5000`, headers)
     .then(result => result.data.results)
+    .catch(err => {
+      throw err;
+    });
+};
+
+// Posts question to current product
+const postQuestion = (body, headers) => {
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions`, body, headers)
+    .then(result => {
+      return result.config.data;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+// Posts answer to current question
+const postAnswer = (body, headers) => {
+  var question_id = body.question_id;
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question_id}/answers`, body, headers)
+    .then(result => {
+      // console.log('answer details', result.data); // logs create
+      return result.config.data;
+    })
     .catch(err => {
       throw err;
     });
@@ -127,5 +151,7 @@ module.exports = {
   getProductQuestions,
   getProductReviews,
   getProductReviewsMeta,
-  postInteraction
+  postInteraction,
+  postQuestion,
+  postAnswer
 };

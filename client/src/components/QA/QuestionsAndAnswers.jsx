@@ -13,11 +13,11 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo}) => {
   useEffect(() => {
     setProductName(productInfo);
     setQuestions(questionsInfo);
-    // axios.get('/qa/questions/')
-    //   .then(response => {
-    //     setQuestions(response.data);
-    //   })
-    //   .catch(err => err);
+    axios.get('qa/questions/')
+      .then(response => {
+        setQuestions(response.data);
+      })
+      .catch(err => err);
     // sorts questions by helpfulness
     questions.sort((a, b) => {
       return b.question_helpfulness - a.question_helpfulness;
