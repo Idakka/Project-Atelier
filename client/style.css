@@ -13,6 +13,8 @@
 html,
 body {
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 @font-face {
@@ -201,6 +203,11 @@ h1{
   font-style: italic;
   text-decoration: underline;
   padding: 5px;
+}
+
+.theme-select{
+  text-decoration: none;
+  cursor: default;
 }
 
 .logo {
