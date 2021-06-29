@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 
-const QuestionsAndAnswers = ({questionsInfo, productInfo}) => {
+const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId}) => {
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [product, setProduct] = useState('');
   // // questions array for current product
