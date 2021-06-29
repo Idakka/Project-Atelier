@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const QAAddQuestionModal = ({ productName }) => {
+const QAAddQuestionModal = ({ productName, currentProductId }) => {
+
   // handles onChange for inputs
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
@@ -10,7 +11,7 @@ const QAAddQuestionModal = ({ productName }) => {
   const [modalInfo, setModalInfo] = useState({question: '', nickname: '', email: ''});
 
   const APICall = (question, nickname, email) => {
-    axios.post('/qa/questions', ({product_id: 22126, body: question, name: nickname, email: email}))
+    axios.post('/qa/questions', ({product_id: currentProductId, body: question, name: nickname, email: email}))
       .then(info => info)
       .catch(err => err)
   }

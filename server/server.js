@@ -62,15 +62,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var productId = 22124; // will need to be updated once product is rendering on page
+  var productId = 22126; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
-      // console.log('?', result)
-      // result.forEach(item => {
-      //   if (item.question_id === 153675) {
-      //     console.log(item)
-      //   }
-      // })
       res.end(JSON.stringify(result))
     })
     .catch(error => {
@@ -80,7 +74,6 @@ app.get('/qa/questions/', (req, res) => {
 });
 
 app.post('/qa/questions', (req, res) => {
-  // console.log('received by server', req.body);
   atelierQueries.postQuestion(req.body, atelierHeaders)
     .then(result => {
       const parseResult = JSON.parse(result);
@@ -89,7 +82,6 @@ app.post('/qa/questions', (req, res) => {
         return result;
     })
     .then(result => {
-      // console.log('info', result); // logs created
       res.end(JSON.stringify(result))
     })
     .catch(error => {
@@ -103,10 +95,8 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 });
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
-  // console.log('info at server.js', req.body)
   atelierQueries.postAnswer(req.body, atelierHeaders)
     .then(result => {
-      // console.log('result in server.js', result) // logs created
       res.end(JSON.stringify(result))
     })
     .catch(error => {

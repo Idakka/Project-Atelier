@@ -31,14 +31,12 @@ const QACardAnswers = ({ currentAnswers }) => {
   }, []);
 
   const APICall = (answerId) => {
-    console.log(answerId)
     axios.put(`/qa/answers/:answer_id/helpful`, {answer_id: answerId})
       .then(info => console.log('info:', info))
       .catch(err => err);
   }
 
   const APICallReport = (answerId) => {
-    console.log(answerId)
     axios.put(`/qa/answers/:answer_id/report`, {answer_id: answerId})
       .then(info => console.log('info:', info))
       .catch(err => err);
@@ -54,7 +52,7 @@ const QACardAnswers = ({ currentAnswers }) => {
               <span className="qa-divider">|</span>
               <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
               <span className="qa-divider">|</span>
-              <span onClick={() => APICallReport(answer.id)}>Report </span>
+              <span onClick={() => APICallReport(answer.id)}>Report</span>
             </p>
           </div>
         )}

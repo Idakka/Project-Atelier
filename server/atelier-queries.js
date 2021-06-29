@@ -70,7 +70,6 @@ const postAnswer = (body, headers) => {
   var question_id = body.question_id;
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question_id}/answers`, body, headers)
     .then(result => {
-      // console.log('answer details', result.data); // logs create
       return result.config.data;
     })
     .catch(err => {

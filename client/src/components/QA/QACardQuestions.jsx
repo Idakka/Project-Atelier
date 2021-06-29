@@ -4,7 +4,7 @@ import QACardAnswers from './QACardAnswers.jsx';
 import QAAddAnswerModal from './QAAddAnswerModal.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
-const QACardQuestions = ({ questionsInfo, productName }) => {
+const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
 
   // NOTE - keeping for refactor later on based on server changes for this path
   // // answers array for current product
@@ -84,7 +84,7 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => increaseCount()}>MORE ANSWERED QUESTIONS</button>
         <div className="qa-more" data-testid="qa-more">
-          <QAAddQuestionModal productName={productName} />
+          <QAAddQuestionModal productName={productName} currentProductId={currentProductId}/>
         </div>
       </div>
     </div>
