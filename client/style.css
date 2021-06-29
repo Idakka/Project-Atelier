@@ -112,6 +112,8 @@ h1{
   border-color: var(--white) transparent transparent transparent;
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 16px;
+  color: var(--trueblack);
+  background-color: var(--white);
 }
 
 .review-title {
