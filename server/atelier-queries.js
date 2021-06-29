@@ -47,7 +47,7 @@ const getProductReviewsMeta = (productId, headers) => {
 
 // Returns the questions as an array
 const getProductQuestions = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=5000`, headers)
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=500`, headers)
     .then(result => result.data.results)
     .catch(err => {
       throw err;
@@ -83,6 +83,19 @@ const helpfulQuestion = (questionId, headers) => {
   var question = questionId.question_id.toString();
   var questionObj = JSON.stringify(questionId)
   return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question}/helpful`, questionObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
+// Reports a question
+const reportQuestion = (questionId, headers) => {
+  var question = questionId.question_id.toString();
+  var questionObj = JSON.stringify(questionId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question}/report`, questionObj, headers)
     .then(result => {
       return result;
     })
@@ -167,5 +180,6 @@ module.exports = {
   postInteraction,
   postQuestion,
   postAnswer,
-  helpfulQuestion
+  helpfulQuestion,
+  reportQuestion
 };

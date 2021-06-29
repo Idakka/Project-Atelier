@@ -35,8 +35,13 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
   };
 
   const APICall = (questionId) => {
-    console.log('in API call, this is the questionId', questionId)
     axios.put(`/qa/questions/:question_id/helpful`, {question_id: questionId})
+      .then(info => console.log('info:', info))
+      .catch(err => err);
+  }
+
+  const APICallReport = (questionId) => {
+    axios.put(`/qa/questions/:question_id/report`, {question_id: questionId})
       .then(info => console.log('info:', info))
       .catch(err => err);
   }
@@ -60,10 +65,14 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
           <div key={index}>
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
-                <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right" onClick={() => {
+              <div className="qa-helpfulness-right righ-spacing" data-testid="qa-helpfulness-right">
+                <span className="right-spacing" onClick={() => {
+                event.preventDefault();
+                APICallReport(question.question_id)}}>Report</span>
+                <span className="right-spacing" onClick={() => {
                   event.preventDefault();
-                  APICall(question.question_id)}}>Helpful? <span className='right-spacing'>Yes ({question.question_helpfulness}) </span>
-                  <QAAddAnswerModal question={question} index={index} productName={productName} />
+                  APICall(question.question_id)}}>Helpful? Yes ({question.question_helpfulness}) </span>
+                <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
               </div></b>
             </div>

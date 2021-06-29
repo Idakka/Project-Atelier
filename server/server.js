@@ -62,7 +62,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var productId = 22126; // will need to be updated once product is rendering on page
+  var productId = 22124; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
       // console.log('?', result)
@@ -123,7 +123,17 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     })
     .catch(error => {
       console.error(error);
-      res.end(JSON.stringify(error));
+    });
+})
+
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  var questionId = req.body;
+  atelierQueries.reportQuestion(questionId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
     });
 })
 
