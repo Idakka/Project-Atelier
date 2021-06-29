@@ -42,10 +42,12 @@ const QACardAnswers = ({ currentAnswers }) => {
       .catch(err => err);
   }
 
+  // if there are no answers
   if (answersLength === 0) {
     return <div>Be the first to answer this question!</div>
   }
 
+  // if there are more answers than those displayed, show "load more" button
   if (answersLength > (answersToShowLength - 2)) {
     return <div data-testid="qa-div-card-answers">
       {answersToShow.map((answer, index) =>
@@ -68,6 +70,30 @@ const QACardAnswers = ({ currentAnswers }) => {
     </div>
   }
 
+  // if answers array is at max, show "collapse button"
+  if (answersLength < (answersToShowLength - 2)) {
+    return <div data-testid="qa-div-card-answers">
+      {answersToShow.map((answer, index) =>
+        <div className="qa-answers-external" key={index}>
+          <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
+          <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span className="qa-divider">|</span>
+            <span onClick={() => APICallReport(answer.id)}>Report</span>
+          </p>
+        </div>
+      )}
+      <div id='show-button'>
+        <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
+          setAnswersToShow(answers.slice(0, 2));
+          setAnswersToShowLength(2);
+        }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
+      </div>
+    </div>
+  }
+
+  // if there are two or less answers, don't show any buttons
   if (answersLength <= (answersToShowLength - 2)) {
     return <div data-testid="qa-div-card-answers">
       {answersToShow.map((answer, index) =>
