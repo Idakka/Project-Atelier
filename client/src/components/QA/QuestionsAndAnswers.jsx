@@ -11,8 +11,8 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo}) => {
   const [productName, setProductName] = useState('');
 
   useEffect(() => {
-    setProductName(productInfo);
-    setQuestions(questionsInfo);
+    // setProductName(productInfo);
+    // setQuestions(questionsInfo);
     axios.get('qa/questions/')
       .then(response => {
         setQuestions(response.data);

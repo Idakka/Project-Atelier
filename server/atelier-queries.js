@@ -78,6 +78,19 @@ const postAnswer = (body, headers) => {
     });
 };
 
+// Reports a question as helpful
+const helpfulQuestion = (questionId, headers) => {
+  var question = questionId.question_id.toString();
+  var questionObj = JSON.stringify(questionId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question}/helpful`, questionObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
 const postInteraction = (interaction, headers) => {
   return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', interaction, headers)
     .then(result => result.data)
@@ -153,5 +166,6 @@ module.exports = {
   getProductReviewsMeta,
   postInteraction,
   postQuestion,
-  postAnswer
+  postAnswer,
+  helpfulQuestion
 };

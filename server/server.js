@@ -115,6 +115,18 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
     });
 });
 
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  var questionId = req.body;
+  atelierQueries.helpfulQuestion(questionId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+})
+
 // Top level state queries
 // .../products/current?id=12345
 app.get('/products/current', (req, res) => {
