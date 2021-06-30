@@ -21,12 +21,12 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
   return (
     <div data-testid="qa-div-card-questions">
       <button id="qa-modal-button" className="qa-add" onClick={() => {
-        document.getElementById(index).style.display = "block";
+        document.getElementById(index).style.display = 'block';
       }}><b>[Add Answer]</b></button>
       <div id={index} className="qa-modal">
         <div className="qa-modal-content">
           <div className="qa-modal-close" onClick={() => {
-            document.getElementById(index).style.display = "none";
+            document.getElementById(index).style.display = 'none';
           }}>&times;</div>
           <h2>Submit Your Answer {question.question_id}</h2>
           <h3>{productName.name}: {question.question_body} </h3>
@@ -39,6 +39,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             <input maxLength="60" placeholder="Example: jack@email.com" required onChange={() => setEmail(event.target.value)} /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
             <button className="qa-add-form-submit" onClick={() => {
               event.preventDefault();
+              document.getElementById(index).style.display = 'none';
               APICall(question, answer, nickname, email);
             }}>Submit</button>
           </form>

@@ -47,7 +47,7 @@ const getProductReviewsMeta = (productId, headers) => {
 
 // Returns the questions as an array
 const getProductQuestions = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=5000`, headers)
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=500`, headers)
     .then(result => result.data.results)
     .catch(err => {
       throw err;
@@ -70,13 +70,64 @@ const postAnswer = (body, headers) => {
   var question_id = body.question_id;
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question_id}/answers`, body, headers)
     .then(result => {
-      // console.log('answer details', result.data); // logs create
       return result.config.data;
     })
     .catch(err => {
       throw err;
     });
 };
+
+// Reports a question as helpful
+const helpfulQuestion = (questionId, headers) => {
+  var question = questionId.question_id.toString();
+  var questionObj = JSON.stringify(questionId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question}/helpful`, questionObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
+// Reports a question
+const reportQuestion = (questionId, headers) => {
+  var question = questionId.question_id.toString();
+  var questionObj = JSON.stringify(questionId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${question}/report`, questionObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
+// Reports an answer as helpful
+const helpfulAnswer = (answerId, headers) => {
+  var answer = answerId.answer_id.toString();
+  var answerObj = JSON.stringify(answerId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${answer}/helpful`, answerObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
+// Reports an answer
+const reportAnswer = (answerId, headers) => {
+  var answer = answerId.answer_id.toString();
+  var answerObj = JSON.stringify(answerId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${answer}/report`, answerObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+}
 
 const postInteraction = (interaction, headers) => {
   return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', interaction, headers)
@@ -153,5 +204,9 @@ module.exports = {
   getProductReviewsMeta,
   postInteraction,
   postQuestion,
-  postAnswer
+  postAnswer,
+  helpfulQuestion,
+  reportQuestion,
+  helpfulAnswer,
+  reportAnswer
 };

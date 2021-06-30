@@ -135,7 +135,11 @@ class ProductDetailPage extends React.Component {
           relatedProducts={this.state.relatedProducts.map(productId => this.state.products[productId])}
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
-        <QuestionsAndAnswersWithTracking questionsInfo={questionsMock} productInfo={productInfoMock}/>
+        <QuestionsAndAnswersWithTracking
+          questionsInfo={questionsMock}
+          productInfo={productInfoMock}
+          currentProductId={this.state.currentProductId}
+        />
         <RatingsAndReviewsWithTracking
           top={this}
           onChangeFileHandler={this.onChangeFileHandler}
