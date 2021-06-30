@@ -211,7 +211,7 @@ module.exports = {
   getProductReviews,
   getProductReviewsMeta,
   postInteraction,
-  postCart
+  postCart,
   postQuestion,
   postAnswer,
   helpfulQuestion,
