@@ -1,11 +1,20 @@
 :root {
+  --trueblack: #000;
+  --nearblack: #333;
   --black: #515251;
+  --pale: #D3D3D3;
   --white: white;
+  --lowlight: #666;
+  --midtone: #808080;
+  --truered: red;
+  --gold: gold;
 }
 
 html,
 body {
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 @font-face {
@@ -27,6 +36,7 @@ body {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
@@ -53,7 +63,7 @@ h1{
 #left-pane-title {
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: medium;
-  color:rgb(60, 60, 60);
+  color:var(--black);
   padding: 0%
 }
 
@@ -99,9 +109,11 @@ h1{
 
 #sort-parameter {
   border: 1px solid transparent;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--white) transparent transparent transparent;
   font-family: Helvetica, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 16px;
+  color: var(--trueblack);
+  background-color: var(--white);
 }
 
 .review-title {
@@ -111,7 +123,7 @@ h1{
 
 .author {
   font-size: 10px;
-  color:#666;
+  color: var(--lowlight);
   margin: 1%;
   text-align: right;
 }
@@ -119,7 +131,7 @@ h1{
 .review-block {
   font-size: 16px;
   margin: 1%;
-  color:#666;
+  color: var(--lowlight);
 }
 
 .review-card {
@@ -130,14 +142,14 @@ h1{
 .response-block {
   font-size: 16px;
   margin: 1%;
-  color:#666;
+  color:var(--lowlight);
   padding: 1%;
 }
 
 .review-footer {
   font-size: 10px;
   margin: 1%;
-  color:#666;
+  color:var(--lowlight);
 }
 
 #ratings-right-pane-footer {
@@ -147,7 +159,7 @@ h1{
 }
 
 .review-btn {
-  background-color: white;
+  background-color: var(--white);
   padding: 2%;
   align-items: left;
   text-decoration: none;
@@ -158,8 +170,8 @@ h1{
 }
 
 .rnr-button {
-  background-color: white;
-  border: 1PX solid black;
+  background-color: var(--white);
+  border: 1PX solid var(--black);
   padding: 1.2rem;
   text-align: center;
   text-decoration: none;
@@ -170,8 +182,8 @@ h1{
 }
 
 .review-add {
-  background-color: white;
-  border: 1PX solid black;
+  background-color: var(--white);
+  border: 1PX solid var(--black);
   padding: 1.2rem;
   text-align: center;
   text-decoration: none;
@@ -184,15 +196,20 @@ h1{
 }
 
 .title-bar {
-  background-color: grey;
+  background-color: var(--midtone);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: white;
+  color: var(--white);
   font-size: 1.6rem;
   font-style: italic;
   text-decoration: underline;
   padding: 5px;
+}
+
+.theme-select{
+  text-decoration: none;
+  cursor: default;
 }
 
 .logo {
@@ -220,7 +237,7 @@ h1{
 }
 
 .image-gallery {
-  background-color: lightgray;
+  background-color: var(--pale);
   position: absolute;
   width: 100%;
   top: 0;
@@ -295,10 +312,10 @@ h1{
 
 .image-gallery-thumbnail {
   position: relative;
-  background-color: #eaeaea;
+  background-color: var(--pale);
   width: 75px;
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid var(--black);
   margin: 0 0 1em 0;
   z-index: 3;
 }
@@ -317,7 +334,7 @@ h1{
   width: 100%;
   height: 3px;
   border: none;
-  background-color: #000;
+  background-color: #var(--black);
   top: 3px;
   margin: 0;
   z-index: 2;
@@ -328,7 +345,7 @@ h1{
 }
 
 .sale-price {
-  color: red;
+  color: var(--truered);
 }
 
 .stars-and-reviews {
@@ -356,7 +373,7 @@ h1{
 }
 
 .vertical-rule {
-  border-left: 3px solid #666;
+  border-left: 3px solid var(--lowlight);
   margin: 0 auto
 }
 
@@ -391,6 +408,32 @@ h1{
   font-weight: 600;
 }
 
+.row-of-style-thumbnails-container {
+  position: relative;
+  width: 100%;
+  padding-top: 25%;
+}
+
+.row-of-style-thumbnails {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.style-thumbnail-container {
+  min-width: 25%;
+  max-width: 25%;
+  position: relative;
+}
+
+.style-thumbnail {
+  width: 100%;
+  height: 100%;
+  clip-path: circle(40% at center)
+}
+
 .add-to-bag-row {
   display: flex;
   flex-direction: row;
@@ -400,7 +443,7 @@ h1{
 }
 
 .add-to-bag-box {
-  border: 2px solid #666;
+  border: 2px solid var(--lowlight);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -411,7 +454,8 @@ h1{
   min-width: 55%;
   max-width: 55%;
   font-size: 1rem;
-  color: #333;
+  background-color: var(--white);
+  color: var(--nearblack);
   font-weight: 600;
   padding: .6em 2em .5em 1em;
   appearance: none;
@@ -421,7 +465,8 @@ h1{
   min-width: 40%;
   max-width: 40%;
   font-size: 1rem;
-  color: #333;
+  background-color: var(--white);
+  color: var(--nearblack);
   font-weight: 600;
   text-align-last: right;
   padding: 0.6em 1em 0.5em 2em;
@@ -458,14 +503,14 @@ h1{
   padding: 12px 16px;
   margin: 1px 0;
   display: inline-block;
-  border: 1px solid black;
+  border: 1px solid var(--trueblack);
   border-radius: 4px;
   box-sizing: border-box;
 }
 
 .qa-search-btn {
-  background-color: white;
-  border: 1px solid black;
+  background-color: var(--white);
+  border: 1px solid var(--trueblack);
   padding: 1%;
   width: 9%;
   text-align: center;
@@ -485,7 +530,7 @@ h1{
 }
 
 .qa-div, .qa-load-more {
-  background-color: white;
+  background-color: var(--white);
   border: none;
   font-size: 1.3em
 }
@@ -519,8 +564,8 @@ h1{
 }
 
 .qa-more, .qa-add-form-submit {
-  background-color: white;
-  border: 1px solid black;
+  background-color: var(--white);
+  border: 1px solid var(--trueblack);
   padding: 2%;
   text-align: center;
   text-decoration: none;
@@ -532,7 +577,7 @@ h1{
 
 .qa-add {
   border: none;
-  background-color: white;
+  background-color: var(--white);
   font-size: 1em;
 }
 
@@ -558,7 +603,7 @@ h1{
 
 .qa-add-answer {
   float: right;
-  background-color: white;
+  background-color: var(--white);
   border: none;
 }
 
@@ -596,14 +641,14 @@ h1{
 }
 
 .qa-modal-close {
-  color: gray;
+  color: var(--midtone);
   float: right;
   font-size: 30px;
   font-weight: bold;
 }
 
 .qa-modal-close:hover {
-  color: black;
+  color: var(--trueblack);
   cursor: pointer;
 }
 
@@ -675,12 +720,12 @@ h1{
   width: 1ch;
 }
 .carousel__edge--left {
-  background-image: linear-gradient(to right, white, transparent);
+  background-image: linear-gradient(to right, var(--white), transparent);
   justify-content: flex-start;
   left: 0;
 }
 .carousel__edge--right {
-  background-image: linear-gradient(to left, white, transparent);
+  background-image: linear-gradient(to left, var(--white), transparent);
   justify-content: flex-end;
   right: 0;
 }
@@ -719,7 +764,7 @@ h1{
 /* Make star visible on both light and dark backgrounds */
 /* I honestly hate this solution but will table it for later */
 .product__picture > .material-icons {
-  color: black;
+  color: var(--trueblack);
   cursor: pointer;
   position: absolute;
   right: 1rem;
@@ -736,12 +781,12 @@ h1{
   z-index: -1;
 }
 .product__picture > .material-icons.star::before {
-  color: gold;
+  color: var(--gold);
   content: '\e838';
   transform: scale(.9);
 }
 .product__picture > .material-icons.remove::before {
-  color: white;
+  color: var(--white);
   content: '\ef4a';
 }
 .product__details {
@@ -833,13 +878,13 @@ h1{
 .modal {
   position: fixed;
   visibility: hidden;
-  background-color: white;
+  background-color: var(--white);
   top: 10%;
   left: 10%;
   height: 80%;
   width: 80%;
   border-style: solid;
-  border-color: black;
+  border-color: var(--trueblack);
   border-width: 2px;
   z-index: 2;
 }

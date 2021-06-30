@@ -105,26 +105,6 @@ const QACardAnswers = ({ currentAnswers }) => {
       }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
     </div>;
   }
-
-  return (
-    <div data-testid="qa-answers-div" data-testid="qa-div-card-answers">
-      {answersToShow.map((answer, index) =>
-        <div className="qa-answers-external" key={index}>
-          <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
-          <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
-            <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
-            <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
-          </p>
-        </div>
-      )}
-      <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
-        setAnswersToShowLength(answersToShowLength + 2);
-        setAnswersToShow(answers.slice(0, answersToShowLength));
-      }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
-    </div>
-  );
 };
 
 export default QACardAnswers;
