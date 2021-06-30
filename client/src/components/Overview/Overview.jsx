@@ -66,7 +66,7 @@ class Overview extends React.Component {
           <div className="product-information">
             <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
             <StyleSelector productStyles={this.props.productStyles} overview={this} />
-            <AddToCartRegion top={this.props.top} />
+            <AddToCartRegion top={this.props.top} productStyles={this.props.productStyles} selectedStyle={this.state.selectedStyle} />
           </div>
         </div>
         <SalesPitch productInfo={this.props.productInfo} />
