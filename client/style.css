@@ -27,6 +27,7 @@ body {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
@@ -389,6 +390,32 @@ h1{
 
 .style-label {
   font-weight: 600;
+}
+
+.row-of-style-thumbnails-container {
+  position: relative;
+  width: 100%;
+  padding-top: 25%;
+}
+
+.row-of-style-thumbnails {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.style-thumbnail-container {
+  min-width: 25%;
+  max-width: 25%;
+  position: relative;
+}
+
+.style-thumbnail {
+  width: 100%;
+  height: 100%;
+  clip-path: circle(40% at center)
 }
 
 .add-to-bag-row {
