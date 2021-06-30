@@ -135,6 +135,7 @@ class AddReviewModal extends React.Component {
             defaultValue={this.state.nickname}
             maxLength="60"
             data-testid="review-nickname"
+            onChange={this.onChangeHandler}
           />
           <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
           <br></br>
@@ -149,6 +150,7 @@ class AddReviewModal extends React.Component {
             name="email"
             defaultValue={this.state.email}
             data-testid="review-name"
+            onChange={this.onChangeHandler}
           />
           <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
           <input
