@@ -61,116 +61,108 @@ class AddReviewModal extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <form id="review-upload-form"
-          data-testid="review-upload-form"
-          encType="multipart/form-data"
-          action="/photo-upload"
-          method="post">
-          <div className="review-form-title">Write Your Review</div>
-          <div className="review-form-subtitle">About the {this.props.currentProduct.name}</div>
-          <fieldset>
-            <legend>
-              <abbr title="This field is mandatory"
-                aria-label="required"> * </abbr>
-                Do you recommend this product?
-              </legend>
-            <input
-              type="radio"
-              required
-              name="recommendation"
-              id="recommend-yes"
-              value="yes"
-              checked={this.state.recommendation === 'yes' || false}
-              onChange={this.onChangeHandler} />Yes
-            <label htmlFor="recommend-yes" value="Yes"/>
-            <input
+      <form id="review-upload-form"
+        data-testid="review-upload-form"
+        encType="multipart/form-data"
+        action="/photo-upload"
+        method="post">
+        <div className="review-form-title">Write Your Review</div>
+        <div className="review-form-subtitle">About the {this.props.currentProduct.name}</div>
+        <fieldset>
+          <legend>
+            <abbr title="This field is mandatory"
+              aria-label="required"> * </abbr>
+              Do you recommend this product?
+            </legend>
+          <input
             type="radio"
             required
             name="recommendation"
-            id="recommend-no"
-            value="no"
-            checked={this.state.recommendation === 'no' || false}
-            onChange={this.onChangeHandler}/> No
-            <label htmlFor="recommend-no" value="No"/>
-          </fieldset>
-          <label>
-            Review Summary:
-            </label>
+            id="recommend-yes"
+            value="yes"
+            checked={this.state.recommendation === 'yes' || false}
+            onChange={this.onChangeHandler} />Yes
+          <label htmlFor="recommend-yes" value="Yes"/>
           <input
-            type="text"
-            id="review-summary"
-            name="reviewSummary"
-            defaultValue={this.state.reviewSummary}
-            maxLength="60"
-            data-testid="review-summary"
-            onChange={this.onChangeHandler}
-          />
-          <br></br>
-          <label>
-            <abbr title="This field is mandatory"
-              aria-label="required"> * </abbr>
-              Review:
+          type="radio"
+          required
+          name="recommendation"
+          id="recommend-no"
+          value="no"
+          checked={this.state.recommendation === 'no' || false}
+          onChange={this.onChangeHandler}/> No
+          <label htmlFor="recommend-no" value="No"/>
+        </fieldset>
+        <label>
+          Review Summary:
           </label>
-          <textarea
-            className="form-body-text"
-            id="review-body-text"
-            name="reviewBody"
-            value={this.state.reviewBody}
-            required
-            maxLength="1000"
-            onChange={this.onChangeHandler}
-          />
-          <WordCount text={this.state.reviewBody} />
-          {/* <input type="file" name="review-photo" multiple /> */}
-          <label>
-            <abbr title="This field is mandatory"
-              aria-label="required"> * </abbr>
-                What is your nickname?
-          </label>
-          <input
-            type="text"
-            id="review-nickname"
-            name="nickname"
-            defaultValue={this.state.nickname}
-            maxLength="60"
-            data-testid="review-nickname"
-            onChange={this.onChangeHandler}
-          />
-          <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
-          <br></br>
-          <label>
+        <input
+          type="text"
+          id="review-summary"
+          name="reviewSummary"
+          defaultValue={this.state.reviewSummary}
+          maxLength="60"
+          data-testid="review-summary"
+          onChange={this.onChangeHandler}
+        />
+        <br></br>
+        <label>
           <abbr title="This field is mandatory"
-              aria-label="required"> * </abbr>
-              Your Email:
-          </label>
-          <input
-            type="text"
-            id="review-email"
-            name="email"
-            defaultValue={this.state.email}
-            data-testid="review-name"
-            onChange={this.onChangeHandler}
-          />
-          <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
-          <input
-            type="submit"
-            value="Submit Review"
-            name="submit"
-            data-testid="review-upload-form-submit"
-          />
-          {/* <input type='text' id='review-body' name='random' /><br></br> */}
-          <span id="status"></span>
-        </form>
+            aria-label="required"> * </abbr>
+            Review:
+        </label>
+        <textarea
+          className="form-body-text"
+          id="review-body-text"
+          name="reviewBody"
+          value={this.state.reviewBody}
+          required
+          maxLength="1000"
+          onChange={this.onChangeHandler}
+        />
+        <WordCount text={this.state.reviewBody} />
+        {/* <input type="file" name="review-photo" multiple /> */}
+        <label>
+          <abbr title="This field is mandatory"
+            aria-label="required"> * </abbr>
+              What is your nickname?
+        </label>
+        <input
+          type="text"
+          id="review-nickname"
+          name="nickname"
+          defaultValue={this.state.nickname}
+          maxLength="60"
+          data-testid="review-nickname"
+          onChange={this.onChangeHandler}
+        />
+        <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
+        <br></br>
+        <label>
+        <abbr title="This field is mandatory"
+            aria-label="required"> * </abbr>
+            Your Email:
+        </label>
+        <input
+          type="text"
+          id="review-email"
+          name="email"
+          defaultValue={this.state.email}
+          data-testid="review-name"
+          onChange={this.onChangeHandler}
+        />
+        <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
+        <input
+          type="submit"
+          value="Submit Review"
+          name="submit"
+          data-testid="review-upload-form-submit"
+        />
+        <span id="status"></span>
         <input type="file" onChange={this.onChangeFileHandler}/>
-        {/* {
-          props.selectedImageFiles.map((image, index) => {
-            <img src={image} key={index} />
-          })
-        } */}
         <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} imageLoaded={this.state.imageLoaded} />
         <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to cancel review.</button>
-      </React.Fragment>
+      </form>
     );
   }
 };
