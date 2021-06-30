@@ -174,4 +174,14 @@ app.post('/photo-upload', (req, res) => {
   });
 });
 
+app.post('/cart', (req, res) => {
+  console.log('Post to cart method in server.js sees body of: ', req.body);
+  atelierQueries.postCart(req.body, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));

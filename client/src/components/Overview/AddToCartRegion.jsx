@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import ExampleModalContents from '../ExampleModalContents.jsx';
 
 class AddToCartRegion extends React.Component {
@@ -20,6 +21,17 @@ class AddToCartRegion extends React.Component {
       let selectedSku = sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
       console.log('Selected SKU: ', selectedSku);
       this.setState({ quantity: skus[selectedSku].quantity});
+    });
+    document.getElementById('add-to-bag-submit-button').addEventListener('click', (event) => {
+      // gather data from the forms.
+      let { skus } = this.props.productStyles.results[this.props.selectedStyle];
+      let sizeSelector = document.getElementById('add-to-bag-size-selector');
+      let selectedSize = sizeSelector.value;
+      let selectedSku = sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
+      console.log('Selected SKU: ', selectedSku);
+      //let skuId = '714565'; // hardcoded for first test.
+      // axios.post to the local server.
+      axios.post('/cart', { sku_id: selectedSku });
     });
   }
 
@@ -51,7 +63,7 @@ class AddToCartRegion extends React.Component {
           </select>
         </div>
         <div className="add-to-bag-row">
-          <div className="add-to-bag-box add-to-bag"><div>Add to Bag</div><div>+</div></div>
+          <div className="add-to-bag-box add-to-bag" id='add-to-bag-submit-button'><div>Add to Bag</div><div>+</div></div>
           <div id='add-to-bag-star-button' className="add-to-bag-box add-to-cart-star" data-testid="add-to-bag-star-button">
             <span className='material-icons'>star_rate</span>
           </div>
