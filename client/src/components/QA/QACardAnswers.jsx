@@ -30,17 +30,17 @@ const QACardAnswers = ({ currentAnswers }) => {
     setToggle(true);
   }, []);
 
-  const APICall = (answerId) => {
+  const APICallHelpful = (answerId) => {
     axios.put(`/qa/answers/:answer_id/helpful`, {answer_id: answerId})
       .then(info => console.log('info:', info))
       .catch(err => err);
-  }
+  };
 
   const APICallReport = (answerId) => {
     axios.put(`/qa/answers/:answer_id/report`, {answer_id: answerId})
       .then(info => console.log('info:', info))
       .catch(err => err);
-  }
+  };
 
   return (
     <div data-testid="qa-answers-div">
@@ -50,7 +50,7 @@ const QACardAnswers = ({ currentAnswers }) => {
             <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
             <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
               <span className="qa-divider">|</span>
-              <span onClick={() => APICall(answer.id)}>Helpful? ({answer.helpfulness})</span>
+              <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
               <span className="qa-divider">|</span>
               <span onClick={() => APICallReport(answer.id)}>Report</span>
             </p>
