@@ -38,23 +38,29 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    console.time('mounted => fetched');
+    this.loadProductInfo(this.state.currentProductId);
+  }
+
+  loadProductInfo(productId) {
+    this.setState({
+      currentProductId: productId
+    });
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
-    localStorage.removeItem('atelier-your-outfit');
     const yourOutfit = localStorage.getItem('atelier-your-outfit') || [22127];
-    console.time('fetched current product');
-    axios.get(`/products/current?id=${this.state.currentProductId}`)
+    axios.get(`/products/current?id=${productId}`)
       .then(response => response.data)
       .then(productInformation => {
-        updatedProducts[this.state.currentProductId] = productInformation;
+        updatedProducts[productId] = productInformation;
         this.setState({
-          products: updatedProducts
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          }
         }, () => {
-          console.timeEnd('fetched current product');
         });
-        console.time('fetched related products');
-        return axios.get(`/products/related?ids=${updatedProducts[this.state.currentProductId].related.join(',')}`);
+        // make axios calls for all related products and update this.state.products
+        return axios.get(`/products/related?ids=${updatedProducts[productId].related.join(',')}`);
       })
       .then(response => response.data)
       .then(relatedProductsInformation => {
@@ -62,12 +68,13 @@ class ProductDetailPage extends React.Component {
           updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
-          products: updatedProducts,
-          relatedProducts: updatedProducts[this.state.currentProductId].related
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          },
+          relatedProducts: updatedProducts[productId].related
         }, () => {
-          console.timeEnd('fetched related products');
         });
-        console.time('fetched your outfit products');
         return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
       })
       .then(response => response.data)
@@ -76,14 +83,15 @@ class ProductDetailPage extends React.Component {
           updatedProducts[product] = outfitProducts[product];
         }
         this.setState({
-          products: updatedProducts,
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          },
           yourOutfit: yourOutfit,
         }, () => {
-          console.timeEnd('fetched your outfit products');
         });
       })
       .catch(err => err);
-    // make axios calls for all related products and update this.state.products
   }
 
   onOutfitChange(changeType, productId) {

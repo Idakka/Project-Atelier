@@ -47,7 +47,7 @@ class Carousel extends React.Component {
     window.addEventListener('resize', () => {
       this.setState({
         screenWidth: this.innerWrapperRef.current.scrollWidth,
-        farRight: Math.max(this.state.numberOfCards - capacity, 0), // number of times user can scroll to the right
+        farRight: Math.max(this.state.numberOfCards - this.state.capacity, 0), // number of times user can scroll to the right
       }, () => console.log(this.state.productCards));
       debouncedScrollAndSetCarousel();
     });

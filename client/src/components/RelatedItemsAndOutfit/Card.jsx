@@ -6,7 +6,11 @@ import axios from 'axios';
 
 const Card = ({ top, product, cardType, onAction }) => {
   return (
-    <div className="card product" data-testid={`card--${cardType}`}>
+    <div
+      className="card product"
+      data-testid={`card--${cardType}`}
+      onClick={() => top.loadProductInfo(product.id)}
+    >
       <div className="product__picture">
         {/* If there is no picture, inform the user */}
         {product.defaultStyle.photos[0].url ? (
