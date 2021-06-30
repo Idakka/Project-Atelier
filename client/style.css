@@ -711,7 +711,7 @@ h1{
   position: absolute;
   top: 0;
   transition: all .5s;
-  width: min(200px, 15%);
+  width: min(40px, 15%);
   z-index: 1;
 }
 .carousel__edge > .material-icons {
@@ -720,12 +720,12 @@ h1{
   width: 1ch;
 }
 .carousel__edge--left {
-  background-image: linear-gradient(to right, var(--white), transparent);
+  background-image: linear-gradient(to right, var(--white) 5%, transparent);
   justify-content: flex-start;
   left: 0;
 }
 .carousel__edge--right {
-  background-image: linear-gradient(to left, var(--white), transparent);
+  background-image: linear-gradient(to left, var(--white) 5%, transparent);
   justify-content: flex-end;
   right: 0;
 }

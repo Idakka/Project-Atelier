@@ -18,7 +18,7 @@ const Card = ({ top, product, cardType, onAction }) => {
       className="card product"
       data-testid={`card--${cardType}`}
       onClick={(event) => changeProduct(event)}
-      style={cardType === 'related' ? { cursor: 'pointer'} : {}}
+      style={{cursor: 'pointer'}}
     >
       <div className="product__picture">
         {cardType === 'related' && (

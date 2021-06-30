@@ -31,7 +31,8 @@ class Carousel extends React.Component {
   }
 
   createProductCards() {
-    return this.props.products.map(product => {
+    const validProducts = this.props.products.filter(product => product);
+    return validProducts.map(product => {
       return {
         ...product,
         rating: calculateRating(product.reviewsMeta.ratings),

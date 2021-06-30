@@ -28,7 +28,7 @@ class ProductDetailPage extends React.Component {
       products: {
         // productId: { ... },
       },
-      yourOutfit: [],
+      yourOutfit: JSON.parse(localStorage.getItem('atelier-your-outfit')) || [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
@@ -38,18 +38,31 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    this.loadProductInfo(this.state.currentProductId);
+    this.loadProductInfo();
   }
 
-  loadProductInfo(productId) {
+  getCurrentProductFromAPI(productId) {
+    return axios.get(`/products/current?id=${productId}`)
+      .then(response => response.data);
+  }
+
+  getListOfProductsFromAPI(listOfProducts) {
+    const productsWithoutInfo = listOfProducts.filter(product => this.state.products[product] === undefined);
+    if (productsWithoutInfo.length !== 0) {
+      return axios.get(`/products/related?ids=${productsWithoutInfo.join(',')}`)
+        .then(response => response.data);
+    } else {
+      return new Promise([]);
+    }
+  }
+
+  loadProductInfo(productId = this.state.currentProductId) {
     this.setState({
       currentProductId: productId
     });
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
-    const yourOutfit = localStorage.getItem('atelier-your-outfit') || [22127];
-    axios.get(`/products/current?id=${productId}`)
-      .then(response => response.data)
+    this.getCurrentProductFromAPI(productId)
       .then(productInformation => {
         updatedProducts[productId] = productInformation;
         this.setState({
@@ -57,12 +70,10 @@ class ProductDetailPage extends React.Component {
             ...this.state.products,
             ...updatedProducts
           }
-        }, () => {
         });
         // make axios calls for all related products and update this.state.products
-        return axios.get(`/products/related?ids=${updatedProducts[productId].related.join(',')}`);
+        return this.getListOfProductsFromAPI(updatedProducts[productId].related);
       })
-      .then(response => response.data)
       .then(relatedProductsInformation => {
         for (const product in relatedProductsInformation) {
           updatedProducts[product] = relatedProductsInformation[product];
@@ -73,11 +84,9 @@ class ProductDetailPage extends React.Component {
             ...updatedProducts
           },
           relatedProducts: updatedProducts[productId].related || []
-        }, () => {
         });
-        return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
+        return this.getListOfProductsFromAPI(this.state.yourOutfit);
       })
-      .then(response => response.data)
       .then(outfitProducts => {
         for (const product in outfitProducts) {
           updatedProducts[product] = outfitProducts[product];
