@@ -120,7 +120,6 @@ const getRelatedProductsBundle = (relatedProducts, headers) => {
 };
 
 const postCart = (skuId, headers) => {
-  console.log('In atelier-queries, skuId: ', skuId)
   return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart', skuId, headers)
     .then(result => result.data)
     .catch(err => {

@@ -10,27 +10,24 @@ class AddToCartRegion extends React.Component {
     };
   };
 
+  getSelectedSku() {
+    let { skus } = this.props.productStyles.results[this.props.selectedStyle];
+    let sizeSelector = document.getElementById('add-to-bag-size-selector');
+    let selectedSize = sizeSelector.value;
+    return sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
+  }
+
   componentDidMount() {
     document.getElementById('add-to-bag-star-button').addEventListener('click', (event) => {
       this.props.top.showModal(<ExampleModalContents top={this.props.top} />);
     });
     document.getElementById('add-to-bag-size-selector').addEventListener('change', (event) => {
       let { skus } = this.props.productStyles.results[this.props.selectedStyle];
-      let sizeSelector = document.getElementById('add-to-bag-size-selector');
-      let selectedSize = sizeSelector.value;
-      let selectedSku = sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
-      console.log('Selected SKU: ', selectedSku);
+      let selectedSku = this.getSelectedSku();
       this.setState({ quantity: skus[selectedSku].quantity});
     });
     document.getElementById('add-to-bag-submit-button').addEventListener('click', (event) => {
-      // gather data from the forms.
-      let { skus } = this.props.productStyles.results[this.props.selectedStyle];
-      let sizeSelector = document.getElementById('add-to-bag-size-selector');
-      let selectedSize = sizeSelector.value;
-      let selectedSku = sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
-      console.log('Selected SKU: ', selectedSku);
-      //let skuId = '714565'; // hardcoded for first test.
-      // axios.post to the local server.
+      let selectedSku = this.getSelectedSku();
       axios.post('/cart', { sku_id: selectedSku });
     });
   }
