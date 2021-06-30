@@ -13,7 +13,7 @@ class AddReviewModal extends React.Component {
       reviewSummary: 'Example: Best purchase ever!',
       reviewBody: 'Why did you like the product or not?',
       characteristics: [],
-      recommendation: '',
+      recommendation: 'yes',
       overalRating: 0
     };
     this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
@@ -28,14 +28,15 @@ class AddReviewModal extends React.Component {
   }
 
   onChangeHandler(event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log("target for onChangeHandler", event.target.value);
     const value = event.target.value;
     const name = event.target.name;
     this.setState( {
       [name]: value
+    }, () => {
+      console.log('new state =>', this.state);
     });
-    console.log('new state => name: value', name, value);
   }
 
   onChangeFileHandler(event) {
@@ -75,14 +76,27 @@ class AddReviewModal extends React.Component {
                 Do you recommend this product?
               </legend>
             <input
-            type="radio" required name="recommend" id="recommend-yes" value="yes" />Yes
+              type="radio"
+              required
+              name="recommendation"
+              id="recommend-yes"
+              value="yes"
+              checked={this.state.recommendation === 'yes' || false}
+              onChange={this.onChangeHandler} />Yes
             <label htmlFor="recommend-yes" value="Yes"/>
-            <input type="radio" required name="recommend" id="recommend-no" value="no" /> No
+            <input
+            type="radio"
+            required
+            name="recommendation"
+            id="recommend-no"
+            value="no"
+            checked={this.state.recommendation === 'no' || false}
+            onChange={this.onChangeHandler}/> No
             <label htmlFor="recommend-no" value="No"/>
           </fieldset>
           <label>
             Review Summary:
-            </label><br></br>
+            </label>
           <input
             type="text"
             id="review-summary"
@@ -90,9 +104,14 @@ class AddReviewModal extends React.Component {
             defaultValue={this.state.reviewSummary}
             maxLength="60"
             data-testid="review-summary"
+            onChange={this.onChangeHandler}
           />
           <br></br>
-          <label>Review:</label><br></br>
+          <label>
+            <abbr title="This field is mandatory"
+              aria-label="required"> * </abbr>
+              Review:
+          </label>
           <textarea
             className="form-body-text"
             id="review-body-text"
@@ -104,14 +123,26 @@ class AddReviewModal extends React.Component {
           />
           <WordCount text={this.state.reviewBody} />
           {/* <input type="file" name="review-photo" multiple /> */}
-          <label></label>
+          <label>
+            <abbr title="This field is mandatory"
+              aria-label="required"> * </abbr>
+                What is your nickname?
+          </label>
           <input
             type="text"
             id="review-nickname"
             name="nickname"
             defaultValue={this.state.nickname}
+            maxLength="60"
             data-testid="review-nickname"
-          /><br></br>
+          />
+          <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
+          <br></br>
+          <label>
+          <abbr title="This field is mandatory"
+              aria-label="required"> * </abbr>
+              Your Email:
+          </label>
           <input
             type="text"
             id="review-email"
@@ -119,6 +150,7 @@ class AddReviewModal extends React.Component {
             defaultValue={this.state.email}
             data-testid="review-name"
           />
+          <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
           <input
             type="submit"
             value="Submit Review"
