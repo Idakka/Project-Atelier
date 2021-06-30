@@ -61,40 +61,50 @@ class AddReviewModal extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Write Your Review</h1>
-        <h2>About the {this.props.currentProduct.name}</h2>
         <form id="review-upload-form"
           data-testid="review-upload-form"
           encType="multipart/form-data"
           action="/photo-upload"
           method="post">
+          <div className="review-form-title">Write Your Review</div>
+          <div className="review-form-subtitle">About the {this.props.currentProduct.name}</div>
           <fieldset>
-            <legend>Do you recommend this product?<abbr title="This field is mandatory"
-            aria-label="required">*</abbr>
-            </legend>
+            <legend>
+              <abbr title="This field is mandatory"
+                aria-label="required"> * </abbr>
+                Do you recommend this product?
+              </legend>
             <input
             type="radio" required name="recommend" id="recommend-yes" value="yes" />Yes
             <label htmlFor="recommend-yes" value="Yes"/>
             <input type="radio" required name="recommend" id="recommend-no" value="no" /> No
             <label htmlFor="recommend-no" value="No"/>
           </fieldset>
-          <legend>Review Summary:</legend>
+          <label>
+            Review Summary:
+            </label><br></br>
           <input
             type="text"
             id="review-summary"
             name="reviewSummary"
             defaultValue={this.state.reviewSummary}
+            maxLength="60"
             data-testid="review-summary"
-          /><br></br>
+          />
+          <br></br>
+          <label>Review:</label><br></br>
           <textarea
+            className="form-body-text"
             id="review-body-text"
             name="reviewBody"
             value={this.state.reviewBody}
             required
+            maxLength="1000"
             onChange={this.onChangeHandler}
           />
           <WordCount text={this.state.reviewBody} />
           {/* <input type="file" name="review-photo" multiple /> */}
+          <label></label>
           <input
             type="text"
             id="review-nickname"

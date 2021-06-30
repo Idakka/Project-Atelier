@@ -183,6 +183,46 @@ h1{
   flex-direction: row;
 }
 
+.review-form-title {
+  text-align: center;
+  justify-content: center;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 2em;
+  font-weight: normal;
+  margin-top: 0.25em;
+  color: rgb(52, 52, 52);
+  letter-spacing: 2px;
+}
+
+.review-form-subtitle {
+  text-align: center;
+  justify-content: center;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+  margin-top: 0.25em;
+  color: rgb(52, 52, 52);
+  letter-spacing: 2px;
+}
+
+#review-upload-form {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 100px;
+  min-height: 400px;
+  padding: 20px 40px 40px 40px;
+  border-radius: 6px;
+  box-shadow: 0px 8px 36px #222;
+  background-color: #fefefe;
+}
+
+.form-body-text {
+  width: 90%;
+  align-content: center;
+}
+/* end Ratings and Reviews css */
+
 .title-bar {
   background-color: grey;
   display: flex;
