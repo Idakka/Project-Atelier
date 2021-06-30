@@ -62,36 +62,92 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var currentProduct = 22126; // will need to be updated once product is rendering on page
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`, atelierHeaders)
-    .then(response => {
-      res.send(response.data.results);
-      res.end();
+  var productId = 22126; // will need to be updated once product is rendering on page
+  atelierQueries.getProductQuestions(productId, atelierHeaders)
+    .then(result => {
+      res.end(JSON.stringify(result))
     })
-    .catch(err => console.log('err', err));
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
+app.post('/qa/questions', (req, res) => {
+  atelierQueries.postQuestion(req.body, atelierHeaders)
+    .then(result => {
+      const parseResult = JSON.parse(result);
+      atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
+        .then(questions => questions)
+        return result;
+    })
+    .then(result => {
+      res.end(JSON.stringify(result))
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+})
+
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  // NOTE - this path will need to be refactored, answers aren't comming from it currently, keeping for reference
-  // var currentProduct = 22126; // will need to be updated once product is rendering on page
-  // axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${currentProduct}`)
-  //   .then(response => {
-  //     var questions = [];
-  //     response.data.results.forEach((item) => {
-  //       questions.push(item);
-  //     });
-  //     return questions;
-  //   })
-  //   .then(getAnswers => {
-  //     var answers = [];
-  //     getAnswers.forEach(item => {
-  //       answers.push(item.answers);
-  //     })
-  //     res.send(answers);
-  //     res.end();
-  //   })
-  //   .catch(err => console.log('err', err));
+
 });
+
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  atelierQueries.postAnswer(req.body, atelierHeaders)
+    .then(result => {
+      res.end(JSON.stringify(result))
+    })
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  var questionId = req.body;
+  atelierQueries.helpfulQuestion(questionId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  var questionId = req.body;
+  atelierQueries.reportQuestion(questionId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  var answerId = req.body;
+  atelierQueries.helpfulAnswer(answerId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  var answerId = req.body;
+  atelierQueries.reportAnswer(answerId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+})
 
 // Top level state queries
 // .../products/current?id=12345

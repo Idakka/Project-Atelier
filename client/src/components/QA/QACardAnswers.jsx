@@ -19,9 +19,7 @@ const QACardAnswers = ({ currentAnswers }) => {
       for (var key in currentAnswers) {
         answers.push(currentAnswers[key]);
       }
-      // sets answers array
       setAnswers(answers);
-      // sorts answers array by helpfulness
       answers.sort((a, b) => {
         return b.helpfulness - a.helpfulness;
       });
@@ -32,6 +30,18 @@ const QACardAnswers = ({ currentAnswers }) => {
     setToggle(true);
   }, []);
 
+  const APICallHelpful = (answerId) => {
+    axios.put(`/qa/answers/:answer_id/helpful`, {answer_id: answerId})
+      .then(info => console.log('info:', info))
+      .catch(err => err);
+  };
+
+  const APICallReport = (answerId) => {
+    axios.put(`/qa/answers/:answer_id/report`, {answer_id: answerId})
+      .then(info => console.log('info:', info))
+      .catch(err => err);
+  };
+
   return (
     <div data-testid="qa-answers-div">
       <div data-testid="qa-div-card-answers">
@@ -40,9 +50,9 @@ const QACardAnswers = ({ currentAnswers }) => {
             <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
             <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
               <span className="qa-divider">|</span>
-              <a href="">Helpful? ({answer.helpfulness})</a>
+              <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
               <span className="qa-divider">|</span>
-              <a href="">Report </a>
+              <span onClick={() => APICallReport(answer.id)}>Report</span>
             </p>
           </div>
         )}

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import QACardAnswers from './QACardAnswers.jsx';
 import QAAddAnswerModal from './QAAddAnswerModal.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
-const QACardQuestions = ({ questionsInfo, productName }) => {
-
-  const [modalIsOpenAdd, setModalIsOpenAdd] = useState(false);
+const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
 
   // NOTE - keeping for refactor later on based on server changes for this path
   // // answers array for current product
@@ -35,6 +34,18 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
     }
   };
 
+  const APICallHelpful = (questionId) => {
+    axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
+      .then(info => console.log('info:', info))
+      .catch(err => err);
+  };
+
+  const APICallReport = (questionId) => {
+    axios.put(`/qa/questions/:question_id/report`, { question_id: questionId })
+      .then(info => console.log('info:', info))
+      .catch(err => err);
+  };
+
   return (
     <div data-testid="qa-questions">
       <form data-testid="search" id="search">
@@ -54,7 +65,15 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
           <div key={index}>
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
-                <div className="qa-helpfulness-right" data-testid="qa-helpfulness-right">Helpful? <a href='' className='right-spacing'>Yes ({question.question_helpfulness}) </a>
+                <div className="qa-helpfulness-right right-spacing" data-testid="qa-helpfulness-right">
+                  <span className="right-spacing" onClick={() => {
+                    event.preventDefault();
+                    APICallReport(question.question_id);
+                  }}>Report</span>
+                  <span className="right-spacing" onClick={() => {
+                    event.preventDefault();
+                    APICallHelpful(question.question_id);
+                  }}>Helpful? Yes ({question.question_helpfulness}) </span>
                   <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
               </div></b>
@@ -67,7 +86,7 @@ const QACardQuestions = ({ questionsInfo, productName }) => {
       <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
         <button className="qa-more" onClick={() => increaseCount()}>MORE ANSWERED QUESTIONS</button>
         <div className="qa-more" data-testid="qa-more">
-          <QAAddQuestionModal productName={productName} />
+          <QAAddQuestionModal productName={productName} currentProductId={currentProductId} />
         </div>
       </div>
     </div>
