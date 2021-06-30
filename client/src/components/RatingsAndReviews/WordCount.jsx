@@ -8,7 +8,9 @@ const message = remainingCount < 1 ? 'Minimum reached' : `Minimum required chara
 
 return (
   <div className="word-count" data-testid="word-count">
-    {message}
+    <p className="form-detail-text">
+      {message}
+    </p>
   </div>
 )
 };

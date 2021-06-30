@@ -205,10 +205,15 @@ h1{
   letter-spacing: 2px;
 }
 
+.form-detail-text {
+  font-size: small;
+  line-height: 0rem;
+}
+
 #review-upload-form {
   display: flex;
   flex-direction: column;
-
+  text-align: center;
   min-width: 100px;
   min-height: 400px;
   padding: 20px 40px 40px 40px;
@@ -218,7 +223,7 @@ h1{
 }
 
 .form-body-text {
-  width: 90%;
+  width: inherit;
   align-content: center;
 }
 /* end Ratings and Reviews css */
