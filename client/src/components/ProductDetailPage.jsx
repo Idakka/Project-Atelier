@@ -72,7 +72,7 @@ class ProductDetailPage extends React.Component {
             ...this.state.products,
             ...updatedProducts
           },
-          relatedProducts: updatedProducts[productId].related
+          relatedProducts: updatedProducts[productId].related || []
         }, () => {
         });
         return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
