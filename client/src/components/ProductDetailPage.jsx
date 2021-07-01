@@ -29,8 +29,6 @@ class ProductDetailPage extends React.Component {
       selectedImageFiles: [],
       fileLoaded: 0
     };
-    // this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
-    // this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
   }
 
   componentDidMount() {
@@ -96,26 +94,6 @@ class ProductDetailPage extends React.Component {
     });
   }
 
-  // onChangeFileHandler(event) {
-  //   let tempImageURLArray = this.state.selectedImageFiles;
-  //   let fileCount = this.state.fileLoaded;
-  //   tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
-  //   fileCount++;
-  //   this.setState({
-  //     selectedImageFiles: tempImageURLArray,
-  //     fileLoaded: fileCount
-  //   });
-  // }
-
-  // onClickUploadHandler() {
-  //   const data = new FormData();
-  //   data.append('file', this.state.selectedImageFiles);
-  //   axios.post(`http://localhost:${port}/upload`, data)
-  //     .then(response => {
-  //       console.log('successful upload: ', response);
-  //     });
-  // }
-
   showModal(component) {
     this.setState({modalContents: component});
     document.getElementById('the_modal').style.visibility = 'visible';
@@ -144,8 +122,6 @@ class ProductDetailPage extends React.Component {
           currentProduct={this.state.products[this.state.currentProductId]}
           reviews={reviewsMock.results}
           reviewsMeta={reviewsMetaMock}
-          selectedImageFiles={this.state.selectedImageFiles}
-          fileLoaded={this.state.fileLoaded}
         />
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>

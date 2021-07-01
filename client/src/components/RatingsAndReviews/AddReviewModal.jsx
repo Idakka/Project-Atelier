@@ -121,7 +121,6 @@ class AddReviewModal extends React.Component {
           onChange={this.onChangeHandler}
         />
         <WordCount text={this.state.reviewBody} />
-        {/* <input type="file" name="review-photo" multiple /> */}
         <label>
           <abbr title="This field is mandatory"
             aria-label="required"> * </abbr>
