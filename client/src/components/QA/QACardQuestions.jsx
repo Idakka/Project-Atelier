@@ -6,33 +6,9 @@ import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
 const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
 
-  // NOTE - keeping for refactor later on based on server changes for this path
-  // // answers array for current product
-  // const [answers, setAnswers] = useState([]);
-
   const [word, setWord] = useState('');
+  const [temp, setTemp] = useState('');
   const [length, setLength] = useState(4);
-
-  // useEffect(() => {
-  // axios.get('/qa/questions/:question_id/answers')
-  //   .then(response => {
-  //     setAnswers(response.data);
-  //   })
-  //   .catch(err => err);
-  // }, []);
-
-  const increaseCount = () => {
-    event.preventDefault();
-    setLength(length + 2);
-  };
-
-  const filterQuestions = () => {
-    if (event.target.value.length < 3) {
-      setWord('');
-    } else {
-      setWord(event.target.value);
-    }
-  };
 
   const APICallHelpful = (questionId) => {
     axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
@@ -46,13 +22,27 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       .catch(err => err);
   };
 
+  const increaseCount = () => {
+    event.preventDefault();
+    setLength(length + 2);
+  };
+
+  const filterQuestions = () => {
+    if (temp.length > 2) {
+      setWord(temp);
+      setLength(questionsInfo.length);
+    } else if ((temp.length >= 0) && (temp.length <= 2)) {
+      setWord('');
+    }
+  };
+
   return (
     <div data-testid="qa-questions">
       <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           onChange={() => {
             filterQuestions();
-            setLength(4);
+            setTemp(event.target.value);
           }}
         ></input>
         {/* NOTE - Search button will be replaced with icon later on */}
@@ -91,6 +81,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       </div>
     </div>
   );
+
 };
 
 export default QACardQuestions;
