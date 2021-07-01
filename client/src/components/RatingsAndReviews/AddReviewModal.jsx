@@ -41,12 +41,12 @@ class AddReviewModal extends React.Component {
 
   onChangeFileHandler(event) {
     let tempImageURLArray = this.state.selectedImageFiles;
-    let fileCount = this.state.fileLoaded;
+    let fileCount = this.state.filesLoaded;
     tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
     fileCount++;
     this.setState({
       selectedImageFiles: tempImageURLArray,
-      fileLoaded: fileCount
+      filesLoaded: fileCount
     });
   }
 
@@ -160,7 +160,7 @@ class AddReviewModal extends React.Component {
         />
         <span id="status"></span>
         <input type="file" onChange={this.onChangeFileHandler}/>
-        <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} imageLoaded={this.state.imageLoaded} />
+        <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} filesLoaded={this.state.filesLoaded} />
         <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to cancel review.</button>
       </form>
     );
