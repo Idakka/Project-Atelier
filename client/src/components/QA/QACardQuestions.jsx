@@ -11,6 +11,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
   const [length, setLength] = useState(4);
 
   const APICallHelpful = (questionId) => {
+    console.log('calling helpful');
     axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
       .then(info => console.log('info:', info))
       .catch(err => err);
@@ -58,6 +59,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
                 <div className="qa-helpfulness-right right-spacing" data-testid="qa-helpfulness-right">
+
                   <span className="right-spacing" id={question.question_id} onClick={() => {
                     event.preventDefault();
                     APICallReport(question.question_id);
@@ -65,10 +67,15 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
                     document.getElementById("afterReport").style.display = 'block';
                   }}>Report</span>
                   <span className="right-spacing" id="afterReport" style={{display: 'none'}}>Reported</span>
-                  <span className="right-spacing" onClick={() => {
+
+                  <span className="right-spacing" id={'h' + question.question_id} onClick={() => {
                     event.preventDefault();
                     APICallHelpful(question.question_id);
+                    document.getElementById('h' + question.question_id).style.display = 'none';
+                    document.getElementById("afterHelpful").style.display = 'block';
                   }}>Helpful? Yes ({question.question_helpfulness}) </span>
+                  <span className="right-spacing" id="afterHelpful" style={{display: 'none'}}>Helpful? Yes ({question.question_helpfulness + 1})</span>
+
                   <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
               </div></b>
