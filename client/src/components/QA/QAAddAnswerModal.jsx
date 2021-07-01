@@ -9,14 +9,31 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
-  // sets up an object with responses, will send this to POST requests
-  const [modalInfo, setModalInfo] = useState({});
 
   const APICall = (question, answer, nickname, email) => {
-    axios.post('/qa/questions/:question_id/answers', ({question_id: question.question_id, body: answer, name: nickname, email: email, photos: photos}))
-      .then(info => info)
-      .catch(err => err)
-  }
+    let message = '';
+    if (answer === '') {
+      message += ' Please include an answer. \n ';
+    }
+    if (nickname === '') {
+      message += ' Please include a nickname. \n ';
+    }
+    if (email === '') {
+      message += ' Please include an email. \n ';
+    }
+    if (email !== '' && email.includes('@') === false) {
+      message += ' Please include a valid email. \n ';
+    }
+
+    if (message !== '') {
+      alert(message);
+      document.getElementById(index).style.display = 'block';
+    } else if (message === '') {
+      axios.post('/qa/questions/:question_id/answers', ({ question_id: question.question_id, body: answer, name: nickname, email: email, photos: photos }))
+        .then(info => info)
+        .catch(err => err);
+    }
+  };
 
   return (
     <div data-testid="qa-div-card-questions">
