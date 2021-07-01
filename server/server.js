@@ -42,22 +42,23 @@ var uploadS3 = multer({
     acl: 'public-read',
     bucket: s3Headers.headers.S3Bucket,
     metadata: (req, file, getFieldname) => {
-      getFieldname(null, {fieldName: file.fieldname})
+      getFieldname(null, {fieldName: file.fieldname});
     },
     key: (req, file, createAWSName) => {
-      createAWSName(null, Date.now().toString() + '-' + file.originalname)
+      createAWSName(null, Date.now().toString() + '-' + file.originalname);
     }
   })
 });
 
 var photoUpload = uploadS3.array('review-photo', 5);
 
+
 const pathname = path.join(__dirname, '..', 'public');
 app.use(expressStaticGzip(pathname));
 const corsOptions = {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200
-}
+};
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -66,7 +67,7 @@ app.get('/qa/questions/', (req, res) => {
   var productId = 22126; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
-      res.end(JSON.stringify(result))
+      res.end(JSON.stringify(result));
     })
     .catch(error => {
       console.error(error);
@@ -79,17 +80,17 @@ app.post('/qa/questions', (req, res) => {
     .then(result => {
       const parseResult = JSON.parse(result);
       atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
-        .then(questions => questions)
-        return result;
+        .then(questions => questions);
+      return result;
     })
     .then(result => {
-      res.end(JSON.stringify(result))
+      res.end(JSON.stringify(result));
     })
     .catch(error => {
       console.error(error);
       res.end(JSON.stringify(error));
     });
-})
+});
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
 
@@ -98,7 +99,7 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   atelierQueries.postAnswer(req.body, atelierHeaders)
     .then(result => {
-      res.end(JSON.stringify(result))
+      res.end(JSON.stringify(result));
     })
     .catch(error => {
       console.error(error);
@@ -115,7 +116,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     .catch(error => {
       console.error(error);
     });
-})
+});
 
 app.put('/qa/questions/:question_id/report', (req, res) => {
   var questionId = req.body;
@@ -126,7 +127,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
     .catch(error => {
       console.error(error);
     });
-})
+});
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   var answerId = req.body;
@@ -137,7 +138,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
     .catch(error => {
       console.error(error);
     });
-})
+});
 
 app.put('/qa/answers/:answer_id/report', (req, res) => {
   var answerId = req.body;
@@ -148,7 +149,7 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     .catch(error => {
       console.error(error);
     });
-})
+});
 
 // Top level state queries
 // .../products/current?id=12345
@@ -227,7 +228,7 @@ app.post('/photo-upload', (req, res) => {
       res.status(400).end('server error uploading photos');
     } else {
       res.status(200).redirect('/');
-    };
+    }
   });
 });
 
