@@ -5,21 +5,25 @@ import Comparison from './Comparison.jsx';
 import axios from 'axios';
 
 const Card = ({ top, product, cardType, onAction }) => {
+  const changeProduct = (event) => {
+    if (event.target.closest('.action-button')) {
+      return;
+    } else {
+      top.loadProductInfo(product.id);
+    }
+  };
+
   return (
-    <div className="card product" data-testid={`card--${cardType}`}>
+    <div
+      className="card product"
+      data-testid={`card--${cardType}`}
+      onClick={(event) => changeProduct(event)}
+      style={{cursor: 'pointer'}}
+    >
       <div className="product__picture">
-        {/* If there is no picture, inform the user */}
-        {product.defaultStyle.photos[0].url ? (
-          <img src={product.defaultStyle.photos[0].url} alt={product.name} />
-        ) : (
-          <div className="product__no-picture-provided">
-            <span className="material-icons broken_image">broken_image</span>
-            <p className="product__name">No Picture Provided</p>
-          </div>
-        )}
         {cardType === 'related' && (
           <span
-            className="material-icons star"
+            className="action-button material-icons star"
             onClick={() => onAction(
               <Comparison
                 top={top}
@@ -33,12 +37,22 @@ const Card = ({ top, product, cardType, onAction }) => {
         )}
         {cardType === 'outfit' && (
           <span
-            className="material-icons remove"
+            className="action-button material-icons remove"
             onClick={() => onAction('remove', product.id)}
           >
             highlight_off
           </span>
         )}
+        {/* If there is no picture, inform the user */}
+        {product.defaultStyle.photos[0].url ? (
+          <img src={product.defaultStyle.photos[0].url} className="product__image" alt={product.name} />
+        ) : (
+          <div className="product__no-picture-provided">
+            <span className="material-icons broken_image">broken_image</span>
+            <p className="product__name">No Picture Provided</p>
+          </div>
+        )}
+
       </div>
       <div className="product__details">
         <p className="product__category">{product.category}</p>

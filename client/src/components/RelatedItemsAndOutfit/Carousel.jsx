@@ -31,7 +31,8 @@ class Carousel extends React.Component {
   }
 
   createProductCards() {
-    return this.props.products.map(product => {
+    const validProducts = this.props.products.filter(product => product);
+    return validProducts.map(product => {
       return {
         ...product,
         rating: calculateRating(product.reviewsMeta.ratings),
@@ -41,16 +42,15 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    this.scrollAndSetCarousel();
     // Set window listener to set scrolling on resize
     const debouncedScrollAndSetCarousel = debounce(() => this.scrollAndSetCarousel());
-    window.addEventListener('resize', () => {
+    const setStateOnResize = () => {
       this.setState({
         screenWidth: this.innerWrapperRef.current.scrollWidth,
-        farRight: Math.max(this.state.numberOfCards - capacity, 0), // number of times user can scroll to the right
-      }, () => console.log(this.state.productCards));
-      debouncedScrollAndSetCarousel();
-    });
+      }, () => debouncedScrollAndSetCarousel());
+    };
+    setStateOnResize();
+    window.addEventListener('resize', setStateOnResize);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -59,8 +59,7 @@ class Carousel extends React.Component {
         products: this.props.products,
         numberOfCards: this.getNumberOfCards(),
         productCards: this.createProductCards(),
-      });
-      this.scrollAndSetCarousel();
+      }, () => this.scrollAndSetCarousel());
     }
   }
 
@@ -68,7 +67,7 @@ class Carousel extends React.Component {
   scrollAndSetCarousel(change = 0, numberOfProducts = this.state.numberOfCards) {
     // If you can't scroll in a direction, remove the button
     const capacity = Math.floor(this.state.screenWidth / this.state.cardWidth);
-    const farRight = Math.max(this.state.numberOfCards - capacity, 0);
+    const farRight = Math.max(numberOfProducts - capacity, 0); // number of times user can scroll to the right
     this.setState({
       canScrollLeft: this.state.scrollPosition > this.state.farLeft,
       canScrollRight: this.state.scrollPosition < farRight,

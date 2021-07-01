@@ -28,7 +28,7 @@ class ProductDetailPage extends React.Component {
       products: {
         // productId: { ... },
       },
-      yourOutfit: [],
+      yourOutfit: JSON.parse(localStorage.getItem('atelier-your-outfit')) || [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFile: null
@@ -38,52 +38,69 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
-    console.time('mounted => fetched');
+    this.loadProductInfo();
+  }
+
+  getCurrentProductFromAPI(productId) {
+    return axios.get(`/products/current?id=${productId}`)
+      .then(response => response.data);
+  }
+
+  getListOfProductsFromAPI(listOfProducts) {
+    const productsWithoutInfo = listOfProducts.filter(product => this.state.products[product] === undefined);
+    if (productsWithoutInfo.length !== 0) {
+      return axios.get(`/products/related?ids=${productsWithoutInfo.join(',')}`)
+        .then(response => response.data);
+    } else {
+      return new Promise([]);
+    }
+  }
+
+  loadProductInfo(productId = this.state.currentProductId) {
+    this.setState({
+      currentProductId: productId
+    });
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
-    localStorage.removeItem('atelier-your-outfit');
-    const yourOutfit = localStorage.getItem('atelier-your-outfit') || [22127];
-    console.time('fetched current product');
-    axios.get(`/products/current?id=${this.state.currentProductId}`)
-      .then(response => response.data)
+    this.getCurrentProductFromAPI(productId)
       .then(productInformation => {
-        updatedProducts[this.state.currentProductId] = productInformation;
+        updatedProducts[productId] = productInformation;
         this.setState({
-          products: updatedProducts
-        }, () => {
-          console.timeEnd('fetched current product');
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          }
         });
-        console.time('fetched related products');
-        return axios.get(`/products/related?ids=${updatedProducts[this.state.currentProductId].related.join(',')}`);
+        // make axios calls for all related products and update this.state.products
+        return this.getListOfProductsFromAPI(updatedProducts[productId].related);
       })
-      .then(response => response.data)
       .then(relatedProductsInformation => {
         for (const product in relatedProductsInformation) {
           updatedProducts[product] = relatedProductsInformation[product];
         }
         this.setState({
-          products: updatedProducts,
-          relatedProducts: updatedProducts[this.state.currentProductId].related
-        }, () => {
-          console.timeEnd('fetched related products');
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          },
+          relatedProducts: updatedProducts[productId].related || []
         });
-        console.time('fetched your outfit products');
-        return axios.get(`/products/related?ids=${yourOutfit.join(',')}`);
+        return this.getListOfProductsFromAPI(this.state.yourOutfit);
       })
-      .then(response => response.data)
       .then(outfitProducts => {
         for (const product in outfitProducts) {
           updatedProducts[product] = outfitProducts[product];
         }
         this.setState({
-          products: updatedProducts,
+          products: {
+            ...this.state.products,
+            ...updatedProducts
+          },
           yourOutfit: yourOutfit,
         }, () => {
-          console.timeEnd('fetched your outfit products');
         });
       })
       .catch(err => err);
-    // make axios calls for all related products and update this.state.products
   }
 
   onOutfitChange(changeType, productId) {
