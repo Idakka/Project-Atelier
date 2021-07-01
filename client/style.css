@@ -697,6 +697,9 @@ h1{
   cursor: pointer;
 }
 
+.right-spacing:hover, .need-cursor:hover {
+  cursor: pointer;
+}
 
 /* QA Styling Ends */
 
