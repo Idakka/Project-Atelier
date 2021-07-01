@@ -8,7 +8,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
 
   const [word, setWord] = useState('');
   const [temp, setTemp] = useState('');
-  const [length, setLength] = useState(4);
+  const [length, setLength] = useState(2);
   const [helpfulArray, setHelpfulArray] = useState([]);
 
   const APICallHelpful = (questionId) => {
@@ -37,7 +37,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       setWord('');
     } else if (temp.length === 3) {
       setWord(temp);
-      setLength(4);
+      setLength(2);
     } else if (temp.length > 3) {
       setLength(questionsInfo.length);
     }

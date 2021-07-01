@@ -535,7 +535,7 @@ h1{
 /* QA Styling Starts */
 
 #qa-scroll {
-  height: 600px;
+  height: 400px;
   overflow: auto;
 }
 
