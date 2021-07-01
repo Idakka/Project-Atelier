@@ -194,6 +194,14 @@ const getRelatedProductsBundle = (relatedProducts, headers) => {
     });
 };
 
+const postCart = (skuId, headers) => {
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart', skuId, headers)
+    .then(result => result.data)
+    .catch(err => {
+      throw err;
+    });
+};
+
 module.exports = {
   // Multi-purpose functions
   getCurrentProductBundle,
@@ -203,6 +211,7 @@ module.exports = {
   getProductReviews,
   getProductReviewsMeta,
   postInteraction,
+  postCart,
   postQuestion,
   postAnswer,
   helpfulQuestion,

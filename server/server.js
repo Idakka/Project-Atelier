@@ -230,4 +230,13 @@ app.post('/photo-upload', (req, res) => {
   });
 });
 
+app.post('/cart', (req, res) => {
+  atelierQueries.postCart(req.body, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
