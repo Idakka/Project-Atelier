@@ -27,12 +27,15 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
     setLength(length + 2);
   };
 
-  const filterQuestions = () => {
-    if (temp.length > 2) {
-      setWord(temp);
-      setLength(questionsInfo.length);
-    } else if ((temp.length >= 0) && (temp.length <= 2)) {
+  const filterQuestions = (current) => {
+    setTemp(current);
+    if ((temp.length >= 0) && (temp.length < 3)) {
       setWord('');
+    } else if (temp.length === 3) {
+      setWord(temp);
+      setLength(4);
+    } else if (temp.length > 3) {
+      setLength(questionsInfo.length);
     }
   };
 
@@ -41,8 +44,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           onChange={() => {
-            filterQuestions();
-            setTemp(event.target.value);
+            filterQuestions(event.target.value);
           }}
         ></input>
         {/* NOTE - Search button will be replaced with icon later on */}
