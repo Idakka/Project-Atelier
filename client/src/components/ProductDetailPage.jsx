@@ -38,7 +38,16 @@ class ProductDetailPage extends React.Component {
   }
 
   componentDidMount() {
+    // Load default product info on page load
     this.loadProductInfo();
+  }
+
+  changeCurrentProduct(productId) {
+    // Do the following when changing the current product in state
+    this.setState({
+      currentProductId: productId
+    });
+    this.loadProductInfo(productId);
   }
 
   getCurrentProductFromAPI(productId) {
