@@ -58,10 +58,13 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
                 <div className="qa-helpfulness-right right-spacing" data-testid="qa-helpfulness-right">
-                  <span className="right-spacing" onClick={() => {
+                  <span className="right-spacing" id={question.question_id} onClick={() => {
                     event.preventDefault();
                     APICallReport(question.question_id);
+                    document.getElementById(question.question_id).style.display = 'none';
+                    document.getElementById("afterReport").style.display = 'block';
                   }}>Report</span>
+                  <span className="right-spacing" id="afterReport" style={{display: 'none'}}>Reported</span>
                   <span className="right-spacing" onClick={() => {
                     event.preventDefault();
                     APICallHelpful(question.question_id);
