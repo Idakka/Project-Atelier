@@ -13,6 +13,8 @@ const QACardAnswers = ({ currentAnswers }) => {
   const [answersToShowLength, setAnswersToShowLength] = useState(2);
   // toggle is to make sure we avoid infinite rerender loop
   const [toggle, setToggle] = useState(false);
+  const [helpfulArray, setHelpfulArray] = useState([]);
+
 
   useEffect(() => {
     if (answers) {
@@ -31,9 +33,12 @@ const QACardAnswers = ({ currentAnswers }) => {
   }, []);
 
   const APICallHelpful = (answerId) => {
-    axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
-      .then(info => console.log('info:', info))
-      .catch(err => err);
+    if (helpfulArray.includes(answerId) === false) {
+      axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
+        .then(info => console.log('info:', info))
+        .catch(err => err);
+      helpfulArray.push(answerId);
+    }
   };
 
   const APICallReport = (answerId) => {
@@ -72,9 +77,17 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallHelpful(answer.id);
+              event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
+            }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallReport(answer.id);
+              event.target.innerText = 'Reported';
+            }}>Report</span>
           </p>
         </div>
       )}
@@ -93,9 +106,17 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallHelpful(answer.id);
+              event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
+            }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallReport(answer.id);
+              event.target.innerText = 'Reported';
+            }}>Report</span>
           </p>
         </div>
       )}
