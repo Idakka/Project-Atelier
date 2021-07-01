@@ -143,11 +143,12 @@ class ProductDetailPage extends React.Component {
   }
 
   render() {
+    console.log('this.state.products: ', this.state);
     return (
       <React.Fragment>
         <OverviewWithTracking
           top={this}
-          productInfo={productInfoMock}
+          productInfo={this.state.products[this.state.currentProductId]}
           productStyles={productStylesMock}
           reviewsMeta={reviewsMetaMock}
         />
