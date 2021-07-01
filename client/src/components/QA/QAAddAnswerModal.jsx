@@ -26,7 +26,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
     }
 
     if (message !== '') {
-      alert(message);
+      alert(`You must enter the following: \n ${message}`);
       document.getElementById(index).style.display = 'block';
     } else if (message === '') {
       axios.post('/qa/questions/:question_id/answers', ({ question_id: question.question_id, body: answer, name: nickname, email: email, photos: photos }))
@@ -45,11 +45,11 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
           <div className="qa-modal-close" onClick={() => {
             document.getElementById(index).style.display = 'none';
           }}>&times;</div>
-          <h2>Submit Your Answer {question.question_id}</h2>
+          <h2>Submit Your Answer</h2>
           <h3>{productName.name}: {question.question_body} </h3>
           <form className="add-answer-form">
             <label className="add-form-answer">Answer* </label>
-            <textarea rows="10" maxLength="1000" required onChange={() => setAnswer(event.target.value)} /><p></p>
+            <textarea rows="10" maxLength="1000" placeholder="Your answer here..." required onChange={() => setAnswer(event.target.value)} /><p></p>
             <label className="add-form-username">Nickname*</label>
             <input maxLength="60" placeholder="Example: jack543!" required onChange={() => setNickname(event.target.value)} /><p className="qa-form-small">For privacy reasons, do not use your full name or email address</p>
             <label className="add-form-email">Email*</label>
