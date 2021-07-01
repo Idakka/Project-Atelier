@@ -14,7 +14,7 @@ class AddReviewModal extends React.Component {
       reviewBody: 'Why did you like the product or not?',
       characteristics: [],
       recommendation: 'yes',
-      overalRating: 0
+      rating: 0
     };
     this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
