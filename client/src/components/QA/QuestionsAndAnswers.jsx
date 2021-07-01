@@ -13,7 +13,7 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId}) => 
   useEffect(() => {
     setProductName(productInfo);
     setQuestions(questionsInfo);
-    axios.get('qa/questions/')
+    axios.get('/qa/questions')
       .then(response => {
         setQuestions(response.data);
       })
