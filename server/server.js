@@ -2,6 +2,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv').config({path: __dirname + '/..' + '/.env'});
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
@@ -52,7 +53,7 @@ var uploadS3 = multer({
 var photoUpload = uploadS3.array('review-photo', 5);
 
 const pathname = path.join(__dirname, '..', 'public');
-app.use(express.static(pathname));
+app.use(expressStaticGzip(pathname));
 const corsOptions = {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200
