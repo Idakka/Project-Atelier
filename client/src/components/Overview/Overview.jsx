@@ -1,4 +1,5 @@
 import React from 'react';
+import { productStylesMock } from '../../mockData/productInfoMock.js';
 import TitleBar from './TitleBar.jsx';
 import SiteWideAnnounce from './SiteWideAnnounce.jsx';
 import ImageGallery from './ImageGallery.jsx';
@@ -62,10 +63,10 @@ class Overview extends React.Component {
         <TitleBar themeChange={this.themeChange}/>
         <SiteWideAnnounce />
         <div className="overview-column-container">
-          <ImageGallery productStyles={this.props.productStyles} overview={this} thumbnailClicked={this.thumbnailClicked}/>
+          <ImageGallery productStyles={productStylesMock} overview={this} thumbnailClicked={this.thumbnailClicked}/>
           <div className="product-information">
-            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
-            <StyleSelector productStyles={this.props.productStyles} overview={this} />
+            <ProductInformation productInfo={this.props.productInfo} productStyles={productStylesMock} reviewsMeta={this.props.reviewsMeta} />
+            <StyleSelector productStyles={productStylesMock} overview={this} />
             <AddToCartRegion top={this.props.top} productStyles={this.props.productStyles} selectedStyle={this.state.selectedStyle} />
           </div>
         </div>

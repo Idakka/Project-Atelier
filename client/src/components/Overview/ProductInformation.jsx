@@ -15,9 +15,14 @@ const calculateRating = function(ratings) {
 };
 
 var ProductInformation = function(props) {
-  let { productInfo = {}, productStyles, reviewsMeta } = props;
+  let { productInfo = {}, productStyles = {}, reviewsMeta } = props;
   let { default_price = '$?', category = 'CATEGORY', name = 'NAME' } = productInfo;
-  let { original_price, sale_price } = productStyles.results[0];
+  let original_price = '$?';
+  let sale_price = undefined;
+  if (productStyles.results && productStyles.results[0]) {
+    original_price = productStyles.results[0].original_price;
+    sale_price = productStyles.results[0].sale_price;
+  }
   let { ratings } = reviewsMeta;
   if (productInfo) {
 

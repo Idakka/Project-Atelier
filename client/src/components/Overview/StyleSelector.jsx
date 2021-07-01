@@ -4,7 +4,8 @@ import StyleThumbnail from './StyleThumbnail.jsx';
 var StyleSelector = function(props) {
   const rowSize = 4;
   let index = -1;
-  let styleThumbnails = props.productStyles.results.map((style) => {
+  let results = props?.productStyles?.results ? props.productStyles.results : [];
+  let styleThumbnails = results.map((style) => {
     index += 1;
     return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} styleID={index} key={props.productStyles.results[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
   });

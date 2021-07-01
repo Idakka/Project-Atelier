@@ -11,7 +11,7 @@ class AddToCartRegion extends React.Component {
   };
 
   getSelectedSku() {
-    let { skus } = this.props.productStyles.results[this.props.selectedStyle];
+    let { skus } = this.props.productStyles[this.props.selectedStyle];
     let sizeSelector = document.getElementById('add-to-bag-size-selector');
     let selectedSize = sizeSelector.value;
     return sizeSelector.options[sizeSelector.selectedIndex].dataset.sku;
@@ -22,7 +22,7 @@ class AddToCartRegion extends React.Component {
       this.props.top.showModal(<ExampleModalContents top={this.props.top} />);
     });
     document.getElementById('add-to-bag-size-selector').addEventListener('change', (event) => {
-      let { skus } = this.props.productStyles.results[this.props.selectedStyle];
+      let { skus } = this.props.productStyles[this.props.selectedStyle];
       let selectedSku = this.getSelectedSku();
       this.setState({ quantity: skus[selectedSku].quantity});
     });
@@ -33,7 +33,8 @@ class AddToCartRegion extends React.Component {
   }
 
   render () {
-    let { skus } = this.props.productStyles.results[this.props.selectedStyle];
+    let { productStyles = [[]] } = this.props;
+    let { skus = [] } = productStyles[this.props.selectedStyle];
     let sizes = [];
     let quantities = [];
     sizes.push(<option data-sku={''} key='placeholder'>SELECT SIZE</option>);

@@ -4,9 +4,14 @@ import ImageGalleryForwardArrow from './ImageGalleryForwardArrow.jsx';
 import ImageGalleryBackArrow from './ImageGalleryBackArrow.jsx';
 
 const ImageGallery = function(props) {
-  let { productStyles, thumbnailClicked } = props;
+  let { productStyles = {}, thumbnailClicked } = props;
   let { selectedStyle, selectedPhoto } = props.overview.state;
-  let photo = productStyles.results[selectedStyle].photos[selectedPhoto].url;
+  let photo;
+  if (productStyles.results) {
+    photo = productStyles.results[selectedStyle].photos[selectedPhoto].url;
+  } else {
+    photo = '';
+  }
   return (
     <div className="image-gallery-container" data-testid="image-gallery">
       <div className="image-gallery">
