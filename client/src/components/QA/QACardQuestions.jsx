@@ -43,6 +43,17 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
     }
   };
 
+  if (questionsInfo.length === 0) {
+    return <div data-testid="qa-questions">
+     There are no questions to display yet, be the first to ask a question:
+      <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
+        <div className="qa-more" data-testid="qa-more" >
+          <QAAddQuestionModal productName={productName} currentProductId={currentProductId} />
+        </div>
+      </div>
+    </div>;
+  }
+
   return (
     <div data-testid="qa-questions">
       <form data-testid="search" id="search">
