@@ -8,7 +8,7 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId}) => 
   // // questions array for current product
   const [questions, setQuestions] = useState([]);
   // variables to take in product info
-  const [productName, setProductName] = useState('');
+  const [productName, setProductName] = useState(productInfo);
 
   useEffect(() => {
     setProductName(productInfo);
