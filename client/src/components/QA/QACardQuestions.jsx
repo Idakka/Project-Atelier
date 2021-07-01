@@ -9,12 +9,15 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
   const [word, setWord] = useState('');
   const [temp, setTemp] = useState('');
   const [length, setLength] = useState(4);
+  const [helpfulArray, setHelpfulArray] = useState([]);
 
   const APICallHelpful = (questionId) => {
-    console.log('calling helpful');
-    axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
-      .then(info => console.log('info:', info))
-      .catch(err => err);
+    if (helpfulArray.includes(questionId) === false) {
+      axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
+        .then(info => console.log('info:', info))
+        .catch(err => err);
+      helpfulArray.push(questionId);
+    }
   };
 
   const APICallReport = (questionId) => {
@@ -60,21 +63,17 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
               <b><div className="qa-div">Q: {question.question_body}
                 <div className="qa-helpfulness-right right-spacing" data-testid="qa-helpfulness-right">
 
-                  <span className="right-spacing" id={question.question_id} onClick={() => {
+                  <span className="right-spacing" onClick={() => {
                     event.preventDefault();
                     APICallReport(question.question_id);
-                    document.getElementById(question.question_id).style.display = 'none';
-                    document.getElementById("afterReport").style.display = 'block';
+                    event.target.innerText = 'Reported';
                   }}>Report</span>
-                  <span className="right-spacing" id="afterReport" style={{display: 'none'}}>Reported</span>
 
-                  <span className="right-spacing" id={'h' + question.question_id} onClick={() => {
+                  <span className="right-spacing" id={question.question_id} onClick={() => {
                     event.preventDefault();
                     APICallHelpful(question.question_id);
-                    document.getElementById('h' + question.question_id).style.display = 'none';
-                    document.getElementById("afterHelpful").style.display = 'block';
+                    event.target.innerText = `Helpful? Yes (${question.question_helpfulness + 1})`;
                   }}>Helpful? Yes ({question.question_helpfulness}) </span>
-                  <span className="right-spacing" id="afterHelpful" style={{display: 'none'}}>Helpful? Yes ({question.question_helpfulness + 1})</span>
 
                   <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
