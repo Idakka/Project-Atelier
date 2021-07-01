@@ -26,15 +26,16 @@ class ProductDetailPage extends React.Component {
       currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
       relatedProducts: [],
       products: {
+        // mock products until successful API calls
+        '22126': productsMock
         // productId: { ... },
       },
       yourOutfit: JSON.parse(localStorage.getItem('atelier-your-outfit')) || [],
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
-      selectedImageFile: null
+      selectedImageFiles: [],
+      fileLoaded: 0
     };
-    this.onChangeFileHandler = this.onChangeFileHandler.bind(this);
-    this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
   }
 
   componentDidMount() {
@@ -126,22 +127,6 @@ class ProductDetailPage extends React.Component {
     });
   }
 
-  onChangeFileHandler(event) {
-    this.setState({
-      selectedImageFile: event.target.files[0],
-      fileLoaded: 0
-    });
-  }
-
-  onClickUploadHandler() {
-    const data = new FormData();
-    data.append('file', this.state.selectedImageFile);
-    axios.post(`http://localhost:${port}/upload`, data)
-      .then(response => {
-        console.log('successful upload: ', response);
-      });
-  }
-
   showModal(component) {
     this.setState({modalContents: component});
     document.getElementById('the_modal').style.visibility = 'visible';
@@ -168,9 +153,10 @@ class ProductDetailPage extends React.Component {
         />
         <RatingsAndReviewsWithTracking
           top={this}
-          onChangeFileHandler={this.onChangeFileHandler}
-          onClickUploadHandler={this.onClickUploadHandler}
-          productId={reviewsMock.product}
+          // onChangeFileHandler={this.onChangeFileHandler}
+          // onClickUploadHandler={this.onClickUploadHandler}
+          productId={this.state.currentProductId}
+          currentProduct={this.state.products[this.state.currentProductId]}
           reviews={reviewsMock.results}
           reviewsMeta={reviewsMetaMock}
         />
