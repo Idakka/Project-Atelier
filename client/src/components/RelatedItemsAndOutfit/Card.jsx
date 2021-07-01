@@ -9,7 +9,7 @@ const Card = ({ top, product, cardType, onAction }) => {
     if (event.target.closest('.action-button')) {
       return;
     } else {
-      top.loadProductInfo(product.id);
+      top.changeCurrentProduct(product.id);
     }
   };
 
