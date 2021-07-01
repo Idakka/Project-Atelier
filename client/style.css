@@ -631,7 +631,7 @@ h1{
 }
 
 .add-form label, .add-answer-form label {
-  width: 10%;
+  width: 15%;
   text-align: right;
   display: inline-block;
   padding-right: 1%;
