@@ -81,7 +81,7 @@ const QACardAnswers = ({ currentAnswers }) => {
       <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
         setAnswersToShowLength(answersToShowLength + 2);
         setAnswersToShow(answers.slice(0, answersToShowLength));
-      }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
+      }}><b><span className="qa-load">[See more answers]</span></b></button>
     </div>;
   }
 
@@ -102,7 +102,7 @@ const QACardAnswers = ({ currentAnswers }) => {
       <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
         setAnswersToShowLength(2);
         setAnswersToShow(answers.slice(0, 2));
-      }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
+      }}><b><span className="qa-load">[Collapse Answers]</span></b></button>
     </div>;
   }
 };
