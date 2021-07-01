@@ -54,6 +54,7 @@ var photoUpload = uploadS3.array('review-photo', 5);
 
 const pathname = path.join(__dirname, '..', 'public');
 app.use(expressStaticGzip(pathname));
+app.use(express.static(pathname));
 const corsOptions = {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200
