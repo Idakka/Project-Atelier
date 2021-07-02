@@ -188,6 +188,15 @@ app.get('/products/styles', (req, res) => {
     });
 });
 
+app.get('/products', (req, res) => {
+  atelierQueries.getProductInfo(req.query.id, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 // Specific and smaller queries
 // .../reviews?id=12345
 app.get('/reviews', (req, res) => {
