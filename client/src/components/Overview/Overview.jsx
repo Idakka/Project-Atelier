@@ -65,7 +65,7 @@ class Overview extends React.Component {
         <div className="overview-column-container">
           <ImageGallery productStyles={productStylesMock} overview={this} thumbnailClicked={this.thumbnailClicked}/>
           <div className="product-information">
-            <ProductInformation productInfo={this.props.productInfo} productStyles={productStylesMock} reviewsMeta={this.props.reviewsMeta} />
+            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
             <StyleSelector productStyles={this.props.productStyles} overview={this} />
             <AddToCartRegion top={this.props.top} productStyles={this.props.productStyles} selectedStyle={this.state.selectedStyle} />
           </div>
