@@ -2,12 +2,12 @@ import React from 'react';
 import StyleThumbnail from './StyleThumbnail.jsx';
 
 var StyleSelector = function(props) {
+  let productStyles = props.productStyles ? props.productStyles : [];
   const rowSize = 4;
   let index = -1;
-  let results = props?.productStyles?.results ? props.productStyles.results : [];
-  let styleThumbnails = results.map((style) => {
+  let styleThumbnails = productStyles.map((style) => {
     index += 1;
-    return <StyleThumbnail thumbnail_url={props.productStyles.results[index].photos[0].thumbnail_url} styleID={index} key={props.productStyles.results[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
+    return <StyleThumbnail thumbnail_url={props.productStyles[index].photos[0].thumbnail_url} styleID={index} key={props.productStyles[index].photos[0].thumbnail_url} styleClickHandler={props.overview.styleClickHandler}/>;
   });
   let rows = [];
   for (var i = 0; i < styleThumbnails.length; i += rowSize) {
