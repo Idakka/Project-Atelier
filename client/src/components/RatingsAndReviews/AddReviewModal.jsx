@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewThumbnailContainer from './ReviewThumbnailContainer.jsx';
 import WordCount from './WordCount.jsx';
+import axios from 'axios';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class AddReviewModal extends React.Component {
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
   };
+
+  postReview(reviewObject) {
+    return axios.get(`/products/current?id=${productId}`)
+      .then(response => response.data);
+  }
 
   componentDidMount() {
     document.getElementById('default-modal-close-button').addEventListener('click', (event) => {
@@ -53,7 +59,9 @@ class AddReviewModal extends React.Component {
   onClickUploadHandler() {
     const data = new FormData();
     data.append('file', this.state.selectedImageFiles);
-    axios.post(`http://localhost:${port}/upload`, data)
+    axios.post(`http://localhost:${port}/photo-upload`, data, {
+      headers: formData.getHeaders()
+    })
       .then(response => {
         console.log('successful upload: ', response);
       });
