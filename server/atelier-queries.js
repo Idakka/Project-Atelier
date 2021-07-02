@@ -144,7 +144,7 @@ const postReview = (body, headers) => {
 
 // Reports a review as helpful
 const helpfulReview = (reviewId, headers) => {
-  var review = reviewId.answer_id.toString();
+  var review = reviewId.review_id.toString();
   var reviewObj = JSON.stringify(reviewId)
   return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${review}/helpful`, reviewObj, headers)
     .then(result => {

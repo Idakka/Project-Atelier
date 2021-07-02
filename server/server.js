@@ -258,7 +258,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   var reviewId = req.body;
   atelierQueries.helpfulReview(reviewId, atelierHeaders)
     .then(result => {
-      res.end(result);
+      res.end(JSON.stringify(result.body));
     })
     .catch(error => {
       console.error(error);
@@ -269,6 +269,7 @@ app.put('/reviews/:review_id/report', (req, res) => {
   var reviewId = req.body;
   atelierQueries.reportReview(reviewId, atelierHeaders)
     .then(result => {
+      console.log('success report!', result.body);
       res.end(JSON.stringify(result.body));
     })
     .catch(error => {
