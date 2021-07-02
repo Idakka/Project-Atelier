@@ -1,5 +1,4 @@
 import React from 'react';
-import { productStylesMock } from '../../mockData/productInfoMock.js';
 import TitleBar from './TitleBar.jsx';
 import SiteWideAnnounce from './SiteWideAnnounce.jsx';
 import ImageGallery from './ImageGallery.jsx';
