@@ -34,13 +34,16 @@ class ProductDetailPage extends React.Component {
       // Software Information
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFiles: [],
-      fileLoaded: 0
+      fileLoaded: 0,
+      currentQuestions: []
     };
   }
 
   componentDidMount() {
     // Load default product info on page load
     this.loadProductInfo();
+    this.getCurrentQuestionsFromAPI();
+    console.log(this.state.currentQuestions);
   }
 
   changeCurrentProduct(productId) {
@@ -49,6 +52,8 @@ class ProductDetailPage extends React.Component {
       currentProductId: productId
     });
     this.loadProductInfo(productId);
+    this.getCurrentQuestionsFromAPI(productId);
+    console.log(this.state.currentQuestions);
   }
 
   getCurrentProductFromAPI(productId) {
@@ -64,6 +69,11 @@ class ProductDetailPage extends React.Component {
     } else {
       return new Promise([]);
     }
+  }
+
+  getCurrentQuestionsFromAPI(productId = this.state.currentProductId) {
+    return axios.get(`/qa/questions?product_id=${productId}`)
+      .then(response => response.data);
   }
 
   loadProductInfo(productId = this.state.currentProductId) {
@@ -111,7 +121,15 @@ class ProductDetailPage extends React.Component {
         });
       })
       .catch(err => err);
-  }
+    this.getCurrentQuestionsFromAPI(productId)
+      .then(result => {
+        this.setState({
+          currentQuestions: result
+        });
+      });
+    }
+
+
 
   onOutfitChange(changeType, productId) {
     let updatedOutfit = this.state.yourOutfit;
@@ -150,6 +168,7 @@ class ProductDetailPage extends React.Component {
           questionsInfo={questionsMock}
           productInfo={productInfoMock}
           currentProductId={this.state.currentProductId}
+          currentQuestions={this.state.currentQuestions}
         />
         <RatingsAndReviewsWithTracking
           top={this}
