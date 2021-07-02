@@ -43,7 +43,6 @@ class ProductDetailPage extends React.Component {
     // Load default product info on page load
     this.loadProductInfo();
     this.getCurrentQuestionsFromAPI();
-    console.log(this.state.currentQuestions);
   }
 
   changeCurrentProduct(productId) {
@@ -53,7 +52,6 @@ class ProductDetailPage extends React.Component {
     });
     this.loadProductInfo(productId);
     this.getCurrentQuestionsFromAPI(productId);
-    console.log(this.state.currentQuestions);
   }
 
   getCurrentProductFromAPI(productId) {
@@ -121,12 +119,6 @@ class ProductDetailPage extends React.Component {
         });
       })
       .catch(err => err);
-    this.getCurrentQuestionsFromAPI(productId)
-      .then(result => {
-        this.setState({
-          currentQuestions: result
-        });
-      });
     }
 
 

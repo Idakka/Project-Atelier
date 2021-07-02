@@ -9,11 +9,10 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId, curr
   const [questions, setQuestions] = useState(questionsInfo);
   // variables to take in product info
   const [productName, setProductName] = useState(productInfo);
-  console.log('these', currentQuestions);
 
   useEffect(() => {
     setProductName(productInfo);
-    setQuestions(currentQuestions);
+    setQuestions(questionsInfo);
     // axios.get('/qa/questions')
     //   .then(response => {
     //     setQuestions(response.data);
@@ -27,7 +26,7 @@ const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId, curr
   return (
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
-      <QACardQuestions currentProductId={currentProductId} questionsInfo={currentQuestions} productName={productName}/>
+      <QACardQuestions currentProductId={currentProductId} questionsInfo={questions} productName={productName}/>
       <p></p>
     </div>
   );
