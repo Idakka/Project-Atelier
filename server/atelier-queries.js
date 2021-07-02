@@ -207,6 +207,8 @@ module.exports = {
   getCurrentProductBundle,
   getRelatedProductsBundle,
   // Single-purpose functions
+  getProductInfo,
+  getProductStyles,
   getProductQuestions,
   getProductReviews,
   getProductReviewsMeta,
