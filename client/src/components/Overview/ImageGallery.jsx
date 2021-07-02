@@ -7,8 +7,8 @@ const ImageGallery = function(props) {
   let { productStyles = {}, thumbnailClicked } = props;
   let { selectedStyle, selectedPhoto } = props.overview.state;
   let photo;
-  if (productStyles.results) {
-    photo = productStyles.results[selectedStyle].photos[selectedPhoto].url;
+  if (productStyles[selectedStyle]) {
+    photo = productStyles[selectedStyle].photos[selectedPhoto].url;
   } else {
     photo = '';
   }
