@@ -233,6 +233,49 @@ app.post('/photo-upload', (req, res) => {
   });
 });
 
+app.post('/reviews/:product_id/', (req, res) => {
+  // temporary mock response to check data shape
+  // atelierQueries.postReview(req.body, atelierHeaders)
+  //   .then(result => {
+  //     res.end(JSON.stringify(result));
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //     res.end(JSON.stringify(error));
+  //   });
+  console.log('this is the recieved request:', req.body);
+  photoUpload(req, res, (err, data) => {
+    if (err) {
+      res.status(400).end('server error uploading photos');
+    } else {
+      res.status(200).redirect('/');
+    }
+  });
+  res.end('review post recieved, data.body:', req.body);
+});
+
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  var reviewId = req.body;
+  atelierQueries.helpfulReview(reviewId, atelierHeaders)
+    .then(result => {
+      res.end(result);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  var reviewId = req.body;
+  atelierQueries.reportReview(reviewId, atelierHeaders)
+    .then(result => {
+      res.end(JSON.stringify(result.body));
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+
 app.post('/cart', (req, res) => {
   atelierQueries.postCart(req.body, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
