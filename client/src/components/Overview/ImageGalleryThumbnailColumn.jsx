@@ -31,8 +31,8 @@ class ImageGalleryThumbnailColumn extends React.Component {
     let target = Number(this.props.selected);
     let index = -1;
     let thumbnails = [];
-    if (productStyles.results) {
-      thumbnails = productStyles.results[selectedStyle].photos.map((style) => {
+    if (productStyles[selectedStyle]) {
+      thumbnails = productStyles[selectedStyle].photos.map((style) => {
         index += 1;
         if (index === target) {
           return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index} thumbnailClicked={this.props.thumbnailClicked} selected={true} />;

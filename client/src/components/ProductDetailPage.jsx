@@ -150,6 +150,7 @@ class ProductDetailPage extends React.Component {
   }
 
   render() {
+    console.log('this.state.products[this.state.currentProductId]: ', this.state.products[this.state.currentProductId])
     return (
       <React.Fragment>
         <OverviewWithTracking

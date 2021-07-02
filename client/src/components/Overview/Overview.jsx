@@ -58,6 +58,7 @@ class Overview extends React.Component {
   }
 
   render() {
+    console.log('this.props.productInfo: ', this.props.productInfo)
     return (
       <div className='top-region max-width'>
         <TitleBar themeChange={this.themeChange}/>
