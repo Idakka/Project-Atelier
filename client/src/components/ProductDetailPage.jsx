@@ -153,8 +153,6 @@ class ProductDetailPage extends React.Component {
         />
         <RatingsAndReviewsWithTracking
           top={this}
-          // onChangeFileHandler={this.onChangeFileHandler}
-          // onClickUploadHandler={this.onClickUploadHandler}
           productId={this.state.currentProductId}
           currentProduct={this.state.products[this.state.currentProductId]}
           reviews={reviewsMock.results}
