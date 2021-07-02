@@ -50,8 +50,7 @@ var uploadS3 = multer({
   })
 });
 
-var photoUpload = uploadS3.array('review-photo', 5);
-
+var photoUpload = uploadS3.array('photo-upload', 5);
 
 const pathname = path.join(__dirname, '..', 'public');
 app.use(expressStaticGzip(pathname));
@@ -228,30 +227,21 @@ app.post('/photo-upload', (req, res) => {
     if (err) {
       res.status(400).end('server error uploading photos');
     } else {
-      res.status(200).redirect('/');
+      // how to access files after creation in photoUpload?
+      console.log('here is the s3 response:', res.files);
+      res.status(200).end('success');
     }
   });
 });
 
-app.post('/reviews/:product_id/', (req, res) => {
-  // temporary mock response to check data shape
-  // atelierQueries.postReview(req.body, atelierHeaders)
-  //   .then(result => {
-  //     res.end(JSON.stringify(result));
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //     res.end(JSON.stringify(error));
-  //   });
+app.post('/reviews/:product_id', (req, res) => {
   console.log('this is the recieved request:', req.body);
-  photoUpload(req, res, (err, data) => {
-    if (err) {
-      res.status(400).end('server error uploading photos');
-    } else {
-      res.status(200).redirect('/');
-    }
-  });
-  res.end('review post recieved, data.body:', req.body);
+  atelierQueries.postReview(req.body, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {

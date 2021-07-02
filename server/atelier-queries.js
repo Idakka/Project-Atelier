@@ -130,8 +130,6 @@ const reportAnswer = (answerId, headers) => {
 }
 
 // Post a review
-
-// Posts question to current product
 const postReview = (body, headers) => {
   return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, body, headers)
     .then(result => {
