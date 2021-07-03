@@ -23,16 +23,7 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, pro
   useEffect(() => {
     setProductName(productInfo ? productInfo.name : '');
     setQuestions(questionsInfo);
-    // setProductName('TEST');
-
-    // axios.get('/qa/questions')
-    //   .then(response => {
-      //     sortQuestions(response.data);
-      //   })
-      //   .catch(err => err);
     }, [productInfo, questionsInfo]);
-
-    // console.log(questionsInfo)
 
   return (
     <div data-testid="qa-div" id="qa">

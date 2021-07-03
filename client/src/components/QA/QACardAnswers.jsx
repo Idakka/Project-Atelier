@@ -29,7 +29,6 @@ const QACardAnswers = ({ currentAnswers }) => {
     const allAnswers = [...currentUserAnswers, ...notCurrentUserAnswers];
     setAnswers(allAnswers);
     setAnswersLength(allAnswers.length);
-    // setAnswersToShowLength(answersToShowLength + 2);
     setAnswersToShow(allAnswers.slice(0, answersToShowLength));
   };
 
