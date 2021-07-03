@@ -16,12 +16,8 @@ const ImageGallery = function(props) {
     <div className="image-gallery-container" data-testid="image-gallery">
       <div className="image-gallery">
         <img className="ig-main-image" src={photo} />
-        <div onClick={prevPic}>
-          <ImageGalleryBackArrow />
-        </div>
-        <div onClick={nextPic}>
-          <ImageGalleryForwardArrow />
-        </div>
+        <ImageGalleryBackArrow prevPic={prevPic} />
+        <ImageGalleryForwardArrow nextPic={nextPic} />
         <ImageGalleryThumbnailColumn productStyles={productStyles} thumbnailClicked={thumbnailClicked} selected={selectedPhoto} selectedStyle={selectedStyle} />
         <div className="image-gallery-fullscreen-toggle">
           <span className="material-icons">fullscreen</span>

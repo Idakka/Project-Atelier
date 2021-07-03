@@ -31,9 +31,8 @@ class Overview extends React.Component {
   }
 
   nextPic(event) {
-    // First make sure we've finished pulling from the API before trying to use the data there.
     if (this.props.productStyles) {
-      if (this.state.selectedPhoto < this.props.productStyles[this.state.selectedPhoto].photos.length) {
+      if (this.state.selectedPhoto < this.props.productStyles[this.state.selectedStyle].photos.length) {
         this.setState({ selectedPhoto: this.state.selectedPhoto + 1});
       }
     }
