@@ -53,8 +53,6 @@ class AddReviewModal extends React.Component {
     this.setState({
       selectedImageFiles: tempImageURLArray,
       filesLoaded: fileCount
-    }, ()=> {
-      console.log('on change handler', this.state.selectedImageFiles);
     });
   }
 
@@ -111,7 +109,6 @@ class AddReviewModal extends React.Component {
           id="review-summary"
           name="reviewSummary"
           placeholder={this.state.reviewSummary}
-          defaultValue={this.state.reviewSummary}
           maxLength="60"
           data-testid="review-summary"
           onChange={this.onChangeHandler}
@@ -126,7 +123,7 @@ class AddReviewModal extends React.Component {
           className="form-body-text"
           id="review-body-text"
           name="reviewBody"
-          value={this.state.reviewBody}
+          placeholder={this.state.reviewBody}
           required
           maxLength="1000"
           onChange={this.onChangeHandler}
@@ -141,9 +138,10 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-nickname"
           name="nickname"
-          defaultValue={this.state.nickname}
+          placeholder={this.state.nickname}
           maxLength="60"
           data-testid="review-nickname"
+          required
           onChange={this.onChangeHandler}
         />
         <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
@@ -157,8 +155,9 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-email"
           name="email"
-          defaultValue={this.state.email}
+          placeholder={this.state.email}
           data-testid="review-name"
+          required
           onChange={this.onChangeHandler}
         />
         <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
