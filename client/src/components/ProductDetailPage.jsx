@@ -26,8 +26,6 @@ class ProductDetailPage extends React.Component {
       currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
       relatedProducts: [],
       products: {
-        // mock products until successful API calls
-        '22126': productsMock
         // productId: { ... },
       },
       yourOutfit: JSON.parse(localStorage.getItem('atelier-your-outfit')) || [],

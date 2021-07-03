@@ -882,6 +882,15 @@ h1{
   transform: scale(1);
   transition: all .3s ease-out;
 }
+.card__price.card__price--sale {
+  color: red;
+  margin-right: 0.5rem;
+}
+.card__price--discounted {
+  color: gray;
+  text-decoration: line-through;
+}
+
 .card--add-to-outfit {
   cursor: pointer;
 }
