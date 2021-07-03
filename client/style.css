@@ -385,6 +385,11 @@ h1{
   z-index: 2;
 }
 
+.review-thumbnail {
+  max-height: 15%;
+  max-width: 15%;
+}
+
 .struck-price {
   text-decoration: line-through;
 }
@@ -666,6 +671,7 @@ h1{
   position: fixed;
   z-index: 1;
   padding-top: 100px;
+  padding-bottom: 100px;
   left: 0;
   top: 0;
   width: 100%;
@@ -683,6 +689,7 @@ h1{
   height: 80%;
   text-align: center;
   font-weight: bold;
+  overflow: auto;
 }
 
 .qa-modal-close {
