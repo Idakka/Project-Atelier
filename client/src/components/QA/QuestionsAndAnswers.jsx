@@ -2,31 +2,39 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 
-const QuestionsAndAnswers = ({questionsInfo, productInfo, currentProductId}) => {
+const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) => {
 
   const [product, setProduct] = useState('');
   // // questions array for current product
   const [questions, setQuestions] = useState([]);
   // variables to take in product info
-  const [productName, setProductName] = useState(productInfo);
+  const [productName, setProductName] = useState('');
+  const [user, setUser] = useState('tester123');
+
+  const sortQuestions = (questionsArray) => {
+    setQuestions((questionsArray.filter(item => {
+      return item.asker_name === user;
+    })).concat((questionsArray.filter(item => {
+      return item.asker_name !== user;
+    }).sort((a, b) => {
+      return b.question_helpfulness - a.question_helpfulness;
+    }))));
+  };
 
   useEffect(() => {
     setProductName(productInfo);
     setQuestions(questionsInfo);
     axios.get('/qa/questions')
       .then(response => {
-        setQuestions(response.data);
+        sortQuestions(response.data);
       })
       .catch(err => err);
-    questions.sort((a, b) => {
-      return b.question_helpfulness - a.question_helpfulness;
-    });
   }, []);
 
   return (
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
-      <QACardQuestions currentProductId={currentProductId} questionsInfo={questions} productName={productName}/>
+      <QACardQuestions currentProductId={currentProductId} questionsInfo={questions} productName={productName} />
       <p></p>
     </div>
   );

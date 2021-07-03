@@ -37,6 +37,7 @@ const s3 = new AWS.S3({
 AWS.config.update({region: 'us-east-1'});
 
 var uploadS3 = multer({
+  dest: './photos',
   storage: multerS3({
     s3: s3,
     acl: 'public-read',
@@ -45,13 +46,13 @@ var uploadS3 = multer({
       getFieldname(null, {fieldName: file.fieldname});
     },
     key: (req, file, createAWSName) => {
+      console.log('success on multer key:', file.originalname);
       createAWSName(null, Date.now().toString() + '-' + file.originalname);
     }
   })
 });
 
-var photoUpload = uploadS3.array('review-photo', 5);
-
+var photoUpload = uploadS3.array('photo-upload', 5);
 
 const pathname = path.join(__dirname, '..', 'public');
 app.use(expressStaticGzip(pathname));
@@ -163,6 +164,15 @@ app.get('/products/current', (req, res) => {
     });
 });
 
+app.get('/products/styles', (req, res) => {
+  atelierQueries.getProductStyles(req.query.id, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 // .../products/related?ids=12345,23456,34567
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');
@@ -222,15 +232,49 @@ app.post('/interactions', (req, res) => {
     });
 });
 
-app.post('/photo-upload', (req, res) => {
-  // send urls to review POST route
-  photoUpload(req, res, (err, data) => {
-    if (err) {
+app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
+  // send urls to review POST
+  console.log('photo request:', req);
+    if (!res) {
       res.status(400).end('server error uploading photos');
     } else {
-      res.status(200).redirect('/');
+      // how to access files after creation in photoUpload?
+      console.log('here is the s3 response:', req.files);
+      res.status(200).end('success');
     }
-  });
+});
+
+app.post('/reviews/:product_id', (req, res) => {
+  console.log('this is the recieved request:', req.body);
+  atelierQueries.postReview(req.body, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  var reviewId = req.body;
+  atelierQueries.helpfulReview(reviewId, atelierHeaders)
+    .then(result => {
+      res.status(204).end(JSON.stringify(result.body));
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+
+app.put('/reviews/:review_id/report', (req, res) => {
+  var reviewId = req.body;
+  atelierQueries.reportReview(reviewId, atelierHeaders)
+    .then(result => {
+      console.log('success report!', result.body);
+      res.status(204).end(JSON.stringify(result.body));
+    })
+    .catch(error => {
+      console.error(error);
+    });
 });
 
 app.post('/cart', (req, res) => {
