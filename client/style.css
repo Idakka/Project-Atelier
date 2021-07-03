@@ -309,12 +309,14 @@ h1{
   position: absolute;
   top: 50%;
   left: 20%;
+  cursor: default;
 }
 
 .image-gallery-forward-arrow {
   position: absolute;
   top: 50%;
   right: 5%;
+  cursor: default;
 }
 
 .ig-thumbnail-column {
@@ -383,6 +385,11 @@ h1{
   top: 3px;
   margin: 0;
   z-index: 2;
+}
+
+.review-thumbnail {
+  max-height: 15%;
+  max-width: 15%;
 }
 
 .struck-price {
@@ -631,7 +638,7 @@ h1{
 }
 
 .add-form label, .add-answer-form label {
-  width: 10%;
+  width: 15%;
   text-align: right;
   display: inline-block;
   padding-right: 1%;
@@ -666,6 +673,7 @@ h1{
   position: fixed;
   z-index: 1;
   padding-top: 100px;
+  padding-bottom: 100px;
   left: 0;
   top: 0;
   width: 100%;
@@ -683,6 +691,7 @@ h1{
   height: 80%;
   text-align: center;
   font-weight: bold;
+  overflow: auto;
 }
 
 .qa-modal-close {
@@ -697,6 +706,9 @@ h1{
   cursor: pointer;
 }
 
+.right-spacing:hover, .need-cursor:hover {
+  cursor: pointer;
+}
 
 /* QA Styling Ends */
 
