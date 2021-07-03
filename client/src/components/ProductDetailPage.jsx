@@ -55,7 +55,7 @@ class ProductDetailPage extends React.Component {
   getCurrentQuestionsFromAPI(productId = this.state.currentProductId) {
     return axios.get(`/qa/questions?product_id=${productId}`)
       .then(response => {
-        this.setState({ currentQuestions: response.data})
+        this.setState({ currentQuestions: response.data});
       });
   }
 
@@ -169,9 +169,9 @@ class ProductDetailPage extends React.Component {
         <QuestionsAndAnswersWithTracking
           top={this}
           questionsInfo={this.state.currentQuestions}
-          productInfo={productInfoMock}
+          productInfo={this.state.products[this.state.currentProductId]}
           currentProductId={this.state.currentProductId}
-          productInfoAPI={this.state.products[this.state.currentProductId]}
+          // productInfoAPI={this.state.products[this.state.currentProductId]}
         />
         <RatingsAndReviewsWithTracking
           top={this}

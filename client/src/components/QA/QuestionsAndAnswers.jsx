@@ -21,19 +21,23 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, pro
   };
 
   useEffect(() => {
-    setProductName(productInfo);
+    setProductName(productInfo ? productInfo.name : '');
     setQuestions(questionsInfo);
+    // setProductName('TEST');
+
     // axios.get('/qa/questions')
     //   .then(response => {
-    //     sortQuestions(response.data);
-    //   })
-    //   .catch(err => err);
-  }, []);
+      //     sortQuestions(response.data);
+      //   })
+      //   .catch(err => err);
+    }, [productInfo, questionsInfo]);
+
+    // console.log(questionsInfo)
 
   return (
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
-      <QACardQuestions currentProductId={currentProductId} questionsInfo={questionsInfo} productName={productInfoAPI} />
+      <QACardQuestions currentProductId={currentProductId} questionsInfo={questionsInfo} productName={productName} />
       <p></p>
     </div>
   );

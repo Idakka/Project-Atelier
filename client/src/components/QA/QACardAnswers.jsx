@@ -29,19 +29,20 @@ const QACardAnswers = ({ currentAnswers }) => {
     const allAnswers = [...currentUserAnswers, ...notCurrentUserAnswers];
     setAnswers(allAnswers);
     setAnswersLength(allAnswers.length);
+    // setAnswersToShowLength(answersToShowLength + 2);
     setAnswersToShow(allAnswers.slice(0, answersToShowLength));
-    setAnswersToShowLength(answersToShowLength + 2);
   };
 
   useEffect(() => {
-    if (answers) {
+    const incomingAnswers = [];
+    if (currentAnswers) {
       for (var key in currentAnswers) {
-        answers.push(currentAnswers[key]);
+        incomingAnswers.push(currentAnswers[key]);
       }
     }
-    sortAnswers(answers);
+    sortAnswers(incomingAnswers);
     setToggle(true);
-  }, []);
+  }, [currentAnswers]);
 
 
   const APICallHelpful = (answerId) => {

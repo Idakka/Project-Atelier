@@ -7,6 +7,7 @@ const QAAddQuestionModal = ({ productName, currentProductId }) => {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [name, setName] = useState(productName)
   // sets up an object with responses, will send this to POST requests
   const [modalInfo, setModalInfo] = useState({question: '', nickname: '', email: ''});
 
@@ -47,7 +48,7 @@ const QAAddQuestionModal = ({ productName, currentProductId }) => {
             document.getElementById('qa-modal-add-question').style.display = 'none';
           }}>&times;</div>
           <h2>Ask Your Question</h2>
-          <h3>About the </h3>
+          <h3>About the {productName}</h3>
           <form className="add-answer-form">
             <label className="add-form-question">Question*</label>
             <textarea rows="10" maxLength="1000" placeholder="Why did you like the product or not?" required onChange={() => setQuestion(event.target.value)} /><p></p>
