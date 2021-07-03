@@ -80,6 +80,7 @@ class ProductDetailPage extends React.Component {
     this.getCurrentProductFromAPI(productId)
       .then(productInformation => {
         updatedProducts[productId] = productInformation;
+        console.log('load product information', productInformation);
         this.setState({
           products: {
             ...this.state.products,

@@ -22,7 +22,7 @@ class RatingsAndReviews extends React.Component {
   // populate reviewsToShow after mounting:
   componentDidMount() {
     // axios call to get reviews
-    let id = this.state.currentProductId || 22128;
+    let id = 22126;
     let page = 1;
     let count = 200;
     let sort = 'relevance';
@@ -37,9 +37,9 @@ class RatingsAndReviews extends React.Component {
   // populate state with reviews:
   setReviews(reviews) {
    console.log('in setReviews', reviews);
-    // this.setState({
-    //   _reviews: reviews
-    // });
+    this.setState({
+     _reviews: reviews
+    });
   }
 
   // set reviews length
@@ -78,7 +78,7 @@ class RatingsAndReviews extends React.Component {
     let rating = calculateRating(reviewsMeta.ratings);
 
     return (
-      <div id="ratings-main" data-testid="ratings-main">
+      <div id="ratings-main" data-testid="ratings-main">{console.log('currentProduct:', currentProduct)}
         <div id="ratings-left-pane">
           <div id="left-pane-title">
             RatingsAndReviews!
