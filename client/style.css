@@ -309,12 +309,14 @@ h1{
   position: absolute;
   top: 50%;
   left: 20%;
+  cursor: default;
 }
 
 .image-gallery-forward-arrow {
   position: absolute;
   top: 50%;
   right: 5%;
+  cursor: default;
 }
 
 .ig-thumbnail-column {
