@@ -15,22 +15,38 @@ const calculateRating = function(ratings) {
 };
 
 var ProductInformation = function(props) {
-  let { productInfo, productStyles, reviewsMeta } = props;
-  let { default_price, category, name } = productInfo;
-  let { original_price, sale_price } = productStyles.results[0];
-  let { ratings } = reviewsMeta;
-  return (
-    <React.Fragment>
-      <div className="stars-and-reviews">
-        <StarReview rating={calculateRating(ratings)}/>&nbsp;<span className="read-all-reviews">Read all reviews</span>
+  let { productInfo = {}, productStyles = {}, reviewsMeta } = props;
+  let { default_price = '$?', category = 'CATEGORY', name = 'NAME' } = productInfo;
+  let original_price = '$?';
+  let sale_price = null;
+  if (productStyles[0]) {
+    original_price = productStyles[0].original_price;
+    sale_price = productStyles[0].sale_price;
+  }
+  let ratings = { 5: 1 };
+  if (productInfo.reviewsMeta) {
+    ratings = productInfo.reviewsMeta.ratings;
+  }
+  if (productInfo) {
+    return (
+      <React.Fragment>
+        <div className="stars-and-reviews">
+          <StarReview rating={calculateRating(ratings)}/>&nbsp;<span className="read-all-reviews">Read all reviews</span>
+        </div>
+        <div data-testid="product-information">
+          <div className="product-detail-category">{category}</div>
+          <div className="product-detail-expanded-product-name">{name}</div>
+          <PriceLine originalPrice={original_price} salePrice={sale_price} />
+        </div>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <div>
+        Loading Product Information...
       </div>
-      <div data-testid="product-information">
-        <div className="product-detail-category">{category}</div>
-        <div className="product-detail-expanded-product-name">{name}</div>
-        <PriceLine originalPrice={original_price} salePrice={sale_price} />
-      </div>
-    </React.Fragment>
-  );
+    );
+  }
 };
 
 export default ProductInformation;

@@ -6,38 +6,18 @@ import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
 const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
 
-  // NOTE - keeping for refactor later on based on server changes for this path
-  // // answers array for current product
-  // const [answers, setAnswers] = useState([]);
-
   const [word, setWord] = useState('');
-  const [length, setLength] = useState(4);
-
-  // useEffect(() => {
-  // axios.get('/qa/questions/:question_id/answers')
-  //   .then(response => {
-  //     setAnswers(response.data);
-  //   })
-  //   .catch(err => err);
-  // }, []);
-
-  const increaseCount = () => {
-    event.preventDefault();
-    setLength(length + 2);
-  };
-
-  const filterQuestions = () => {
-    if (event.target.value.length < 3) {
-      setWord('');
-    } else {
-      setWord(event.target.value);
-    }
-  };
+  const [temp, setTemp] = useState('');
+  const [length, setLength] = useState(2);
+  const [helpfulArray, setHelpfulArray] = useState([]);
 
   const APICallHelpful = (questionId) => {
-    axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
-      .then(info => console.log('info:', info))
-      .catch(err => err);
+    if (helpfulArray.includes(questionId) === false) {
+      axios.put(`/qa/questions/:answer_id/helpful`, { question_id: questionId })
+        .then(info => console.log('info:', info))
+        .catch(err => err);
+      helpfulArray.push(questionId);
+    }
   };
 
   const APICallReport = (questionId) => {
@@ -46,13 +26,40 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       .catch(err => err);
   };
 
+  const increaseCount = () => {
+    event.preventDefault();
+    setLength(length + 2);
+  };
+
+  const filterQuestions = (current) => {
+    setTemp(current);
+    if ((temp.length >= 0) && (temp.length < 3)) {
+      setWord('');
+    } else if (temp.length === 3) {
+      setWord(temp);
+      setLength(2);
+    } else if (temp.length > 3) {
+      setLength(questionsInfo.length);
+    }
+  };
+
+  if (questionsInfo.length === 0) {
+    return <div data-testid="qa-questions">
+     There are no questions to display yet, be the first to ask a question:
+      <div className="qa-footer-buttons" data-testid="qa-footer-buttons">
+        <div className="qa-more" data-testid="qa-more" >
+          <QAAddQuestionModal productName={productName} currentProductId={currentProductId} />
+        </div>
+      </div>
+    </div>;
+  }
+
   return (
     <div data-testid="qa-questions">
       <form data-testid="search" id="search">
         <input className="qa-searchbar" data-testid="qa-searchbar" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           onChange={() => {
-            filterQuestions();
-            setLength(4);
+            filterQuestions(event.target.value);
           }}
         ></input>
         {/* NOTE - Search button will be replaced with icon later on */}
@@ -66,14 +73,19 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
             <div className="qa-card-sample" data-testid="qa-card-sample" key={index}>
               <b><div className="qa-div">Q: {question.question_body}
                 <div className="qa-helpfulness-right right-spacing" data-testid="qa-helpfulness-right">
+
                   <span className="right-spacing" onClick={() => {
                     event.preventDefault();
                     APICallReport(question.question_id);
+                    event.target.innerText = 'Reported';
                   }}>Report</span>
-                  <span className="right-spacing" onClick={() => {
+
+                  <span className="right-spacing" id={question.question_id} onClick={() => {
                     event.preventDefault();
                     APICallHelpful(question.question_id);
+                    event.target.innerText = `Helpful? Yes (${question.question_helpfulness + 1})`;
                   }}>Helpful? Yes ({question.question_helpfulness}) </span>
+
                   <QAAddAnswerModal question={question} index={index} productName={productName} />
                 </div>
               </div></b>
@@ -91,6 +103,7 @@ const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
       </div>
     </div>
   );
+
 };
 
 export default QACardQuestions;

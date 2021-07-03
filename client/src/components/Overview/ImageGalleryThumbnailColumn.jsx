@@ -14,7 +14,7 @@ class ImageGalleryThumbnailColumn extends React.Component {
   componentDidMount() {
     document.getElementById('ig-thumbnail-column-up-arrow').addEventListener('click', (event) => {
       let currentThumbnailPosition = this.state.thumbnailPosition;
-      if (currentThumbnailPosition < this.props.productStyles.results[0].photos.length - 1) {
+      if (currentThumbnailPosition < this.props.productStyles[0].photos.length - 1) {
         this.setState({thumbnailPosition: currentThumbnailPosition + 1});
       }
     });
@@ -27,17 +27,20 @@ class ImageGalleryThumbnailColumn extends React.Component {
   }
 
   render() {
-    let { selectedStyle, productStyles } = this.props;
+    let { selectedStyle, productStyles = {} } = this.props;
     let target = Number(this.props.selected);
     let index = -1;
-    let thumbnails = productStyles.results[selectedStyle].photos.map((style) => {
-      index += 1;
-      if (index === target) {
-        return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index} thumbnailClicked={this.props.thumbnailClicked} selected={true} />;
-      } else {
-        return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index} thumbnailClicked={this.props.thumbnailClicked} />;
-      }
-    });
+    let thumbnails = [];
+    if (productStyles[selectedStyle]) {
+      thumbnails = productStyles[selectedStyle].photos.map((style) => {
+        index += 1;
+        if (index === target) {
+          return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index} thumbnailClicked={this.props.thumbnailClicked} selected={true} />;
+        } else {
+          return <ImageGalleryThumbnail key={style.thumbnail_url} thumbnail_url={style.thumbnail_url} index={index} thumbnailClicked={this.props.thumbnailClicked} />;
+        }
+      });
+    }
 
     return (
       <div className="ig-thumbnail-column" data-testid="ig-tc">

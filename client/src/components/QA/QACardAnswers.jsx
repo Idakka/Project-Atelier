@@ -13,27 +13,44 @@ const QACardAnswers = ({ currentAnswers }) => {
   const [answersToShowLength, setAnswersToShowLength] = useState(2);
   // toggle is to make sure we avoid infinite rerender loop
   const [toggle, setToggle] = useState(false);
+  const [helpfulArray, setHelpfulArray] = useState([]);
+  const [user, setUser] = useState('tester123');
+
+  const sortAnswers = (answersArray) => {
+    const currentUserAnswers = answersArray.filter(item => {
+      return item.answerer_name === user;
+    });
+    let notCurrentUserAnswers = answersArray.filter(item => {
+      return item.answerer_name !== user;
+    });
+    notCurrentUserAnswers.sort((a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
+    const allAnswers = [...currentUserAnswers, ...notCurrentUserAnswers];
+    setAnswers(allAnswers);
+    setAnswersLength(allAnswers.length);
+    setAnswersToShow(allAnswers.slice(0, answersToShowLength));
+    setAnswersToShowLength(answersToShowLength + 2);
+  };
 
   useEffect(() => {
     if (answers) {
       for (var key in currentAnswers) {
         answers.push(currentAnswers[key]);
       }
-      setAnswers(answers);
-      answers.sort((a, b) => {
-        return b.helpfulness - a.helpfulness;
-      });
-      setAnswersLength(answers.length);
-      setAnswersToShow(answers.slice(0, answersToShowLength));
-      setAnswersToShowLength(answersToShowLength + 2);
     }
+    sortAnswers(answers);
     setToggle(true);
   }, []);
 
+
   const APICallHelpful = (answerId) => {
-    axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
-      .then(info => console.log('info:', info))
-      .catch(err => err);
+    if (helpfulArray.includes(answerId) === false) {
+      axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
+        .then(info => console.log('info:', info))
+        .catch(err => err);
+      helpfulArray.push(answerId);
+    }
   };
 
   const APICallReport = (answerId) => {
@@ -72,16 +89,24 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallHelpful(answer.id);
+              event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
+            }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallReport(answer.id);
+              event.target.innerText = 'Reported';
+            }}>Report</span>
           </p>
         </div>
       )}
       <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
         setAnswersToShowLength(answersToShowLength + 2);
         setAnswersToShow(answers.slice(0, answersToShowLength));
-      }}><b><span className="qa-load">[LOAD MORE ANSWERS]</span></b></button>
+      }}><b><span className="qa-load">[See more answers]</span></b></button>
     </div>;
   }
 
@@ -93,16 +118,24 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallHelpful(answer.id);
+              event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
+            }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
+            <span onClick={() => {
+              event.preventDefault();
+              APICallReport(answer.id);
+              event.target.innerText = 'Reported';
+            }}>Report</span>
           </p>
         </div>
       )}
       <button data-testid="qa-load-more" className="qa-load-more" onClick={() => {
         setAnswersToShowLength(2);
         setAnswersToShow(answers.slice(0, 2));
-      }}><b><span className="qa-load">[COLLAPSE ANSWERS]</span></b></button>
+      }}><b><span className="qa-load">[Collapse Answers]</span></b></button>
     </div>;
   }
 };
