@@ -75,7 +75,7 @@ class AddReviewModal extends React.Component {
         action="/photo-upload"
         method="post">
         <div className="review-form-title">Write Your Review</div>
-        <div className="review-form-subtitle">About the {this.props.currentProduct.name}</div>
+        <div className="review-form-subtitle">About the {this.props.currentProduct ? this.props.currentProduct.name : ''}</div>
         <fieldset>
           <legend>
             <abbr title="This field is mandatory"
