@@ -66,7 +66,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             document.getElementById(index).style.display = 'none';
           }}>&times;</div>
           <h2>Submit Your Answer</h2>
-          <h3>{question.question_body} </h3>
+          <h3>{productName}: {question.question_body} </h3>
           <form className="add-answer-form">
             <label className="add-form-answer">Answer* </label>
             <textarea rows="10" maxLength="1000" placeholder="Your answer here..." required onChange={() => setAnswer(event.target.value)} /><p></p>
