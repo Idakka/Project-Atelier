@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewThumbnailContainer from './ReviewThumbnailContainer.jsx';
 import WordCount from './WordCount.jsx';
+import axios from 'axios';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class AddReviewModal extends React.Component {
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
   };
+
+  postReview(reviewObject) {
+    return axios.get(`/products/current?id=${productId}`)
+      .then(response => response.data);
+  }
 
   componentDidMount() {
     document.getElementById('default-modal-close-button').addEventListener('click', (event) => {
@@ -53,7 +59,9 @@ class AddReviewModal extends React.Component {
   onClickUploadHandler() {
     const data = new FormData();
     data.append('file', this.state.selectedImageFiles);
-    axios.post(`http://localhost:${port}/upload`, data)
+    axios.post(`http://localhost:${port}/photo-upload`, data, {
+      headers: formData.getHeaders()
+    })
       .then(response => {
         console.log('successful upload: ', response);
       });
@@ -100,7 +108,7 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-summary"
           name="reviewSummary"
-          defaultValue={this.state.reviewSummary}
+          placeholder={this.state.reviewSummary}
           maxLength="60"
           data-testid="review-summary"
           onChange={this.onChangeHandler}
@@ -115,7 +123,7 @@ class AddReviewModal extends React.Component {
           className="form-body-text"
           id="review-body-text"
           name="reviewBody"
-          value={this.state.reviewBody}
+          placeholder={this.state.reviewBody}
           required
           maxLength="1000"
           onChange={this.onChangeHandler}
@@ -130,9 +138,10 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-nickname"
           name="nickname"
-          defaultValue={this.state.nickname}
+          placeholder={this.state.nickname}
           maxLength="60"
           data-testid="review-nickname"
+          required
           onChange={this.onChangeHandler}
         />
         <p className="form-detail-text">For privacy reasons, do not use your full name or email address</p>
@@ -146,8 +155,9 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-email"
           name="email"
-          defaultValue={this.state.email}
+          placeholder={this.state.email}
           data-testid="review-name"
+          required
           onChange={this.onChangeHandler}
         />
         <p className="form-detail-text">For authentication reasons, you will not be emailed</p>
@@ -158,7 +168,7 @@ class AddReviewModal extends React.Component {
           data-testid="review-upload-form-submit"
         />
         <span id="status"></span>
-        <input type="file" onChange={this.onChangeFileHandler}/>
+        <input type="file" name="images" onChange={this.onChangeFileHandler} multiple/>
         <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} filesLoaded={this.state.filesLoaded} />
         <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to cancel review.</button>
       </form>

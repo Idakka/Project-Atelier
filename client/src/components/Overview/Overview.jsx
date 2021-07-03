@@ -57,14 +57,22 @@ class Overview extends React.Component {
   }
 
   render() {
+    let reviewsMeta = {};
+    if (this.props.productInfo) {
+      reviewsMeta = this.props.productInfo.reviewsMeta;
+    }
     return (
       <div className='top-region max-width'>
         <TitleBar themeChange={this.themeChange}/>
         <SiteWideAnnounce />
         <div className="overview-column-container">
-          <ImageGallery productStyles={this.props.productStyles} overview={this} thumbnailClicked={this.thumbnailClicked}/>
+          <ImageGallery
+            productStyles={this.props.productStyles}
+            overview={this}
+            thumbnailClicked={this.thumbnailClicked}
+          />
           <div className="product-information">
-            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} reviewsMeta={this.props.reviewsMeta} />
+            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} />
             <StyleSelector productStyles={this.props.productStyles} overview={this} />
             <AddToCartRegion top={this.props.top} productStyles={this.props.productStyles} selectedStyle={this.state.selectedStyle} />
           </div>
