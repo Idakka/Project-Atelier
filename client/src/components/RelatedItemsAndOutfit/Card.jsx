@@ -58,7 +58,6 @@ const Card = ({ top, product, cardType, onAction }) => {
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
         <p className="product__price">
-          {console.log(product)}
           {product.defaultStyle.sale_price ? (
             <>
               <span className="card__price card__price--sale">${product.defaultStyle.sale_price.split('.')[0]}</span>
