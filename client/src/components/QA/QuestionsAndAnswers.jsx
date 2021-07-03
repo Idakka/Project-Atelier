@@ -22,11 +22,10 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) =
   };
 
   useEffect(() => {
-    // setProductName(productInfo);
-    // setQuestions(questionsInfo);
+    setProductName(productInfo);
+    setQuestions(questionsInfo);
     axios.get('/qa/questions')
       .then(response => {
-        // setQuestions(response.data);
         sortQuestions(response.data);
       })
       .catch(err => err);
