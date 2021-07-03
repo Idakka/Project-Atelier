@@ -202,8 +202,8 @@ app.get('/reviews', (req, res) => {
 
 // .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
-  const query = req.query;
-  atelierQueries.getProductReviewsMeta(query, atelierHeaders)
+  const product_id = req.query.product_id;
+  atelierQueries.getProductReviewsMeta(product_id, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
@@ -237,13 +237,13 @@ app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
       res.status(400).end('server error uploading photos');
     } else {
       // send to review API with all req params
-      res.status(200).end('success');
+      res.status(200).redirect('/');
     }
 });
 
 app.post('/reviews/:product_id', (req, res) => {
   atelierQueries.postReview(req.body, atelierHeaders)
-    .then(result => res.end(JSON.stringify(result)))
+    .then(result => res.redirect('/'))
     .catch(error => {
       console.error(error);
       res.end(JSON.stringify(error));
@@ -265,7 +265,6 @@ app.put('/reviews/:review_id/report', (req, res) => {
   var reviewId = req.body;
   atelierQueries.reportReview(reviewId, atelierHeaders)
     .then(result => {
-      console.log('success report!', result.body);
       res.status(204).end(JSON.stringify(result.body));
     })
     .catch(error => {

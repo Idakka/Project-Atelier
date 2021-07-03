@@ -9,7 +9,7 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: props.productId || 22126,
+      currentProductId: props.productId,
       _reviews: this.props.reviews || [],
       reviewsLength: this.props.reviews.length || 0,
       reviewsToShow: this.props.reviews.slice(0,2) || [],
@@ -17,14 +17,16 @@ class RatingsAndReviews extends React.Component {
       filters: [],
       sortBy: ''
     }
+    this.setReviews = this.setReviews.bind(this);
   };
   // populate reviewsToShow after mounting:
   componentDidMount() {
     // axios call to get reviews
-    let id = this.state.currentProductId;
+    let id = this.state.currentProductId || 22128;
     let page = 1;
     let count = 200;
     let sort = 'relevance';
+    // console.log('product id in get reviews:', id);
     axios.get(`/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${id}`)
     .then(response => {
       this.setReviews(response.data);
@@ -34,9 +36,10 @@ class RatingsAndReviews extends React.Component {
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
-    this.setState({
-      _reviews: reviews
-    });
+   console.log('in setReviews', reviews);
+    // this.setState({
+    //   _reviews: reviews
+    // });
   }
 
   // set reviews length
