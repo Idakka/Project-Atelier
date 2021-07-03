@@ -23,7 +23,10 @@ var ProductInformation = function(props) {
     original_price = productStyles[0].original_price;
     sale_price = productStyles[0].sale_price;
   }
-  let { ratings } = reviewsMeta;
+  let ratings = { 5: 1 };
+  if (productInfo.reviewsMeta) {
+    ratings = productInfo.reviewsMeta.ratings;
+  }
   if (productInfo) {
 
     return (
