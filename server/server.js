@@ -46,7 +46,6 @@ var uploadS3 = multer({
       getFieldname(null, {fieldName: file.fieldname});
     },
     key: (req, file, createAWSName) => {
-      console.log('success on multer key:', file.originalname);
       createAWSName(null, Date.now().toString() + '-' + file.originalname);
     }
   })
@@ -192,8 +191,8 @@ app.get('/products/related', (req, res) => {
 // Specific and smaller queries
 // .../reviews?id=12345
 app.get('/reviews', (req, res) => {
-  const productId = req.query.id;
-  atelierQueries.getProductReviews(productId, atelierHeaders)
+  const query = req.query;
+  atelierQueries.getProductReviews(query, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);

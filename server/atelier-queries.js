@@ -28,8 +28,9 @@ const getRelatedProducts = (productId, headers) => {
 };
 
 // Returns the entire response as an object, including page, count, etc.
-const getProductReviews = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}`, headers)
+const getProductReviews = (query, headers) => {
+  console.log('get reviews query:', query);
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?page=${query.page}&count=${query.count}&sort=${query.sort}&product_id=${query.product_id}`, headers)
     .then(result => result.data)
     .catch(err => {
       throw err;
