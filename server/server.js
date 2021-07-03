@@ -37,6 +37,7 @@ const s3 = new AWS.S3({
 AWS.config.update({region: 'us-east-1'});
 
 var uploadS3 = multer({
+  dest: './images',
   storage: multerS3({
     s3: s3,
     acl: 'public-read',
@@ -45,7 +46,9 @@ var uploadS3 = multer({
       getFieldname(null, {fieldName: file.fieldname});
     },
     key: (req, file, createAWSName) => {
-      createAWSName(null, Date.now().toString() + '-' + file.originalname);
+      console.log('success on multer key:', file.originalname);
+      createAWSName(null, 'test-file');
+      //Date.now().toString() + '-' + file.originalname);
     }
   })
 });
@@ -221,17 +224,16 @@ app.post('/interactions', (req, res) => {
     });
 });
 
-app.post('/photo-upload', (req, res) => {
-  // send urls to review POST route
-  photoUpload(req, res, (err, data) => {
-    if (err) {
+app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
+  // send urls to review POST
+  console.log('photo request:', req);
+    if (!res) {
       res.status(400).end('server error uploading photos');
     } else {
       // how to access files after creation in photoUpload?
-      console.log('here is the s3 response:', res.files);
+      console.log('here is the s3 response:', req.files);
       res.status(200).end('success');
     }
-  });
 });
 
 app.post('/reviews/:product_id', (req, res) => {
