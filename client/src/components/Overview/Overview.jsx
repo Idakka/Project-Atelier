@@ -19,7 +19,7 @@ class Overview extends React.Component {
     this.themeChange = this.themeChange.bind(this);
     this.nextPic = this.nextPic.bind(this);
     this.prevPic = this.prevPic.bind(this);
-    this.currentTheme = "light";
+    this.currentTheme = 'light';
   }
 
   styleClickHandler(event) {
