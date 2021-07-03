@@ -191,7 +191,7 @@ app.get('/products/related', (req, res) => {
 // Specific and smaller queries
 // .../reviews?id=12345
 app.get('/reviews', (req, res) => {
-  const query = req.query;
+  const query = req.query.product_id;
   atelierQueries.getProductReviews(query, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {

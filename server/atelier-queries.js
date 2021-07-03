@@ -29,11 +29,17 @@ const getRelatedProducts = (productId, headers) => {
 
 // Returns the entire response as an object, including page, count, etc.
 const getProductReviews = (query, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?page=${query.page}&count=${query.count}&sort=${query.sort}&product_id=${query.product_id}`, headers)
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${query}`, headers)
     .then(result => result.data)
     .catch(err => {
       throw err;
     });
+    // initial bundle doesn't include other parameters for reviews GET
+  // return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?page=${query.page}&count=${query.count}&sort=${query.sort}&product_id=${query.product_id}`, headers)
+  //   .then(result => result.data)
+  //   .catch(err => {
+  //     throw err;
+  //   });
 };
 
 // Returns the entire response as an object
@@ -195,6 +201,7 @@ const getCurrentProductBundle = (productId, headers) => {
 };
 
 const getRelatedProductsBundle = (relatedProducts, headers) => {
+  console.log('relatedProducts in bundle:', relatedProducts[0]);
   console.time('getRelatedProductsBundle API Time');
   const allRelatedProductCalls = [];
   for (let i = 0; i < relatedProducts.length; i++) {
