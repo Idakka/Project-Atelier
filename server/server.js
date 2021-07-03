@@ -234,18 +234,15 @@ app.post('/interactions', (req, res) => {
 
 app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
   // send urls to review POST
-  console.log('photo request:', req);
     if (!res) {
       res.status(400).end('server error uploading photos');
     } else {
-      // how to access files after creation in photoUpload?
-      console.log('here is the s3 response:', req.files);
+      // send to review API with all req params
       res.status(200).end('success');
     }
 });
 
 app.post('/reviews/:product_id', (req, res) => {
-  console.log('this is the recieved request:', req.body);
   atelierQueries.postReview(req.body, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
