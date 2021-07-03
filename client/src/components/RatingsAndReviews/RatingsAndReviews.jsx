@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import StarReview from '../StarReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import calculateRating from '../../scripts/calculateRating.js';
@@ -8,8 +9,9 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProductId: props.productId || 22126,
       _reviews: this.props.reviews || [],
-      reviewsLength: this.props.reviews.length,
+      reviewsLength: this.props.reviews.length || 0,
       reviewsToShow: this.props.reviews.slice(0,2) || [],
       reviewsToShowLength: 2,
       filters: [],
@@ -18,16 +20,28 @@ class RatingsAndReviews extends React.Component {
   };
   // populate reviewsToShow after mounting:
   componentDidMount() {
-
+    // axios call to get reviews
+    let id = this.state.currentProductId;
+    let page = 1;
+    let count = 200;
+    let sort = 'relevance';
+    axios.get(`/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${id}`)
+    .then(response => {
+      this.setReviews(response.data);
+    })
+    .catch(err => err);
   }
-  /* sorting and filter handlers:
+  // sorting and filter handlers:
   // populate state with reviews:
-  setReviews() {
-
+  setReviews(reviews) {
+    this.setState({
+      _reviews: reviews
+    });
   }
+
   // set reviews length
-  setReviewsLength()
-  setReviewsToShow()
+  // setReviewsLength()
+  // setReviewsToShow()
   setReviewsToShowLength(){
     let currentLength = this.state.reviewsToShowLength;
     reviewsShownLength+=2;
@@ -36,7 +50,6 @@ class RatingsAndReviews extends React.Component {
     })
   }
 
-  */
   // const [_reviews, setReviews] = useState([]);
   // const [reviewsLength, setReviewsLength] = useState(0);
   // const [reviewsToShow, setReviewsToShow] = useState([]);
