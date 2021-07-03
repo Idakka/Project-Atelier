@@ -309,12 +309,14 @@ h1{
   position: absolute;
   top: 50%;
   left: 20%;
+  cursor: default;
 }
 
 .image-gallery-forward-arrow {
   position: absolute;
   top: 50%;
   right: 5%;
+  cursor: default;
 }
 
 .ig-thumbnail-column {
@@ -892,6 +894,15 @@ h1{
   transform: scale(1);
   transition: all .3s ease-out;
 }
+.card__price.card__price--sale {
+  color: red;
+  margin-right: 0.5rem;
+}
+.card__price--discounted {
+  color: gray;
+  text-decoration: line-through;
+}
+
 .card--add-to-outfit {
   cursor: pointer;
 }
@@ -941,6 +952,12 @@ h1{
 }
 .comparison-characteristics__related {
   text-align: right;
+}
+.modal__button-container {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 1rem;
 }
 
 /* Modal */
