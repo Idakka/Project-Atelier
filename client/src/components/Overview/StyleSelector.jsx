@@ -17,10 +17,14 @@ var StyleSelector = function(props) {
     if (styleThumbnails.length > i + rowSize) { rowEntries.splice(i + rowSize); } // trim entries off the end
     rows.push(<div className="row-of-style-thumbnails-container" key={Math.random()}><div className="row-of-style-thumbnails" children={rowEntries}></div></div>);
   }
+  let styleName = 'SELECTED STYLE';
+  if (productStyles[props.overview.state.selectedStyle]) {
+    styleName = productStyles[props.overview.state.selectedStyle].name;
+  }
   return (
     <React.Fragment>
       <div className="style-selector-header" data-testid='style-selector'>
-        <span className="style-label">STYLE &gt;</span> SELECTED STYLE
+        <span className="style-label">STYLE &gt;</span> {styleName}
       </div>
       <div>
         {rows}
