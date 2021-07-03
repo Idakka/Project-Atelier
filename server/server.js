@@ -225,15 +225,18 @@ app.post('/interactions', (req, res) => {
 
 app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
   // send urls to review POST
-    if (!res) {
+    if (!req.files) {
       res.status(400).end('server error uploading photos');
     } else {
       // send to review API with all req params
-      res.status(200).end('success');
+      console.log(req);
+      res.status(200).redirect('/');
     }
 });
 
-app.post('/reviews/:product_id', (req, res) => {
+app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
+  // multer middleware posts images to s3 and decorates req object with resulting URLs
+  if (res)
   atelierQueries.postReview(req.body, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
