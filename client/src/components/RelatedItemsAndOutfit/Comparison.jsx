@@ -64,13 +64,15 @@ const Comparison = ({ top, currentProduct, relatedProduct }) => {
           );
         })}
       </div>
-      <button
-        id='default-modal-close-button'
-        data-testid="example-modal-close-button"
-        onClick={() => top.hideModal()}
-      >
-        Click to hide modal.
-      </button>
+      <div className="modal__button-container">
+        <button
+          id='default-modal-close-button'
+          data-testid="example-modal-close-button"
+          onClick={() => top.hideModal()}
+        >
+          Close
+        </button>
+      </div>
     </div>
   );
 };

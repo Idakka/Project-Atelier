@@ -932,6 +932,12 @@ h1{
 .comparison-characteristics__related {
   text-align: right;
 }
+.modal__button-container {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 1rem;
+}
 
 /* Modal */
 
