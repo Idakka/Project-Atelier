@@ -28,7 +28,6 @@ var ProductInformation = function(props) {
     ratings = productInfo.reviewsMeta.ratings;
   }
   if (productInfo) {
-
     return (
       <React.Fragment>
         <div className="stars-and-reviews">
