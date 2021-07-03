@@ -38,8 +38,8 @@ const getProductReviews = (query, headers) => {
 };
 
 // Returns the entire response as an object
-const getProductReviewsMeta = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`, headers)
+const getProductReviewsMeta = (query, headers) => {
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${query.product_id}`, headers)
     .then(result => result.data)
     .catch(err => {
       throw err;

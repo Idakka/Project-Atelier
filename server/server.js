@@ -202,8 +202,8 @@ app.get('/reviews', (req, res) => {
 
 // .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
-  const productId = req.query.id;
-  atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
+  const query = req.query;
+  atelierQueries.getProductReviewsMeta(query, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
