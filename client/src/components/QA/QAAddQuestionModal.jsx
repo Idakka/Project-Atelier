@@ -47,7 +47,7 @@ const QAAddQuestionModal = ({ productName, currentProductId }) => {
             document.getElementById('qa-modal-add-question').style.display = 'none';
           }}>&times;</div>
           <h2>Ask Your Question</h2>
-          <h3>About the {productName.name}</h3>
+          <h3>About the </h3>
           <form className="add-answer-form">
             <label className="add-form-question">Question*</label>
             <textarea rows="10" maxLength="1000" placeholder="Why did you like the product or not?" required onChange={() => setQuestion(event.target.value)} /><p></p>

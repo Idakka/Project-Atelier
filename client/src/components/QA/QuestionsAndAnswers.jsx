@@ -23,7 +23,6 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, pro
   useEffect(() => {
     setProductName(productInfo);
     setQuestions(questionsInfo);
-    console.log(productInfoAPI);
     // axios.get('/qa/questions')
     //   .then(response => {
     //     sortQuestions(response.data);
@@ -34,7 +33,7 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, pro
   return (
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
-      <QACardQuestions currentProductId={currentProductId} questionsInfo={questionsInfo} productName={productName} />
+      <QACardQuestions currentProductId={currentProductId} questionsInfo={questionsInfo} productName={productInfoAPI} />
       <p></p>
     </div>
   );
