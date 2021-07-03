@@ -234,21 +234,36 @@ app.post('/interactions', (req, res) => {
 
 app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
   // send urls to review POST
-    if (!res) {
+    if (!req.files) {
       res.status(400).end('server error uploading photos');
     } else {
-      // send to review API with all req params
-      res.status(200).end('success');
+      res.status(200).redirect('/');
     }
 });
 
-app.post('/reviews/:product_id', (req, res) => {
-  atelierQueries.postReview(req.body, atelierHeaders)
+app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
+  // multer middleware posts images to s3 and decorates req object with resulting URLs
+  if (!req.files) {
+    res.status(400).end('server error uploading photos');
+  } else {
+    // send to review API with all req params
+    const reviewObject = req.body;
+    const photos = [];
+    req.files.forEach(object => photos.push(object.location));
+    reviewObject.photos = photos;
+    // properties aren't parsing correctly so this is temp hack to get correct types:
+    reviewObject.product_id = Number(reviewObject.product_id);
+    reviewObject.rating = Number(reviewObject.rating);
+    reviewObject.recommend = reviewObject.recommend === 'true';
+    reviewObject.characteristics = JSON.parse(reviewObject.characteristics);
+
+    atelierQueries.postReview(reviewObject, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
       res.end(JSON.stringify(error));
     });
+  }
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
