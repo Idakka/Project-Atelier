@@ -37,7 +37,7 @@ const s3 = new AWS.S3({
 AWS.config.update({region: 'us-east-1'});
 
 var uploadS3 = multer({
-  dest: './images',
+  dest: './photos',
   storage: multerS3({
     s3: s3,
     acl: 'public-read',
@@ -47,8 +47,7 @@ var uploadS3 = multer({
     },
     key: (req, file, createAWSName) => {
       console.log('success on multer key:', file.originalname);
-      createAWSName(null, 'test-file');
-      //Date.now().toString() + '-' + file.originalname);
+      createAWSName(null, Date.now().toString() + '-' + file.originalname);
     }
   })
 });
