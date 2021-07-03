@@ -167,9 +167,11 @@ class ProductDetailPage extends React.Component {
           outfitProducts={this.state.yourOutfit.map(productId => this.state.products[productId])}
         />
         <QuestionsAndAnswersWithTracking
+          top={this}
           questionsInfo={this.state.currentQuestions}
           productInfo={productInfoMock}
           currentProductId={this.state.currentProductId}
+          productInfoAPI={this.state.products[this.state.currentProductId]}
         />
         <RatingsAndReviewsWithTracking
           top={this}

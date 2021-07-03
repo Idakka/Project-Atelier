@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 
-const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) => {
+const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, productInfoAPI }) => {
   const [product, setProduct] = useState('');
   // // questions array for current product
   const [questions, setQuestions] = useState([]);
@@ -23,6 +23,7 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) =
   useEffect(() => {
     setProductName(productInfo);
     setQuestions(questionsInfo);
+    console.log(productInfoAPI);
     // axios.get('/qa/questions')
     //   .then(response => {
     //     sortQuestions(response.data);
