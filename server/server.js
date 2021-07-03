@@ -163,6 +163,15 @@ app.get('/products/current', (req, res) => {
     });
 });
 
+app.get('/products/styles', (req, res) => {
+  atelierQueries.getProductStyles(req.query.id, atelierHeaders)
+    .then(result => res.end(JSON.stringify(result)))
+    .catch(error => {
+      console.error(error);
+      res.end(JSON.stringify(error));
+    });
+});
+
 // .../products/related?ids=12345,23456,34567
 app.get('/products/related', (req, res) => {
   const relatedProducts = req.query.ids.split(',');

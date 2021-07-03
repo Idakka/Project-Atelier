@@ -56,6 +56,12 @@ class ProductDetailPage extends React.Component {
       .then(response => response.data);
   }
 
+  getCurrentProductStylesFromAPI(productId) {
+    return axios.get(`/products/styles?id=${productId}`)
+      .then((response => response.data))
+      .then(styles => {this.setState({productStyles: styles})});
+  }
+
   getListOfProductsFromAPI(listOfProducts) {
     const productsWithoutInfo = listOfProducts.filter(product => this.state.products[product] === undefined);
     if (productsWithoutInfo.length !== 0) {
@@ -72,6 +78,7 @@ class ProductDetailPage extends React.Component {
     });
     // set currentProductId based on URL or default
     const updatedProducts = { ...this.state.products };
+    this.getCurrentProductStylesFromAPI(this.state.currentProductId);
     this.getCurrentProductFromAPI(productId)
       .then(productInformation => {
         updatedProducts[productId] = productInformation;
@@ -139,7 +146,12 @@ class ProductDetailPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <OverviewWithTracking top={this} productInfo={productInfoMock} productStyles={productStylesMock} reviewsMeta={reviewsMetaMock}/>
+        <OverviewWithTracking
+          top={this}
+          productInfo={this.state.products[this.state.currentProductId]}
+          productStyles={this.state.productStyles}
+          reviewsMeta={reviewsMetaMock}
+        />
         <RelatedItemsAndOutfitWithTracking
           top={this}
           product={this.state.products[this.state.currentProductId]}
