@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewThumbnailContainer from './ReviewThumbnailContainer.jsx';
 import WordCount from './WordCount.jsx';
+import axios from 'axios';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class AddReviewModal extends React.Component {
     this.onClickUploadHandler = this.onClickUploadHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
   };
+
+  postReview(reviewObject) {
+    return axios.get(`/products/current?id=${productId}`)
+      .then(response => response.data);
+  }
 
   componentDidMount() {
     document.getElementById('default-modal-close-button').addEventListener('click', (event) => {
@@ -47,13 +53,17 @@ class AddReviewModal extends React.Component {
     this.setState({
       selectedImageFiles: tempImageURLArray,
       filesLoaded: fileCount
+    }, ()=> {
+      console.log('on change handler', this.state.selectedImageFiles);
     });
   }
 
   onClickUploadHandler() {
     const data = new FormData();
     data.append('file', this.state.selectedImageFiles);
-    axios.post(`http://localhost:${port}/upload`, data)
+    axios.post(`http://localhost:${port}/photo-upload`, data, {
+      headers: formData.getHeaders()
+    })
       .then(response => {
         console.log('successful upload: ', response);
       });
@@ -100,6 +110,7 @@ class AddReviewModal extends React.Component {
           type="text"
           id="review-summary"
           name="reviewSummary"
+          placeholder={this.state.reviewSummary}
           defaultValue={this.state.reviewSummary}
           maxLength="60"
           data-testid="review-summary"
@@ -158,7 +169,7 @@ class AddReviewModal extends React.Component {
           data-testid="review-upload-form-submit"
         />
         <span id="status"></span>
-        <input type="file" onChange={this.onChangeFileHandler}/>
+        <input type="file" name="images" onChange={this.onChangeFileHandler} multiple/>
         <ReviewThumbnailContainer thumbnails={this.state.selectedImageFiles} filesLoaded={this.state.filesLoaded} />
         <button id='default-modal-close-button' data-testid="example-modal-close-button">Click to cancel review.</button>
       </form>

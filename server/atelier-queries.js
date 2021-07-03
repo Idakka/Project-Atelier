@@ -129,6 +129,43 @@ const reportAnswer = (answerId, headers) => {
     });
 }
 
+// Post a review
+const postReview = (body, headers) => {
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, body, headers)
+    .then(result => {
+      return result.config.data;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+// Reports a review as helpful
+const helpfulReview = (reviewId, headers) => {
+  var review = reviewId.review_id.toString();
+  var reviewObj = JSON.stringify(reviewId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${review}/helpful`, reviewObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+// Reports a review
+const reportReview = (reviewId, headers) => {
+  var review = reviewId.review_id.toString();
+  var reviewObj = JSON.stringify(reviewId)
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${review}/report`, reviewObj, headers)
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
 const postInteraction = (interaction, headers) => {
   return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', interaction, headers)
     .then(result => result.data)
@@ -216,8 +253,11 @@ module.exports = {
   postCart,
   postQuestion,
   postAnswer,
+  postReview,
   helpfulQuestion,
   reportQuestion,
   helpfulAnswer,
-  reportAnswer
+  reportAnswer,
+  helpfulReview,
+  reportReview
 };
