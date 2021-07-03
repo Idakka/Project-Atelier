@@ -57,7 +57,17 @@ const Card = ({ top, product, cardType, onAction }) => {
       <div className="product__details">
         <p className="product__category">{product.category}</p>
         <p className="product__name">{product.name}</p>
-        <p className="product__price">${product.defaultStyle.sale_price ? product.defaultStyle.sale_price.split('.')[0] : product.defaultStyle.original_price.split('.')[0]}</p>
+        <p className="product__price">
+          {console.log(product)}
+          {product.defaultStyle.sale_price ? (
+            <>
+              <span className="card__price card__price--sale">${product.defaultStyle.sale_price.split('.')[0]}</span>
+              <span className="card__price card__price--discounted">${product.defaultStyle.original_price.split('.')[0]}</span>
+            </>
+          ) : (
+            <span className="card__price">${product.defaultStyle.original_price.split('.')[0]}</span>
+          )}
+        </p>
         <StarReview rating={product.rating} />
       </div>
     </div>
