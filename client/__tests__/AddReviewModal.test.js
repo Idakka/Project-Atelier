@@ -31,5 +31,5 @@ test('Clicking the "Add Review" reveals the modal with the WordCount and ReviewT
   let theModal = screen.getByTestId('the_modal');
   fireEvent.click(screen.getByTestId('add-review-button'));
   expect(screen.queryByTestId('word-count')).toBeInTheDocument();
-  expect(screen.queryByTestId('review-thumbnail-container')).toBeInTheDocument();
+  expect(screen.queryAllByTestId('review-thumbnail-container').length).not.toBe(0);
 });
