@@ -17,6 +17,8 @@ class Overview extends React.Component {
     this.styleClickHandler = this.styleClickHandler.bind(this);
     this.thumbnailClicked = this.thumbnailClicked.bind(this);
     this.themeChange = this.themeChange.bind(this);
+    this.nextPic = this.nextPic.bind(this);
+    this.prevPic = this.prevPic.bind(this);
     this.currentTheme = "light";
   }
 
@@ -26,6 +28,21 @@ class Overview extends React.Component {
 
   thumbnailClicked(event) {
     this.setState({ selectedPhoto: event.target.dataset.index});
+  }
+
+  nextPic(event) {
+    // First make sure we've finished pulling from the API before trying to use the data there.
+    if (this.props.productStyles) {
+      if (this.state.selectedPhoto < this.props.productStyles[this.state.selectedPhoto].photos.length) {
+        this.setState({ selectedPhoto: this.state.selectedPhoto + 1});
+      }
+    }
+  }
+
+  prevPic(event) {
+    if (this.state.selectedPhoto > 0) {
+      this.setState({ selectedPhoto: this.state.selectedPhoto - 1});
+    }
   }
 
   themeChange(event) {
@@ -70,11 +87,23 @@ class Overview extends React.Component {
             productStyles={this.props.productStyles}
             overview={this}
             thumbnailClicked={this.thumbnailClicked}
+            nextPic={this.nextPic}
+            prevPic={this.prevPic}
           />
           <div className="product-information">
-            <ProductInformation productInfo={this.props.productInfo} productStyles={this.props.productStyles} />
-            <StyleSelector productStyles={this.props.productStyles} overview={this} />
-            <AddToCartRegion top={this.props.top} productStyles={this.props.productStyles} selectedStyle={this.state.selectedStyle} />
+            <ProductInformation
+              productInfo={this.props.productInfo}
+              productStyles={this.props.productStyles}
+            />
+            <StyleSelector
+              productStyles={this.props.productStyles}
+              overview={this}
+            />
+            <AddToCartRegion
+              top={this.props.top}
+              productStyles={this.props.productStyles}
+              selectedStyle={this.state.selectedStyle}
+            />
           </div>
         </div>
         <SalesPitch productInfo={this.props.productInfo} />
