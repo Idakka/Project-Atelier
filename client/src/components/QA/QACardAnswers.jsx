@@ -13,22 +13,35 @@ const QACardAnswers = ({ currentAnswers }) => {
   const [answersToShowLength, setAnswersToShowLength] = useState(2);
   // toggle is to make sure we avoid infinite rerender loop
   const [toggle, setToggle] = useState(false);
+  const [user, setUser] = useState('tester123');
+
+  const sortAnswers = (answersArray) => {
+    const currentUserAnswers = answersArray.filter(item => {
+      return item.answerer_name === user;
+    });
+    let notCurrentUserAnswers = answersArray.filter(item => {
+      return item.answerer_name !== user;
+    });
+    notCurrentUserAnswers.sort((a, b) => {
+      return b.helpfulness - a.helpfulness;
+    });
+    const allAnswers = [...currentUserAnswers, ...notCurrentUserAnswers];
+    setAnswers(allAnswers);
+    setAnswersLength(allAnswers.length);
+    setAnswersToShow(allAnswers.slice(0, answersToShowLength));
+    setAnswersToShowLength(answersToShowLength + 2);
+  };
 
   useEffect(() => {
     if (answers) {
       for (var key in currentAnswers) {
         answers.push(currentAnswers[key]);
       }
-      setAnswers(answers);
-      answers.sort((a, b) => {
-        return b.helpfulness - a.helpfulness;
-      });
-      setAnswersLength(answers.length);
-      setAnswersToShow(answers.slice(0, answersToShowLength));
-      setAnswersToShowLength(answersToShowLength + 2);
     }
+    sortAnswers(answers);
     setToggle(true);
   }, []);
+
 
   const APICallHelpful = (answerId) => {
     axios.put(`/qa/answers/:answer_id/helpful`, { answer_id: answerId })
