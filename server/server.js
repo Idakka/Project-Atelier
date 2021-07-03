@@ -66,7 +66,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var productId = 22126; // will need to be updated once product is rendering on page
+  console.log('->', req.url.split('=')[1]);
+  var productId = req.url.split('=')[1]; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
       res.end(JSON.stringify(result));
@@ -76,6 +77,7 @@ app.get('/qa/questions/', (req, res) => {
       res.end(JSON.stringify(error));
     });
 });
+
 
 app.post('/qa/questions', (req, res) => {
   atelierQueries.postQuestion(req.body, atelierHeaders)
