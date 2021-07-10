@@ -65,7 +65,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/qa/questions/', (req, res) => {
-  var productId = 22126; // will need to be updated once product is rendering on page
+  var productId = req.url.split('=')[1]; // will need to be updated once product is rendering on page
   atelierQueries.getProductQuestions(productId, atelierHeaders)
     .then(result => {
       res.end(JSON.stringify(result));
@@ -76,11 +76,12 @@ app.get('/qa/questions/', (req, res) => {
     });
 });
 
+
 app.post('/qa/questions', (req, res) => {
   atelierQueries.postQuestion(req.body, atelierHeaders)
     .then(result => {
       const parseResult = JSON.parse(result);
-      atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
+      atelierQueries.getProductQuestions(parseResult.productId, atelierHeaders)
         .then(questions => questions);
       return result;
     })
@@ -191,7 +192,7 @@ app.get('/products/related', (req, res) => {
 // Specific and smaller queries
 // .../reviews?id=12345
 app.get('/reviews', (req, res) => {
-  const query = req.query.product_id;
+  const query = req.query.productId;
   atelierQueries.getProductReviews(query, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
@@ -202,8 +203,8 @@ app.get('/reviews', (req, res) => {
 
 // .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
-  const product_id = req.query.product_id;
-  atelierQueries.getProductReviewsMeta(product_id, atelierHeaders)
+  const productId = req.query.productId;
+  atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
@@ -233,21 +234,36 @@ app.post('/interactions', (req, res) => {
 
 app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
   // send urls to review POST
-    if (!res) {
-      res.status(400).end('server error uploading photos');
-    } else {
-      // send to review API with all req params
-      res.status(200).redirect('/');
-    }
+  if (!req.files) {
+    res.status(400).end('server error uploading photos');
+  } else {
+    res.status(200).redirect('/');
+  }
 });
 
-app.post('/reviews/:product_id', (req, res) => {
-  atelierQueries.postReview(req.body, atelierHeaders)
-    .then(result => res.redirect('/'))
-    .catch(error => {
-      console.error(error);
-      res.end(JSON.stringify(error));
-    });
+app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
+  // multer middleware posts images to s3 and decorates req object with resulting URLs
+  if (!req.files) {
+    res.status(400).end('server error uploading photos');
+  } else {
+    // send to review API with all req params
+    const reviewObject = req.body;
+    const photos = [];
+    req.files.forEach(object => photos.push(object.location));
+    reviewObject.photos = photos;
+    // properties aren't parsing correctly so this is temp hack to get correct types:
+    reviewObject.productId = Number(reviewObject.productId);
+    reviewObject.rating = Number(reviewObject.rating);
+    reviewObject.recommend = reviewObject.recommend === 'true';
+    reviewObject.characteristics = JSON.parse(reviewObject.characteristics);
+
+    atelierQueries.postReview(reviewObject, atelierHeaders)
+      .then(result => res.end(JSON.stringify(result)))
+      .catch(error => {
+        console.error(error);
+        res.end(JSON.stringify(error));
+      });
+  }
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {

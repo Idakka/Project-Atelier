@@ -30,18 +30,18 @@ const QACardAnswers = ({ currentAnswers }) => {
     setAnswers(allAnswers);
     setAnswersLength(allAnswers.length);
     setAnswersToShow(allAnswers.slice(0, answersToShowLength));
-    setAnswersToShowLength(answersToShowLength + 2);
   };
 
   useEffect(() => {
-    if (answers) {
+    const incomingAnswers = [];
+    if (currentAnswers) {
       for (var key in currentAnswers) {
-        answers.push(currentAnswers[key]);
+        incomingAnswers.push(currentAnswers[key]);
       }
     }
-    sortAnswers(answers);
+    sortAnswers(incomingAnswers);
     setToggle(true);
-  }, []);
+  }, [currentAnswers]);
 
 
   const APICallHelpful = (answerId) => {
@@ -72,9 +72,17 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallHelpful(answer.id)}>Helpful? ({answer.helpfulness})</span>
+            <span className="need-cursor" onClick={() => {
+              event.preventDefault();
+              APICallHelpful(answer.id);
+              event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
+            }}>Helpful? ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => APICallReport(answer.id)}>Report</span>
+            <span className="need-cursor" onClick={() => {
+              event.preventDefault();
+              APICallReport(answer.id);
+              event.target.innerText = 'Reported';
+            }}>Report</span>
           </p>
         </div>
       )}
@@ -89,13 +97,13 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => {
+            <span className="need-cursor" onClick={() => {
               event.preventDefault();
               APICallHelpful(answer.id);
               event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
             }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => {
+            <span className="need-cursor" onClick={() => {
               event.preventDefault();
               APICallReport(answer.id);
               event.target.innerText = 'Reported';
@@ -118,13 +126,13 @@ const QACardAnswers = ({ currentAnswers }) => {
           <div className="qa-div-answers" ><b>A:</b> {answer.body}</div>
           <p className="qa-footer"> by {answer.answerer_name}, {format((new Date(answer.date)), "MMMM dd, yyyy")}
             <span className="qa-divider">|</span>
-            <span onClick={() => {
+            <span className="need-cursor" onClick={() => {
               event.preventDefault();
               APICallHelpful(answer.id);
               event.target.innerText = `Helpful? Yes (${answer.helpfulness + 1})`;
             }}>Helpful? Yes ({answer.helpfulness})</span>
             <span className="qa-divider">|</span>
-            <span onClick={() => {
+            <span className="need-cursor" onClick={() => {
               event.preventDefault();
               APICallReport(answer.id);
               event.target.innerText = 'Reported';

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import QACardAnswers from './QACardAnswers.jsx';
+import ReviewThumbnailContainer from '../RatingsAndReviews/ReviewThumbnailContainer.jsx';
 
 const QAAddAnswerModal = ({ question, index, productName }) => {
   // handles onChange for inputs
@@ -9,6 +10,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [fileLoaded, setFileLoaded] = useState(0);
 
   const APICall = (question, answer, nickname, email) => {
     let message = '';
@@ -35,6 +37,24 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
     }
   };
 
+  const onChangeFileHandler = (event) => {
+    let tempImageURLArray = photos;
+    let fileCount = fileLoaded;
+    tempImageURLArray.push(URL.createObjectURL(event.target.files[0]));
+    fileCount++;
+    setPhotos(tempImageURLArray);
+    setFileLoaded(fileCount);
+  };
+
+  const onClickUploadHandler = () => {
+    const data = new FormData();
+    data.append('file', photos);
+    axios.post(`http://localhost:${port}/upload`, data)
+      .then(response => {
+        console.log('successful upload: ', response);
+      });
+  };
+
   return (
     <div data-testid="qa-div-card-questions">
       <button id="qa-modal-button" className="qa-add" onClick={() => {
@@ -46,7 +66,7 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             document.getElementById(index).style.display = 'none';
           }}>&times;</div>
           <h2>Submit Your Answer</h2>
-          <h3>{productName.name}: {question.question_body} </h3>
+          <h3>{productName}: {question.question_body} </h3>
           <form className="add-answer-form">
             <label className="add-form-answer">Answer* </label>
             <textarea rows="10" maxLength="1000" placeholder="Your answer here..." required onChange={() => setAnswer(event.target.value)} /><p></p>
@@ -54,6 +74,8 @@ const QAAddAnswerModal = ({ question, index, productName }) => {
             <input maxLength="60" placeholder="Example: jack543!" required onChange={() => setNickname(event.target.value)} /><p className="qa-form-small">For privacy reasons, do not use your full name or email address</p>
             <label className="add-form-email">Email*</label>
             <input maxLength="60" placeholder="Example: jack@email.com" required onChange={() => setEmail(event.target.value)} /><p className="qa-form-small">For authentication reasons, you will not be emailed</p>
+            <label className="add-form-email">Upload Your Images:</label><input type="file" onChange={onChangeFileHandler}/>
+            <ReviewThumbnailContainer thumbnails={photos} />
             <button className="qa-add-form-submit" onClick={() => {
               event.preventDefault();
               document.getElementById(index).style.display = 'none';

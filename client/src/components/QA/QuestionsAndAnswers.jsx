@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QACardQuestions from './QACardQuestions.jsx';
 
-const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) => {
-
+const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId, productInfoAPI }) => {
   const [product, setProduct] = useState('');
   // // questions array for current product
   const [questions, setQuestions] = useState([]);
@@ -22,19 +21,14 @@ const QuestionsAndAnswers = ({ questionsInfo, productInfo, currentProductId }) =
   };
 
   useEffect(() => {
-    setProductName(productInfo);
+    setProductName(productInfo ? productInfo.name : '');
     setQuestions(questionsInfo);
-    axios.get('/qa/questions')
-      .then(response => {
-        sortQuestions(response.data);
-      })
-      .catch(err => err);
-  }, []);
+    }, [productInfo, questionsInfo]);
 
   return (
     <div data-testid="qa-div" id="qa">
       <h1 id="qa-header">QUESTIONS AND ANSWERS</h1>
-      <QACardQuestions currentProductId={currentProductId} questionsInfo={questions} productName={productName} />
+      <QACardQuestions currentProductId={currentProductId} questionsInfo={questionsInfo} productName={productName} />
       <p></p>
     </div>
   );

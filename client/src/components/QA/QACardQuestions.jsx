@@ -5,7 +5,6 @@ import QAAddAnswerModal from './QAAddAnswerModal.jsx';
 import QAAddQuestionModal from './QAAddQuestionModal.jsx';
 
 const QACardQuestions = ({ questionsInfo, productName, currentProductId }) => {
-
   const [word, setWord] = useState('');
   const [temp, setTemp] = useState('');
   const [length, setLength] = useState(2);
