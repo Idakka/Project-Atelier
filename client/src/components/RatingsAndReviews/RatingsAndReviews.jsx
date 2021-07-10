@@ -10,15 +10,16 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       currentProductId: props.productId,
-      _reviews: this.props.reviews || [],
-      reviewsLength: this.props.reviews.length || 0,
-      reviewsToShow: this.props.reviews.slice(0,2) || [],
+      _reviews: [],
+      reviewsLength: 0,
+      reviewsToShow: [],
       reviewsToShowLength: 2,
       filters: [],
       sortBy: ''
-    }
+    };
     this.setReviews = this.setReviews.bind(this);
-  };
+  }
+
   // populate reviewsToShow after mounting:
   componentDidMount() {
     // axios call to get reviews
@@ -29,6 +30,7 @@ class RatingsAndReviews extends React.Component {
     // console.log('product id in get reviews:', id);
     axios.get(`/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${id}`)
     .then(response => {
+      console.log('this is the reviews response.data'. response.data);
       this.setReviews(response.data);
     })
     .catch(err => err);
@@ -36,9 +38,9 @@ class RatingsAndReviews extends React.Component {
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
-   console.log('in setReviews', reviews);
+    console.log('in setReviews', reviews);
     this.setState({
-     _reviews: reviews
+      _reviews: reviews
     });
   }
 
