@@ -9,7 +9,7 @@ var onChangeFileHandler = (event) => {
     selectedImageFile: event.target.files[0],
     fileLoaded: 0
   });
-}
+};
 
 var onClickUploadHandler = () => {
   const data = new FormData();
@@ -18,7 +18,7 @@ var onClickUploadHandler = () => {
     .then(response => {
       console.log('successful upload: ', response);
     });
-}
+};
 
 beforeEach(() => {
   var ProductDetailPageMock = new ProductDetailPage;
@@ -44,8 +44,8 @@ test('Ratings and Reviews has more than one star-review', () => {
   expect(screen.getAllByTestId('star-review').length).not.toBe(0);
 });
 
-test('Ratings and Reviews has 2 review cards on load', () => {
-  expect(screen.getAllByTestId('review-card').length).toBe(2);
+test('Ratings and Reviews has at least 1 review card on load', () => {
+  expect(screen.getAllByTestId('review-card').length).not.toBe(0);
 });
 
 test('Ratings and Reviews has a rating-left element', () => {

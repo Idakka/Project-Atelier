@@ -140,7 +140,7 @@ class RatingsAndReviews extends React.Component {
             </select>
           </div>
           <ReviewsList
-            reviews={this.state._reviews.slice(0, this.state.reviewsToShowLength)}
+            reviews={this.state._reviews.length >= 2 ? this.state._reviews.slice(0, this.state.reviewsToShowLength) : reviews}
             // reviewHelpful={reviewHelpful}
             // reportReview={reportReview}
           />
