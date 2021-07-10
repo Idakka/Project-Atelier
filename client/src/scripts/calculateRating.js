@@ -9,7 +9,7 @@ const calculateRating = function(ratings) {
       totalRatingTally += currentRatingCount * currentRatingValue;
     }
   }
-  return (totalRatingTally / totalRatingCount);
+  return (totalRatingTally / totalRatingCount) || 0;
 };
 
 export default calculateRating;
