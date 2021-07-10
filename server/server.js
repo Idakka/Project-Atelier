@@ -203,7 +203,7 @@ app.get('/reviews', (req, res) => {
 
 // .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
-  const productId = req.query.productId;
+  const productId = req.query.product_id;
   atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
