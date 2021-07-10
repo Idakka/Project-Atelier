@@ -17,9 +17,19 @@ class RatingsAndReviews extends React.Component {
       filters: [],
       sortBy: ''
     };
+    this.getReviews = this.getReviews.bind(this);
     this.setReviews = this.setReviews.bind(this);
+    this.setReviewsLength = this.setReviewsLength.bind(this);
+    this.setReviewsToShowLength = this.setReviewsToShowLength.bind(this);
+    this.moreReviewsButtonHandler = this.moreReviewsButtonHandler.bind(this);
   }
 
+  // populate reviewsToShow after mounting:
+  componentDidMount() {
+    console.log('componentDidMount for reviews');
+  }
+
+  // check if props change and send API request for more reviews
   componentDidUpdate(prevProps) {
     if (this.props.productId !== prevProps.productId) {
       this.getReviews(this.props.productId);
@@ -41,46 +51,43 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
-  // populate reviewsToShow after mounting:
-  componentDidMount() {
-    console.log('componentDidMount for reviews');
-
-  }
-
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
     console.log('setReviews:', reviews);
+    let newReviewsToShow = reviews.slice(0, 2);
     this.setState({
       _reviews: reviews,
       reviewsLength: reviews.length,
-      reviewsToShow: reviews,
-      reviewsToShowLength: reviews.length
+      reviewsToShow: newReviewsToShow,
+      reviewsToShowLength: 2
     });
   }
 
-  // setReviewsLength()
-  // setReviewsToShow()
-  setReviewsToShowLength() {
-    let currentLength = this.state.reviewsToShowLength;
-    reviewsShownLength += 2;
+  setReviewsLength() {
+    let currentLength = this.state.reviews.length;
     this.setState({
-      reviewsToShowLength: currentLength
+      reviewsLength: currentLength
     });
   }
 
-  // const [_reviews, setReviews] = useState([]);
-  // const [reviewsLength, setReviewsLength] = useState(0);
-  // const [reviewsToShow, setReviewsToShow] = useState([]);
-  // const [reviewsToShowLength, setReviewsToShowLength] = useState(2);
+  setReviewsToShowLength() {
+    console.log('setReviewsToShowLength', this.state.reviewsToShowLength);
+    let currentLength = this.state.reviewsToShowLength;
 
-  // useEffect(() => {
-  //   setReviews(reviews);
-  //   setReviewsLength(reviews.length);
-  //   setReviewsToShow(reviews.slice(0, reviewsToShowLength));
-  //   setReviewsToShowLength(reviewsToShowLength + 2);
-  // }, []);
+    if (currentLength <= this.state.reviewsLength) {
+      currentLength === this.state.reviewsLength - 1 ? currentLength += 1 : currentLength += 2;
+      this.setState({
+        reviewsToShowLength: currentLength
+      });
+    }
+  }
 
+  moreReviewsButtonHandler(e) {
+    // e.preventDefault();
+    console.log('moreReviewsButtonHandler');
+    this.setReviewsToShowLength();
+  }
 
   render() {
     const {
@@ -92,9 +99,11 @@ class RatingsAndReviews extends React.Component {
     } = this.props;
 
     let rating = calculateRating(reviewsMeta.ratings);
+    let moreReviews = this.state.reviewsLength >= this.state.reviewsToShowLength;
 
     return (
-      <div id="ratings-main" data-testid="ratings-main">{console.log('rendering Ratings&Reviews component')}
+      <div id="ratings-main" data-testid="ratings-main">
+        {/* {console.log('rendering Ratings&Reviews component')} */}
         <div id="ratings-left-pane">
           <div id="left-pane-title">
             RatingsAndReviews!
@@ -121,22 +130,24 @@ class RatingsAndReviews extends React.Component {
               <option value="newest">newest</option>
             </select>
           </div>
-          <ReviewsList reviews={this.state.reviewsToShow} />
+          <ReviewsList reviews={this.state._reviews.slice(0, this.state.reviewsToShowLength)} />
           <div id="ratings-right-pane-footer">
-            <div type="button" className="review-btn">
-              <button className="rnr-button" onClick={() => {
-                setReviewsToShowLength(reviewsToShowLength + 2);
-                setReviewsToShow(_reviews.slice(0, reviewsToShowLength));
-              }}>MORE REVIEWS</button>
-            </div>
+            {
+              moreReviews ?
+                <div type="button" className="review-btn">
+                  <button className="rnr-button" onClick={
+                    this.moreReviewsButtonHandler
+                  }>MORE REVIEWS</button>
+                </div> : null
+            }
             <div className="review-add" data-testid="review-add">
               <button className="add-review-button" data-testid="add-review-button" onClick={(event) => {
                 top.showModal(
-                <AddReviewModal
-                  top={top}
-                  productId={productId}
-                  currentProduct={currentProduct}
-                />);
+                  <AddReviewModal
+                    top={top}
+                    productId={productId}
+                    currentProduct={currentProduct}
+                  />);
               }}>ADD A REVIEW +</button>
             </div>
           </div>
@@ -144,6 +155,6 @@ class RatingsAndReviews extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default RatingsAndReviews;
