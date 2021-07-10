@@ -51,6 +51,15 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
+  // reportReview(review_id) {
+
+  // }
+
+  // reviewHelpful(review_id) {
+
+
+  // }
+
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
@@ -130,7 +139,11 @@ class RatingsAndReviews extends React.Component {
               <option value="newest">newest</option>
             </select>
           </div>
-          <ReviewsList reviews={this.state._reviews.slice(0, this.state.reviewsToShowLength)} />
+          <ReviewsList
+            reviews={this.state._reviews.slice(0, this.state.reviewsToShowLength)}
+            // reviewHelpful={reviewHelpful}
+            // reportReview={reportReview}
+          />
           <div id="ratings-right-pane-footer">
             {
               moreReviews ?
