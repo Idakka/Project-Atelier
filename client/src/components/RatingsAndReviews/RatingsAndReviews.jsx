@@ -9,7 +9,7 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: props.productId,
+      currentProductId: 0,
       _reviews: [],
       reviewsLength: 0,
       reviewsToShow: [],
@@ -20,39 +20,53 @@ class RatingsAndReviews extends React.Component {
     this.setReviews = this.setReviews.bind(this);
   }
 
-  // populate reviewsToShow after mounting:
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.getReviews(this.props.productId);
+    }
+  }
+
+  getReviews(id) {
     // axios call to get reviews
-    let id = 22126;
     let page = 1;
     let count = 200;
     let sort = 'relevance';
     // console.log('product id in get reviews:', id);
     axios.get(`/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${id}`)
-    .then(response => {
-      console.log('this is the reviews response.data'. response.data);
-      this.setReviews(response.data);
-    })
-    .catch(err => err);
+      .then(response => {
+        this.setReviews(response.data.results);
+      })
+      .catch(err => {
+        console.log('error in Reviews request ', err);
+      });
   }
+
+  // populate reviewsToShow after mounting:
+  componentDidMount() {
+    console.log('componentDidMount for reviews');
+
+  }
+
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
-    console.log('in setReviews', reviews);
+    console.log('setReviews:', reviews);
     this.setState({
-      _reviews: reviews
+      _reviews: reviews,
+      reviewsLength: reviews.length,
+      reviewsToShow: reviews,
+      reviewsToShowLength: reviews.length
     });
   }
 
-  // set reviews length
   // setReviewsLength()
   // setReviewsToShow()
-  setReviewsToShowLength(){
+  setReviewsToShowLength() {
     let currentLength = this.state.reviewsToShowLength;
-    reviewsShownLength+=2;
+    reviewsShownLength += 2;
     this.setState({
       reviewsToShowLength: currentLength
-    })
+    });
   }
 
   // const [_reviews, setReviews] = useState([]);
@@ -75,12 +89,12 @@ class RatingsAndReviews extends React.Component {
       currentProduct,
       reviews,
       reviewsMeta,
-    } = this.props
+    } = this.props;
 
     let rating = calculateRating(reviewsMeta.ratings);
 
     return (
-      <div id="ratings-main" data-testid="ratings-main">{console.log('currentProduct:', currentProduct)}
+      <div id="ratings-main" data-testid="ratings-main">{console.log('rendering Ratings&Reviews component')}
         <div id="ratings-left-pane">
           <div id="left-pane-title">
             RatingsAndReviews!
