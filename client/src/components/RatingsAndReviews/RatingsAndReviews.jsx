@@ -26,7 +26,6 @@ class RatingsAndReviews extends React.Component {
 
   // populate reviewsToShow after mounting:
   componentDidMount() {
-    console.log('componentDidMount for reviews');
   }
 
   // check if props change and send API request for more reviews
@@ -41,14 +40,11 @@ class RatingsAndReviews extends React.Component {
     let page = 1;
     let count = 200;
     let sort = 'relevance';
-    // console.log('product id in get reviews:', id);
     axios.get(`/reviews?page=${page}&count=${count}&sort=${sort}&product_id=${id}`)
       .then(response => {
         this.setReviews(response.data.results);
       })
-      .catch(err => {
-        console.log('error in Reviews request ', err);
-      });
+      .catch(err => err);
   }
 
   // reportReview(review_id) {
@@ -63,7 +59,6 @@ class RatingsAndReviews extends React.Component {
   // sorting and filter handlers:
   // populate state with reviews:
   setReviews(reviews) {
-    console.log('setReviews:', reviews);
     let newReviewsToShow = reviews.slice(0, 2);
     this.setState({
       _reviews: reviews,
@@ -81,7 +76,6 @@ class RatingsAndReviews extends React.Component {
   }
 
   setReviewsToShowLength() {
-    console.log('setReviewsToShowLength', this.state.reviewsToShowLength);
     let currentLength = this.state.reviewsToShowLength;
 
     if (currentLength <= this.state.reviewsLength) {
@@ -94,7 +88,6 @@ class RatingsAndReviews extends React.Component {
 
   moreReviewsButtonHandler(e) {
     // e.preventDefault();
-    console.log('moreReviewsButtonHandler');
     this.setReviewsToShowLength();
   }
 
@@ -112,7 +105,7 @@ class RatingsAndReviews extends React.Component {
 
     return (
       <div id="ratings-main" data-testid="ratings-main">
-        {/* {console.log('rendering Ratings&Reviews component')} */}
+
         <div id="ratings-left-pane">
           <div id="left-pane-title">
             RatingsAndReviews!
