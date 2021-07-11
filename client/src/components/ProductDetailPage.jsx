@@ -23,7 +23,7 @@ class ProductDetailPage extends React.Component {
     super(props);
     this.state = {
       // Product Information
-      currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
+      currentProductId: 28212, // 22126 (old)this should be set at runtime by the productId in the url? or if none given, has a default
       relatedProducts: [],
       products: {
         // productId: { ... },
@@ -63,7 +63,6 @@ class ProductDetailPage extends React.Component {
   }
 
   getCurentReviewsMetaFromAPI(productId = this.state.currentProductId) {
-    console.log('getCurrent Meta');
     return axios.get(`/reviews/meta?product_id=${productId}`)
       .then(response => {
         this.setState({ reviewsMeta: response.data });
@@ -101,7 +100,6 @@ class ProductDetailPage extends React.Component {
     this.getCurrentProductFromAPI(productId)
       .then(productInformation => {
         updatedProducts[productId] = productInformation;
-        console.log('load product information', productInformation);
         this.setState({
           products: {
             ...this.state.products,
