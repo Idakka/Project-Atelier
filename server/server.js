@@ -267,7 +267,6 @@ app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  console.log('mark review as helpful - server');
   var reviewId = req.body;
   atelierQueries.helpfulReview(reviewId, atelierHeaders)
     .then(result => {
@@ -279,7 +278,6 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
-  console.log('report review - server');
   var reviewId = req.body;
   atelierQueries.reportReview(reviewId, atelierHeaders)
     .then(result => {

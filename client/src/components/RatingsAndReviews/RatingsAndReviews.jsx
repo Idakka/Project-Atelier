@@ -26,6 +26,7 @@ class RatingsAndReviews extends React.Component {
 
   // populate reviewsToShow after mounting:
   componentDidMount() {
+    this.getReviews(this.props.productId);
   }
 
   // check if props change and send API request for more reviews
@@ -69,7 +70,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   setReviewsLength() {
-    let currentLength = this.state.reviews.length;
+    let currentLength = this.state._reviews.length;
     this.setState({
       reviewsLength: currentLength
     });

@@ -201,7 +201,6 @@ const getCurrentProductBundle = (productId, headers) => {
 };
 
 const getRelatedProductsBundle = (relatedProducts, headers) => {
-  console.log('relatedProducts in bundle:', relatedProducts[0]);
   console.time('getRelatedProductsBundle API Time');
   const allRelatedProductCalls = [];
   for (let i = 0; i < relatedProducts.length; i++) {

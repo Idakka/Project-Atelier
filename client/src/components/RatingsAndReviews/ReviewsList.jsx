@@ -5,13 +5,13 @@ import axios from 'axios';
 const ReviewsList = (props) => {
   const reviewHelpful = (reviewId) => {
     axios.put('/reviews/:review_id/helpful', { review_id: reviewId })
-      .then(info => console.log('info:', info))
+      .then(info => info)
       .catch(err => err);
   };
 
   const reportReview = (reviewId) => {
     axios.put('/reviews/:review_id/report', { review_id: reviewId })
-      .then(info => console.log('info:', info))
+      .then(info => info)
       .catch(err => err);
   };
 
