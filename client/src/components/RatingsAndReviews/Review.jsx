@@ -1,8 +1,8 @@
 import React from 'react';
 import StarReview from '../StarReview.jsx';
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
-const Review = ({review}) => {
+const Review = ({ review, reviewHelpful, reportReview }) => {
   return (
     <React.Fragment>
       <div className="review-card" data-testid="review-card">
@@ -21,7 +21,7 @@ const Review = ({review}) => {
             <p>{review.response}</p>
           </div>
         }
-        <div className="review-footer">Helpful? <span onClick={(i) => {alert("This feature only available to premium subscribers!")}}>Yes</span> ({review.helpfulness || ''}) | <span onClick={(e) => {alert("this feature coming soon!")}}>Report</span>
+        <div className="review-footer">Helpful? <span onClick={() => reviewHelpful(review.review_id)}>Yes</span> ({review.helpfulness || ''}) | <span onClick={() => reportReview(review.review_id)}>Report</span>
         </div>
         <hr></hr>
       </div>

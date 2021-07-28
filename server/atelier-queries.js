@@ -28,12 +28,18 @@ const getRelatedProducts = (productId, headers) => {
 };
 
 // Returns the entire response as an object, including page, count, etc.
-const getProductReviews = (productId, headers) => {
-  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}`, headers)
+const getProductReviews = (query, headers) => {
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${query}`, headers)
     .then(result => result.data)
     .catch(err => {
       throw err;
     });
+  // initial bundle doesn't include other parameters for reviews GET
+  // return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?page=${query.page}&count=${query.count}&sort=${query.sort}&product_id=${query.product_id}`, headers)
+  //   .then(result => result.data)
+  //   .catch(err => {
+  //     throw err;
+  //   });
 };
 
 // Returns the entire response as an object
@@ -88,7 +94,7 @@ const helpfulQuestion = (questionId, headers) => {
     .catch(err => {
       throw err;
     });
-}
+};
 
 // Reports a question
 const reportQuestion = (questionId, headers) => {
@@ -101,7 +107,7 @@ const reportQuestion = (questionId, headers) => {
     .catch(err => {
       throw err;
     });
-}
+};
 
 // Reports an answer as helpful
 const helpfulAnswer = (answerId, headers) => {
@@ -114,7 +120,7 @@ const helpfulAnswer = (answerId, headers) => {
     .catch(err => {
       throw err;
     });
-}
+};
 
 // Reports an answer
 const reportAnswer = (answerId, headers) => {
@@ -127,7 +133,7 @@ const reportAnswer = (answerId, headers) => {
     .catch(err => {
       throw err;
     });
-}
+};
 
 // Post a review
 const postReview = (body, headers) => {
@@ -141,7 +147,7 @@ const postReview = (body, headers) => {
 // Reports a review as helpful
 const helpfulReview = (reviewId, headers) => {
   var review = reviewId.review_id.toString();
-  var reviewObj = JSON.stringify(reviewId)
+  var reviewObj = JSON.stringify(reviewId);
   return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${review}/helpful`, reviewObj, headers)
     .then(result => result)
     .catch(err => {
@@ -152,7 +158,7 @@ const helpfulReview = (reviewId, headers) => {
 // Reports a review
 const reportReview = (reviewId, headers) => {
   var review = reviewId.review_id.toString();
-  var reviewObj = JSON.stringify(reviewId)
+  var reviewObj = JSON.stringify(reviewId);
   return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${review}/report`, reviewObj, headers)
     .then(result => result)
     .catch(err => {

@@ -23,7 +23,7 @@ class ProductDetailPage extends React.Component {
     super(props);
     this.state = {
       // Product Information
-      currentProductId: 22126, // this should be set at runtime by the productId in the url? or if none given, has a default
+      currentProductId: 28212, // 22126 (old)this should be set at runtime by the productId in the url? or if none given, has a default
       relatedProducts: [],
       products: {
         // productId: { ... },
@@ -33,7 +33,8 @@ class ProductDetailPage extends React.Component {
       modalContents: <div>Error: Modal displayed before it was populated.<br />Maybe you didn't pass anything to showModal?</div>,
       selectedImageFiles: [],
       fileLoaded: 0,
-      currentQuestions: questionsMock
+      currentQuestions: questionsMock,
+      reviewsMeta: reviewsMetaMock
     };
   }
 
@@ -41,6 +42,7 @@ class ProductDetailPage extends React.Component {
     // Load default product info on page load
     this.loadProductInfo();
     this.getCurrentQuestionsFromAPI();
+    this.getCurentReviewsMetaFromAPI();
   }
 
   changeCurrentProduct(productId) {
@@ -50,12 +52,20 @@ class ProductDetailPage extends React.Component {
     });
     this.loadProductInfo(productId);
     this.getCurrentQuestionsFromAPI(productId);
+    this.getCurentReviewsMetaFromAPI(productId);
   }
 
   getCurrentQuestionsFromAPI(productId = this.state.currentProductId) {
     return axios.get(`/qa/questions?product_id=${productId}`)
       .then(response => {
         this.setState({ currentQuestions: response.data});
+      });
+  }
+
+  getCurentReviewsMetaFromAPI(productId = this.state.currentProductId) {
+    return axios.get(`/reviews/meta?product_id=${productId}`)
+      .then(response => {
+        this.setState({ reviewsMeta: response.data });
       });
   }
 
@@ -175,12 +185,10 @@ class ProductDetailPage extends React.Component {
         />
         <RatingsAndReviewsWithTracking
           top={this}
-          // onChangeFileHandler={this.onChangeFileHandler}
-          // onClickUploadHandler={this.onClickUploadHandler}
           productId={this.state.currentProductId}
           currentProduct={this.state.products[this.state.currentProductId]}
           reviews={reviewsMock.results}
-          reviewsMeta={reviewsMetaMock}
+          reviewsMeta={this.state.reviewsMeta}
         />
         <Modal top={this} contents={this.state.modalContents}/>
       </React.Fragment>

@@ -8,7 +8,7 @@ class AddToCartRegion extends React.Component {
     this.state = {
       quantity: ['-']
     };
-  };
+  }
 
   getSelectedSku() {
     let { skus } = this.props.productStyles[this.props.selectedStyle];
@@ -68,7 +68,7 @@ class AddToCartRegion extends React.Component {
         </div>
       </React.Fragment>
     );
-  };
-};
+  }
+}
 
 export default AddToCartRegion;

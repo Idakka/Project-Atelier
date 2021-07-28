@@ -46,7 +46,6 @@ var uploadS3 = multer({
       getFieldname(null, {fieldName: file.fieldname});
     },
     key: (req, file, createAWSName) => {
-      console.log('success on multer key:', file.originalname);
       createAWSName(null, Date.now().toString() + '-' + file.originalname);
     }
   })
@@ -82,7 +81,7 @@ app.post('/qa/questions', (req, res) => {
   atelierQueries.postQuestion(req.body, atelierHeaders)
     .then(result => {
       const parseResult = JSON.parse(result);
-      atelierQueries.getProductQuestions(parseResult.product_id, atelierHeaders)
+      atelierQueries.getProductQuestions(parseResult.productId, atelierHeaders)
         .then(questions => questions);
       return result;
     })
@@ -193,8 +192,8 @@ app.get('/products/related', (req, res) => {
 // Specific and smaller queries
 // .../reviews?id=12345
 app.get('/reviews', (req, res) => {
-  const productId = req.query.id;
-  atelierQueries.getProductReviews(productId, atelierHeaders)
+  const query = req.query.product_id;
+  atelierQueries.getProductReviews(query, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
       console.error(error);
@@ -204,7 +203,7 @@ app.get('/reviews', (req, res) => {
 
 // .../reviews/meta?id=12345
 app.get('/reviews/meta', (req, res) => {
-  const productId = req.query.id;
+  const productId = req.query.product_id;
   atelierQueries.getProductReviewsMeta(productId, atelierHeaders)
     .then(result => res.end(JSON.stringify(result)))
     .catch(error => {
@@ -235,11 +234,11 @@ app.post('/interactions', (req, res) => {
 
 app.post('/photo-upload', uploadS3.array('images', 5), (req, res) => {
   // send urls to review POST
-    if (!req.files) {
-      res.status(400).end('server error uploading photos');
-    } else {
-      res.status(200).redirect('/');
-    }
+  if (!req.files) {
+    res.status(400).end('server error uploading photos');
+  } else {
+    res.status(200).redirect('/');
+  }
 });
 
 app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
@@ -253,17 +252,17 @@ app.post('/reviews/:product_id', uploadS3.array('images', 5), (req, res) => {
     req.files.forEach(object => photos.push(object.location));
     reviewObject.photos = photos;
     // properties aren't parsing correctly so this is temp hack to get correct types:
-    reviewObject.product_id = Number(reviewObject.product_id);
+    reviewObject.productId = Number(reviewObject.productId);
     reviewObject.rating = Number(reviewObject.rating);
     reviewObject.recommend = reviewObject.recommend === 'true';
     reviewObject.characteristics = JSON.parse(reviewObject.characteristics);
 
     atelierQueries.postReview(reviewObject, atelierHeaders)
-    .then(result => res.end(JSON.stringify(result)))
-    .catch(error => {
-      console.error(error);
-      res.end(JSON.stringify(error));
-    });
+      .then(result => res.end(JSON.stringify(result)))
+      .catch(error => {
+        console.error(error);
+        res.end(JSON.stringify(error));
+      });
   }
 });
 
@@ -282,7 +281,6 @@ app.put('/reviews/:review_id/report', (req, res) => {
   var reviewId = req.body;
   atelierQueries.reportReview(reviewId, atelierHeaders)
     .then(result => {
-      console.log('success report!', result.body);
       res.status(204).end(JSON.stringify(result.body));
     })
     .catch(error => {
